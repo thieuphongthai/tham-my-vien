@@ -1,0 +1,26 @@
+{
+  "name": "tham-my-vien",
+  "version": "1.0.0",
+  "description": "Quản lý data khách hàng cho thẩm mỹ viện",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon --inspect app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thieuphongthai/tham-my-vien.git"
+  },
+  "author": "Hachitech",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thieuphongthai/tham-my-vien/issues"
+  },
+  "homepage": "https://github.com/thieuphongthai/tham-my-vien#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}

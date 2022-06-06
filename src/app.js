@@ -20,6 +20,10 @@ app.set('views', path.join(__dirname, 'resources/views'));
 console.log(path.join(__dirname, 'resources/views'));
 
 app.get('/', (req, res) => {
+  res.render('login', {layout: false});
+});
+
+app.get('/home', (req, res) => {
   res.render('home');
 });
 

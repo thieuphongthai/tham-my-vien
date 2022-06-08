@@ -8,6 +8,9 @@ const port = 3001;
 // path static file
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(express.urlencoded());
+app.use(express.json());
+
 // view log request
 app.use(morgan('combined'));
 
@@ -23,13 +26,18 @@ app.get('/', (req, res) => {
   res.render('login', {layout: false});
 });
 
+app.post('/', (req, res) => {
+	
+	res.redirect('home');
+});
+
 app.get('/home', (req, res) => {
   res.render('home');
 });
 
 app.get('/news', (req, res) => {
-    res.render('news');
-  });
+  res.render('news');
+});
 
 app.listen(port, () => {
   console.log(`App listening on port ${port}`);

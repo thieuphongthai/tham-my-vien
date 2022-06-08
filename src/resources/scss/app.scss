@@ -6,32 +6,55 @@
     box-sizing: border-box;
 }
 
+html{
+    height: 100%;
+}
+
 body {
-    // overflow: hidden;
+    overflow: hidden;
+    // width: 100vw;
+    min-height: 100%;
 }
 
 .sidebar-container {
-    width: 250px;
+    width: 64px;
+    height: 100%;
+    transition: all 0.5s ease;
 }
 
 .sidebar-container .sidebar {
     background-color: $bg-primary;
-    height: 983px;
-    overflow-y: scroll;
+    height: 979px;
+    // overflow-y: scroll;
+    width: 64px;
+    transition: all 0.5s ease;
 }
 
 .sidebar-container .dashboard {
     background-color: $bg-primary;
+    width: 64px;
     height: 44px;
     border-bottom: #fff 1px solid;
+    transition: all 0.5s ease;
+}
+
+.sidebar-container:hover,
+.sidebar-container .sidebar:hover,
+.sidebar-container .dashboard:hover,
+.sidebar-container .dashboard-footer:hover{
+    width: 264px;
+    transition: all 0.5s ease;
+}
+
+.sidebar-container .dashboard-footer {
+    background-color: $bg-primary;
+    height: 44px;
+    width: 64px;
+    transition: all 0.5s ease;
 }
 
 .sidebar-container .dashboard h5 {
     line-height: 44px;
-}
-
-#sidebar {
-    min-height: 1024px;
 }
 
 #sidebar::-webkit-scrollbar {
@@ -74,4 +97,25 @@ body {
     position: absolute;
     bottom: 0;
     width: 100%;
+}
+
+// login template
+.login-template {
+    // background-image: linear-gradient(to bottom right, red, yellow);
+    background-color: #343a40;
+    width: 100%;
+    height: 100vh;
+}
+
+.login-form {
+    width: 350px;
+    height: 296px;
+}
+
+.img-logo {
+    background-image: linear-gradient(to bottom right, red, yellow);
+}
+
+.login-container {
+    height: 440px;
 }

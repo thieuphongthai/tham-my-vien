@@ -5,16 +5,16 @@ function route(app) {
     });
       
     app.post('/', (req, res) => {      
-        res.redirect('home');
-    });
-      
-    app.get('/home', (req, res) => {
         res.render('home');
     });
       
-    app.get('/news', (req, res) => {
-        res.render('news');
-    });
+    // app.get('/home', (req, res) => {
+    //     res.render('home');
+    // });
+      
+    // app.get('/news', (req, res) => {
+    //     res.render('news');
+    // });
 }
 
 module.exports = route;

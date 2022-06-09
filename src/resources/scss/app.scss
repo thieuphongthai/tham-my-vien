@@ -31,19 +31,21 @@ body {
 
 .sidebar-container {
     width: 100%;
-    height: 100vh;
+    height: auto;
     transition: all 0.5s ease;
     // display: block;
 }
 
 .sidebar-container .sidebar {
     background-color: $bg-primary;
-    max-height: 100vh;
+    height: 100vh;
     overflow-x: hidden;
     width: 100%;
     transition: all 0.5s ease;
     // display: block;
 }
+
+
 
 .sidebar-container .sidebar .nav .nav-item {
     height: 44px;

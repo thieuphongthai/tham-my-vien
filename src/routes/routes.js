@@ -1,20 +1,26 @@
+// const express = require('express');
+const managerRouter = require('./manager');
+const loginRouter = require('./login');
 
 function route(app) {
-    app.get('/', (req, res) => {
-        res.render('login', {layout: false});
-    });
+
+    app.use('/', loginRouter);
+
+    
       
-    app.post('/home', (req, res) => {      
-        res.render('home');
-    });
+    // app.post('/', (req, res) => {      
+    //     res.render('manager');
+    // });
+
+    // app.use('/manager', managerRouter);
       
-    app.get('/home', (req, res) => {
-        res.render('home');
-    });
+    // app.get('/home', (req, res) => {
+    //     res.render('home');
+    // });
       
-    app.get('/news', (req, res) => {
-        res.render('news');
-    });
+    // app.get('/news', (req, res) => {
+    //     res.render('news');
+    // });
 }
 
 module.exports = route;

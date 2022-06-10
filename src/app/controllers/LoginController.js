@@ -9,10 +9,21 @@ class LoginController {
 	}
 
 	postLogin(req, res, next) {
-		Account.find({}, function (err, accounts) {
-			let email = multipleMongooseToObject(accounts.email)
-			console.log(multipleMongooseToObject(accounts.email));
-		})
+		// Account.find({}, function (err, accounts) {
+			
+		// 	multipleMongooseToObject(accounts, {
+				
+		// 	});
+			
+		// })
+
+		Account.find({})
+			.then(accounts => {
+				res.render('manager', {
+					accounts: multipleMongooseToObject(accounts)
+				});
+			})
+			.catch(next);
   	}
 }
 

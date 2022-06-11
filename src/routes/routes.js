@@ -4,6 +4,7 @@ const loginRouter = require('./login');
 
 function route(app) {
 
+    app.use('/manager', managerRouter);
     app.use('/', loginRouter);
 
     

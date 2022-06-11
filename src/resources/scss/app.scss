@@ -30,17 +30,26 @@ body {
 }
 
 .sidebar-container {
-    width: 100%;
+    width: 48px;
     height: auto;
+    background-color: #fff;
     transition: all 0.5s ease;
     // display: block;
 }
 
+.sidebar-container:hover,
+.sidebar-container:hover .sidebar,
+.sidebar-container:hover .dashboard,
+.sidebar-container:hover .dashboard-footer {
+    width: 264px;
+    // transition: all 0.5s ease;
+}
+
 .sidebar-container .sidebar {
-    background-color: $bg-primary;
+    // background-color: $bg-primary;
     height: 100vh;
     overflow-x: hidden;
-    width: 100%;
+    width: 48px;
     transition: all 0.5s ease;
     // display: block;
 }
@@ -54,7 +63,7 @@ body {
 
 .sidebar-container .sidebar .nav .nav-item a {
     text-decoration: none;
-    color: #fff;
+    color: #343a40;
     display: flex;
     align-items: center;
     transition: all 0.4s ease;
@@ -62,14 +71,14 @@ body {
 }
 
 .sidebar-container .sidebar .nav .nav-item:hover a {
-    background-color: whitesmoke;
-    color: #343a40;
+    background-color: #007bff;
+    color: #fff;
 }
 
 
 .sidebar-container .dashboard {
-    background-color: $bg-primary;
-    width: 100%;
+    background-color: #fff;
+    width: 48px;
     height: 4%;
     border-bottom: #fff 1px solid;
     transition: all 0.5s ease;
@@ -77,9 +86,9 @@ body {
 
 .sidebar-container .dashboard h5 {
     line-height: 44px;
-    // margin-bottom: 0;
-    // white-space: nowrap;
-    // opacity: 0;
+    margin-bottom: 0;
+    white-space: nowrap;
+    opacity: 0;
 }
 
 // .sidebar-container:hover .dashboard h5 {
@@ -95,9 +104,9 @@ body {
 // }
 
 .sidebar-container .dashboard-footer {
-    background-color: $bg-primary;
+    background-color: #fff;
     height: 4%;
-    width: 100%;
+    width: 48px;
     border-top: #fff 1px solid;
     transition: all 0.5s ease;
 }

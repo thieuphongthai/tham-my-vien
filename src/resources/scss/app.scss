@@ -30,9 +30,9 @@ body {
 }
 
 .sidebar-container {
-    width: 48px;
+    width: 264px;
     height: auto;
-    background-color: #fff;
+    background-color: #000;
     transition: all 0.5s ease;
     // display: block;
 }
@@ -41,7 +41,7 @@ body {
 .sidebar-container:hover .sidebar,
 .sidebar-container:hover .dashboard,
 .sidebar-container:hover .dashboard-footer {
-    width: 264px;
+    width: 350px;
     // transition: all 0.5s ease;
 }
 
@@ -49,7 +49,7 @@ body {
     // background-color: $bg-primary;
     height: 100vh;
     overflow-x: hidden;
-    width: 48px;
+    width: 264px;
     transition: all 0.5s ease;
     // display: block;
 }
@@ -78,7 +78,7 @@ body {
 
 .sidebar-container .dashboard {
     background-color: #fff;
-    width: 48px;
+    width: 264px;
     height: 4%;
     border-bottom: #fff 1px solid;
     transition: all 0.5s ease;
@@ -91,6 +91,19 @@ body {
     opacity: 0;
 }
 
+.dashboard-1 {
+    background-color: $bg-primary;
+    color: whitesmoke;
+    border-bottom: whitesmoke 1px solid;
+}
+
+.dashboard-1 h5 {
+    line-height: 36px;
+}
+
+.admin-container {
+    min-height: 100vh;
+}
 // .sidebar-container:hover .dashboard h5 {
 //     opacity: 1;
 // }

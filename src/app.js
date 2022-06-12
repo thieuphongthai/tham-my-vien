@@ -14,18 +14,21 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
-console.log(process.env.PORT);
+console.log(process.env.SECURITY_KEY);
 
+// Cung cấp middleware trên Express để kích hoạt CORS
 var corsOptions = {
   origin: "http://localhost:3001"
 };
 
+// Kiểm tra trước khi đến lớp bảo mật
 app.use(cors(corsOptions));
 
+// Lưu trữ dữ liệu trên client mà không yêu cầu csdl ở server
 app.use(
   cookieSession({
     name: "Hachitech-session",
-    secret: "COOKIE_SECR", // should use as secret environment variable
+    secret: `${process.env.SECURITY_KEY}`, // should use as secret environment variable
     httpOnly: true
   })
 );
@@ -36,6 +39,7 @@ db.connect();
 // path static file
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Phân tích cú pháp yêu cầu của các loại nội dung
 app.use(express.urlencoded());
 app.use(express.json());
 
@@ -48,6 +52,54 @@ app.engine('hbs', engine({
 }));
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resources', 'views'));
+
+// 
+function initial() {
+  	Role.estimatedDocumentCount((err, count) => {
+    	if (!err && count === 0) {
+      		new Role({
+        		name: "manager"
+      		}).save(err => {
+				if (err) {
+					console.log("error", err);
+				}
+				console.log("added 'manager' to roles collection");
+			});
+			new Role({
+				name: "employ"
+			}).save(err => {
+				if (err) {
+					console.log("error", err);
+				}
+				console.log("added 'employ' to roles collection");
+			});
+			new Role({
+				name: "doctor"
+			}).save(err => {
+				if (err) {
+					console.log("error", err);
+				}
+				console.log("added 'doctor' to roles collection");
+			});
+			new Role({
+				name: "nurse"
+			}).save(err => {
+				if (err) {
+					console.log("error", err);
+				}
+				console.log("added 'nurse' to roles collection");
+			});
+			new Role({
+				name: "nursing"
+			}).save(err => {
+				if (err) {
+					console.log("error", err);
+				}
+				console.log("added 'nursing' to roles collection");
+			});
+		}
+	});
+}
 
 // Routes init
 route(app);

@@ -29,10 +29,8 @@ const User = new Schema({
 			ref: "Account"
 		}
 	],
-	createdAt: {type: Date, default: Date.now},
-	updateAt: {type: Date, default: Date.now},
-	deletedAt: {type: Date, default: Date.now},
-
+}, {
+    timestamps: true
 });
 
 module.exports = mongoose.model('User', User);

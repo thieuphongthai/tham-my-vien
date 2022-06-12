@@ -22,6 +22,10 @@ ul li{
     list-style: none;
 }
 
+.admin-container {
+    height: 100vh;
+}
+
 .sidebar::-webkit-scrollbar {
     width: 6px;
 }
@@ -36,31 +40,33 @@ ul li{
 }
 
 .sidebar-container {
-    // position: relative;
+    position: relative;
     // top: 0;
     // left: 0;
     width: 50px;
     height: 100vh;
-    background: #fff;
+    background: #343a40;
     transition: all 0.5s ease;
 }
 
 
 .sidebar-container .sidebar {
     overflow-x: hidden;
-    height: 620px;
+    max-height: 90vh;
 }
 
 .sidebar-container .dashboard{
     height: 50px;
     align-items: center;
     // margin: 5px;
+    background: #343a40;
 }
 
 .sidebar-container .dashboard h5{
-    font-size: 1rem;
-    color: #343a40;
+    font-size: 20px;
+    color: #fff;
     font-weight: 700;
+    font-family: 'VT323';
     text-align: center;
     padding-top: 10px;
     opacity: 0;
@@ -70,14 +76,14 @@ ul li{
     opacity: 1;
 }
 
-.sidebar-container .sidebar .sidebar-toggle{
+.sidebar-container  .sidebar-toggle{
     position: absolute;
-    top: 0.5rem;
+    top: 0.8rem;
     right: -0.4rem;
-    width: 18px;
-    height: 18px;
-    background: cornflowerblue;
-    color: #fff;
+    width: 20px;
+    height: 20px;
+    background: #edbc64;
+    color: #000;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -86,10 +92,13 @@ ul li{
     transition: all 0.5s ease;
 }
 
+.rotate{
+    transform: rotate(180deg);
+    transition: 0.3s;
+}
 
 .sidebar-container.active{
-    width: 250px;
-    transition: all 0.5s ease;
+    width: 255px;
 }
 
 .sidebar-container .sidebar .nav .nav-item {
@@ -97,14 +106,14 @@ ul li{
     line-height: 44px;
 }
 
-.sidebar-container .sidebar .nav .nav-item:hover{
-    background: cornflowerblue;
-    color: #fff;
+.sidebar-container .sidebar .nav .nav-item:hover a{
+    background: #fff;
+    color: #000;
 }
 
 .sidebar-container .sidebar .nav .nav-item a {
     text-decoration: none;
-    color: #343a40;
+    color: #fff;
     display: flex;
     align-items: center;
     transition: all 0.4s ease;
@@ -112,7 +121,7 @@ ul li{
 }
 
 .sidebar-container .dashboard-footer {
-    background-color: #fff;
+    background-color: #343a40;
     height: 50px;
     // border-top: #fff 1px solid;
     transition: all 0.5s ease;
@@ -120,9 +129,10 @@ ul li{
 
 
 .sidebar-container .dashboard-footer .copyrightLine {
-    color: #fff;
+    color: #343a40;
     width: 100%;
     text-align: center;
+    padding-top: 6px;
     // align-items: center;
     font-size: 18px;
     font-weight: 600;
@@ -138,9 +148,9 @@ ul li{
     content: attr(data-text);
     position: absolute;
     text-align: center;
-    color: #2c2f33;
+    color: #fff;
     -webkit-text-stroke: 0.3vw , #383d52;
-    border-right: 2px solid #000;
+    border-right: 2px solid #fff;
     overflow: hidden;
     animation: animate 6s linear infinite;
 }
@@ -187,6 +197,11 @@ ul li{
     height: 100vh;
     background-color: #000;
 }
+
+
+//              Content CSS     //
+
+
 
 
 // @import '_variables';

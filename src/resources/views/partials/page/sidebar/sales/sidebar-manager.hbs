@@ -1,6 +1,9 @@
 <div class="sidebar-container">
-	<div class="dashboard text-center text-light sticky-top"><h5>BẢNG ĐIỀU KHIỂN</h5></div>
+	<div class="dashboard"><h5>BẢNG ĐIỀU KHIỂN</h5></div>
 	<div class="sidebar">
+		<div class="sidebar-toggle" id="sidebarToggleBtn">
+			<i class="ti-arrow-circle-right"></i>
+		</div>
 		<ul class="nav flex-column text-light">
 			<li class="nav-item ml-2"><a href="/news"><i class="ti-user ml-3 mr-3"></i>Danh sách khách hàng mới</a></li>
 			<li class="nav-item ml-2"><a href="/news"><i class="ti-user ml-3 mr-3"></i>Danh sách nhân viên</a></li>
@@ -58,3 +61,12 @@
 		<div class="copyrightLine" data-text="Copyright@Hachitech">Copyright@Hachitech</div>
 	</div>
 </div>
+
+<script>
+	let sidebarBtn = document.querySelector("#sidebarToggleBtn");
+	let sidebar = document.querySelector(".sidebar-container");
+
+	sidebarBtn.onclick = function(){
+		sidebar.classList.toggle("active");
+	}
+</script>

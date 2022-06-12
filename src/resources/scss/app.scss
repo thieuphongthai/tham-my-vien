@@ -36,18 +36,35 @@ ul li{
 }
 
 .sidebar-container {
+<<<<<<< HEAD
     position: fixed;
     top: 0;
     left: 0;
     width: 50px;
     height: 100vh;
     background: #fff;
+=======
+    width: 264px;
+    height: auto;
+    background-color: #000;
+>>>>>>> 9aa220daba0b7585e32245d2cae54fe336803015
     transition: all 0.5s ease;
 }
 
+<<<<<<< HEAD
+=======
+.sidebar-container:hover,
+.sidebar-container:hover .sidebar,
+.sidebar-container:hover .dashboard,
+.sidebar-container:hover .dashboard-footer {
+    width: 350px;
+    // transition: all 0.5s ease;
+}
+>>>>>>> 9aa220daba0b7585e32245d2cae54fe336803015
 
 .sidebar-container .sidebar {
     overflow-x: hidden;
+<<<<<<< HEAD
     height: 620px;
 }
 
@@ -83,6 +100,9 @@ ul li{
     align-items: center;
     justify-content: center;
     cursor: pointer;
+=======
+    width: 264px;
+>>>>>>> 9aa220daba0b7585e32245d2cae54fe336803015
     transition: all 0.5s ease;
 }
 
@@ -110,6 +130,55 @@ ul li{
     white-space: nowrap;
 }
 
+<<<<<<< HEAD
+=======
+.sidebar-container .sidebar .nav .nav-item:hover a {
+    background-color: #007bff;
+    color: #fff;
+}
+
+
+.sidebar-container .dashboard {
+    background-color: #fff;
+    width: 264px;
+    height: 4%;
+    border-bottom: #fff 1px solid;
+    transition: all 0.5s ease;
+}
+
+.sidebar-container .dashboard h5 {
+    line-height: 44px;
+    margin-bottom: 0;
+    white-space: nowrap;
+    opacity: 0;
+}
+
+.dashboard-1 {
+    background-color: $bg-primary;
+    color: whitesmoke;
+    border-bottom: whitesmoke 1px solid;
+}
+
+.dashboard-1 h5 {
+    line-height: 36px;
+}
+
+.admin-container {
+    min-height: 100vh;
+}
+// .sidebar-container:hover .dashboard h5 {
+//     opacity: 1;
+// }
+
+// .sidebar-container:hover,
+// .sidebar-container:hover .sidebar,
+// .sidebar-container:hover .dashboard,
+// .sidebar-container:hover .dashboard-footer{
+//     width: 264px;
+//     transition: all 0.5s ease;
+// }
+
+>>>>>>> 9aa220daba0b7585e32245d2cae54fe336803015
 .sidebar-container .dashboard-footer {
     background-color: #fff;
     height: 50px;

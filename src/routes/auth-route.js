@@ -1,7 +1,9 @@
 // [POST] Đăng ký, đăng nhập và đăng nhập
 
-const { verifySignUp } = require("../middlewares");
-const controller = require("../controllers/AuthController");
+const express = require('express');
+const router = express.Router();
+const verifySignUp = require("../middleware/VerifySignUp");
+const controller = require("../app/controllers/AuthController");
 module.exports = function(app) {
     app.use(function(req, res, next) {
         res.header(
@@ -11,14 +13,15 @@ module.exports = function(app) {
             next();
         }
     );
-    app.post(
-        "/signup",
-        [
-            verifySignUp.checkDuplicateUsernameOrEmail,
-            verifySignUp.checkRolesExisted
-        ],
-        controller.signup
-    );
-    app.post("/signin", controller.signin);
-    app.post("/signout", controller.signout);
+    
+
 };
+
+router.post("/signup",[verifySignUp.checkUsernameOrEmail, verifySignUp.checkRolesExisted], controller.signup);
+router.post("/signin", controller.signin);
+router.post("/signout", controller.signout);
+router.get('/signin', controller.getSignin);
+router.get('/signup', controller.getSignup);
+router.get('/', controller.getSignin);
+
+module.exports = router;

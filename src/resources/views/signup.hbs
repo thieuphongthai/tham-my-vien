@@ -48,7 +48,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST">
+                <form method="POST" action="/signup">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Tên tài khoản</label>
                         <input type="text" class="form-control" id="exampleInputEmail1" name="userName" aria-describedby="emailHelp" placeholder="Nhập tài khoản">
@@ -63,7 +63,12 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Chức vụ</label>
-                        <input type="text" class="form-control" id="exampleInputPassword1" name="role" placeholder="Nhập chức vụ">
+                        <select class="form-control" id="exampleFormControlSelect1">
+                            <option>-- Chọn chức vụ --</option>
+                            {{#each roles}}
+                            <option value="{{this._id}}">{{this.roleName}}</option>
+                            {{/each}}
+                        </select>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>

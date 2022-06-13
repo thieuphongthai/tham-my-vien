@@ -52,7 +52,7 @@ ul li{
 
 .sidebar-container .sidebar {
     overflow-x: hidden;
-    height: 620px;
+    max-height: 90vh;
 }
 
 .sidebar-container .dashboard{
@@ -194,138 +194,29 @@ ul li{
     height: 100vh;
 }
 
+.admin-container {
+    height: 100vh;
+    background-color: #000;
+}
+
 
 //              Content CSS     //
 
 
+// Root CSS
+.img-frame {
+    width: 150px;
+    height: 150px;
+    border: #000 0.5px solid;
+    border-radius: 5px;
+}
 
-
-// @import '_variables';
-
-// * {
-//     margin: 0;
-//     padding: 0;
-//     box-sizing: border-box;
-// }
-
-// html{
-//     height: 100%;
-// }
-
-// body {
-//     overflow: hidden;
-//     // width: 100vw;
-//     min-height: 100%;
-// }
-
-// .sidebar-container {
-//     width: 64px;
-//     height: 100%;
-//     transition: all 0.5s ease;
-// }
-
-// .sidebar-container .sidebar {
-//     background-color: $bg-primary;
-//     height: 979px;
-//     // overflow-y: scroll;
-//     width: 64px;
-//     transition: all 0.5s ease;
-// }
-
-// .sidebar-container .dashboard {
-//     background-color: $bg-primary;
-//     width: 64px;
-//     height: 44px;
-//     border-bottom: #fff 1px solid;
-//     transition: all 0.5s ease;
-// }
-
-// .sidebar-container:hover,
-// .sidebar-container:hover .sidebar,
-// .sidebar-container:hover .dashboard,
-// .sidebar-container:hover .dashboard-footer{
-//     width: 264px;
-//     transition: all 0.5s ease;
-// }
-
-// .sidebar-container .dashboard-footer {
-//     background-color: $bg-primary;
-//     height: 44px;
-//     width: 64px;
-//     transition: all 0.5s ease;
-// }
-
-// .manager {
-//     // margin-left: 64px;
-//     background-color: #343a40;
-//     transition: all 0.5s ease;
-// }
-
-// .sidebar-container .dashboard h5 {
-//     line-height: 44px;
-// }
-
-// #sidebar::-webkit-scrollbar {
-//     width: 8px;
-// }
-
-// #sidebar::-webkit-scrollbar-thumb {
-//     background: #ff024e;
-//     border-radius: 10px;
-// }
-
-// #sidebar::-webkit-scrollbar-thumb:hover {
-//     background: rgb(250, 3, 126);
-// }
-
-
-
-// .sidebar-container .sidebar .nav .nav-item {
-//     height: 44px;
-//     line-height: 44px;
-// }
-
-// .sidebar-container .sidebar .nav-item a {
-//     text-decoration: none;
-//     color: #fff;
+// .frame-body {
 //     display: inline-block;
 //     width: 100%;
 // }
 
-// .sidebar-container .sidebar .nav-item a:hover {
-//     background-color: whitesmoke;
-//     color: #343a40;
-// }
-
-// // .sidebar-container .sidebar .list-sidebar .sidebar-item {
-// //     list-style: none;
-// // }
-
-// .nav-footer {
-//     position: absolute;
-//     bottom: 0;
-//     width: 100%;
-// }
-
-// // login template
-// .login-template {
-//     // background-image: linear-gradient(to bottom right, red, yellow);
-//     background-color: #b89669;
-//     width: 100%;
-//     height: 100vh;
-// }
-
-// .login-form {
-//     width: 350px;
-//     height: 296px;
-// }
-
-// .img-logo {
-//     // background-color: #343a40;
-//     width: 300px;
-//     height: 300px;
-// }
-
-// .login-container {
-//     height: 100vh;
-// }
+.content {
+    min-width: 1200px;
+    height: 100vw;
+}

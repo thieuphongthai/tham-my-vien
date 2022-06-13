@@ -4,9 +4,8 @@ const ObjectId = Schema.ObjectId;
 
 const Role = new Schema({
   	roleName: String,
-	createdAt: {type: Date, default: Date.now},
-	updateAt: {type: Date, default: Date.now},
-	deletedAt: {type: Date, default: Date.now},
+}, {
+	timestamps: true
 });
 
 module.exports = mongoose.model('Role', Role);

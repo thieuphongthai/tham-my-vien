@@ -7,14 +7,13 @@ const Account = new Schema({
   	password: String,
 	role: [
 		{
+
 			type: mongoose.Schema.Types.ObjectId,
-			ref: "Role"
+			ref: "User",
 		}
 	],
-	createdAt: {type: Date, default: Date.now},
-	updateAt: {type: Date, default: Date.now},
-	deletedAt: {type: Date, default: Date.now},
-
+}, {
+	timestamps: true
 });
 
 module.exports = mongoose.model('Account', Account);

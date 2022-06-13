@@ -11,6 +11,7 @@ const User = new Schema({
     email: String,
   	address: String,
 	image: String,
+    account: String,
 	department_id: [
 		{
 			type: mongoose.Schema.Types.ObjectId,
@@ -23,16 +24,8 @@ const User = new Schema({
 			ref: "Role"
 		}
 	],
-    account: [
-		{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: "Account"
-		}
-	],
-	createdAt: {type: Date, default: Date.now},
-	updateAt: {type: Date, default: Date.now},
-	deletedAt: {type: Date, default: Date.now},
-
+}, {
+    timestamps: true
 });
 
 module.exports = mongoose.model('User', User);

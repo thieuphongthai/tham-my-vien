@@ -11,6 +11,7 @@ const User = new Schema({
     email: String,
   	address: String,
 	image: String,
+    account: String,
 	department_id: [
 		{
 			type: mongoose.Schema.Types.ObjectId,
@@ -21,12 +22,6 @@ const User = new Schema({
 		{
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "Role"
-		}
-	],
-    account: [
-		{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: "Account"
 		}
 	],
 }, {

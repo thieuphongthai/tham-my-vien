@@ -44,7 +44,7 @@ isAdmin = (req, res, next) => {
         );
     });
 };
-isModerator = (req, res, next) => {
+isRoot = (req, res, next) => {
     Account.findById(req.userId).exec((err, user) => {
         if (err) {
             res.status(500).send({ message: err });
@@ -52,7 +52,7 @@ isModerator = (req, res, next) => {
         }
         Role.find(
             {
-                _id: { $in: user.roles },
+                _id: { $in: user.role },
             },
             (err, roles) => {
                 if (err) {
@@ -74,6 +74,6 @@ isModerator = (req, res, next) => {
 const authJwt = {
     verifyToken,
     isAdmin,
-    isModerator,
+    isRoot,
 };
 module.exports = authJwt;

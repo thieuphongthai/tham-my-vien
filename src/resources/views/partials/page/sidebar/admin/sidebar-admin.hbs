@@ -1,8 +1,9 @@
-<div class="sidebar-staff">
-	<div class="dashboard-1 bg-dark">
-		<h5 class="pl-4">BẢNG ĐIỀU KHIỂN</h5>
-	</div>
-	<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+<div class="sidebar-container ml-2 border border-right border-light">
+	<div class="dashboard"><h5>BẢNG ĐIỀU KHIỂN</h5></div>
+	<div class="sidebar">
+		<div class="sidebar-toggle" id="sidebarToggleBtn">
+			<i class="ti-arrow-circle-right"></i>
+		</div>
 		<ul class="nav flex-column text-light">
 			<li class="nav-item"><a href="/admin"><i class="ti-user ml-3 mr-3"></i>Tổng quan</a></li>
 			<li class="nav-item"><a href="/user"><i class="ti-user ml-3 mr-3"></i>Quản lý người dùng</a></li>
@@ -13,4 +14,17 @@
 			<li class="nav-item"><a href="/status"><i class="ti-user ml-3 mr-3"></i>Quản lý trạng thái</a></li>
 		</ul>
 	</div>
+	{{!-- <div class="dashboard-footer text-light">
+		<div class="copyrightLine" data-text="Copyright@Hachitech">Copyright@Hachitech</div>
+	</div> --}}
 </div>
+
+<script>
+	let sidebarBtn = document.querySelector("#sidebarToggleBtn");
+	let sidebar = document.querySelector(".sidebar-container");
+	
+	sidebarBtn.onclick = function(){
+	sidebar.classList.toggle("active");
+	sidebarBtn.classList.toggle("rotate");
+}
+</script>

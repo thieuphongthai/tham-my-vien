@@ -1,27 +1,125 @@
-<div class="bg-dark text-light admin-container">
-    <div class="row">
-        <div class="col-lg-2">
-            {{> page/sidebar/admin/sidebar-admin}}
+<div class="row bg-dark">
+    {{> page/sidebar/admin/sidebar-admin}}
+    <div class="content">
+        <div class="container-fluid mt-3">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Tạo thông tin người dùng
+            </button>
         </div>
-        <div class="col-lg-10">
-            <nav class="navbar navbar-light bg-dark">
-                <!-- Button trigger modal -->
-                <a href="user/create" type="button" class="btn btn-outline-light">Tạo dữ liệu người dùng</a>
-            </nav>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-2 mt-3">
-                        <a href="">
-                            <div class="card border-light bg-dark mb-3">
-                                <div class="card-header">Thông tin người dùng</div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Nguyễn Văn A</h5>
-                                    <p class="card-text">Nơi sinh thành phố hồ chí minh</p>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg bg-dark" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thông tin người dùng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <div class="row">
+                                <div class="ml-3">
+                                    <div class="form-group">
+                                        <label for="firstName">Họ</label>
+                                        <input type="text" class="form-control form-control-sm" id="firstName" placeholder="Nhập 'Họ'">
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <div class="form-group">
+                                        <label for="middleName">Tên đệm</label>
+                                        <input type="text" class="form-control form-control-sm" id="middleName" placeholder="Nhập 'Tên đệm'">
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <div class="form-group">
+                                        <label for="lastName">Tên</label>
+                                        <input type="text" class="form-control form-control-sm" id="lastName" placeholder="Nhập 'Tên'">
+                                    </div>
                                 </div>
                             </div>
-                        </a>
+                            <div class="row">
+                                <div class="ml-3">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlFile1">Ngày sinh</label>
+                                        <input type="date" class="form-control form-control-sm" id="exampleFormControlFile1">
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlFile1">Giới tính</label>
+                                        <select class="form-control form-control-sm">
+                                            <option>Chọn giới tính</option>
+                                            <option value="Male">Nam</option>
+                                            <option value="Female">Nữ</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="ml-3">
+                                    <div class="form-group">
+                                        <label for="address">Số điện thoại</label>
+                                        <input type="tel" class="form-control form-control-sm" id="address" placeholder="Nhập số điện thoại">
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <div class="form-group">
+                                        <label for="address">Email</label>
+                                        <input type="email" class="form-control form-control-sm" id="address" placeholder="Nhập email">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Địa chỉ</label>
+                                <input type="text" class="form-control form-control-sm" id="address" placeholder="Nhập địa chỉ, tên đường">
+                            </div>
+                            <div class="row ml-0">
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">Phòng ban</label>
+                                    <select class="form-control form-control-sm">
+                                        <option>Chọn phòng ban</option>
+                                        <option value="Marketing">Marketing</option>
+                                        <option value="Business">Kinh doanh</option>
+                                        <option value="Reception">Lễ tân</option>
+                                        <option value="Operating room">Phẩu thuật</option>
+                                    </select>
+                                </div>
+                                <div class="form-group ml-3">
+                                    <label for="exampleFormControlFile1">Chức vụ</label>
+                                    <select class="form-control form-control-sm">
+                                        <option>Chọn chức vụ</option>
+                                        <option value="Manager">Quản lý</option>
+                                        <option value="Supervisor">Giám sát</option>
+                                        <option value="Employee">Nhân viên</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row ml-0">
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">Tài khoản đăng nhập</label>
+                                    <input type="text" class="form-control form-control-sm" id="middleName" placeholder="Nhập 'Tài khoản'">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <img src="..." class="rounded mx-auto d-block border border-seconnary" width="150px" height="150px" alt="...">
+                            <div class="form-group mt-3">
+                                <label for="exampleFormControlFile1">Hình ảnh</label>
+                                <input type="file" class="form-control-file form-control-sm" id="exampleFormControlFile1">
+                            </div>
+                        </div>
                     </div>
-                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        <button type="submit" class="btn btn-primary">Lưu</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

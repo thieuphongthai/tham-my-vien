@@ -76,17 +76,17 @@ class AuthController {
     };
 
     // Signin
-    signin = (req, res) => {
+    signin = (req, res, next) => {
         Account.findOne({
             email: req.body.email,
         })
-		.populate("roles", "-__v")
-		.exec((err, account) => {
+		// .populate("roles", "-__v")
+		.then( account => {
             console.log(account);
-            if (err) {
-                res.status(500).send({ message: 'Bi loi roi' });
-                return;
-            }
+            // if (err) {
+            //     res.status(500).send({ message: 'Bi loi roi' });
+            //     return;
+            // }
             if (!account) {
                 return res.status(404).send({ message: "User Not found." });
             }
@@ -98,21 +98,22 @@ class AuthController {
             if (!passwordIsValid) {
                 return res.status(401).send({ message: "Invalid Password!" });
             }
-            var token = jwt.sign({ id: user.id }, config.secret, {
+            var token = jwt.sign({ id: account._id }, config.secret, {
                 expiresIn: 86400, // 24 hours
             });
-            var authorities = [];
-            for (let i = 0; i < account.role.length; i++) {
-                authorities.push("ROLE_" + account.role[i].name.toUpperCase());
-            }
+            // var authorities = [];
+            // for (let i = 0; i < account.role.length; i++) {
+            //     authorities.push("ROLE_" + account.role[i].roleName.toUpperCase());
+            // }
             req.session.token = token;
-            res.status(200).send({
+            res.status(200).render('root', {
                 id: account._id,
-                userName: account.username,
+                userName: account.userName,
                 email: account.email,
-                role: authorities,
+                // role: authorities,
             });
-        });
+        })
+        .catch(next);
     };
 
     // Signout

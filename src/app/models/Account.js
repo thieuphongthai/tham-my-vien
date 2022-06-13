@@ -5,8 +5,7 @@ const Account = new Schema({
 	userName: String,
   	email: String,
   	password: String,
-	role: String,
-	uid: [
+	role: [
 		{
 
 			type: mongoose.Schema.Types.ObjectId,

@@ -44,7 +44,7 @@ ul li{
     // top: 0;
     // left: 0;
     width: 50px;
-    height: 100vh;
+    height: auto;
     background: #343a40;
     transition: all 0.5s ease;
 }
@@ -69,6 +69,7 @@ ul li{
     font-family: 'VT323';
     text-align: center;
     padding-top: 10px;
+    white-space: nowrap;
     opacity: 0;
 }
 

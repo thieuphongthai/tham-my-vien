@@ -17,7 +17,7 @@ class AuthController {
         Role.find({})
 			.then(roles => {
 				res.render('signup', {
-					roles: multipleMongooseToObject(roles)
+					roles: multipleMongooseToObject(roles),
 				});
 			})
 			.catch(next);
@@ -25,10 +25,12 @@ class AuthController {
 
     // Signup
     signup = (req, res) => {
+        
         const account = new Account({
             userName: req.body.userName,
             email: req.body.email,
             password: bcrypt.hashSync(req.body.password, 8),
+            role: { $in: req.body._id }
         });
         account.save((err, account) => {
             if (err) {

@@ -12,6 +12,7 @@ const User = new Schema({
   	address: String,
 	image: String,
     account: String,
+	password: String,
 	department_id: [
 		{
 			type: mongoose.Schema.Types.ObjectId,

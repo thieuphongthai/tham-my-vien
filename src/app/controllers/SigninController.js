@@ -20,42 +20,39 @@ class SigninController {
 				res.status(500).send({ message: err });
 				return;
 			}
-			if (req.body.role) {
-				Role.find(
-					{
-						name: { $in: req.body.role },
-					},
-					(err, role) => {
-						if (err) {
-							res.status(500).send({ message: err });
-							return;
-						}
-						account.role = role.map((role) => role._id);
-						account.save((err) => {
-							if (err) {
-								res.status(500).send({ message: err });
-								return;
-							}
-							res.send({ message: "User was registered successfully!" });
-						});
-					}
-				);
-			} else {
-				Role.findOne({ name: "manager" }, (err, role) => {
-					if (err) {
-						res.status(500).send({ message: err });
-						return;
-					}
-					account.role = [role._id];
-					account.save((err) => {
-						if (err) {
-							res.status(500).send({ message: err });
-							return;
-						}
-						res.send({ message: "User was registered successfully!" });
-					});
-				});
-			}
+			// if (req.body.role) {
+			// 	Role.find({},
+			// 		(err, role) => {
+			// 			if (err) {
+			// 				res.status(500).send({ message: err });
+			// 				return;
+			// 			}
+			// 			account.role = role.map((role) => role._id);
+			// 			account.save((err) => {
+			// 				if (err) {
+			// 					res.status(500).send({ message: err });
+			// 					return;
+			// 				}
+			// 				res.send({ message: "User was registered successfully!" });
+			// 			});
+			// 		}
+			// 	);
+			// } else {
+			// 	Role.findOne({ name: "manager" }, (err, role) => {
+			// 		if (err) {
+			// 			res.status(500).send({ message: err });
+			// 			return;
+			// 		}
+			// 		account.role = [role._id];
+			// 		account.save((err) => {
+			// 			if (err) {
+			// 				res.status(500).send({ message: err });
+			// 				return;
+			// 			}
+			// 			res.send({ message: "User was registered successfully!" });
+			// 		});
+			// 	});
+			// }
 		});
 	};
 

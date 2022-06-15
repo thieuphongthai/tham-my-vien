@@ -30,7 +30,7 @@ class AuthController {
             userName: req.body.userName,
             email: req.body.email,
             password: bcrypt.hashSync(req.body.password, 8),
-            role: { $in: req.body._id }
+            // role: { $in: req.body._id }
         });
         account.save((err, account) => {
             if (err) {

@@ -5,13 +5,7 @@ const Account = new Schema({
 	userName: String,
   	email: String,
   	password: String,
-	role: [
-		{
-
-			type: mongoose.Schema.Types.ObjectId,
-			ref: "User",
-		}
-	],
+	role: String
 }, {
 	timestamps: true
 });

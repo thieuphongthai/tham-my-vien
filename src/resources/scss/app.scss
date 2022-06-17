@@ -45,7 +45,7 @@ ul li{
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    width: 50px;
+    width: 56px;
     height: 100vh;
     background: #343a40;
     transition: all 0.5s ease;
@@ -55,6 +55,7 @@ ul li{
 .sidebar-container .sidebar {
     overflow-x: hidden;
     max-height: 1000px;
+    overflow-y: hidden;
 }
 
 .sidebar-container .dashboard{
@@ -76,6 +77,10 @@ ul li{
 
 .sidebar-container.active .dashboard h5{
     opacity: 1;
+}
+
+.sidebar-container.active .sidebar:hover{
+    overflow-y: scroll;
 }
 
 .sidebar-container  .sidebar-toggle{

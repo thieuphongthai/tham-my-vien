@@ -26,6 +26,22 @@ ul li{
     height: 100vh;
 }
 
+// .row{
+//     display: -webkit-box;
+//     margin-right: -15px;
+//     margin-left: -15px;
+// }
+
+// .content{
+//     width: calc(100% - 56px);
+//     padding-left: 15px;
+//     padding-right: 30px;
+// }
+
+// .content .container-fluid{
+//     width: 100%;
+// }
+
 .sidebar::-webkit-scrollbar {
     width: 8px;
     padding-left: 3px;
@@ -74,6 +90,10 @@ ul li{
     white-space: nowrap;
     opacity: 0;
 }
+
+// .sidebar-container.active ~ .content{
+//     width: calc(100% - 260px);
+// }
 
 .sidebar-container.active .dashboard h5{
     opacity: 1;

@@ -26,21 +26,16 @@ ul li{
     height: 100vh;
 }
 
-// .row{
-//     display: -webkit-box;
-//     margin-right: -15px;
-//     margin-left: -15px;
-// }
+.row{
+    display: -webkit-box;
+    margin-right: -15px;
+    margin-left: -15px;
+}
 
-// .content{
-//     width: calc(100% - 56px);
-//     padding-left: 15px;
-//     padding-right: 30px;
-// }
-
-// .content .container-fluid{
-//     width: 100%;
-// }
+.sidebar-container ~ .content{
+    width: calc(100vw - 56px);
+    transition: all 0.2s ease;
+}
 
 .sidebar::-webkit-scrollbar {
     width: 8px;
@@ -91,9 +86,10 @@ ul li{
     opacity: 0;
 }
 
-// .sidebar-container.active ~ .content{
-//     width: calc(100% - 260px);
-// }
+.sidebar-container.active ~ .content{
+    width: calc(100vw - 260px);
+    transition: all 0.2s ease ;
+}
 
 .sidebar-container.active .dashboard h5{
     opacity: 1;

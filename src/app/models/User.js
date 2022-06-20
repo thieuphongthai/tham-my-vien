@@ -7,22 +7,23 @@ const User = new Schema({
 	lastName: String,
 	birth: String,
 	gender: String,
-	phoneNumber: Number,
+	phone: Number,
     email: String,
   	address: String,
-	image: String,
-    account: String,
+	image: {
+		type: mongoose.Schema.Types.Decimal128
+	},
 	password: String,
 	department_id: [
 		{
 			type: mongoose.Schema.Types.ObjectId,
-			ref: "Department"
+			ref: 'Department'
 		}
 	],
     role_id: [
 		{
 			type: mongoose.Schema.Types.ObjectId,
-			ref: "Role"
+			ref: 'Role'
 		}
 	],
 }, {

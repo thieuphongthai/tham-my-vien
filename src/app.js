@@ -14,8 +14,6 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
-console.log(process.env.SECURITY_KEY);
-
 // Cung cấp middleware trên Express để kích hoạt CORS
 var corsOptions = {
   origin: "http://localhost:3001"
@@ -48,7 +46,10 @@ app.use(morgan('combined'));
 
 //template engine
 app.engine('hbs', engine({
-  extname: '.hbs'
+  extname: '.hbs',
+  helpers: {
+	sum: (a, b) => a + b
+}
 }));
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resources', 'views'));

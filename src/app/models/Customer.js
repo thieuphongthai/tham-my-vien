@@ -10,17 +10,8 @@ const Customer = new Schema({
 	phoneNumber: Number,
     email: String,
   	address: String,
-	image: String,
-    serviceNote_id: [
-		{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: "ServiceNote"
-		}
-	],
-	createdAt: {type: Date, default: Date.now},
-	updateAt: {type: Date, default: Date.now},
-	deletedAt: {type: Date, default: Date.now},
-
+}, {
+	timestamps: true
 });
 
 module.exports = mongoose.model('Customer', Customer);

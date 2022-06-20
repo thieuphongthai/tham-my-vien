@@ -32,9 +32,9 @@ const ServiceNote = new Schema({
 			comment: String
 		}
 	],
-	createdAt: {type: Date, default: Date.now},
-	updateAt: {type: Date, default: Date.now},
-	deletedAt: {type: Date, default: Date.now},
+	appointmentDate: Date,
+}, {
+	timestamps: true
 });
 
 module.exports = mongoose.model('ServiceNote', ServiceNote);

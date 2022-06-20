@@ -5,7 +5,6 @@ const Account = new Schema({
 	userName: String,
   	email: String,
   	password: String,
-	role: String
 }, {
 	timestamps: true
 });

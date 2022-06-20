@@ -1,17 +1,15 @@
-<div class="row bg-dark">
-    {{!-- <div class="col-lg-1"> --}}
-        {{> page/sidebar/admin/sidebar-admin}}
-    {{!-- </div> --}}
-    {{!-- <div class="col-lg-11"> --}}
-        <div class="content">
-            <div class="container-fluid mt-3">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Tổng quan
-                </button>
-            </div>
+<div class="row">
+    {{> page/sidebar/admin/sidebar-admin}}
+    <div class="content">
+        <div class="container-fluid">
+            <h1></h1>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Tổng quan
+            </button>
         </div>
-    {{!-- </div> --}}
+    </div>
 </div>
+
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

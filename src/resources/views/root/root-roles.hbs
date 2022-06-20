@@ -18,7 +18,7 @@
                 <tr>
                     <th scope="row">{{sum @index 1}}</th>
                     <td>{{this._id}}</td>
-                    <td>{{this.roleName}}</td>
+                    <td>{{this.name}}</td>
                     <td>{{this.description}}</td>
                 </tr>
                 {{/each}}
@@ -41,7 +41,7 @@
                 <form method="POST">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Tên chức vụ</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" name="roleName" aria-describedby="emailHelp" placeholder="Nhập tên chức vụ">
+                        <input type="text" class="form-control" id="exampleInputEmail1" name="name" aria-describedby="emailHelp" placeholder="Nhập tên chức vụ">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Mô tả</label>

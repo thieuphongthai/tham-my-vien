@@ -23,7 +23,7 @@ class AuthController {
 			.catch(next);
 	}
 
-    // Signup
+    // [POST] Signup
     signup = (req, res) => {
         
         const account = new Account({
@@ -37,58 +37,58 @@ class AuthController {
                 res.status(500).send({ message: err });
                 return;
             }
-            res.redirect('/signin');
-            // if (req.body.role) {
-            //     Role.find(
-            //         {
-            //             name: { $in: req.body.role },
-            //         },
-            //         (err, role) => {
-            //             if (err) {
-            //                 res.status(500).send({ message: err });
-            //                 return;
-            //             }
-            //             account.role = role.map((role) => role._id);
-            //             account.save((err) => {
-            //                 if (err) {
-            //                     res.status(500).send({ message: err });
-            //                     return;
-            //                 }
-            //                 res.send({ message: "User was registered successfully!" });
-            //             });
-            //         }
-            //     );
-            // } else {
-            //     Role.findOne({ name: "manager" }, (err, role) => {
-            //         if (err) {
-            //             res.status(500).send({ message: err });
-            //             return;
-            //         }
-            //         account.role = [role._id];
-            //         account.save((err) => {
-            //             if (err) {
-            //                 res.status(500).send({ message: err });
-            //                 return;
-            //             }
-            //             res.send({ message: "User was registered successfully!" });
-            //         });
-            //     });
-            // }
+            // res.redirect('/signin');
+            if (req.body.role) {
+                Role.find(
+                    {
+                        name: { $in: req.body.role },
+                    },
+                    (err, role) => {
+                        if (err) {
+                            res.status(500).send({ message: err });
+                            return;
+                        }
+                        account.role = role.map((role) => role._id);
+                        account.save((err) => {
+                            if (err) {
+                                res.status(500).send({ message: err });
+                                return;
+                            }
+                            res.send({ message: "User was registered successfully!" });
+                        });
+                    }
+                );
+            } else {
+                Role.findOne({ name: "manager" }, (err, role) => {
+                    if (err) {
+                        res.status(500).send({ message: err });
+                        return;
+                    }
+                    account.role = [role._id];
+                    account.save((err) => {
+                        if (err) {
+                            res.status(500).send({ message: err });
+                            return;
+                        }
+                        res.redirect('signin');
+                    });
+                });
+            }
         });
     };
 
-    // Signin
-    signin = (req, res, next) => {
+    // [POST] Signin
+    signin = (req, res, err) => {
         Account.findOne({
             email: req.body.email,
         })
-		// .populate("roles", "-__v")
-		.then( account => {
+		.populate("roles", "-__v")
+		.exec( account => {
             console.log(account);
-            // if (err) {
-            //     res.status(500).send({ message: 'Bi loi roi' });
-            //     return;
-            // }
+            if (!err) {
+                res.status(500).send({ message: 'Bi loi roi' });
+                return;
+            }
             if (!account) {
                 return res.status(404).send({ message: "User Not found." });
             }
@@ -103,19 +103,18 @@ class AuthController {
             var token = jwt.sign({ id: account._id }, config.secret, {
                 expiresIn: 86400, // 24 hours
             });
-            // var authorities = [];
-            // for (let i = 0; i < account.role.length; i++) {
-            //     authorities.push("ROLE_" + account.role[i].roleName.toUpperCase());
-            // }
+            var authorities = [];
+            for (let i = 0; i < account.role.length; i++) {
+                authorities.push("ROLE_" + account.role[i].roleName.toUpperCase());
+            }
             req.session.token = token;
             res.status(200).render('root', {
                 id: account._id,
                 userName: account.userName,
                 email: account.email,
-                // role: authorities,
+                role: authorities,
             });
         })
-        .catch(next);
     };
 
     // Signout

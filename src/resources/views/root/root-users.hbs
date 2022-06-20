@@ -1,0 +1,125 @@
+<div class="row bg-dark">
+    {{> page/sidebar/admin/sidebar-admin}}
+    <div class="content">
+        <div class="container-fluid mt-3">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Tạo thông tin người dùng
+            </button>
+            <table class="table table-hover text-light mt-3">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Mã người dùng</th>
+                        <th scope="col">Họ tên</th>
+                        <th scope="col">Ngày sinh</th>
+                        <th scope="col">Giới tính</th>
+                        <th scope="col">Số điện thoại</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Địa chỉ</th>
+                        <th scope="col">Phòng ban</th>
+                        <th scope="col">Chức vụ</th>
+                        <th scope="col">Tài khoản</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each users}}
+                    <tr>
+                        <th scope="row">{{sum @index 1}}</th>
+                        <td>{{this._id}}</td>
+                        <td>{{this.firstName}}{{this.middleName}}{{this.lastName}}</td>
+                        <td>{{this.birth}}</td>
+                        <td>{{this.gender}}</td>
+                        <td>{{this.phone}}</td>
+                        <td>{{this.email}}</td>
+                        <td>{{this.address}}</td>
+                        <td>{{this.department_id}}</td>
+                        <td>{{this.role_id}}</td>
+                        <td>{{this.account_id}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg bg-dark" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thông tin tài khoản</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="first-name">Họ</label>
+                        <input type="text" class="form-control" id="first-name" name="firstName" placeholder="Nhập 'Họ' của người dùng">
+                    </div>
+                    <div class="form-group">
+                        <label for="middle-name">Tên đệm</label>
+                        <input type="text" class="form-control" id="middle-name" name="middleName" placeholder="Nhập 'Tên đệm' của người dùng">
+                    </div>
+                    <div class="form-group">
+                        <label for="last-name">Tên</label>
+                        <input type="text" class="form-control" id="last-name" name="lastName" placeholder="Nhập 'Tên' của người dùng">
+                    </div>
+                    <div class="form-group">
+                        <label for="birth">Ngày sinh</label>
+                        <input type="date" class="form-control" id="birth" name="birth" min="01/01/2006" max="01/01/1977">
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">Giới tính</label>
+                        <select class="form-control" id="gender">
+                            <option>-- Chọn giới tính --</option>
+                            <option value="male">Nam</option>
+                            <option value="female">Nữ</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Số điện thoại</label>
+                        <input type="number" class="form-control" id="phone" name="phone" placeholder="Nhập số điện thoại">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Nhập email">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Địa chỉ</label>
+                        <input type="text" class="form-control" id="address" name="address" placeholder="Nhập địa chỉ">
+                    </div>
+                    <div class="form-group">
+                        <label for="department">Phòng ban</label>
+                        <select class="form-control" id="department">
+                            <option>-- Chọn phòng ban --</option>
+                            <option value="marketing">Marketing</option>
+                            <option value="business">Kinh doanh</option>
+                            <option value="reception">Lễ tân</option>
+                            <option value="operating-room">Phẩu thuật</option>
+                            <option value="hr">Nhân sự</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="role">Chức vụ</label>
+                        <select class="form-control" id="role">
+                            <option>-- Chọn chức vụ --</option>
+                            <option value="admin">Admin</option>
+                            <option value="manager">Quản lý</option>
+                            <option value="employ">Nhân viên</option>
+                            <option value="doctor">Bác sĩ</option>
+                            <option value="nurse">Y tá</option>
+                            <option value="nursing">Điều dưỡng</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        <button type="submit" class="btn btn-primary">Lưu</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

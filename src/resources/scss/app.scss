@@ -26,6 +26,8 @@ ul li{
     height: 100vh;
 }
 
+                //          Sidebar             //
+
 .row{
     display: -webkit-box;
     margin-right: -15px;
@@ -164,25 +166,7 @@ ul li{
     opacity: 1;
 }
 
-// .sidebar-container .dashboard-footer .copyrightLine::before {
-//     content: attr(data-text);
-//     position: absolute;
-//     text-align: center;
-//     color: #fff;
-//     -webkit-text-stroke: 0.3vw , #383d52;
-//     border-right: 2px solid #fff;
-//     overflow: hidden;
-//     animation: animate 6s linear infinite;
-// }
-
-// @keyframes animate {
-//     0%, 10%, 100% {
-//       width: 0;
-//     }
-//     70%, 90% {
-//       width: 180px;
-//     }
-// }  
+                        //          Sidebar         //
 
 .nav-footer {
     position: absolute;
@@ -212,11 +196,3 @@ ul li{
 .login-container {
     height: 100vh;
 }
-
-// Root CSS
-// .container-login {
-//     width: 250px;
-//     height: 250px;
-//     border-radius: 5%;
-//     display: flex;
-// }

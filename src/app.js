@@ -1,5 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
+const methodOverride = require('method-override');
 const { engine } = require('express-handlebars');
 const path = require('path');
 const app = express();
@@ -7,6 +8,7 @@ const route = require('./routes/routes');
 const db = require('./config/db/db');
 const cors = require("cors");
 const cookieSession = require("cookie-session");
+
 require('dotenv').config();
 
 
@@ -18,6 +20,9 @@ if (process.env.NODE_ENV !== 'production') {
 var corsOptions = {
   origin: "http://localhost:3001"
 };
+
+// Method Override
+app.use(methodOverride('_method'));
 
 // Kiểm tra trước khi đến lớp bảo mật
 app.use(cors(corsOptions));

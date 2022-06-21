@@ -78,14 +78,14 @@ class AuthController {
     };
 
     // [POST] Signin
-    signin(req, res, err) {
+    signin(req, res, next) {
         Account.findOne({
             email: req.body.email,
         })
-		.populate("roles", "-__v")
-		.exec( account => {
+		// .populate("roles", "-__v")
+		.then( account => {
             console.log(account);
-            if (!err) {
+            if (!next) {
                 res.status(500).send({ message: 'Bi loi roi' });
                 return;
             }
@@ -105,11 +105,11 @@ class AuthController {
                 expiresIn: 86400, // 24 hours
             });
             var authorities = [];
-            for (let i = 0; i < account.role.length; i++) {
-                authorities.push("ROLE_" + account.role[i].roleName.toUpperCase());
-            }
+            // for (let i = 0; i < account.role.length; i++) {
+            //     authorities.push("ROLE_" + account.role[i].roleName.toUpperCase());
+            // }
             req.session.token = token;
-            res.status(200).render('root', {
+            res.status(200).render('root/root', {
                 id: account._id,
                 userName: account.userName,
                 email: account.email,

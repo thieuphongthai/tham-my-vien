@@ -8,8 +8,14 @@ const roleRouter = require("./role-route");
 // const serviceRouter = require('./service');
 // const statusRouter = require('./status');
 const rootRouter = require("./root");
+const marketingRouter = require("./marketing")
+const receptionRouter = require("./reception")
+const saleRouter = require("./sale")
 
 function route(app) {
+  app.use("/sale", saleRouter)
+  app.use("/reception", receptionRouter)
+  app.use("/marketing", marketingRouter)
   app.use("/user", userRouter);
   // app.use('/account', accountRouter);
   // app.use('/department', departmentRouter);

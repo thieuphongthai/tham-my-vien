@@ -8,7 +8,7 @@ router.get('/manager-marketing', MarketingController.getManagerMakertingDashboar
 // [GET] Staff Marketing
 router.get('/employee-marketing', MarketingController.getStaffMarketingDashboard)
 
-// [GET] Manager UI
-router.get('/marketings', MarketingController.getMarketingDashboard)
+// [GET] Marketing UI
+router.get('/', MarketingController.getMarketingDashboard)
 
 module.exports = router;

@@ -9,6 +9,6 @@ router.get('/employee-sale', SaleController.getSaleStaffDashboard)
 router.get('/manager-sale', SaleController.getSaleManagerDashboard)
 
 // [GET] SALE UI
-router.get('/sales', SaleController.getSaleDashboard)
+router.get('/', SaleController.getSaleDashboard)
 
 module.exports = router;

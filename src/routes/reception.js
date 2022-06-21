@@ -2,6 +2,13 @@ const express = require('express');
 const router = express.Router();
 const ReceptionController = require('../app/controllers/ReceptionController');
 
-router.get('/', ReceptionController.getReceptionDashboard);
+// [GET] RECEPTION Employee
+router.get('/manager-reception', ReceptionController.getReceptionManagerDashboard)
+
+// [GET] RECEPTION Manager
+router.get('/employee-reception', ReceptionController.getReceptionStaffDashboard)
+
+// [GET] RECEPTION UI
+router.get('/receptions', ReceptionController.getReceptionDashboard);
 
 module.exports = router;

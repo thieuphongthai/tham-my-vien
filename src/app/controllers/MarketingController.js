@@ -1,17 +1,16 @@
-const { getManagerDashboard } = require("./ManagerController");
 
 class MarketingController{
 
     getMarketingDashboard(req, res){
-
+        res.render('partials/marketing/marketing')
     };
 
-    getManagerDashboard(req, res){
-
+    getManagerMakertingDashboard(req, res){
+        res.render('partials/marketing/manager-marketing');
     };
 
-    getStaffDashboard(req, res){
-
+    getStaffMarketingDashboard(req, res){
+        res.render('partials/marketing/employee-marketing');
     };
 };
 

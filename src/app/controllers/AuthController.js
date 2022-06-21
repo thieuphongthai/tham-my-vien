@@ -24,13 +24,13 @@ class AuthController {
 	}
 
     // [POST] Signup
-    signup = (req, res) => {
+    postSignup(req, res) {
         
         const account = new Account({
             userName: req.body.userName,
             email: req.body.email,
             password: bcrypt.hashSync(req.body.password, 8),
-            // role: { $in: req.body._id }
+            role_id: { $in: req.body.role_id }
         });
         account.save((err, account) => {
             if (err) {
@@ -38,17 +38,17 @@ class AuthController {
                 return;
             }
             // res.redirect('/signin');
-            if (req.body.role) {
+            if (req.body.role_id) {
                 Role.find(
                     {
-                        name: { $in: req.body.role },
+                        name: { $in: req.body.role_id },
                     },
                     (err, role) => {
                         if (err) {
                             res.status(500).send({ message: err });
                             return;
                         }
-                        account.role = role.map((role) => role._id);
+                        account.role_id = role.map((role) => role._id);
                         account.save((err) => {
                             if (err) {
                                 res.status(500).send({ message: err });
@@ -78,7 +78,7 @@ class AuthController {
     };
 
     // [POST] Signin
-    signin = (req, res, err) => {
+    signin(req, res, err) {
         Account.findOne({
             email: req.body.email,
         })
@@ -92,6 +92,7 @@ class AuthController {
             if (!account) {
                 return res.status(404).send({ message: "User Not found." });
             }
+            // so sánh password nhập vào với password trong db
             var passwordIsValid = bcrypt.compareSync(
                 req.body.password,
                 account.password

@@ -19,7 +19,7 @@ module.exports = function(app) {
 };
 
 router.post("/signout", controller.signout);
-router.post("/signup",[verifySignUp.checkUsernameOrEmail, verifySignUp.checkRolesExisted], controller.signup);
+router.post("/signup", verifySignUp.checkUsernameOrEmail, controller.postSignup);
 router.get('/signup', controller.getSignup);
 router.post("/", controller.signin);
 router.get('/', controller.getSignin);

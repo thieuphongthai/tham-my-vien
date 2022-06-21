@@ -73,7 +73,7 @@
                     </div>
                     <div class="form-group">
                         <label for="gender">Giới tính</label>
-                        <select class="form-control" id="gender">
+                        <select class="form-control" id="gender" name="gender">
                             <option>-- Chọn giới tính --</option>
                             <option value="male">Nam</option>
                             <option value="female">Nữ</option>
@@ -93,25 +93,20 @@
                     </div>
                     <div class="form-group">
                         <label for="department">Phòng ban</label>
-                        <select class="form-control" id="department">
+                        <select class="form-control" id="department" name="departmentId">
                             <option>-- Chọn phòng ban --</option>
-                            <option value="marketing">Marketing</option>
-                            <option value="business">Kinh doanh</option>
-                            <option value="reception">Lễ tân</option>
-                            <option value="operating-room">Phẩu thuật</option>
-                            <option value="hr">Nhân sự</option>
+                            {{#each departments}}
+                            <option value="{{this._id}}" data-target="{{this.role_id}}" class="department-opt">{{this.name}}</option>
+                            {{/each}}
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="role">Chức vụ</label>
-                        <select class="form-control" id="role">
+                        <select class="form-control" id="role" name="roleId">
                             <option>-- Chọn chức vụ --</option>
-                            <option value="admin">Admin</option>
-                            <option value="manager">Quản lý</option>
-                            <option value="employ">Nhân viên</option>
-                            <option value="doctor">Bác sĩ</option>
-                            <option value="nurse">Y tá</option>
-                            <option value="nursing">Điều dưỡng</option>
+                            {{#each roles}}
+                            <option value="{{this._id}}">{{this.name}}</option>
+                            {{/each}}
                         </select>
                     </div>
                     <div class="modal-footer">
@@ -123,3 +118,17 @@
         </div>
     </div>
 </div>
+
+<script>
+    var selectDepartment = document.getElementById('department');
+    console.log(selectDepartment);
+    selectDepartment.addEventListener('change', (e) => {
+        var opt = e.target;
+        console.log('depart value', e.target.value)
+        console.log(opt);
+    })
+    
+    
+    
+    
+</script>

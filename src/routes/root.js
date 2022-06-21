@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const RootController = require('../app/controllers/RootController');
+const VerifySignUp = require('../middleware/VerifySignUp');
 
 // [GET] Root Operating-room UI
 router.get('/operating-room', RootController.getRootOperatingRoomDashboard);
@@ -20,7 +21,7 @@ router.get('/user', RootController.getRootUserDashboard);
 
 
 // [GET] Root Account UI
-router.post('/account', RootController.postRootAccountDashboard);
+router.post('/account', VerifySignUp.checkUsernameOrEmail, RootController.postRootAccountDashboard);
 
 // [GET] Root Account UI
 router.get('/account', RootController.getRootAccountDashboard);
@@ -47,6 +48,9 @@ router.get('/service', RootController.getRootServiceDashboard);
 router.get('/status', RootController.getRootStatusDashboard);
 
 // [GET] Root Dashboard UI
-router.get('/', RootController.getRootDashboard);
+router.get('/dashboard', RootController.getRootDashboard);
+
+// [GET] Root Login UI
+router.get('/', RootController.getRootLogin);
 
 module.exports = router;

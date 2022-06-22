@@ -2,7 +2,7 @@
 
 class ReceptionController{
     getReceptionDashboard(req, res){
-        res.render('reception');
+        res.render('partials/reception/reception');
     }
 
     getReceptionManagerDashboard(req, res){

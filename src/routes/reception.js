@@ -9,6 +9,6 @@ router.get('/manager-reception', ReceptionController.getReceptionManagerDashboar
 router.get('/employee-reception', ReceptionController.getReceptionStaffDashboard)
 
 // [GET] RECEPTION UI
-router.get('/receptions', ReceptionController.getReceptionDashboard);
+router.get('/', ReceptionController.getReceptionDashboard);
 
 module.exports = router;

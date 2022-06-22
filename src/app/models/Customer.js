@@ -5,9 +5,10 @@ const Customer = new Schema({
 	firstName: String,
 	middleName: String,
 	lastName: String,
+	name: String,
 	birth: String,
 	gender: String,
-	phoneNumber: Number,
+	phone: Number,
     email: String,
   	address: String,
 }, {

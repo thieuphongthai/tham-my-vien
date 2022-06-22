@@ -78,14 +78,14 @@ class AuthController {
     };
 
     // [POST] Signin
-    signin(req, res, err) {
+    signin(req, res, next) {
         Account.findOne({
             email: req.body.email,
         })
-		.populate("roles", "-__v")
-		.exec( account => {
+		// .populate("roles", "-__v")
+		.then( account => {
             console.log(account);
-            if (!err) {
+            if (!next) {
                 res.status(500).send({ message: 'Bi loi roi' });
                 return;
             }
@@ -97,7 +97,7 @@ class AuthController {
                 req.body.password,
                 account.password
             );
-            console.log(req.body.password)
+            console.log(passwordIsValid)
             if (!passwordIsValid) {
                 return res.status(401).send({ message: "Invalid Password!" });
             }
@@ -116,6 +116,7 @@ class AuthController {
                 role: authorities,
             });
         })
+		.catch(next);
     };
 
     // Signout

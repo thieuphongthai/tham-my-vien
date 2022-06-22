@@ -48,7 +48,17 @@ app.use(morgan('combined'));
 app.engine('hbs', engine({
   extname: '.hbs',
   helpers: {
-	sum: (a, b) => a + b
+	sum: (a, b) => a + b,
+	change: (a) => {
+		return a;
+		// for (const key in a) {
+		// 	if (Object.hasOwnProperty.call(a, key)) {
+		// 		const element = a[key];
+		// 		console.log(element)
+		// 		return element;
+		// 	}
+		// }
+	}
 }
 }));
 app.set('view engine', 'hbs');

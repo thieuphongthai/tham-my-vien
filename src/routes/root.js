@@ -18,6 +18,12 @@ router.get('/marketing', RootController.getRootMarketingDashboard);
 // [GET] Root User UI
 router.get('/user', RootController.getRootUserDashboard);
 
+// [POST] Root User UI
+router.post('/user', RootController.postRootUserDashboard);
+
+router.get('/user/create', RootController.getRootUserCreateDashboard)
+
+router.post('/user/create/:id', RootController.postLoadRole);
 
 
 // [GET] Root Account UI
@@ -49,6 +55,7 @@ router.get('/status', RootController.getRootStatusDashboard);
 
 // [GET] Root Dashboard UI
 router.get('/dashboard', RootController.getRootDashboard);
+
 
 // [GET] Root Login UI
 router.get('/', RootController.getRootLogin);

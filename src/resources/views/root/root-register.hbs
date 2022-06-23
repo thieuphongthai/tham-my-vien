@@ -1,6 +1,10 @@
 <div class="d-flex justify-content-center mt-3">
     <form method="POST">
         <div class="form-group">
+            <label for="root-user-name">Tên tài khoản</label>
+            <input type="text" class="form-control" id="root-user-name" placeholder="Nhập tên tài khoản" name="userName">
+        </div>
+        <div class="form-group">
             <label for="root-email">Email</label>
             <input type="email" class="form-control" id="root-email" aria-describedby="emailHelp" placeholder="Nhập email" name="email">
         </div>
@@ -9,7 +13,13 @@
             <input type="password" class="form-control" id="root-password" placeholder="Nhập mật khẩu" name="password">
         </div>
         <div class="form-group">
-            <a href="root/register">Đăng ký</a>
+            <label for="role">Chức vụ</label>
+            <select class="form-control form-control-sm" id="role" name="roleEngName">
+                <option value="">-- Chọn quyền hạn --</option>
+                {{#each roles}}
+                <option value="{{this.engName}}" class="role-opt">{{cutRole this.name}}</option>
+                {{/each}}
+            </select>
         </div>
         <button type="submit" class="btn btn-primary">Đăng nhập</button>
     </form>    

@@ -53,59 +53,17 @@ app.use(morgan('combined'));
 app.engine('hbs', engine({
   extname: '.hbs',
   helpers: {
-	sum: (a, b) => a + b
+	sum: (a, b) => a + b,
+	cutRole: (role) => {
+		console.log(role)
+		if (role !== 'Gốc') {
+			return role;
+		}
+	}
 }
 }));
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resources', 'views'));
-
-// 
-function initial() {
-  	Role.estimatedDocumentCount((err, count) => {
-    	if (!err && count === 0) {
-      		new Role({
-        		name: "manager"
-      		}).save(err => {
-				if (err) {
-					console.log("error", err);
-				}
-				console.log("added 'manager' to roles collection");
-			});
-			new Role({
-				name: "employ"
-			}).save(err => {
-				if (err) {
-					console.log("error", err);
-				}
-				console.log("added 'employ' to roles collection");
-			});
-			new Role({
-				name: "doctor"
-			}).save(err => {
-				if (err) {
-					console.log("error", err);
-				}
-				console.log("added 'doctor' to roles collection");
-			});
-			new Role({
-				name: "nurse"
-			}).save(err => {
-				if (err) {
-					console.log("error", err);
-				}
-				console.log("added 'nurse' to roles collection");
-			});
-			new Role({
-				name: "nursing"
-			}).save(err => {
-				if (err) {
-					console.log("error", err);
-				}
-				console.log("added 'nursing' to roles collection");
-			});
-		}
-	});
-}
 
 // Routes init
 route(app);

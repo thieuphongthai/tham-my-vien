@@ -2,77 +2,65 @@
 const jwt = require("jsonwebtoken");
 const config = require("../config/auth");
 const Account = require('../app/models/Account');
-const Role = require('../app/models/Role');
+const Position = require('../app/models/Position');
 
 verifyToken = (req, res, next) => {
     let token = req.session.token;
     if (!token) {
-        return res.status(403).send({ message: "No token provided!" });
+        return res.status(403).send({ message: "Không có mã token được cung cấp" });
     }
     jwt.verify(token, config.secret, (err, decoded) => {
         if (err) {
-            return res.status(401).send({ message: "Unauthorized!" });
+            return res.status(401).send({ message: "Không được phép đăng nhập" });
         }
         req.userId = decoded.id;
         next();
     });
 };
-isAdmin = (req, res, next) => {
-    Account.findById(req.userId).exec((err, user) => {
-        if (err) {
-            res.status(500).send({ message: err });
-            return;
-        }
-        Role.find(
-            {
-                _id: { $in: user.roles },
-            },
-            (err, roles) => {
-                if (err) {
-                    res.status(500).send({ message: err });
-                    return;
-                }
-                for (let i = 0; i < roles.length; i++) {
-                    if (roles[i].name === "admin") {
-                        next();
-                        return;
-                    }
-                }
-                res.status(403).send({ message: "Require Admin Role!" });
+isUser = (req, res, next) => {
+    Promise.all([Account.findById(req.body._id), Role.find({})])
+        .then((users, roles) => {
+            if(users.role === roles.engName) {
+                console.log(users.role);
+                console.log(roles.engName);
+                next();
+                res.status(403).send({ message: "Yêu cầu vai trò người dùng!" });
                 return;
             }
-        );
-    });
+        })
+        .catch(next);
 };
-isRoot = (req, res, next) => {
-    Account.findById(req.userId).exec((err, user) => {
-        if (err) {
-            res.status(500).send({ message: err });
-            return;
-        }
-        Role.find(
-            {
-                _id: { $in: user.role },
-            },
-            (err, roles) => {
-                if (err) {
-                    res.status(500).send({ message: err });
-                    return;
-                }
-                for (let i = 0; i < roles.length; i++) {
-                    if (roles[i].name === "moderator") {
-                        next();
-                        return;
-                    }
-                }
-                res.status(403).send({ message: "Require Moderator Role!" });
+
+isAdmin = (req, res, next) => {
+    Promise.all([Account.findById(req.body._id), Role.find({})])
+        .then((users, roles) => {
+            if(users.role === roles.engName) {
+                console.log(users.role);
+                console.log(roles.engName);
+                next();
+                res.status(403).send({ message: "Yêu cầu vai trò quản trị viên" });
                 return;
             }
-        );
-    });
+        })
+        .catch(next);
+};
+
+isRoot = (req, res, next) => {
+    Promise.all([Account.findById(req.body._id), Role.find({})])
+        .then((users, roles) => {
+            if(users.role === roles.engName) {
+                console.log(users.role);
+                console.log(roles.engName);
+                next();
+                res.status(403).send({ message: "Yêu cầu vai trò gốc!" });
+                return;
+            }
+        })
+        .catch(next);
 };
 const authJwt = {
     verifyToken,
+    isUser,
     isAdmin,
     isRoot,
 };

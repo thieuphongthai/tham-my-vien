@@ -2,9 +2,77 @@
     {{> page/sidebar/admin/sidebar-admin}}
     <div class="content">
         <div class="container-fluid mt-3">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                Tạo thông tin người dùng
-            </button>
+            <div class="container mt-3">
+                <form method="POST" class="text-light">
+                    <div class="row">
+                        <div class="form-group mr-3 ml-3">
+                            <label for="first-name">Họ</label>
+                            <input type="text" class="form-control form-control-sm" id="first-name" name="firstName" placeholder="Nhập 'Họ'">
+                        </div>
+                        <div class="form-group mr-3">
+                            <label for="middle-name">Tên đệm</label>
+                            <input type="text" class="form-control form-control-sm" id="middle-name" name="middleName" placeholder="Nhập 'Tên đệm'">
+                        </div>
+                        <div class="form-group">
+                            <label for="last-name">Tên</label>
+                            <input type="text" class="form-control form-control-sm" id="last-name" name="lastName" placeholder="Nhập 'Tên'">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group mr-3 ml-3">
+                            <label for="birth">Ngày sinh</label>
+                            <input type="date" class="form-control form-control-sm" id="birth" name="birth" min="01/01/2006" max="01/01/1977">
+                        </div>
+                        <div class="form-group">
+                            <label for="gender">Giới tính</label>
+                            <select class="form-control form-control-sm" id="gender" name="gender">
+                                <option>-- Chọn giới tính --</option>
+                                <option value="male">Nam</option>
+                                <option value="female">Nữ</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group mr-3 ml-3">
+                            <label for="phone">Số điện thoại</label>
+                            <input type="number" class="form-control form-control-sm" id="phone" name="phone" placeholder="Nhập số điện thoại">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email</label>
+                            <input type="email" class="form-control form-control-sm" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Nhập email">
+                        </div>
+                    </div>
+                    
+                        <div class="form-group">
+                            <label for="address">Địa chỉ</label>
+                            <input type="text" class="form-control form-control-sm" id="address" name="address" placeholder="Nhập địa chỉ">
+                        </div>
+                    
+                    <div class="row">
+                        <div class="form-group mr-3 ml-3">
+                            <label for="department">Phòng ban</label>
+                            <select class="form-control form-control-sm" id="department" name="role_id">
+                                <option>-- Chọn phòng ban --</option>
+                                {{#each departments}}
+                                <option value="{{this.name}}" class="department-opt">{{this.name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="role">Chức vụ</label>
+                            <select class="form-control form-control-sm" id="role" name="roleEngName">
+                                <option value="">-- Chọn chức vụ --</option>
+                                {{#each roles}}
+                                <option value="{{this.name}}" class="department-opt">{{this.name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    </div>
+                </form>
+                <div class="form=group d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">Lưu</button>
+                </div>
+            </div>
             <table class="table table-hover text-light mt-3">
                 <thead>
                     <tr>
@@ -43,92 +111,3 @@
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg bg-dark" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Thông tin tài khoản</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form method="POST">
-                    <div class="form-group">
-                        <label for="first-name">Họ</label>
-                        <input type="text" class="form-control" id="first-name" name="firstName" placeholder="Nhập 'Họ' của người dùng">
-                    </div>
-                    <div class="form-group">
-                        <label for="middle-name">Tên đệm</label>
-                        <input type="text" class="form-control" id="middle-name" name="middleName" placeholder="Nhập 'Tên đệm' của người dùng">
-                    </div>
-                    <div class="form-group">
-                        <label for="last-name">Tên</label>
-                        <input type="text" class="form-control" id="last-name" name="lastName" placeholder="Nhập 'Tên' của người dùng">
-                    </div>
-                    <div class="form-group">
-                        <label for="birth">Ngày sinh</label>
-                        <input type="date" class="form-control" id="birth" name="birth" min="01/01/2006" max="01/01/1977">
-                    </div>
-                    <div class="form-group">
-                        <label for="gender">Giới tính</label>
-                        <select class="form-control" id="gender" name="gender">
-                            <option>-- Chọn giới tính --</option>
-                            <option value="male">Nam</option>
-                            <option value="female">Nữ</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Số điện thoại</label>
-                        <input type="number" class="form-control" id="phone" name="phone" placeholder="Nhập số điện thoại">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Email</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Nhập email">
-                    </div>
-                    <div class="form-group">
-                        <label for="address">Địa chỉ</label>
-                        <input type="text" class="form-control" id="address" name="address" placeholder="Nhập địa chỉ">
-                    </div>
-                    <div class="form-group">
-                        <label for="department">Phòng ban</label>
-                        <select class="form-control" id="department" name="departmentId">
-                            <option>-- Chọn phòng ban --</option>
-                            {{#each departments}}
-                            <option value="{{this._id}}" data-target="{{this.role_id}}" class="department-opt">{{this.name}}</option>
-                            {{/each}}
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="role">Chức vụ</label>
-                        <select class="form-control" id="role" name="roleId">
-                            <option>-- Chọn chức vụ --</option>
-                            {{#each roles}}
-                            <option value="{{this._id}}">{{this.name}}</option>
-                            {{/each}}
-                        </select>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                        <button type="submit" class="btn btn-primary">Lưu</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    var selectDepartment = document.getElementById('department');
-    console.log(selectDepartment);
-    selectDepartment.addEventListener('change', (e) => {
-        var opt = e.target;
-        console.log('depart value', e.target.value)
-        console.log(opt);
-    })
-    
-    
-    
-    
-</script>

@@ -10,10 +10,6 @@ var bcrypt = require("bcryptjs");
 
 class RootController {
 
-	getRootLogin(req, res, next) {
-		res.render("root/root-login");
-    }
-
     getRootDashboard(req, res, next) {
 		res.render("root/root-dashboard");
     }
@@ -42,19 +38,35 @@ class RootController {
 		res.render("root/root-service-note");
     }
 
+
+
 	// [GET] /user
     getRootUserDashboard(req, res, next) {
+		User.find({})
+			.then((users) => {
+				res.render('root/root-users', {
+					users: multipleMongooseToObject(users),
+				});
+			})
+			.catch(next);
+    }
+
+	getRootUserCreateDashboard(req, res, next) {
 		Promise.all([User.find({}), Department.find({}), Role.find({})])
 			.then(([users, departments, roles]) => {
-				res.render('root/root-users', {
+				res.render('root/root-users-create', {
 					users: multipleMongooseToObject(users),
 					departments: multipleMongooseToObject(departments),
 					roles: multipleMongooseToObject(roles)
 				});
 			})
 			.catch(next);
-    }
+		
+	}
 
+	postRootUserDashboard(req, res, next) {
+		
+	}
      
 	// [POST] /account
     postRootAccountDashboard(req, res, next) {
@@ -73,9 +85,6 @@ class RootController {
 				res.status(500).send({ message: err });
 				return;
 			} else {
-				res.redirect('account');
-			}
-			if (req.body.roleId) {
 				console.log('2', req.body.roleId)
                 Role.find(
                     {
@@ -94,6 +103,7 @@ class RootController {
                                 return;
                             }
                             res.redirect('account');
+							return;
                         });
                     }
                 );

@@ -1,0 +1,67 @@
+<div class="row bg-dark">
+    {{> page/sidebar/admin/sidebar-admin}}
+    <div class="content">
+        <div class="container-fluid text-light mt-3">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Tạo thông tin người dùng
+            </button>
+            
+        </div>
+        
+    </div>
+</div>
+
+<script>
+    var roleArr = [{ name: 'Quản lý', engName: 'Manager' }, { name: 'Nhân viên', engName: 'Employ' }]
+
+    var operatingArr = [{ name: 'Bác sĩ', engName: 'Doctor' }, { name: 'Y tá', engName: 'Nurse' }, { name: 'Điều dưỡng', engName: 'Nursing', }]
+
+    var adminArr = [{ name: 'Admin', engName: 'Admin', }]
+
+    var selectDepart = document.getElementById('department');
+    var selectRole = document.getElementById('role');
+    var child = selectRole.getElementsByTagName('option');
+    function create(arr) {
+        arr.filter(item => {
+            let opt = document.createElement('option');
+            opt.setAttribute('value', item.engName);
+            opt.innerHTML = item.name;
+            selectRole.appendChild(opt);
+        })
+    }
+    selectDepart.addEventListener('change', (e) => {
+        let value = e.target.value;
+        if (value === 'Marketing') {
+            let a = [...child];
+            a.forEach((ite, index) => {
+                if (index > 0) {
+                    fixIndex = index + 1;
+                    a.splice(fixIndex, a.length)
+                    console.log(a)
+                    roleArr.filter(item => {
+                        let opt = document.createElement('option');
+                        opt.setAttribute('value', item.engName);
+                        opt.innerHTML = item.name;
+                        selectRole.replaceChild(opt, ite);
+                    })
+                }
+                if (index === 0) {
+                    create(roleArr);
+                }
+            })
+        }
+        if (value === 'Business') {
+            let a = [...child];
+            a.filter(ite => {
+                roleArr.filter(item => {
+                    let opt = document.createElement('option');
+                    opt.setAttribute('value', item.engName);
+                    opt.innerHTML = item.name;
+                    selectRole.replaceChild(opt, ite);
+                })
+            })
+        }
+    })
+</script>
+    
+    

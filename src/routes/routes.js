@@ -11,10 +11,8 @@ const rootRouter = require("./root");
 const marketingRouter = require("./marketing")
 const receptionRouter = require("./reception")
 const saleRouter = require("./sale")
-const customerRouter = require("./customer")
 
 function route(app) {
-  app.use("/customer", customerRouter)
   app.use("/sale", saleRouter)
   app.use("/reception", receptionRouter)
   app.use("/marketing", marketingRouter)

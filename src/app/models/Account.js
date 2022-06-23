@@ -11,12 +11,10 @@ const Account = new Schema({
 		unique: true
 	},
   	password: String,
-	role_id: [
-		{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'Role'
-		}
-	]
+	role: {
+		type: String,
+		unique: true
+	} 
 }, {
 	timestamps: true
 });

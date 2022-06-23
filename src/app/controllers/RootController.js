@@ -10,10 +10,6 @@ var bcrypt = require("bcryptjs");
 
 class RootController {
 
-	getRootLogin(req, res, next) {
-		res.render("root/root-login");
-    }
-
     getRootDashboard(req, res, next) {
 		res.render("root/root-dashboard");
     }
@@ -69,30 +65,8 @@ class RootController {
 	}
 
 	postRootUserDashboard(req, res, next) {
-		// console.log(req.body.departmentId)
-		// Department.findOne({ _id: req.body.departmentId })
-		// 	.then((department => {
-		// 		res.redirect('user', {
-		// 			department: mongooseToObject(department)
-		// 		})
-		// 	}))
-		// 	.catch(next)
+		
 	}
-
-	postLoadRole(req, res, next) {
-		console.log(req.params.id)
-		Department.findOne({ _id: req.params.id })
-			.then((department) => {
-				console.log(department);
-				res.redirect('/root/user/create', department)
-			})
-			.catch(next)
-			// res.redirect('user', {
-			// 	department: mongooseToObject(department)
-			// })
-		}
-	
-
      
 	// [POST] /account
     postRootAccountDashboard(req, res, next) {

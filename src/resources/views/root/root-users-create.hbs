@@ -5,110 +5,63 @@
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                 Tạo thông tin người dùng
             </button>
-            <form method="POST">
-                <div class="form-group">
-                    <label for="first-name">Họ</label>
-                    <input type="text" class="form-control" id="first-name" name="firstName" placeholder="Nhập 'Họ' của người dùng">
-                </div>
-                <div class="form-group">
-                    <label for="middle-name">Tên đệm</label>
-                    <input type="text" class="form-control" id="middle-name" name="middleName" placeholder="Nhập 'Tên đệm' của người dùng">
-                </div>
-                <div class="form-group">
-                    <label for="last-name">Tên</label>
-                    <input type="text" class="form-control" id="last-name" name="lastName" placeholder="Nhập 'Tên' của người dùng">
-                </div>
-                <div class="form-group">
-                    <label for="birth">Ngày sinh</label>
-                    <input type="date" class="form-control" id="birth" name="birth" min="01/01/2006" max="01/01/1977">
-                </div>
-                <div class="form-group">
-                    <label for="gender">Giới tính</label>
-                    <select class="form-control" id="gender" name="gender">
-                        <option>-- Chọn giới tính --</option>
-                        <option value="male">Nam</option>
-                        <option value="female">Nữ</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="phone">Số điện thoại</label>
-                    <input type="number" class="form-control" id="phone" name="phone" placeholder="Nhập số điện thoại">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Email</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Nhập email">
-                </div>
-                <div class="form-group">
-                    <label for="address">Địa chỉ</label>
-                    <input type="text" class="form-control" id="address" name="address" placeholder="Nhập địa chỉ">
-                </div>
-                <div class="form-group">
-                    <label for="department">Phòng ban</label>
-                    <select class="form-control" id="department" name="id">
-                        <option>-- Chọn phòng ban --</option>
-                        {{#each departments}}
-                        <option value="{{this._id}}" class="department-opt">{{this.name}}</option>
-                        {{/each}}
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="role">Chức vụ</label>
-                    <select class="form-control" id="role" name="roleId">
-                        <option>-- Chọn chức vụ --</option>
-                        {{#each departments.role_name}}
-                        <option value="{{departments.role_name}}" class="opt-role">{{departments.role_name[0]}}</option>
-                        {{/each}}
-                    </select>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                    <button type="submit" class="btn btn-primary">Lưu</button>
-                </div>
-            </form>
+            
         </div>
+        
     </div>
 </div>
 
-{{!-- <form method="POST" id="load-role" action="load-role"></form> --}}
-
 <script>
-	//var loadRoleForm = document.forms['load-role'];
-	//console.log(loadRoleForm);
-    //var selectDepartment = document.getElementById('department');
-	//var formSubmit = document.getElementById('load-role');
-	//selectDepartment.addEventListener('change', (e) => {
-        //var id = e.target.value
-        //loadRoleForm.action = '/root/user/create/' + id
-		//loadRoleForm.submit()
-	//})
-    //var selectRole = document.getElementById('role');
-    //var optRole = selectRole.getElementsByClassName('opt-role');
-    //optRole.addEventListener('submit', (e) => {
-		//alert('good')
-        //optDepart = e.target.value;
-        //var arrayId = optDepart.split(',');
-        //var id, element;
-        //for (i = 0; i < arrayId.length; i++) {
-            //id = arrayId[i];
-            //for (j = 0; j <= optRole.length; j++) {
-                //console.log(optRole[j]);   
-				//selectRole.remove(optRole[j].value !== id)
-                //if	(id === optRole[j].value) {
-                        
-                //} else {
-                    //console.log('if element value false', optRole[j].value)
-                        //console.log('if id', id)
-                        //console.log('if element value true', optRole[j].value)
-                //}
-            //}
-        //}
-            
-    //})
-    //selectRole.addEventListener('change', (e) => {
-        //optRole = e.target.value
-    //});
-    
-    
-    
-    
+    var roleArr = [{ name: 'Quản lý', engName: 'Manager' }, { name: 'Nhân viên', engName: 'Employ' }]
+
+    var operatingArr = [{ name: 'Bác sĩ', engName: 'Doctor' }, { name: 'Y tá', engName: 'Nurse' }, { name: 'Điều dưỡng', engName: 'Nursing', }]
+
+    var adminArr = [{ name: 'Admin', engName: 'Admin', }]
+
+    var selectDepart = document.getElementById('department');
+    var selectRole = document.getElementById('role');
+    var child = selectRole.getElementsByTagName('option');
+    function create(arr) {
+        arr.filter(item => {
+            let opt = document.createElement('option');
+            opt.setAttribute('value', item.engName);
+            opt.innerHTML = item.name;
+            selectRole.appendChild(opt);
+        })
+    }
+    selectDepart.addEventListener('change', (e) => {
+        let value = e.target.value;
+        if (value === 'Marketing') {
+            let a = [...child];
+            a.forEach((ite, index) => {
+                if (index > 0) {
+                    fixIndex = index + 1;
+                    a.splice(fixIndex, a.length)
+                    console.log(a)
+                    roleArr.filter(item => {
+                        let opt = document.createElement('option');
+                        opt.setAttribute('value', item.engName);
+                        opt.innerHTML = item.name;
+                        selectRole.replaceChild(opt, ite);
+                    })
+                }
+                if (index === 0) {
+                    create(roleArr);
+                }
+            })
+        }
+        if (value === 'Business') {
+            let a = [...child];
+            a.filter(ite => {
+                roleArr.filter(item => {
+                    let opt = document.createElement('option');
+                    opt.setAttribute('value', item.engName);
+                    opt.innerHTML = item.name;
+                    selectRole.replaceChild(opt, ite);
+                })
+            })
+        }
+    })
 </script>
+    
+    

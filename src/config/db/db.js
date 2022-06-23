@@ -6,10 +6,10 @@ async function connect() {
 			useNewUrlParser: true,
 			useUnifiedTopology: true,
 		});
-		console.log('Connect successfully database');
+      	console.log('Kết nối cơ sở dữ liệu thành công');
     }
     catch(error) {
-		console.log('Connect failure database');
+		console.log('Kết nối cơ sở dữ liệu thất bại');
     }
 }
 

@@ -8,11 +8,13 @@ const businessRouter = require('../app/controllers/BusinessController');
 const receptionRouter = require('../app/controllers/ReceptionController');
 const operatingRoomRouter = require('../app/controllers/OperationRoomController');
 const humanResourceRouter = require('../app/controllers/HRController');
+const managerRouter = require('../app/controllers/ManagerController')
 
 router.get("/marketing", marketingRouter.getMarketingDashboard);
 router.get("/business", businessRouter.getBusinessDashboard);
 router.get("/reception", receptionRouter.getReceptionDashboard);
 router.get("/operating-room", operatingRoomRouter.getDoctorDashboard);
 router.get("/human-resource", humanResourceRouter.getHRDashboard);
+router.get('/manager', managerRouter.getManagerDasboard)
 
 module.exports = router;

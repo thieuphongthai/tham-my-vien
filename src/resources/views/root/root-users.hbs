@@ -1,15 +1,19 @@
 <div class="row">
     {{> page/sidebar/admin/sidebar-admin}}
     <div class="content">
-        <nav class="navbar navbar-dark bg-primary">    
+        <nav class="navbar bg-light d-flex justify-content-between">    
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary mx-auto" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            <button type="button" class="btn btn-danger mr-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            Kho lưu trữ
+            </button>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary ml-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             Tạo thông tin người dùng
             </button>
         </nav>
         <div class="container-fluid mt-3">
             <div class="table-responsive mt-3">
-                <table id="user" class="display compact cell-border table-sm">
+                <table id="user" class="compact cell-border table-sm">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -23,6 +27,7 @@
                             <th scope="col">Phòng ban</th>
                             <th scope="col">Chức vụ</th>
                             <th scope="col">Tài khoản</th>
+                            <th scope="col">Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,6 +44,10 @@
                             <td>{{this.name}}</td>
                             <td>{{this.name}}</td>
                             <td>{{this.account_id}}</td>
+                            <td class="text-center">
+                                <button class="btn btn-info btn-sm">Sửa</button>
+                                <button class="btn btn-danger btn-sm">Xóa</button>
+                            </td>
                         </tr>
                         {{/each}}
                     </tbody>

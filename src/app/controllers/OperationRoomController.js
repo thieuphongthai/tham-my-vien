@@ -1,5 +1,5 @@
 
-class OperationRoomController{
+class OperationRoomController {
     getOperationDashboard(req, res){
         res.render('operation');
     }
@@ -17,3 +17,5 @@ class OperationRoomController{
     }
 
 }
+
+module.exports = new OperationRoomController;

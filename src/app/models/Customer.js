@@ -11,6 +11,7 @@ const Customer = new Schema({
 	phone: Number,
     email: String,
   	address: String,
+	image: String
 }, {
 	timestamps: true
 });

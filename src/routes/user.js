@@ -1,14 +1,18 @@
+// Nhận tài nguyên công khai và được bảo vệ
+
 const express = require('express');
 const router = express.Router();
-const UserController = require('../app/controllers/UserController');
-const storage = require('../middleware/storage');
-const helpers = require('../middleware/helpers');
+// const authJwt = require("../middleware/authJwt");
+const marketingRouter = require('../app/controllers/MarketingController');
+const businessRouter = require('../app/controllers/BusinessController');
+const receptionRouter = require('../app/controllers/ReceptionController');
+const operatingRoomRouter = require('../app/controllers/OperationRoomController');
+const humanResourceRouter = require('../app/controllers/HRController');
 
-// router.post('/image',  helpers.imageFilter, UserController.upload);
-router.post('/', UserController.create);
-router.post('/create', helpers.imageFilter, UserController.upload);
-router.get('/create', UserController.getCreateDashboard);
-router.get('/', UserController.getUserDashboard);
-// router.post('/', managerController.postUserPassword);
+router.get("/marketing", marketingRouter.getMarketingDashboard);
+router.get("/business", businessRouter.getBusinessDashboard);
+router.get("/reception", receptionRouter.getReceptionDashboard);
+router.get("/operating-room", operatingRoomRouter.getDoctorDashboard);
+router.get("/human-resource", humanResourceRouter.getHRDashboard);
 
 module.exports = router;

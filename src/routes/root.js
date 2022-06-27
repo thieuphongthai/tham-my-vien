@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const RootController = require('../app/controllers/RootController');
-const VerifySignUp = require('../middleware/VerifySignUp');
 const AuthController = require('../app/controllers/AuthController');
+const RootController = require('../app/controllers/RootController');
+const verifyRegister = require('../middleware/VerifyRegister');
+const authJwt = require("../middleware/authJwt");
 
 /* -----------------------------------------Quản lý Operating-room Start-------------------------------------------------- */
 
@@ -61,7 +62,7 @@ router.post('/user', RootController.postRootUserDashboard);
 
 
 // [GET] Root Account UI
-router.post('/account', VerifySignUp.checkUsernameOrEmail, RootController.postRootAccountDashboard);
+router.post('/account', [verifyRegister.checkUsernameOrEmail, verifyRegister.checkRole], RootController.postRootAccountDashboard);
 
 // [GET] Root Account UI
 router.get('/account', RootController.getRootAccountDashboard);
@@ -121,27 +122,15 @@ router.get('/service', RootController.getRootServiceDashboard);
 
 /* -----------------------------------------Quản lý Status Start-------------------------------------------------- */
 
-
 // [GET] Root Status UI
 router.get('/status', RootController.getRootStatusDashboard);
 
 /* -----------------------------------------Quản lý Status End-------------------------------------------------- */
 
-
-
 // [GET] Root Dashboard UI
 router.get('/dashboard', RootController.getRootDashboard);
-
-
-// [GET] Root Register UI
-router.get('/register', AuthController.getRootRegister);
-
-// [POST] Root Register
-router.post('/register', [VerifySignUp.checkUsernameOrEmail, VerifySignUp.checkRole], AuthController.postRootRegister);
-
-router.post('/', AuthController.postRootLogin);
-
-// [GET] Root Login UI
+router.post('/', AuthController.postLogin);
 router.get('/', AuthController.getRootLogin);
+
 
 module.exports = router;

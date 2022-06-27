@@ -1,17 +1,17 @@
 
-class SaleController{
+class HRController{
 
-    getSaleDashboard(req, res){
+    getHRDashboard(req, res){
         res.render('partials/sales/sale');
     }
 
-    getSaleManagerDashboard(req, res){
+    getHRManagerDashboard(req, res){
         res.render('partials/sales/manager-sale');
     }
 
-    getSaleStaffDashboard(req, res){
+    getHRStaffDashboard(req, res){
         res.render('partials/sales/employee-sale');
     }
 }
 
-module.exports = new SaleController;
+module.exports = new HRController;

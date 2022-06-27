@@ -15,18 +15,21 @@ const User = new Schema({
 		type: mongoose.Schema.Types.Decimal128
 	},
 	password: String,
-	department_id: [
-		{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'Department'
-		}
-	],
-    role_id: [
-		{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'Role'
-		}
-	],
+	department: String,
+	position: String,
+	userName: {
+		type: String,
+		unique: true	
+	},
+  	email: {
+		type: String,
+		unique: true
+	},
+  	password: String,
+	role: {
+		type: String,
+		unique: true
+	} 
 }, {
     timestamps: true
 });

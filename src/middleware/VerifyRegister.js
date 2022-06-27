@@ -4,7 +4,7 @@ const Account = require('../app/models/Account');
 const { mongooseToObject } = require('../util/mongoose');
 const bcrypt = require("bcryptjs");
 
-class VerifySignUp {
+class VerifyRegister {
     checkUsernameOrEmail (req, res, next) {
         // Username
         Account.findOne({
@@ -64,4 +64,4 @@ class VerifySignUp {
     }
 };
 
-module.exports = new VerifySignUp;
+module.exports = new VerifyRegister;

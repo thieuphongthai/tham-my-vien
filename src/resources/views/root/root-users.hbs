@@ -1,113 +1,145 @@
-<div class="row bg-dark">
+<div class="row">
     {{> page/sidebar/admin/sidebar-admin}}
     <div class="content">
+        <nav class="navbar navbar-dark bg-primary">    
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary mx-auto" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            Tạo thông tin người dùng
+            </button>
+        </nav>
         <div class="container-fluid mt-3">
-            <div class="container mt-3">
-                <form method="POST" class="text-light">
-                    <div class="row">
-                        <div class="form-group mr-3 ml-3">
-                            <label for="first-name">Họ</label>
-                            <input type="text" class="form-control form-control-sm" id="first-name" name="firstName" placeholder="Nhập 'Họ'">
-                        </div>
-                        <div class="form-group mr-3">
-                            <label for="middle-name">Tên đệm</label>
-                            <input type="text" class="form-control form-control-sm" id="middle-name" name="middleName" placeholder="Nhập 'Tên đệm'">
-                        </div>
-                        <div class="form-group">
-                            <label for="last-name">Tên</label>
-                            <input type="text" class="form-control form-control-sm" id="last-name" name="lastName" placeholder="Nhập 'Tên'">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group mr-3 ml-3">
-                            <label for="birth">Ngày sinh</label>
-                            <input type="date" class="form-control form-control-sm" id="birth" name="birth" min="01/01/2006" max="01/01/1977">
-                        </div>
-                        <div class="form-group">
-                            <label for="gender">Giới tính</label>
-                            <select class="form-control form-control-sm" id="gender" name="gender">
-                                <option>-- Chọn giới tính --</option>
-                                <option value="male">Nam</option>
-                                <option value="female">Nữ</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group mr-3 ml-3">
-                            <label for="phone">Số điện thoại</label>
-                            <input type="number" class="form-control form-control-sm" id="phone" name="phone" placeholder="Nhập số điện thoại">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Email</label>
-                            <input type="email" class="form-control form-control-sm" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Nhập email">
-                        </div>
-                    </div>
-                    
-                        <div class="form-group">
-                            <label for="address">Địa chỉ</label>
-                            <input type="text" class="form-control form-control-sm" id="address" name="address" placeholder="Nhập địa chỉ">
-                        </div>
-                    
-                    <div class="row">
-                        <div class="form-group mr-3 ml-3">
-                            <label for="department">Phòng ban</label>
-                            <select class="form-control form-control-sm" id="department" name="role_id">
-                                <option>-- Chọn phòng ban --</option>
-                                {{#each departments}}
-                                <option value="{{this.name}}" class="department-opt">{{this.name}}</option>
-                                {{/each}}
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="role">Chức vụ</label>
-                            <select class="form-control form-control-sm" id="role" name="roleEngName">
-                                <option value="">-- Chọn chức vụ --</option>
-                                {{#each roles}}
-                                <option value="{{this.name}}" class="department-opt">{{this.name}}</option>
-                                {{/each}}
-                            </select>
-                        </div>
-                    </div>
-                </form>
-                <div class="form=group d-flex justify-content-end">
-                    <button type="submit" class="btn btn-primary">Lưu</button>
-                </div>
+            <div class="table-responsive mt-3">
+                <table id="user" class="display compact cell-border table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Mã người dùng</th>
+                            <th scope="col">Họ tên</th>
+                            <th scope="col">Ngày sinh</th>
+                            <th scope="col">Giới tính</th>
+                            <th scope="col">Số điện thoại</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Địa chỉ</th>
+                            <th scope="col">Phòng ban</th>
+                            <th scope="col">Chức vụ</th>
+                            <th scope="col">Tài khoản</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each users}}
+                        <tr class="info">
+                            <th scope="row" class="text-center">{{sum @index 1}}</th>
+                            <td>{{this._id}}</td>
+                            <td>{{this.firstName}}{{this.middleName}}{{this.lastName}}</td>
+                            <td>{{this.birth}}</td>
+                            <td>{{this.gender}}</td>
+                            <td>{{this.phone}}</td>
+                            <td>{{this.email}}</td>
+                            <td>{{this.address}}</td>
+                            <td>{{this.name}}</td>
+                            <td>{{this.name}}</td>
+                            <td>{{this.account_id}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
             </div>
-            <table class="table table-hover text-light mt-3">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Mã người dùng</th>
-                        <th scope="col">Họ tên</th>
-                        <th scope="col">Ngày sinh</th>
-                        <th scope="col">Giới tính</th>
-                        <th scope="col">Số điện thoại</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Địa chỉ</th>
-                        <th scope="col">Phòng ban</th>
-                        <th scope="col">Chức vụ</th>
-                        <th scope="col">Tài khoản</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{#each users}}
-                    <tr>
-                        <th scope="row">{{sum @index 1}}</th>
-                        <td>{{this._id}}</td>
-                        <td>{{this.firstName}}{{this.middleName}}{{this.lastName}}</td>
-                        <td>{{this.birth}}</td>
-                        <td>{{this.gender}}</td>
-                        <td>{{this.phone}}</td>
-                        <td>{{this.email}}</td>
-                        <td>{{this.address}}</td>
-                        <td>{{this.department_id}}</td>
-                        <td>{{this.role_id}}</td>
-                        <td>{{this.account_id}}</td>
-                    </tr>
-                    {{/each}}
-                </tbody>
-            </table>
         </div>
     </div>
 </div>
 
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form class="row g-3">
+                <div class="col-md-4">
+                    <label for="validationServer01" class="form-label">First name</label>
+                    <input type="text" class="form-control is-valid" id="validationServer01" value="Mark" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label for="validationServer02" class="form-label">Last name</label>
+                    <input type="text" class="form-control is-valid" id="validationServer02" value="Otto" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label for="validationServerUsername" class="form-label">Username</label>
+                    <div class="input-group has-validation">
+                    <span class="input-group-text" id="inputGroupPrepend3">@</span>
+                    <input type="text" class="form-control is-invalid" id="validationServerUsername" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" required>
+                    <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                        Please choose a username.
+                    </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="validationServer03" class="form-label">City</label>
+                    <input type="text" class="form-control is-invalid" id="validationServer03" aria-describedby="validationServer03Feedback" required>
+                    <div id="validationServer03Feedback" class="invalid-feedback">
+                    Please provide a valid city.
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="validationServer04" class="form-label">State</label>
+                    <select class="form-select is-invalid" id="validationServer04" aria-describedby="validationServer04Feedback" required>
+                    <option selected disabled value="">Choose...</option>
+                    <option>...</option>
+                    </select>
+                    <div id="validationServer04Feedback" class="invalid-feedback">
+                    Please select a valid state.
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="validationServer05" class="form-label">Zip</label>
+                    <input type="text" class="form-control is-invalid" id="validationServer05" aria-describedby="validationServer05Feedback" required>
+                    <div id="validationServer05Feedback" class="invalid-feedback">
+                    Please provide a valid zip.
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-check">
+                    <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" aria-describedby="invalidCheck3Feedback" required>
+                    <label class="form-check-label" for="invalidCheck3">
+                        Agree to terms and conditions
+                    </label>
+                    <div id="invalidCheck3Feedback" class="invalid-feedback">
+                        You must agree before submitting.
+                    </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <button class="btn btn-primary" type="submit">Submit form</button>
+                </div>
+            </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        $(document).ready(function () {
+            $('#user').DataTable({
+                paginate: true,
+                //scrollY: 300
+            });
+        });
+        var info = document.getElementsByClassName('info');
+        console.log(info)
+    })
+</script>

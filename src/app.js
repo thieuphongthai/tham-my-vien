@@ -31,25 +31,26 @@ app.use(cors(corsOptions));
 app.use(
   cookieSession({
     name: "Hachitech-session",
-    secret: `${process.env.SECURITY_KEY}`, // should use as secret environment variable
-    httpOnly: true
+    secret: `${process.env.SECURITY_KEY}`,
+    httpOnly: true,
+    secure:true
   })
 );
 
-// Connect to DB
+// Kết nối tới cơ sở dữ liệu
 db.connect();
 
-// path static file
+// Cấu hình đường dẫn tệp tin tĩnh
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Phân tích cú pháp yêu cầu của các loại nội dung
 app.use(express.urlencoded());
 app.use(express.json());
 
-// view log request
+// Xem những yêu cầu được ghi chép lại
 app.use(morgan('combined'));
 
-//template engine
+// Mẫu thiết kế giao diện
 app.engine('hbs', engine({
   extname: '.hbs',
   helpers: {
@@ -62,12 +63,25 @@ app.engine('hbs', engine({
 	}
 }
 }));
+
+// Cấu hình đuôi tệp tin
 app.set('view engine', 'hbs');
+// Cấu hình đường dẫn đến tệp tin chứa giao diện người dùng
 app.set('views', path.join(__dirname, 'resources', 'views'));
 
-// Routes init
+
+app.use(function(req, res, next) {
+  res.header(
+          "Access-Control-Allow-Headers",
+          "x-access-token, Origin, Content-Type, Accept"
+      );
+      next();
+  }
+);
+
+// Khởi tạo các tuyến đường
 route(app);
 
 app.listen(process.env.PORT, () => {
-  console.log(`App listening on port ${process.env.PORT}`);
+  console.log(`Ứng dụng đang chạy trên port ${process.env.PORT}`);
 });

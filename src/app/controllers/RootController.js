@@ -2,13 +2,21 @@ const Role = require('../models/Role');
 const Account = require('../models/Account');
 const User = require('../models/User');
 const Department = require('../models/Department');
+const Position = require('../models/Position');
 const { multipleMongooseToObject, mongooseToObject } = require('../../util/mongoose');
-const { emailDB, passwordDB } = require('../../middleware/login');
 // const { multipleMongooseToObject } = require('../../util/mongoose');
 var bcrypt = require("bcryptjs");
 
 
 class RootController {
+
+	getRootLogin(req,res, next) {
+
+	}
+
+	postRootLogin(req, res, next) {
+
+	}
 
     getRootDashboard(req, res, next) {
 		res.render("root/root-dashboard");
@@ -42,10 +50,13 @@ class RootController {
 
 	// [GET] /user
     getRootUserDashboard(req, res, next) {
-		User.find({})
-			.then((users) => {
+		Promise.all([User.find({}), Department.find({}), Role.find({}), Position.find({})])
+			.then(([users, departments, positions, roles]) => {
 				res.render('root/root-users', {
 					users: multipleMongooseToObject(users),
+					departments: multipleMongooseToObject(departments),
+					positions: multipleMongooseToObject(positions),
+					roles: multipleMongooseToObject(roles),
 				});
 			})
 			.catch(next);
@@ -170,6 +181,69 @@ class RootController {
 	getRootStatusDashboard(req, res, next) {
 		res.render("statuses/status");
     }
+
+	// [GET] Login
+    getRegister(req, res, next) {
+        Role.find({})
+			.then(roles => {
+				res.render('register', {
+					roles: multipleMongooseToObject(roles),
+				});
+			})
+			.catch(next);
+	}
+
+    // [POST] Register
+    postRegister(req, res) {
+        const account = new Account({
+            userName: req.body.userName,
+            email: req.body.email,
+            password: bcrypt.hashSync(req.body.password, 8),
+            role_id: { $in: req.body.role_id }
+        });
+        account.save((err, account) => {
+            if (err) {
+                res.status(500).send({ message: err });
+                return;
+            }
+            if (req.body.role_id) {
+                Role.find(
+                    {
+                        name: { $in: req.body.role_id },
+                    },
+                    (err, role) => {
+                        if (err) {
+                            res.status(500).send({ message: err });
+                            return;
+                        }
+                        account.role_id = role.map((role) => role._id);
+                        account.save((err) => {
+                            if (err) {
+                                res.status(500).send({ message: err });
+                                return;
+                            }
+                            res.send({ message: "Đăng ký tài khoản thành công!" });
+                        });
+                    }
+                );
+            } else {
+                Role.findOne({ name: "manager" }, (err, role) => {
+                    if (err) {
+                        res.status(500).send({ message: err });
+                        return;
+                    }
+                    account.role = [role._id];
+                    account.save((err) => {
+                        if (err) {
+                            res.status(500).send({ message: err });
+                            return;
+                        }
+                        res.redirect('login');
+                    });
+                });
+            }
+        });
+    };
 }
 
 module.exports = new RootController;

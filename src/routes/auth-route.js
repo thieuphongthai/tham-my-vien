@@ -2,26 +2,13 @@
 
 const express = require('express');
 const router = express.Router();
-const verifySignUp = require("../middleware/VerifySignUp");
+const authJwt = require('../middleware/authJwt');
+const verifyRegister = require("../middleware/VerifyRegister");
 const controller = require("../app/controllers/AuthController");
 
-module.exports = function(app) {
-    app.use(function(req, res, next) {
-        res.header(
-                "Access-Control-Allow-Headers",
-                "Origin, Content-Type, Accept"
-            );
-            next();
-        }
-    );
-    
 
-};
-
-router.post("/signout", controller.signout);
-router.post("/signup", verifySignUp.checkUsernameOrEmail, controller.postSignup);
-router.get('/signup', controller.getSignup);
-router.post("/", controller.signin);
-router.get('/', controller.getSignin);
+router.post("/logout", controller.logout);
+router.post("/login", controller.postLogin);
+router.get('/', controller.getLogin);
 
 module.exports = router;

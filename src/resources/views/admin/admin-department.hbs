@@ -1,0 +1,28 @@
+<div class="row bg-dark">
+    {{> page/sidebar/sales/sidebar-manager}}
+    <div class="content">
+        <div class="container-fluid mt-3">
+            
+            <table class="table table-hover text-light mt-8">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Mã phòng ban</th>
+                        <th scope="col">Phòng ban</th>
+                        <th scope="col">Mô tả</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each departments}}
+                    <tr>
+                        <th scope="row">{{sum @index 1}}</th>
+                        <td>{{this._id}}</td>
+                        <td>{{this.name}}</td>
+                        <td>{{this.decription}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

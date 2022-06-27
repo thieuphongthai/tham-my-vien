@@ -27,13 +27,13 @@ class ManagerController{
             .catch(next)
     }
 
-    editCustomer(req, res, next){
-        Customer.findById(req.body.id) 
-            .then(customer => res.render('customer',{
-                customer: mongooseToObject(customer)
-            }))
-            .catch(next);
-    }
+    // editCustomer(req, res, next){
+    //     Customer.findById(req.body.id) 
+    //         .then(customer => res.render('customer',{
+    //             customer: mongooseToObject(customer)
+    //         }))
+    //         .catch(next);
+    // }
 
     
     // [PUT] Update customer

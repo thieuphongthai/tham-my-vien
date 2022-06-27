@@ -1,89 +1,75 @@
-// const Role = require('../models/Role');
-// const Account = require('../models/Account');
-// const User = require('../models/User');
-// const Department = require('../models/Department');
-// const { multipleMongooseToObject } = require('../../util/mongoose');
-// const { emailDB, passwordDB } = require('../../middleware/login');
+const Customer = require("../models/Customer")
+const Department = require("../models/Department")
+const { multipleMongooseToObject, mongooseToObject } = require('../../util/mongoose');
 
-// class AdminController {
-//     getAdminDashboard(req, res, next) {
-// 		res.render("admin");
-//     }
 
-// 	// [GET] /user
-//     getUserDashboard(req, res, next) {
-// 		User.find({})
-// 			.then(users => {
-// 				res.render('users/user', {
-// 					users: multipleMongooseToObject(users)
-// 				});
-// 			})
-// 			.catch(next);
-//     }
-     
-// 	// [POST] /account
-//     createAccount(req, res, next) {
-// 		const account = new Account(req.body);
-// 		account.save()
-// 			.then(() => res.redirect('/account'))
-// 			.catch(next)
-//     }
 
-// 	// [GET] /account
-//     getAccountDashboard(req, res, next) {
-//       	Account.find({})
-// 			.then(accounts => {
-// 				res.render('accounts/account', {
-// 					accounts: multipleMongooseToObject(accounts)
-// 				});
-// 			})
-// 			.catch(next);
-//     }
-    
-//     // [POST] /department
-//     createDepartment(req, res, next) {
-// 		const department = new Department(req.body);
-// 		department.save()
-// 			.then(() => res.redirect('/department'))
-// 			.catch(next)
-//     }
-//     // [GET] /department
-//     getDepartmentDashboard(req, res, next) {
-// 		Department.find({})
-// 			.then(departments => {
-// 				res.render("departments/deparment", {
-// 					departments: multipleMongooseToObject(departments)
-// 				});
-// 			})
-// 			.catch(next);
-//     	}
+  class AdminController {
+      
+    getAdminDashboard(req, res, next) {
+      res.render("admin/admin-login");
+    }
 
-// 	// [POST] /role
-// 	createRole(req, res, next) {
-// 		const role = new Role(req.body);
-// 		role.save()
-// 			.then(() => res.redirect('/role'))
-// 			.catch(next)	
-// 	}
-        
-// 	// [GET] /role
-//     getRoleDashboard(req, res, next) {
-//       	Role.find({})
-// 			.then(roles => {
-// 				res.render('roles/role', {
-// 					roles: multipleMongooseToObject(roles)
-// 				});
-// 			})
-// 			.catch(next);
-//     }
-          
-//     getServiceDashboard(req, res, next) {
-//       	res.render("services/service");
-//     }
+    //CUSTOMER
+    getAdminCustomer(req, res, next){
+      Customer.find({})
+          .then(customers => {
+              res.render('admin/admin-customer',{
+                  customers: multipleMongooseToObject(customers)
+              });
+          })
+          .catch(next);
+    }
 
-// 	getStatusDashboard(req, res, next) {
-// 		res.render("statuses/status");
-//     }
-// }
+    createCustomer(req, res, next){
+      const customer = new Customer(req.body);
+      customer.save()
+          .then(() => res.redirect('customer'))
+          .catch(next)
+    }
 
-// module.exports = new AdminController;
+    editCustomer(req, res, next){
+      Customer.findById(req.params.id) 
+          .then(customer => res.render('admin/admin-editcustomer',{
+              customer: mongooseToObject(customer)
+          }))
+          .catch(next);
+    }
+
+    updateCustomer(req, res, next){
+      Customer.updateOne({_id: req.params.id}, req.body)
+          .then(() => res.redirect('/admin/customer'))
+          .catch(next);
+    }
+    //END CUSTOMER
+
+    //USER
+    getAdminUser(req, res, next){
+      res.render("admin/admin-user")
+    }
+    //END USER
+
+    //DEPARTMENT
+    getAdminDepartment(req, res, next){
+      Department.find({})
+          .then(departments => {
+              res.render("admin/admin-department",{
+                  departments: multipleMongooseToObject(departments)
+              });
+          })
+          .catch(next);
+      
+    }
+
+
+    //END DEPARTMENT
+
+    //ACCOUNT
+    getAdminAccount(req, res, next){
+      res.render("admin/admin-account")
+    }
+    //END ACCOUNT
+
+  }
+
+module.exports = new AdminController;

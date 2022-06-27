@@ -16,13 +16,16 @@ router.put('/:id', AdminController.updateCustomer)
 
 //END CUSTOMER
 
-
+//USER
 router.get('/user', AdminController.getAdminUser)
+//END USER
 
 //DEPARTEMENT
 router.get('/department', AdminController.getAdminDepartment)
 //END DEPARTMENT
 
+//ACCOUNT
 router.get('/account', AdminController.getAdminAccount)
+//END ACCOUNT
 
 module.exports = router;

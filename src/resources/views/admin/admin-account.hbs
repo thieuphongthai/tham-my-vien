@@ -1,6 +1,28 @@
-<div class="row">
+<div class="row bg-dark">
     {{> page/sidebar/sales/sidebar-manager}}
     <div class="content">
-        ACCOUNT page
+        <div class="container-fluid mt-3">
+            
+            <table class="table table-hover text-light mt-8">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Tên tài khoản</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Chúc vụ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each accounts}}
+                    <tr>
+                        <th scope="row">{{sum @index 1}}</th>
+                        <td>{{this.userName}}</td>
+                        <td>{{this.email}}</td>
+                        <td>{{this.role}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

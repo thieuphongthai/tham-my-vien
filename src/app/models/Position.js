@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const Permission = new Schema({
+const Position = new Schema({
 	name: {
 		type: String,
 		unique: true	
@@ -14,4 +14,4 @@ const Permission = new Schema({
 	timestamps: true
 });
 
-module.exports = mongoose.model('Permission', Permission);
+module.exports = mongoose.model('Position', Position);

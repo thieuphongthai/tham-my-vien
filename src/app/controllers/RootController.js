@@ -50,7 +50,7 @@ class RootController {
 
 	// [GET] /user
     getRootUserDashboard(req, res, next) {
-		Promise.all([User.find({}), Department.find({}), Role.find({}), Position.find({})])
+		Promise.all([User.find({}), Department.find({}), Position.find({}), Role.find({})])
 			.then(([users, departments, positions, roles]) => {
 				res.render('root/root-users', {
 					users: multipleMongooseToObject(users),
@@ -62,21 +62,26 @@ class RootController {
 			.catch(next);
     }
 
-	getRootUserCreateDashboard(req, res, next) {
-		Promise.all([User.find({}), Department.find({}), Role.find({})])
-			.then(([users, departments, roles]) => {
-				res.render('root/root-users-create', {
-					users: multipleMongooseToObject(users),
-					departments: multipleMongooseToObject(departments),
-					roles: multipleMongooseToObject(roles)
-				});
-			})
-			.catch(next);
-		
-	}
-
+    // [POST] /user
 	postRootUserDashboard(req, res, next) {
-		
+        console.log(req.body)
+        const user = new User({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            birth: req.body.birth,
+            gender: req.body.gender,
+            phone: req.body.phone,
+            email: req.body.email,
+            address: req.body.address,
+            department: req.body.department,
+            position: req.body.position,
+            description: req.body.description,
+        });
+        user.save()
+            .then(() => {
+                res.redirect('user');
+            })
+            .catch(next);
 	}
      
 	// [POST] /account

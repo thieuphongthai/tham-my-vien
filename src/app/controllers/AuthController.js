@@ -150,7 +150,7 @@ class AuthController {
                 // const { password, ...others } = account._doc;
                 // {...others, accessToken, refreshToken});
                 // res.status(200).render('root/root-dashboard', { ...others, accessToken });
-                res.status(200).render('root/root', {
+                res.status(200).render('users/user', {
                     id: account._id,
                     userName: account.userName,
                     email: account.email,

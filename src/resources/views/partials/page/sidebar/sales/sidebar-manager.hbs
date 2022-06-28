@@ -1,24 +1,24 @@
-<div class="sidebar-container">
-	<div class="dashboard"><h5>BẢNG ĐIỀU KHIỂN</h5></div>
-	<div class="sidebar">
+<div class="d-flex" id="wrapper">
+	{{!-- <div class="dashboard"><h5>BẢNG ĐIỀU KHIỂN</h5></div> --}}
+	<div class="border-end bg-white" id="sidebar-wrapper">
 		<div class="sidebar-toggle" id="sidebarToggleBtn">
 			<i class="ti-arrow-circle-right"></i>
 		</div>
-		<ul class="nav flex-column text-light">
-			<li class="nav-item ml-2"><a href="/admin/customer"><i class="ti-user ml-3 mr-3"></i>Danh sách khách hàng mới</a></li>
-			<li class="nav-item ml-2"><a href="/admin/user"><i class="ti-user ml-3 mr-3"></i>Danh sách nhân viên</a></li>
-			<li class="nav-item ml-2"><a href="/admin/account"><i class="ti-pencil-alt ml-3 mr-3"></i>Đang xử lý</a></li>
-			<li class="nav-item ml-2"><a href="/admin/department"><i class="ti-close ml-3 mr-3"></i>Chưa hoàn thành</a></li>
-		</ul>
+		<div class="list-group list-group-flush">
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/customer"><i class="ti-user ml-3 mr-3"></i>Danh sách khách hàng mới</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/user"><i class="ti-user ml-3 mr-3"></i>Danh sách nhân viên</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/account"><i class="ti-pencil-alt ml-3 mr-3"></i>Đang xử lý</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/department"><i class="ti-close ml-3 mr-3"></i>Chưa hoàn thành</a>
+        </div>
 	</div>
-	<div class="dashboard-footer text-light">
+	{{!-- <div class="dashboard-footer text-light">
 		<div class="copyrightLine" data-text="Copyright@Hachitech">Copyright@Hachitech</div>
-	</div>
+	</div> --}}
 </div>
 
 <script>
 	let sidebarBtn = document.querySelector("#sidebarToggleBtn");
-	let sidebar = document.querySelector(".sidebar-container");
+	let sidebar = document.querySelector("#sidebar-wrapper");
 	
 	sidebarBtn.onclick = function(){
 	sidebar.classList.toggle("active");

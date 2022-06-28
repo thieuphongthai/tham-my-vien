@@ -10,7 +10,7 @@ const userRouter = require("./user")
 function route(app) {
   app.use("/root", rootRouter);
   app.use("/admin", adminRouter);
-  app.use("/user", [authJwt.verifyToken, authJwt.isUser], userRouter);
+  app.use("/user", userRouter);
   app.use("/", signinRouter);
 }
 

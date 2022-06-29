@@ -1,0 +1,129 @@
+{{!-- <div class="row">
+    {{> page/sidebar/sales/sidebar-manager}} --}}
+    <div class="content">
+        <nav class="navbar bg-info d-flex justify-content-between">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-danger mr-2">
+                <i class="ti-archive"></i> Kho lưu trữ
+            </button>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary ml-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <i class="ti-plus"></i> Tạo người dùng
+            </button>
+        </nav>
+        <div class="container-fluid mt-3">
+            <div class="table-responsive mt-3">
+                <table id="user" class="display nowrap order-column compact">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Khách hàng</th>
+                            <th scope="col">Nhân viên</th>
+                            <th scope="col">Dịch vụ</th>
+                            <th scope="col">Trạng thái</th>
+                            <th scope="col">Ghi chú</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each serviceNotes}}
+                        <tr class="info">
+                            <td scope="row" class="text-center">{{sum @index 1}}</td>
+                            <td>{{this.customer}}</td>
+                            <td>{{this.user}}</td>
+                            <td>{{this.service}}</td>
+                            <td>{{this.status}}</td>
+                            <td>{{this.comments}}</td>
+                            <td class="text-center">
+                                <button class="btn btn-outline-info btn-sm">Sửa</button>
+                                <button class="btn btn-outline-danger btn-sm">Xóa</button>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg bg-dark" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thông tin tài khoản</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST">
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label class="form-lable" for="customer">Khách hàng</label>
+                            <select class="form-control" id="customer" name="customer">
+                                <option>-- Chọn khách hàng --</option>
+                                {{#each customers}}
+                                <option value="{{this.name}}">{{this.name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="form-lable" for="user">Nhân viên</label>
+                            <select class="form-control" id="user" name="user">
+                                <option>-- Chọn nhân viên --</option>
+                                {{#each users}}
+                                <option value="{{this.firstName}} {{this.lastName}}">{{this.firstName}}
+                                    {{this.lastName}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label class="form-lable" for="service">Dịch vụ</label>
+                            <select class="form-control" id="service" name="service">
+                                <option>-- Chọn dịch vụ --</option>
+                                {{#each services}}
+                                <option value="{{this.name}}">{{this.name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="form-lable" for="status">Trạng thái</label>
+                            <select class="form-control" id="status" name="status">
+                                <option>-- Chọn trạng thái --</option>
+                                {{#each statuses}}
+                                <option value="{{this.name}}">{{this.name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                        <button type="submit" class="btn btn-primary">Lưu</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        $(document).ready(function () {
+            $('#user').DataTable({
+                paginate: true,
+                scrollY: 300,
+                scrollX: 0
+            });
+        });
+        var create = document.getElementById('create');
+        var createUserForm = document.forms['create-user'];
+        create.addEventListener('click', () => {
+            createUserForm.action = '/admin/service-note';
+            createUserForm.submit();
+        })
+    })
+
+</script>

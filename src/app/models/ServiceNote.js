@@ -3,27 +3,27 @@ const Schema = mongoose.Schema;
 
 const ServiceNote = new Schema({
 	name: String,
-    customer_id: [
+    customer: [
 		{
-			type: mongoose.Schema.Types.ObjectId,
+			type: String,
 			ref: "Customer"
 		}
 	],
-    user_id: [
+    user: [
 		{
-			type: mongoose.Schema.Types.ObjectId,
+			type: String,
 			ref: "User"
 		}
 	],
-    status_id: [
+    status: [
 		{
-			type: mongoose.Schema.Types.ObjectId,
+			type: String,
 			ref: "Status"
 		}
 	],
-	service_id: [
+	service: [
 		{
-			type: mongoose.Schema.Types.ObjectId,
+			type: String,
 			ref: "Service"
 		}
 	],

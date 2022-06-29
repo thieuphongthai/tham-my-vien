@@ -14,6 +14,10 @@ const User = new Schema({
 	},
 	department: String,
 	position: String,
+	account: String,
+	password: String,
+	role: String,
+
 }, {
     timestamps: true
 });

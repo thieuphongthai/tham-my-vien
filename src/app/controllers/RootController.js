@@ -64,7 +64,7 @@ class RootController {
 
     // [POST] /user
 	postRootUserDashboard(req, res, next) {
-        console.log(req.body)
+        console.log(req.body);
         const user = new User({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
@@ -76,10 +76,22 @@ class RootController {
             department: req.body.department,
             position: req.body.position,
             description: req.body.description,
+            account: req.body.account,
+            password: bcrypt.hashSync(req.body.password, 8),
+            role: req.body.role
         });
-        user.save()
-            .then(() => {
-                res.redirect('user');
+        User.findOne({ account: req.body.account })
+            .then(account => {
+                if (!account) {
+                    user.save();
+                    res.redirect('user');
+                    return;
+                } else {
+                    user.account = user.account + Math.floor(Math.random() * 100)
+                    user.save();
+                    res.redirect('user');
+                    return;
+                }
             })
             .catch(next);
 	}

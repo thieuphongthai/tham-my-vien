@@ -1,147 +1,299 @@
-    <div class="row">
-        {{> page/sidebar/admin/sidebar-admin}}
-        <div class="content">
-            <nav class="navbar bg-info d-flex justify-content-between">    
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-danger mr-2">
-                    <i class="ti-archive"></i> Kho lưu trữ
-                </button>
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary ml-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                <i class="ti-plus"></i> Tạo người dùng
-                </button>
-            </nav>
-            <div class="container-fluid mt-3">
-                <div class="table-responsive mt-3">
-                    <table id="user" class="display nowrap order-column compact">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Mã người dùng</th>
-                                <th scope="col">Họ tên</th>
-                                <th scope="col">Ngày sinh</th>
-                                <th scope="col">Giới tính</th>
-                                <th scope="col">Số điện thoại</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Địa chỉ</th>
-                                <th scope="col">Phòng ban</th>
-                                <th scope="col">Chức vụ</th>
-                                <th scope="col">Hành động</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {{#each users}}
-                            <tr class="info">
-                                <th scope="row" class="text-center">{{sum @index 1}}</th>
-                                <td>{{this._id}}</td>
-                                <td>{{this.firstName}}{{this.middleName}} {{this.lastName}}</td>
-                                <td>{{this.birth}}</td>
-                                <td>{{this.gender}}</td>
-                                <td>{{this.phone}}</td>
-                                <td>{{this.email}}</td>
-                                <td>{{this.address}}</td>
-                                <td>{{this.department}}</td>
-                                <td>{{this.position}}</td>
-                                <td class="text-center">
-                                    <button class="btn btn-outline-info btn-sm">Sửa</button>
-                                    <button class="btn btn-outline-danger btn-sm">Xóa</button>
-                                </td>
-                            </tr>
-                            {{/each}}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+    {{!-- <div class="row"> --}}
+        {{!-- {{> page/sidebar/admin/sidebar-admin}} --}}
+<div class="content">
+    <nav class="navbar bg-info d-flex justify-content-between pr-3 pl-3">    
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-danger btn-storage">
+            <i class="ti-archive"></i> Kho lưu trữ
+        </button>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary btn-create" data-bs-toggle="modal" data-bs-target="#create-user">
+            <i class="ti-plus"></i> Tạo người dùng
+        </button>
+    </nav>
+    <div class="container-fluid mt-3">
+        <div class="table-responsive mt-3">
+            <table id="user" class="display nowrap order-column compact">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Mã người dùng</th>
+                        <th scope="col">Họ tên</th>
+                        <th scope="col">Ngày sinh</th>
+                        <th scope="col">Giới tính</th>
+                        <th scope="col">Số điện thoại</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Địa chỉ</th>
+                        <th scope="col">Phòng ban</th>
+                        <th scope="col">Chức vụ</th>
+                        <th scope="col">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each users}}
+                    <tr class="info">
+                        <th scope="row" class="text-center">{{sum @index 1}}</th>
+                        <td>{{this._id}}</td>
+                        <td>{{this.firstName}}{{this.middleName}} {{this.lastName}}</td>
+                        <td>{{this.birth}}</td>
+                        <td>{{this.gender}}</td>
+                        <td>{{this.phone}}</td>
+                        <td>{{this.email}}</td>
+                        <td>{{this.address}}</td>
+                        <td>{{this.department}}</td>
+                        <td>{{this.position}}</td>
+                        <td class="text-center">
+                            <button type="button" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#updateUser">Sửa</button>
+                            <button class="btn btn-outline-danger btn-sm">Xóa</button>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
         </div>
     </div>
+</div>
+    {{!-- </div> --}}
 {{!-- <div class="row">
 </div> --}}
 
 
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="info-user" aria-hidden="true">
-  <div class="modal-dialog modal-md">
-    <div class="modal-content">
+<!-- Modal Create User -->
+<div class="modal fade" id="create-user" tabindex="-1" aria-labelledby="infoUser" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
         <div class="modal-header bg-primary text-light">
-            <h5 class="modal-title" id="info-user">Thông tin người dùng</h5>
+            <h5 class="modal-title" id="infoUser">Tạo thông tin người dùng mới</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form method="POST" id="create-user" class="container-fluid">
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="firstName" class="form-label"><h6>Họ</h6></label>
-                        <input type="text" class="form-control form-control-sm" id="firstName" pattern="[a-z]{1,15}"  placeholder="Vd: Trần Văn" name="firstName" title="Username should only contain lowercase letters. e.g. john" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="lastName" class="form-label"><h6>Tên</h6></label>
-                        <input type="text" class="form-control form-control-sm" id="lastName" placeholder="Vd: Khánh" name="lastName" required>
-                    </div>
+            <form method="POST" id="create-user" class="row">
+                <div class="col-xl-8">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="firstName" class="form-label"><h6>Họ</h6></label>
+                                    <input type="text" class="form-control form-control-sm" id="firstName" pattern="[a-z]{1,15}"  placeholder="Vd: Trần Văn" name="firstName" title="Username should only contain lowercase letters. e.g. john" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="lastName" class="form-label"><h6>Tên</h6></label>
+                                    <input type="text" class="form-control form-control-sm" id="lastName" placeholder="Vd: Khánh" name="lastName" required>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <label for="birth" class="form-label"><h6>Ngày sinh</h6></label>
+                                    <input type="date" class="form-control form-control-sm" id="birth" aria-describedby="birthFeedback" name="birth" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="gender" class="form-label"><h6>Giới tính</h6></label>
+                                    <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="gender">
+                                        <option value="" selected>-- Chọn giới tính --</option>
+                                        <option value="Nữ">Nữ</option>
+                                        <option value="Nam">Nam</option>
+                                    </select>
+                                </div>    
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <label for="phone" class="form-label"><h6>Số điện thoại</h6></label>
+                                    <input type="tel" class="form-control form-control-sm" id="phone" placeholder="Vd: 0909888888" name="phone" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label"><h6>Email</h6></label>
+                                    <input type="email" class="form-control form-control-sm" id="email" placeholder="Vd: tranvankhanh@gmail.com" name="email" required>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <label for="address" class="form-label"><h6>Địa chỉ</h6></label>
+                                    <input type="text" class="form-control form-control-sm" id="address" aria-describedby="addressFeedback" placeholder="Vd: 123 Đường số 10" name="address" required>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <label for="departments" class="form-label"><h6>Phòng ban</h6></label>
+                                    <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="department">
+                                        <option value="" selected>-- Chọn phòng ban --</option>
+                                        {{#each departments}}
+                                        <option value="{{this.name}}">{{this.name}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="positions" class="form-label"><h6>Chức vụ</h6></label>
+                                    <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="position">
+                                        <option value="" selected>-- Chọn chức vụ --</option>
+                                        {{#each positions}}
+                                        <option value="{{this.name}}">{{this.name}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12 mb-3">
+                                    <label for="description" class="form-label"><h6>Mô tả</h6></label>
+                                    <textarea class="form-control" id="description" rows="6" placeholder="Vd: Kinh nghiệm làm việc, sở thích..." name="description"></textarea>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <label for="birth" class="form-label"><h6>Ngày sinh</h6></label>
-                        <input type="date" class="form-control form-control-sm" id="birth" aria-describedby="birthFeedback" name="birth" required>
+                <div class="col-xl-4">
+                    <img src="/img/user-icon.png" class="rounded mx-auto d-block" alt="...">
+                    <div class="mt-3 text-light">
+                        <label for="password" class="form-label"><h6>Chọn ảnh đại diện</h6></label>
+                        <input class="form-control form-control-sm" id="formFileSm" type="file">
                     </div>
-                    <div class="col-md-6">
-                        <label for="gender" class="form-label"><h6>Giới tính</h6></label>
-                        <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="gender">
-                            <option value="" selected>-- Chọn giới tính --</option>
-                            <option value="Nữ">Nữ</option>
-                            <option value="Nam">Nam</option>
-                        </select>
-                    </div>    
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <label for="phone" class="form-label"><h6>Số điện thoại</h6></label>
-                        <input type="tel" class="form-control form-control-sm" id="phone" placeholder="Vd: 0909888888" name="phone" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="email" class="form-label"><h6>Email</h6></label>
-                        <input type="email" class="form-control form-control-sm" id="email" placeholder="Vd: tranvankhanh@gmail.com" name="email" required>
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-12">
-                        <label for="address" class="form-label"><h6>Địa chỉ</h6></label>
-                        <input type="text" class="form-control form-control-sm" id="address" aria-describedby="addressFeedback" placeholder="Vd: 123 Đường số 10" name="address" required>
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <label for="departments" class="form-label"><h6>Phòng ban</h6></label>
-                        <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="department">
-                            <option value="" selected>-- Chọn phòng ban --</option>
-                            {{#each departments}}
-                            <option value="{{this.name}}">{{this.name}}</option>
-                            {{/each}}
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="positions" class="form-label"><h6>Chức vụ</h6></label>
-                        <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="position">
-                            <option value="" selected>-- Chọn chức vụ --</option>
-                            {{#each positions}}
-                            <option value="{{this.name}}">{{this.name}}</option>
-                            {{/each}}
-                        </select>
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-12 mb-3">
-                        <label for="description" class="form-label"><h6>Mô tả</h6></label>
-                        <textarea class="form-control" id="description" rows="6" placeholder="Vd: Kinh nghiệm làm việc, sở thích..." name="description"></textarea>
-                    </div>
+                    <ul class="list-group mt-3">
+                        <li class="list-group-item bg-danger text-light">
+                            <div class="col-xl">
+                                <label for="account" class="form-label"><h6>Tài khoản</h6></label>
+                                <input type="text" class="form-control form-control-sm" id="account" name="account" required>
+                            </div>
+                            <div class="col-xl mt-3">
+                                <label for="password" class="form-label"><h6>Mật khẩu</h6></label>
+                                <input type="password" class="form-control form-control-sm" id="password" name="password" required>
+                            </div>
+                            <div class="col-xl mt-3 mb-3">
+                                <label for="roles" class="form-label"><h6>Quyền hạn</h6></label>
+                                <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="role">
+                                    <option value="" selected>-- Chọn quyền hạn --</option>
+                                    {{#each roles}}
+                                    <option value="{{this.name}}">{{this.name}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </form>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-            <button type="button" id="create" class="btn btn-primary">Tạo</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng lại</button>
+            <button type="button" id="create" class="btn btn-primary">Tạo mới</button>
+        </div>
         </div>
     </div>
 </div>
+
+
+<!-- Modal Edit User -->
+<div class="modal fade" id="updateUser" tabindex="-1" aria-labelledby="editUser" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h5 class="modal-title" id="editUser">Sửa / Cập nhật thông tin người dùng</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" class="row">
+                    <div class="col-xl-8">
+                        <ul class="list-group">
+                            <li class="list-group-item bg-warning text-dark">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="firstName" class="form-label"><h6>Họ</h6></label>
+                                        <input type="text" class="form-control form-control-sm"  data-bs-focus="focus" id="edit-firstName" pattern="[a-z]{1,15}"  placeholder="Vd: Trần Văn" name="firstName" title="Username should only contain lowercase letters. e.g. john" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="lastName" class="form-label"><h6>Tên</h6></label>
+                                        <input type="text" class="form-control form-control-sm" id="edit-lastName" placeholder="Vd: Khánh" name="lastName" required>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <label for="birth" class="form-label"><h6>Ngày sinh</h6></label>
+                                        <input type="date" class="form-control form-control-sm" id="edit-birth" aria-describedby="birthFeedback" name="birth" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="gender" class="form-label"><h6>Giới tính</h6></label>
+                                        <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="gender">
+                                            <option value="" selected>-- Chọn giới tính --</option>
+                                            <option value="Nữ">Nữ</option>
+                                            <option value="Nam">Nam</option>
+                                        </select>
+                                    </div>    
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <label for="phone" class="form-label"><h6>Số điện thoại</h6></label>
+                                        <input type="tel" class="form-control form-control-sm" id="edit-phone" placeholder="Vd: 0909888888" name="phone" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="email" class="form-label"><h6>Email</h6></label>
+                                        <input type="email" class="form-control form-control-sm" id="edit-email" placeholder="Vd: tranvankhanh@gmail.com" name="email" required>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <label for="address" class="form-label"><h6>Địa chỉ</h6></label>
+                                        <input type="text" class="form-control form-control-sm" id="edit-address" aria-describedby="addressFeedback" placeholder="Vd: 123 Đường số 10" name="address" required>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <label for="departments" class="form-label"><h6>Phòng ban</h6></label>
+                                        <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="department">
+                                            <option value="" selected>-- Chọn phòng ban --</option>
+                                            {{#each departments}}
+                                            <option value="{{this.name}}">{{this.name}}</option>
+                                            {{/each}}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="positions" class="form-label"><h6>Chức vụ</h6></label>
+                                        <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="position">
+                                            <option value="" selected>-- Chọn chức vụ --</option>
+                                            {{#each positions}}
+                                            <option value="{{this.name}}">{{this.name}}</option>
+                                            {{/each}}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-12 mb-3">
+                                        <label for="description" class="form-label"><h6>Mô tả</h6></label>
+                                        <textarea class="form-control" id="edit-description" rows="6" placeholder="Vd: Kinh nghiệm làm việc, sở thích..." name="description"></textarea>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>    
+                    </div>
+                    <div class="col-xl-4">
+                        <img src="/img/user-icon.png" class="rounded mx-auto d-block" alt="...">
+                        <div class="mt-3 text-light">
+                            <label for="password" class="form-label"><h6>Chọn ảnh đại diện</h6></label>
+                            <input class="form-control form-control-sm" id="edit-formFileSm" type="file">
+                        </div>
+                        <ul class="list-group mt-3">
+                            <li class="list-group-item bg-danger text-light">
+                                <div class="col-xl">
+                                    <label for="account" class="form-label"><h6>Tài khoản</h6></label>
+                                    <input type="text" class="form-control form-control-sm" id="edit-account" value="{{this.account}}" name="account" disabled>
+                                </div>
+                                <div class="col-xl mt-3">
+                                    <label for="password" class="form-label"><h6>Mật khẩu</h6></label>
+                                    <input type="password" class="form-control form-control-sm" id="edit-password" name="password" required>
+                                </div>
+                                <div class="col-xl mb-3">
+                                    <label for="roles" class="form-label"><h6>Quyền hạn</h6></label>
+                                    <input type="text" class="form-control form-control-sm" id="edit-role" value="{{this.role}}" disabled>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng lại</button>
+                <button type="button" id="edit" class="btn btn-primary">Lưu thay đổi</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -153,24 +305,41 @@
             });
         });
 
-        var inputFirstName = document.getElementById('firstName');
-        var formCreate  = document.getElementById('create-user');
-        var elem = document.createElement('div');
-        elem.setAttribute('class', 'alert alert-danger');
-        elem.setAttribute('role', 'alert');
-        elem.setAttribute('id', 'notify');
-        elem.style.display = 'none';
-        formCreate.appendChild(elem);
+        //function convert_vi_to_en(str) {
+            //str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
+            //str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
+            //str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
+            //str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
+            //str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
+            //str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
+            //str = str.replace(/đ/g, "d");
+            //str = str.replace(/À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ/g, "A");
+            //str = str.replace(/È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ/g, "E");
+            //str = str.replace(/Ì|Í|Ị|Ỉ|Ĩ/g, "I");
+            //str = str.replace(/Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ/g, "O");
+            //str = str.replace(/Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ/g, "U");
+            //str = str.replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g, "Y");
+            //str = str.replace(/Đ/g, "D");
+            //str = str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g, " ");
+            //str = str.replace(/  +/g, ' ');
+            //return str;
+        //}
 
-        inputFirstName.addEventListener('invalid', function(event){
-            event.preventDefault();
-            if ( ! event.target.validity.valid ) {
-                elem.textContent   = 'Tên không được chứa số và ký tự đặc biệt';
-                elem.className     = 'error';
-                elem.style.display = 'block';
-                inputFirstName.setAttribute('class', 'invalid animated shake');
-            }
-        });
+        //var inputFirstName = document.getElementById('firstName');
+        //var inputLastName = document.getElementById('lastName');
+        //var inputAccount = document.getElementById('account');
+        //var firstNameValue;
+        //var lastNameValue;
+        //var accountValue;
+
+        //inputFirstName.addEventListener('input', (e) => {
+            //firstNameValue = convert_vi_to_en(e.target.value).split(" ").join('').toLowerCase();
+            //inputLastName.addEventListener('input', (e) => {
+                //lastNameValue = convert_vi_to_en(e.target.value).split(" ").join('').toLowerCase();
+                
+                //inputAccount.setAttribute('value', lastNameValue + firstNameValue);
+            //})
+        //});
 
         var create = document.getElementById('create');
         var createUserForm = document.forms['create-user'];

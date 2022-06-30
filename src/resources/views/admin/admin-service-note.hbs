@@ -22,7 +22,11 @@
                             <th scope="col">Dịch vụ</th>
                             <th scope="col">Trạng thái</th>
                             <th scope="col">Ghi chú</th>
+<<<<<<< HEAD
                             <th scope="col">Action</th>
+=======
+                            <th scope="col">Hành động</th>
+>>>>>>> 0315c8eb390189e15d495777fb54e5b607e4806f
                         </tr>
                     </thead>
                     <tbody>
@@ -86,7 +90,7 @@
                         <div class="form-group col-md-6">
                             <label class="form-lable" for="service">Dịch vụ</label>
                             <select class="form-control" id="service" name="service">
-                                <option>-- Chọn dịch vụ --</option>
+                                <option value="">-- Chọn dịch vụ --</option>
                                 {{#each services}}
                                 <option value="{{this.name}}">{{this.name}}</option>
                                 {{/each}}
@@ -95,8 +99,13 @@
                         <div class="form-group col-md-6">
                             <label class="form-lable" for="status">Trạng thái</label>
                             <select class="form-control" id="status" name="status">
+<<<<<<< HEAD
                                 <option>-- Chọn trạng thái --</option>
                                 {{#each status}}
+=======
+                                <option value="">-- Chọn trạng thái --</option>
+                                {{#each statuses}}
+>>>>>>> 0315c8eb390189e15d495777fb54e5b607e4806f
                                 <option value="{{this.name}}">{{this.name}}</option>
                                 {{/each}}
                             </select>
@@ -173,6 +182,7 @@
                 scrollX: 0
             });
         });
+<<<<<<< HEAD
 
         var id;
         var btnDel = document.getElementById('btn-delete');
@@ -188,6 +198,14 @@
             delForm.action = '/admin/' + id + '?_method=DELETE';
             delForm.submit();
         }
+=======
+        //var create = document.getElementById('create');
+        //var createUserForm = document.forms['create-user'];
+        //create.addEventListener('click', () => {
+            //createUserForm.action = '/admin/service-note';
+            //createUserForm.submit();
+        //})
+>>>>>>> 0315c8eb390189e15d495777fb54e5b607e4806f
     })
 
 </script>

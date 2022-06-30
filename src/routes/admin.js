@@ -13,12 +13,15 @@ router.get('/customer', AdminController.getAdminCustomer)
 router.post('/customer', AdminController.createCustomer)
 router.get('/:id/editcustomer', AdminController.editCustomer)
 router.put('/:id', AdminController.updateCustomer)
+router.delete('/:id', AdminController.destroyCustomer)
+
 
 //END CUSTOMER
 
 //USER
 router.get('/user', AdminController.getAdminUser)
 router.post('/user', AdminController.createUser)
+router.delete('/:id', AdminController.destroyUser)
 //END USER
 
 //DEPARTEMENT
@@ -42,9 +45,9 @@ router.get('/position', AdminController.getAdminPosition)
 //SERVICE NOTE
 router.get('/service-note', AdminController.getAdminServiceNote)
 router.post('/service-note', AdminController.creatAdminServiceNote)
+router.get('/service-note', AdminController.getOneServiceNote)
+router.delete('/service-note', AdminController.destroyServiceNote)
 //END SERVICE NOTE
 
-//test
-router.get('/test-service-note', AdminController.getServiceNoteTest)
-//end test
+
 module.exports = router;

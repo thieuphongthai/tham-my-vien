@@ -48,6 +48,12 @@ class AdminController {
       .then(() => res.redirect('/admin/customer'))
       .catch(next);
   }
+
+  destroyCustomer(req, res, next){
+    Customer.deleteOne({_id: req.params.id })
+      .then(() => res.redirect('back'))
+      .catch(next)
+  }
   //END CUSTOMER
 
   //USER
@@ -94,6 +100,12 @@ class AdminController {
     User.updateOne({ _id: req.params.id }, req.body)
       .then(() => res.redirect('/admin/user'))
       .catch(next);
+  }
+
+  destroyUser(req, res, next){
+    User.deleteOne({_id: req.params.id })
+      .then(() => res.redirect('back'))
+      .catch(next)
   }
   //END USER
 
@@ -250,13 +262,25 @@ class AdminController {
   //SERVICE NOTE
   getAdminServiceNote(req, res, next) {
     Promise.all([ServiceNote.find({}), Customer.find({}), User.find({}), Status.find({}), Service.find({})])
-      .then(([serviceNotes, customers, users, statuses, services]) => {
+      .then(([serviceNotes, customers, users, status, services]) => {
         res.render('admin/admin-service-note', {
           serviceNotes: multipleMongooseToObject(serviceNotes),
           customers: multipleMongooseToObject(customers),
           users: multipleMongooseToObject(users),
-          statuses: multipleMongooseToObject(statuses),
+          status: multipleMongooseToObject(status),
           services: multipleMongooseToObject(services),
+        });
+      })
+      .catch(next);
+  }
+
+  getOneServiceNote(req, res, next) {
+    var a = document.getElementsByClassName('customer');
+    console.log(a);
+    ServiceNote.findOne({ customer: document.getElementsByClassName('customer') })
+      .then(serviceNote => {
+        res.render('admin/admin-service-note', {
+          serviceNote: multipleMongooseToObject(serviceNote)
         });
       })
       .catch(next);
@@ -279,22 +303,22 @@ class AdminController {
         } else {
           ServiceNote.updateOne({ customer: req.body.customer }, req.body)
             .then(() => res.redirect('/admin/service-note'))
-            .then(() => alert("Đã cập nhật khách hàng" + req.body.customer))
             .catch(next);
-
           return;
         }
       })
       .catch(next);
   }
+
+  destroyServiceNote(req, res, next){
+    ServiceNote.deleteOne({_id: req.params.id })
+      .then(() => res.redirect('back'))
+      .catch(next)
+  }
   //END SERVICE NOTE
 
 
-  //test
-  getServiceNoteTest(req, res, next){
 
-  }
-  //end test
 }
 
 

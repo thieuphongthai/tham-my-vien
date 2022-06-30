@@ -289,6 +289,12 @@ class AdminController {
   }
   //END SERVICE NOTE
 
+
+  //test
+  getServiceNoteTest(req, res, next){
+
+  }
+  //end test
 }
 
 

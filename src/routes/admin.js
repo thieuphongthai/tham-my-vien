@@ -43,4 +43,8 @@ router.get('/position', AdminController.getAdminPosition)
 router.get('/service-note', AdminController.getAdminServiceNote)
 router.post('/service-note', AdminController.creatAdminServiceNote)
 //END SERVICE NOTE
+
+//test
+router.get('/test-service-note', AdminController.getServiceNoteTest)
+//end test
 module.exports = router;

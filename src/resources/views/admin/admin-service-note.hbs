@@ -22,6 +22,7 @@
                             <th scope="col">Dịch vụ</th>
                             <th scope="col">Trạng thái</th>
                             <th scope="col">Ghi chú</th>
+                            <th scope="col">Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -83,7 +84,7 @@
                         <div class="form-group col-md-6">
                             <label class="form-lable" for="service">Dịch vụ</label>
                             <select class="form-control" id="service" name="service">
-                                <option>-- Chọn dịch vụ --</option>
+                                <option value="">-- Chọn dịch vụ --</option>
                                 {{#each services}}
                                 <option value="{{this.name}}">{{this.name}}</option>
                                 {{/each}}
@@ -92,7 +93,7 @@
                         <div class="form-group col-md-6">
                             <label class="form-lable" for="status">Trạng thái</label>
                             <select class="form-control" id="status" name="status">
-                                <option>-- Chọn trạng thái --</option>
+                                <option value="">-- Chọn trạng thái --</option>
                                 {{#each statuses}}
                                 <option value="{{this.name}}">{{this.name}}</option>
                                 {{/each}}
@@ -118,12 +119,12 @@
                 scrollX: 0
             });
         });
-        var create = document.getElementById('create');
-        var createUserForm = document.forms['create-user'];
-        create.addEventListener('click', () => {
-            createUserForm.action = '/admin/service-note';
-            createUserForm.submit();
-        })
+        //var create = document.getElementById('create');
+        //var createUserForm = document.forms['create-user'];
+        //create.addEventListener('click', () => {
+            //createUserForm.action = '/admin/service-note';
+            //createUserForm.submit();
+        //})
     })
 
 </script>

@@ -252,6 +252,7 @@ class AdminController {
     Promise.all([ServiceNote.find({}), Customer.find({}), User.find({}), Status.find({}), Service.find({})])
       .then(([serviceNotes, customers, users, statuses, services]) => {
         res.render('admin/admin-service-note', {
+          console: console.log(statuses),
           serviceNotes: multipleMongooseToObject(serviceNotes),
           customers: multipleMongooseToObject(customers),
           users: multipleMongooseToObject(users),

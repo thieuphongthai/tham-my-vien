@@ -227,7 +227,7 @@
                 createUserForm.action = '/admin/user';
                 createUserForm.submit();
             })
-
+            //DELETE
             var id;
             var btnDel = document.getElementById('btn-delete');
             var delForm = document.forms['delete-form'];
@@ -242,5 +242,6 @@
                 delForm.action = '/admin/' + id + '?_method=DELETE';
                 delForm.submit();
             }
+            //END DELETE
         })
     </script>

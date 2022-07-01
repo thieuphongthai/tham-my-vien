@@ -37,7 +37,7 @@ class AdminController {
 
   editCustomer(req, res, next) {
     Customer.findById(req.params.id)
-      .then(customer => res.render('admin/admin-customeredit', {
+      .then(customer => res.render('admin/admin-customer', {
         customer: mongooseToObject(customer)
       }))
       .catch(next);
@@ -45,14 +45,14 @@ class AdminController {
 
   updateCustomer(req, res, next) {
     Customer.updateOne({ _id: req.params.id }, req.body)
-      .then(() => res.redirect('/admin/customer'))
+      .then(() => res.redirect('back'))
       .catch(next);
   }
 
   destroyCustomer(req, res, next){
-    Customer.deleteOne({_id: req.params.id })
+    Customer.deleteOne({ _id: req.params.id })
       .then(() => res.redirect('back'))
-      .catch(next)
+      .catch(next);
   }
   //END CUSTOMER
 
@@ -264,7 +264,6 @@ class AdminController {
     Promise.all([ServiceNote.find({}), Customer.find({}), User.find({}), Status.find({}), Service.find({})])
       .then(([serviceNotes, customers, users, status, services]) => {
         res.render('admin/admin-service-note', {
-          console: console.log(statuses),
           serviceNotes: multipleMongooseToObject(serviceNotes),
           customers: multipleMongooseToObject(customers),
           users: multipleMongooseToObject(users),
@@ -275,17 +274,7 @@ class AdminController {
       .catch(next);
   }
 
-  getOneServiceNote(req, res, next) {
-    var a = document.getElementsByClassName('customer');
-    console.log(a);
-    ServiceNote.findOne({ customer: document.getElementsByClassName('customer') })
-      .then(serviceNote => {
-        res.render('admin/admin-service-note', {
-          serviceNote: multipleMongooseToObject(serviceNote)
-        });
-      })
-      .catch(next);
-  }
+  
 
   creatAdminServiceNote(req, res, next) {
     const serviceNote = new ServiceNote({
@@ -314,7 +303,7 @@ class AdminController {
   destroyServiceNote(req, res, next){
     ServiceNote.deleteOne({_id: req.params.id })
       .then(() => res.redirect('back'))
-      .catch(next)
+      .catch(next);
   }
   //END SERVICE NOTE
 

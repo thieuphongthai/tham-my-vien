@@ -94,6 +94,7 @@ editUser.addEventListener("show.bs.modal", function (event) {
 	var editAccount = document.getElementById("edit-account");
 	var editPassword = document.getElementById("edit-password");
 	var editRole = document.getElementById("edit-role");
+	console.log(editPhone);
 	editFirstName.value = firstName;
 	editLastName.value = lastName;
 	editBirth.value = birth;
@@ -153,3 +154,6 @@ detailUser.addEventListener("show.bs.modal", function (event) {
 	detailAccount.innerHTML = 'Tài khoản: ' + accountDetail;
 	detailRole.innerHTML = 'Quyền hạn: ' + roleDetail;
 });
+
+
+

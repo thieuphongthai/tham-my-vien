@@ -23,7 +23,7 @@
                             <th scope="col">Giới tính</th>
                             <th scope="col">Số điện thoại</th>
                             <th scope="col">Email</th>
-                            <th scope="col">option</th>
+                            <th scope="col">Option</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,10 +33,14 @@
                             <td>{{this.name}}</td>
                             <td>{{this.birth}}</td>
                             <td>{{this.gender}}</td>
-                            <td>{{this.phone}}</td>
+                            <td>0{{this.phone}}</td>
                             <td>{{this.email}}</td>
                             <td class="text-center">
-                                <a class="btn btn-outline-info btn-sm" href="/admin/{{this._id}}/editcustomer">Sửa</a>
+                                <button class="btn btn-outline-info btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#updateModal" data-idd="{{this._id}}" data-name="{{this.name}}"
+                                    data-birth="{{this.birth}}" data-gender="{{this.gender}}"
+                                    data-phone="{{this.phone}}" data-email="{{this.email}}">Sửa
+                                </button>
                                 <button class="btn btn-outline-danger btn-sm" data-id="{{this._id}}"
                                     data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
                             </td>
@@ -48,7 +52,7 @@
         </div>
     </div>
 
-
+    {{!-- Modal Create --}}
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg bg-dark" role="document">
             <div class="modal-content">
@@ -97,7 +101,7 @@
             </div>
         </div>
     </div>
-
+    {{!-- Modal Delete --}}
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -117,7 +121,56 @@
     </div>
 
     <form name="delete-form" method="POST"></form>
-
+    {{!-- Modal Update --}}
+    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateModalLabel">Thông tin tài khoản</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form name="update-form" id="update-form" method="POST">
+                        <div class="form-group mb-3">
+                            <label class="form-label" for="name">Tên</label>
+                            <input type="text" class="form-control" id="updName" name="name"
+                                placeholder="Nhập 'Tên' khách hàng">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="birth" class="form-label">
+                                <h6>Ngày sinh</h6>
+                            </label>
+                            <input type="date" class="form-control form-control-sm" id="updBirth"
+                                aria-describedby="birthFeedback" name="birth" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label" for="gender">Giới tính</label>
+                            <select class="form-control" id="updGender" name="gender">
+                                <option value="Nam">Nam</option>
+                                <option value="Nữ">Nữ</option>
+                            </select>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label" for="phone">Số điện thoại</label>
+                            <input type="tel" class="form-control" id="updPhone" name="phone"
+                                placeholder="Nhập số điện thoại">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label" for="exampleInputEmail1">Email</label>
+                            <input type="email" class="form-control" id="updEmail" name="email"
+                                aria-describedby="emailHelp" placeholder="Nhập email">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                            <button id="btn-update" type="button" class="btn btn-primary">Lưu</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
 
 
@@ -130,6 +183,7 @@
                 });
             });
 
+            //DELETE
             var id;
             var btnDel = document.getElementById('btn-delete');
             var delForm = document.forms['delete-form'];
@@ -144,7 +198,45 @@
                 delForm.action = '/admin/' + id + '?_method=DELETE';
                 delForm.submit();
             }
-        })
+            //END DELETE
+
+            //UPDATE
+            var idd;
+            var btnUpd = document.getElementById('btn-update');
+            var updForm = document.forms['update-form'];
+
+            var updCustomer = document.getElementById("updateModal");
+            updCustomer.addEventListener("show.bs.modal", function (event) {
+                // Button that triggered the modal
+                var button = event.relatedTarget;
+                idd = button.getAttribute("data-idd");
+
+                // Get data from edit button
+                var name = button.getAttribute("data-name");
+                var birth = button.getAttribute("data-birth");
+                var gender = button.getAttribute("data-gender");
+                var phone = button.getAttribute("data-phone");
+                var email = button.getAttribute("data-email")
+
+                // Get element need embeded input
+                var updName = document.getElementById("updName");
+                var updBirth = document.getElementById("updBirth");
+                var updGender = document.getElementById("updGender");
+                var updPhone = document.getElementById("updPhone");
+                var updEmail = document.getElementById("updEmail");
+
+                updName.value = name;
+                updBirth.value = birth;
+                updGender.value = gender;
+                updPhone.value = phone;
+                updEmail.value = email;
+            });
+            btnUpd.onclick = function () {
+                updForm.action = '/admin/' + idd + '?_method=PUT';
+                updForm.submit();
+            }
+            //END UPDATE
+        });
 
 
 

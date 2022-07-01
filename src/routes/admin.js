@@ -11,7 +11,6 @@ router.get('/', AdminController.getAdminDashboard)
 //CUSTOMER
 router.get('/customer', AdminController.getAdminCustomer)
 router.post('/customer', AdminController.createCustomer)
-router.get('/:id/editcustomer', AdminController.editCustomer)
 router.put('/:id', AdminController.updateCustomer)
 router.delete('/:id', AdminController.destroyCustomer)
 
@@ -45,8 +44,7 @@ router.get('/position', AdminController.getAdminPosition)
 //SERVICE NOTE
 router.get('/service-note', AdminController.getAdminServiceNote)
 router.post('/service-note', AdminController.creatAdminServiceNote)
-router.get('/service-note', AdminController.getOneServiceNote)
-router.delete('/service-note', AdminController.destroyServiceNote)
+router.delete('/:id', AdminController.destroyServiceNote)
 //END SERVICE NOTE
 
 

@@ -50,6 +50,7 @@ class AdminController {
   }
 
   destroyCustomer(req, res, next){
+    console.log('customer', req.params.id);
     Customer.deleteOne({ _id: req.params.id })
       .then(() => res.redirect('back'))
       .catch(next);
@@ -103,6 +104,7 @@ class AdminController {
   }
 
   destroyUser(req, res, next){
+    console.log(req.params.id)
     User.deleteOne({_id: req.params.id })
       .then(() => res.redirect('back'))
       .catch(next)

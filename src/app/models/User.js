@@ -9,15 +9,13 @@ const User = new Schema({
 	phone: Number,
     email: String,
   	address: String,
-	image: {
-		type: mongoose.Schema.Types.Decimal128
-	},
+	image: String,
 	department: String,
 	position: String,
 	account: String,
 	password: String,
 	role: String,
-
+	description: String
 }, {
     timestamps: true
 });

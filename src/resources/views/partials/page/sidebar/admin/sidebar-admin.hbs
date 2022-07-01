@@ -1,18 +1,41 @@
 <div class="d-flex" id="wrapper">
-	<div class="border-end" id="sidebar-wrapper">
+	<div class="border-end bg-white" id="sidebar-wrapper">
 		<div class="sidebar-toggle" id="sidebarToggleBtn">
-			<i class="ti-menu"></i>
+			<i class="ti-arrow-circle-right"></i>
 		</div>
-		<div class="list-group">
-			<a class="list-group-item item-hover p-3" href="/root/user"><i class="ti-user ml-3 mr-3"></i>Quản lý người dùng</a>
-			<a class="list-group-item item-hover p-3" href="/root/account"><i class="ti-face-smile ml-3 mr-3"></i>Quản lý tài khoản</a>
-			<a class="list-group-item item-hover p-3" href="/root/department"><i class="ti-briefcase ml-3 mr-3"></i>Quản lý phòng ban</a>
-			<a class="list-group-item item-hover p-3" href="/root/roles"><i class="ti-flag-alt ml-3 mr-3"></i>Quản lý quyền</a>
-			<a class="list-group-item item-hover p-3" href="/root/service"><i class="ti-receipt ml-3 mr-3"></i>Quản lý dịch vụ</a>
-			<a class="list-group-item item-hover p-3" href="/root/status"><i class="ti-shine ml-3 mr-3"></i>Quản lý trạng thái</a>
+		<div class="list-group list-group-flush">
+			<a
+				class="list-group-item list-group-item-action list-group-item-light p-3"
+				href="/root/user"
+			><i class="ti-user ml-3 mr-3"></i>Quản lý người dùng</a>
+			<a
+				class="list-group-item list-group-item-action list-group-item-light p-3"
+				href="/root/account"
+			><i class="ti-face-smile ml-3 mr-3"></i>Quản lý tài khoản</a>
+			<a
+				class="list-group-item list-group-item-action list-group-item-light p-3"
+				href="/root/department"
+			><i class="ti-briefcase ml-3 mr-3"></i>Quản lý phòng ban</a>
+			<a
+				class="list-group-item list-group-item-action list-group-item-light p-3"
+				href="/root/roles"
+			><i class="ti-flag-alt ml-3 mr-3"></i>Quản lý quyền</a>
+			<a
+				class="list-group-item list-group-item-action list-group-item-light p-3"
+				href="/root/service"
+			><i class="ti-receipt ml-3 mr-3"></i>Quản lý dịch vụ</a>
+			<a
+				class="list-group-item list-group-item-action list-group-item-light p-3"
+				href="/root/status"
+			><i class="ti-shine ml-3 mr-3"></i>Quản lý trạng thái</a>
 		</div>
 	</div>
-	{{!-- <div class="dashboard-footer text-light">
-			<div class="copyrightLine" data-text="Copyright@Hachitech">Copyright@Hachitech</div>
-		</div> --}}
 </div>
+
+<script>
+	let sidebarBtn = document.querySelector("#sidebarToggleBtn");
+	let sidebar = document.querySelector("#sidebar-wrapper");
+	sidebarBtn.onclick = function () {
+		sidebar.classList.toggle("active"); sidebarBtn.classList.toggle("rotate");
+	};
+</script>

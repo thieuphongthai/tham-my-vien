@@ -16,6 +16,10 @@ body {
     min-height: 100%;
 }
 
+textarea {
+    resize: none !important;
+}
+
 ul li{
     margin: 0;
     padding: 0;
@@ -41,7 +45,7 @@ a{
 @media (min-width: 768px){
     #page-content-wrapper {
         min-width: 0;
-        width: 70%;
+        width: 100%;
     }
 }
 
@@ -179,6 +183,10 @@ a{
     margin-left: 5px;
 }
 
+.list-group-item:hover {
+    background-color: #0dcaf0;
+}
+
 #sidebar-wrapper.active{
     width: 260px;
 }
@@ -203,4 +211,12 @@ a{
 
 .btn-storage {
     margin-left: 12px;
+}
+
+.text-green {
+    color: #00f284 !important;
+}
+
+.border-green {
+    border: #00f284 0.5px solid !important;
 }

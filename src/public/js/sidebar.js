@@ -6,12 +6,38 @@
 // 	sidebarBtn.classList.toggle("rotate");
 // };
 
+
+// Handle create info user
 var create = document.getElementById("create");
 var createUserForm = document.forms["create-user-form"];
 create.addEventListener("click", () => {
 	createUserForm.action = "/root/user";
 	createUserForm.submit();
 });
+
+// Handle edit info user
+var edit = document.getElementById("edit");
+var editUserForm = document.forms["edit-user-form"];
+create.addEventListener("click", () => {
+	createUserForm.action = "/root/user";
+	createUserForm.submit();
+});
+
+
+// Handle select image from modal create
+var addImg = document.getElementById('create-img');
+var addAvt = document.getElementById('add-avt');
+addImg.addEventListener('change', (e) => {
+	addAvt.src = URL.createObjectURL(e.target.files[0]);
+});
+
+// Handle select image from modal edit
+var editImg = document.getElementById('edit-img');
+var editAvt = document.getElementById('edit-avt');
+editImg.addEventListener('change', (e) => {
+	editAvt.src = URL.createObjectURL(e.target.files[0]);
+});
+
 
 // Function convert Vietnameses to English
 function convert_vi_to_en(str) {
@@ -65,8 +91,8 @@ var editUser = document.getElementById("edit-user");
 editUser.addEventListener("show.bs.modal", function (event) {
 	// Button that triggered the modal
 	var button = event.relatedTarget;
-
 	// Get data from edit button
+	var imageEdit = button.getAttribute("data-edit-img");
 	var firstName = button.getAttribute("data-first-name");
 	var lastName = button.getAttribute("data-last-name");
 	var birth = button.getAttribute("data-birth");
@@ -80,7 +106,9 @@ editUser.addEventListener("show.bs.modal", function (event) {
 	var account = button.getAttribute("data-account");
 	var password = button.getAttribute("data-password");
 	var role = button.getAttribute("data-role");
+
 	// Get element need embeded input
+	var editAvt = document.getElementById("edit-avt");
 	var editFirstName = document.getElementById("edit-firstName");
 	var editLastName = document.getElementById("edit-lastName");
 	var editBirth = document.getElementById("edit-birth");
@@ -94,7 +122,12 @@ editUser.addEventListener("show.bs.modal", function (event) {
 	var editAccount = document.getElementById("edit-account");
 	var editPassword = document.getElementById("edit-password");
 	var editRole = document.getElementById("edit-role");
-	console.log(editPhone);
+
+	if (imageEdit === '') {
+		editAvt.setAttribute('src', '/img//user-icon.png');
+	} else {
+		editAvt.setAttribute('src', '/img/uploads/users/' + imageEdit);
+	}
 	editFirstName.value = firstName;
 	editLastName.value = lastName;
 	editBirth.value = birth;
@@ -115,8 +148,8 @@ var detailUser = document.getElementById("detail-user");
 detailUser.addEventListener("show.bs.modal", function (event) {
 	// Button that triggered the modal
 	var button = event.relatedTarget;
-
 	// Get data from detail button
+	var imageDetail = button.getAttribute("data-detail-img");
 	var firstNameDetail = button.getAttribute("data-detail-first-name");
 	var lastNameDetail = button.getAttribute("data-detail-last-name");
 	var birthDetail = button.getAttribute("data-detail-birth");
@@ -131,6 +164,8 @@ detailUser.addEventListener("show.bs.modal", function (event) {
 	var roleDetail = button.getAttribute("data-detail-role");
 
 	// // Get element need embeded input
+	
+	var detailAvt = document.getElementById("detail-avt");
 	var detailFirstName = document.getElementById("detail-firstLastName");
 	var detailBirth = document.getElementById("detail-birth");
 	var detailGender = document.getElementById("detail-gender");
@@ -142,6 +177,11 @@ detailUser.addEventListener("show.bs.modal", function (event) {
 	var detailDescription = document.getElementById("detail-description");
 	var detailAccount = document.getElementById("detail-account");
 	var detailRole = document.getElementById("detail-role");
+	if (imageDetail === '') {
+		detailAvt.setAttribute('src', '/img//user-icon.png');
+	} else {
+		detailAvt.setAttribute('src', '/img/uploads/users/' + imageDetail)
+	}
 	detailFirstName.innerHTML = firstNameDetail + " " + lastNameDetail;
 	detailBirth.innerHTML = 'Ngày sinh: ' + birthDetail;
 	detailGender.innerHTML = 'Giới tính: ' + genderDetail;

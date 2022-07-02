@@ -44,7 +44,7 @@
 								{{#each users}}
 								<tr class="info">
 									<th scope="row" class="text-center">{{sum @index 1}}</th>
-									<td><div type="button" class="btn-outline-info" data-bs-toggle="modal" data-detail-id="{{this._id}}" data-detail-first-name="{{this.firstName}}"
+									<td><div type="button" class="btn-outline-info" data-bs-toggle="modal" data-detail-id="{{this._id}}" data-detail-img="{{this.image.name}}" data-detail-first-name="{{this.firstName}}"
 											data-detail-last-name="{{this.lastName}}" data-detail-birth="{{this.birth}}" data-detail-gender="{{this.gender}}" data-detail-phone="{{this.phone}}" data-detail-email="{{this.email}}"
 											data-detail-address="{{this.address}}" data-detail-department="{{this.department}}" data-detail-position="{{this.position}}" data-detail-description="{{this.description}}"
 											data-detail-account="{{this.account}}" data-detail-password="{{this.this.password}}" data-detail-role="{{this.role}}" data-bs-target="#detail-user" title="{{this._id}}">{{cutString this._id 16}}</div></td>
@@ -59,7 +59,7 @@
 									<td>{{this.account}}</td>
 									<td>{{this.role}}</td>
 									<td class="text-center">
-										<button type="button" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-id="{{this._id}}" data-first-name="{{this.firstName}}"
+										<button type="button" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-edit-img="{{this.image.name}}" data-id="{{this._id}}" data-first-name="{{this.firstName}}"
 											data-last-name="{{this.lastName}}" data-birth="{{this.birth}}" data-gender="{{this.gender}}" data-phone="{{this.phone}}" data-email="{{this.email}}"
 											data-address="{{this.address}}" data-department="{{this.department}}" data-position="{{this.position}}" data-description="{{this.description}}"
 											data-account="{{this.account}}" data-password="{{this.this.password}}" data-role="{{this.role}}" data-bs-target="#edit-user">Sửa</button>
@@ -101,7 +101,7 @@
 								</ul>    
 							</div>
 							<div class="col-xl-4">
-								<img src="/img/user-icon.png" class="rounded mx-auto d-block" alt="...">
+								<img id="detail-avt" class="rounded mx-auto d-block add-avata" alt="...">
 								<p class="font-monospace text-green mt-3" id="detail-account">{{this.account}}</p>
 								<p class="font-monospace text-green" id="detail-role">{{this.role}}</p>
 							</div>
@@ -121,7 +121,7 @@
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<form method="POST" id="create-user-form" class="row">
+						<form method="POST" id="create-user-form" class="row" enctype="multipart/form-data">
 							<div class="col-xl-8">
 								<ul class="list-group">
 									<li class="list-group-item bg-info">
@@ -195,10 +195,12 @@
 								</ul>
 							</div>
 							<div class="col-xl-4">
-								<img src="/img/user-icon.png" class="rounded mx-auto d-block" alt="...">
-								<div class="mt-3 text-light">
-									<label for="password" class="form-label"><h6>Chọn ảnh đại diện</h6></label>
-									<input class="form-control form-control-sm" id="formFileSm" type="file">
+								<img src="/img/user-icon.png" id="add-avt" class="rounded mx-auto d-block add-avata" alt="...">
+								<div class="mt-3 text-center">
+									<label for="create-img" class="label-avt btn btn-sm btn-primary">
+										<h6>Chọn ảnh đại diện</h6>
+									</label>
+									<input id="create-img" type="file" name="image">
 								</div>
 								<ul class="list-group mt-3">
 									<li class="list-group-item bg-danger text-light">
@@ -242,14 +244,14 @@
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<form method="POST" class="row" >
+						<form method="POST" id="edit-user-form" class="row" >
 							<div class="col-xl-8">
 								<ul class="list-group">
 									<li class="list-group-item bg-info text-light">
 										<div class="row">
 											<div class="col-md-6">
 												<label for="firstName" class="form-label"><h6>Họ</h6></label>
-												<input type="text" class="form-control form-control-sm"  data-bs-focus="focus" id="edit-firstName" pattern="[a-z]{1,15}" name="firstName" required>
+												<input type="text" class="form-control form-control-sm" data-bs-focus="focus" id="edit-firstName" name="firstName" required>
 											</div>
 											<div class="col-md-6">
 												<label for="lastName" class="form-label"><h6>Tên</h6></label>
@@ -316,10 +318,12 @@
 								</ul>    
 							</div>
 							<div class="col-xl-4">
-								<img src="/img/user-icon.png" class="rounded mx-auto d-block" alt="...">
-								<div class="mt-3 text-light">
-									<label for="password" class="form-label"><h6>Chọn ảnh đại diện</h6></label>
-									<input class="form-control form-control-sm" id="edit-formFileSm" type="file">
+								<img src="/img/user-icon.png" id="edit-avt" class="rounded mx-auto d-block add-avata" alt="...">
+								<div class="mt-3 text-center">
+									<label for="edit-img" class="label-avt btn btn-sm btn-primary">
+										<h6>Chọn ảnh đại diện</h6>
+									</label>
+									<input class="form-control form-control-sm" id="edit-img" type="file" name="image">	
 								</div>
 								<ul class="list-group mt-3">
 									<li class="list-group-item bg-danger text-light">

@@ -4,6 +4,7 @@ const AuthController = require('../app/controllers/AuthController');
 const RootController = require('../app/controllers/RootController');
 const verifyRegister = require('../middleware/VerifyRegister');
 const authJwt = require("../middleware/authJwt");
+const validateUploadImage = require('../middleware/validateUploadImage');
 
 /* -----------------------------------------Quản lý Operating-room Start-------------------------------------------------- */
 
@@ -43,10 +44,13 @@ router.get('/marketing', RootController.getRootMarketingDashboard);
 /* -----------------------------------------Quản lý User Start-------------------------------------------------- */
 
 // [GET] Root User UI
-router.get('/user', RootController.getRootUserDashboard);
+// router.post('/user/upload-avatar', RootController.uploadAvatar);
 
-// [POST] Root User UI
-router.post('/user', RootController.postRootUserDashboard);
+// [POST] Root Create User UI
+router.post('/user', validateUploadImage.upload, RootController.postRootUserDashboard);
+
+// [GET] Root User UI
+router.get('/user', RootController.getRootUserDashboard);
 
 // [PUT] Root User UI
 // router.put('/user/:id', RootController.getRootUserCreateDashboard)

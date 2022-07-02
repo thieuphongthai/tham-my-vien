@@ -59,7 +59,6 @@ app.engine(
 			sum: (a, b) => a + b,
 			cutString: (str, num) => {
 				var newStr = str.toString();
-				console.log(newStr.length)
 				return newStr.length > num ?  "..." + newStr.slice(num, newStr.length) : newStr;
 			},
 			cutPassword: (str, num) => {

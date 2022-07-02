@@ -220,3 +220,25 @@ a{
 .border-green {
     border: #00f284 0.5px solid !important;
 }
+
+.add-avata {
+    width: 245px;
+    height: 245px;
+    object-fit: cover;
+}
+
+#create-img {
+    display: none;
+}
+
+#edit-img {
+    display: none;
+}
+
+.label-avt {
+    cursor: pointer;
+}
+
+.label-avt h6 {
+    margin: 0;
+}

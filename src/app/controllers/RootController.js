@@ -4,9 +4,10 @@ const User = require('../models/User');
 const Department = require('../models/Department');
 const Position = require('../models/Position');
 const { multipleMongooseToObject, mongooseToObject } = require('../../util/mongoose');
-// const { multipleMongooseToObject } = require('../../util/mongoose');
-var bcrypt = require("bcryptjs");
-
+const bcrypt = require("bcryptjs");
+const multer = require('multer');
+const uploadAvatar = multer().single('image');
+const clc = require("cli-color");
 
 class RootController {
 
@@ -46,8 +47,6 @@ class RootController {
 		res.render("root/root-service-note");
     }
 
-
-
 	// [GET] /user
     getRootUserDashboard(req, res, next) {
 		Promise.all([User.find({}), Department.find({}), Position.find({}), Role.find({})])
@@ -64,36 +63,76 @@ class RootController {
 
     // [POST] /user
 	postRootUserDashboard(req, res, next) {
-        console.log(req.body);
-        const user = new User({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            birth: req.body.birth,
-            gender: req.body.gender,
-            phone: req.body.phone,
-            email: req.body.email,
-            address: req.body.address,
-            department: req.body.department,
-            position: req.body.position,
-            description: req.body.description,
-            account: req.body.account,
-            password: bcrypt.hashSync(req.body.password, 8),
-            role: req.body.role
-        });
-        User.findOne({ account: req.body.account })
-            .then(account => {
-                if (!account) {
-                    user.save();
-                    res.redirect('user');
-                    return;
-                } else {
-                    user.account = user.account + Math.floor(Math.random() * 100)
-                    user.save();
-                    res.redirect('user');
-                    return;
-                }
-            })
-            .catch(next);
+        
+        if (req.file) {
+            const user = new User({
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                birth: req.body.birth,
+                gender: req.body.gender,
+                phone: req.body.phone,
+                email: req.body.email,
+                address: req.body.address,
+                department: req.body.department,
+                position: req.body.position,
+                description: req.body.description,
+                account: req.body.account,
+                password: bcrypt.hashSync(req.body.password, 8),
+                role: req.body.role,
+                image: {
+                    name: req.file.filename,
+                    url:  req.file.path,
+                },
+            });
+            User.findOne({ account: req.body.account })
+                .then(account => {
+                    if (!account) {
+                        user.save();
+                        res.redirect('user');
+                        return;
+                    } else {
+                        user.account = user.account + Math.floor(Math.random() * 100)
+                        user.save();
+                        res.redirect('user');
+                        return;
+                    }
+                })
+                .catch(next);
+        } else {
+            const user = new User({
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                birth: req.body.birth,
+                gender: req.body.gender,
+                phone: req.body.phone,
+                email: req.body.email,
+                address: req.body.address,
+                department: req.body.department,
+                position: req.body.position,
+                description: req.body.description,
+                account: req.body.account,
+                password: bcrypt.hashSync(req.body.password, 8),
+                role: req.body.role,
+                image: {
+                    name: '',
+                    url:  '',
+                },
+            });
+            User.findOne({ account: req.body.account })
+                .then(account => {
+                    if (!account) {
+                        user.save();
+                        res.redirect('user');
+                        return;
+                    } else {
+                        user.account = user.account + Math.floor(Math.random() * 100)
+                        user.save();
+                        res.redirect('user');
+                        return;
+                    }
+                })
+                .catch(next);
+        }
 	}
      
 	// [POST] /account

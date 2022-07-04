@@ -11,16 +11,14 @@
 var create = document.getElementById("create");
 var createUserForm = document.forms["create-user-form"];
 create.addEventListener("click", () => {
-	createUserForm.action = "/root/user";
 	createUserForm.submit();
 });
 
 // Handle edit info user
 var edit = document.getElementById("edit");
 var editUserForm = document.forms["edit-user-form"];
-create.addEventListener("click", () => {
-	createUserForm.action = "/root/user";
-	createUserForm.submit();
+edit.addEventListener("click", () => {
+	editUserForm.submit();
 });
 
 
@@ -92,6 +90,7 @@ editUser.addEventListener("show.bs.modal", function (event) {
 	// Button that triggered the modal
 	var button = event.relatedTarget;
 	// Get data from edit button
+	var idEdit = button.getAttribute('data-id');
 	var imageEdit = button.getAttribute("data-edit-img");
 	var firstName = button.getAttribute("data-first-name");
 	var lastName = button.getAttribute("data-last-name");
@@ -128,6 +127,7 @@ editUser.addEventListener("show.bs.modal", function (event) {
 	} else {
 		editAvt.setAttribute('src', '/img/uploads/users/' + imageEdit);
 	}
+	editUserForm.setAttribute('action', `/root/user/${idEdit}?_method=PUT`);
 	editFirstName.value = firstName;
 	editLastName.value = lastName;
 	editBirth.value = birth;
@@ -183,16 +183,16 @@ detailUser.addEventListener("show.bs.modal", function (event) {
 		detailAvt.setAttribute('src', '/img/uploads/users/' + imageDetail)
 	}
 	detailFirstName.innerHTML = firstNameDetail + " " + lastNameDetail;
-	detailBirth.innerHTML = 'Ngày sinh: ' + birthDetail;
-	detailGender.innerHTML = 'Giới tính: ' + genderDetail;
-	detailPhone.innerHTML = 'Điện thoại: ' + phoneDetail;
-	detailEmail.innerHTML = 'Email: ' + emailDetail;
-	detailAddress.innerHTML = 'Địa chỉ: ' + addressDetail;
-	detailDepartment.innerHTML = 'Phòng ban: ' + departmentDetail;
-	detailPosition.innerHTML = 'Chức vụ: ' + positionDetail;
+	detailBirth.innerHTML = '<strong>Ngày sinh: </strong> ' + birthDetail;
+	detailGender.innerHTML = '<strong>Giới tính: </strong>' + genderDetail;
+	detailPhone.innerHTML = '<strong>Điện thoại: </strong>' + phoneDetail;
+	detailEmail.innerHTML = '<strong>Email: </strong>' + emailDetail;
+	detailAddress.innerHTML = '<strong>Địa chỉ: </strong>' + addressDetail;
+	detailDepartment.innerHTML = '<strong>Phòng ban: </strong>' + departmentDetail;
+	detailPosition.innerHTML = '<strong>Chức vụ: </strong>' + positionDetail;
 	detailDescription.innerHTML = desciptionDetail;
-	detailAccount.innerHTML = 'Tài khoản: ' + accountDetail;
-	detailRole.innerHTML = 'Quyền hạn: ' + roleDetail;
+	detailAccount.innerHTML = '<strong>Tài khoản: </strong>' + accountDetail;
+	detailRole.innerHTML = '<strong>Quyền hạn: </strong>' + roleDetail;
 });
 
 

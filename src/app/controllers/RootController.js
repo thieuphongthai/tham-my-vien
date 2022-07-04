@@ -7,7 +7,8 @@ const { multipleMongooseToObject, mongooseToObject } = require('../../util/mongo
 const bcrypt = require("bcryptjs");
 const multer = require('multer');
 const uploadAvatar = multer().single('image');
-const clc = require("cli-color");
+const helpers = require('../../middleware/helpers');
+
 
 class RootController {
 
@@ -20,6 +21,7 @@ class RootController {
 	}
 
     getRootDashboard(req, res, next) {
+        // req.flash('message', 'Welcome to Blog');
 		res.render("root/root-dashboard");
     }
 
@@ -93,8 +95,6 @@ class RootController {
                     } else {
                         user.account = user.account + Math.floor(Math.random() * 100)
                         user.save();
-                        res.redirect('user');
-                        return;
                     }
                 })
                 .catch(next);
@@ -127,13 +127,40 @@ class RootController {
                     } else {
                         user.account = user.account + Math.floor(Math.random() * 100)
                         user.save();
-                        res.redirect('user');
-                        return;
                     }
                 })
                 .catch(next);
         }
+        res.redirect('user');
+        return;
 	}
+
+    // [PUT] /user
+    putRootUser(req, res, next) {
+        console.log('req file in controllers', req.file);
+        console.log('req body in controllers', req.body);
+        User.updateOne({ _id: req.params.id }, {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            birth: req.body.birth,
+            gender: req.body.gender,
+            phone: req.body.phone,
+            email: req.body.email,
+            address: req.body.address,
+            department: req.body. department,
+            position: req.body. position,
+            description: req.body.description,
+            password: bcrypt.hashSync(req.body.password, 8),
+            role: req.body.role,
+            image: {
+                name: req.file.filename,
+                url: req.file.path,
+            }
+        })
+            .then(() => res.redirect('/root/user'))
+            .catch(next);
+        // console.log((helpers.imageFilter(req.body)));
+    }
      
 	// [POST] /account
     postRootAccountDashboard(req, res, next) {

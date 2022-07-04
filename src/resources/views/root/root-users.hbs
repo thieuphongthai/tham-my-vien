@@ -4,14 +4,14 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Document</title>
+		<title>Quản lý người dùng</title>
 	</head>
 	<body>
 		<div class="d-flex" id="wrapper">
 			{{> page/sidebar/admin/sidebar-admin}}
 			<div id="page-content-wrapper">
-				<nav class="contentHeader">    
-					<!-- Button trigger modal -->
+				<nav id="sub-nav-lg" class="navbar navbar-light" style="background-color: #e3f2fd;">
+					<!-- Navbar content -->
 					<button type="button" class="btn btn-danger btn-storage">
 						<i class="ti-archive"></i> Kho lưu trữ
 					</button>
@@ -20,55 +20,54 @@
 						<i class="ti-plus"></i> Tạo người dùng
 					</button>
 				</nav>
-				<div class="container-fluid">
-					<div class="table-responsive mt-3">
-						<table id="user" class="table table-sm table-bordered align-middle">
-							<thead class="table-info">
-								<tr>
-									<th scope="col">#</th>
-									<th scope="col">Mã người dùng</th>
-									<th scope="col">Họ tên</th>
-									<th scope="col">Ngày sinh</th>
-									<th scope="col">Giới tính</th>
-									<th scope="col">Số điện thoại</th>
-									<th scope="col">Email</th>
-									<th scope="col">Địa chỉ</th>
-									<th scope="col">Phòng ban</th>
-									<th scope="col">Chức vụ</th>
-									<th scope="col">Tài khoản</th>
-									<th scope="col">Quyền hạn</th>
-									<th scope="col">Hành động</th>
-								</tr>
-							</thead>
-							<tbody>
-								{{#each users}}
-								<tr class="info">
-									<th scope="row" class="text-center">{{sum @index 1}}</th>
-									<td><div type="button" class="btn-outline-info" data-bs-toggle="modal" data-detail-id="{{this._id}}" data-detail-img="{{this.image.name}}" data-detail-first-name="{{this.firstName}}"
-											data-detail-last-name="{{this.lastName}}" data-detail-birth="{{this.birth}}" data-detail-gender="{{this.gender}}" data-detail-phone="{{this.phone}}" data-detail-email="{{this.email}}"
-											data-detail-address="{{this.address}}" data-detail-department="{{this.department}}" data-detail-position="{{this.position}}" data-detail-description="{{this.description}}"
-											data-detail-account="{{this.account}}" data-detail-password="{{this.this.password}}" data-detail-role="{{this.role}}" data-bs-target="#detail-user" title="{{this._id}}">{{cutString this._id 16}}</div></td>
-									<td>{{this.firstName}} {{this.lastName}}</td>
-									<td>{{this.birth}}</td>
-									<td>{{this.gender}}</td>
-									<td>{{this.phone}}</td>
-									<td>{{this.email}}</td>
-									<td>{{cutPassword this.address 12}}</td>
-									<td>{{this.department}}</td>
-									<td>{{this.position}}</td>
-									<td>{{this.account}}</td>
-									<td>{{this.role}}</td>
-									<td class="text-center">
-										<button type="button" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-edit-img="{{this.image.name}}" data-id="{{this._id}}" data-first-name="{{this.firstName}}"
+				<nav id="sub-nav-sm" class="navbar navbar-light d-flex justify-content-between" style="background-color: #e3f2fd;">
+					<!-- Navbar content -->
+					<button type="button" class="btn btn-danger btn-storage">
+						<i class="ti-archive"></i>
+					</button>
+					<!-- Button trigger modal -->
+					<button type="button" class="btn btn-primary btn-create" data-bs-toggle="modal" data-bs-target="#create-user">
+						<i class="ti-plus"></i>
+					</button>
+				</nav>
+				<div class="container-fluid container-content-page">
+					<div class="row mt-3">
+						{{#each users}}
+						<div class="col-xl-3 col-lg-3 col-md-6 mb-3 mr-3">
+							<div class="card">
+								<div class="card-header d-flex justify-content-between">
+									<strong>ID: {{cutString this._id 16}}</strong>
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+									</div>
+								</div>
+								<img src="/img/uploads/users/{{this.image.name}}" class="card-img-top add-avata" alt="...">
+								<div class="card-body">
+									<a href="#" class="text-decoration-none" data-bs-toggle="modal" data-detail-id="{{this._id}}" data-detail-img="{{this.image.name}}" data-detail-first-name="{{this.firstName}}"
+										data-detail-last-name="{{this.lastName}}" data-detail-birth="{{this.birth}}" data-detail-gender="{{this.gender}}" data-detail-phone="{{this.phone}}" data-detail-email="{{this.email}}"
+										data-detail-address="{{this.address}}" data-detail-department="{{this.department}}" data-detail-position="{{this.position}}" data-detail-description="{{this.description}}"
+										data-detail-account="{{this.account}}" data-detail-password="{{this.this.password}}" data-detail-role="{{this.role}}" data-bs-target="#detail-user" title="{{this._id}}">
+										<h5 class="card-title">{{this.firstName}} {{this.lastName}}</h5>
+									</a>
+									<p class="none-mb"><strong>Phòng ban: </strong>{{this.department}}</p>
+									<p class="none-mb"><strong>Chức vụ: </strong>{{this.position}}</p>
+									{{!-- <label><strong>Mô tả: </strong></label>
+									<p class="text-wrap none-mb">{{this.description}}</p> --}}
+								</div>
+								<div class="card-footer">
+									<div class="row">
+										<button type="button" class="btn btn-info mb-1" data-bs-toggle="modal" data-edit-img="{{this.image.name}}" data-id="{{this._id}}" data-first-name="{{this.firstName}}"
 											data-last-name="{{this.lastName}}" data-birth="{{this.birth}}" data-gender="{{this.gender}}" data-phone="{{this.phone}}" data-email="{{this.email}}"
 											data-address="{{this.address}}" data-department="{{this.department}}" data-position="{{this.position}}" data-description="{{this.description}}"
-											data-account="{{this.account}}" data-password="{{this.this.password}}" data-role="{{this.role}}" data-bs-target="#edit-user">Sửa</button>
-										<button class="btn btn-outline-danger btn-sm">Xóa</button>
-									</td>
-								</tr>
-								{{/each}}
-							</tbody>
-						</table>
+											data-account="{{this.account}}" data-password="{{this.this.password}}" data-role="{{this.role}}" data-bs-target="#edit-user">
+											Sửa
+										</button>
+										<button class="btn btn-danger">Xóa</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						{{/each}}
 					</div>
 				</div>
 			</div>
@@ -76,37 +75,66 @@
 
 		<!-- Modal Details User -->
 		<div class="modal fade" id="detail-user" tabindex="-1" aria-labelledby="detailUser" aria-hidden="true">
-			<div class="modal-dialog modal-lg">
+			<div class="modal-dialog modal-xl">
 				<div class="modal-content">
 					<div class="modal-header bg-info text-light">
 						<h5 class="modal-title" id="detailUser">Thông tin chi tiết</h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
-					<div class="modal-body bg-dark">
-						<div class="row">
-							<div class="col-xl-8">
-								<ul class="list-group">
-									<li class="list-group-item bg-dark text-green border-green">
-										<h3 class="font-monospace" id="detail-firstLastName">{{this.firstName}} {{this.lastName}}</h3>
-										<p class="font-monospace" id="detail-birth" for="detail-birth">{{this.birth}}</p>
-										<p class="font-monospace" id="detail-gender">{{this.gender}}</p>
-										<p class="font-monospace" id="detail-phone">{{this.phone}}</p>
-										<p class="font-monospace" id="detail-email">{{this.email}}</p>
-										<p class="font-monospace" id="detail-address">{{this.address}}</p>
-										<p class="font-monospace" id="detail-department">{{this.department}}</p>
-										<p class="font-monospace" id="detail-position">{{this.position}}</p>
-										<label class="font-monospace">Mô tả:</label>
-										<textarea id="detail-description" class="form-control font-monospace bg-dark text-green border-green mb-3" rows="6" disabled>{{this.description}}</textarea>
-									</li>
-								</ul>    
+					<div class="card">
+						<div class="row g-0">
+							<div class="col-md-4 text-center">
+							<img id="detail-avt" class="img-fluid rounded-start" alt="...">
 							</div>
-							<div class="col-xl-4">
-								<img id="detail-avt" class="rounded mx-auto d-block add-avata" alt="...">
-								<p class="font-monospace text-green mt-3" id="detail-account">{{this.account}}</p>
-								<p class="font-monospace text-green" id="detail-role">{{this.role}}</p>
+							<div class="col-md-8">
+								<div class="card-body">
+									<h3 class="none-mb" id="detail-firstLastName"></h3>
+									<p class="none-mb" id="detail-birth" for="detail-birth"></p>
+									<p class="none-mb" id="detail-gender"></p>
+									<p class="none-mb" id="detail-phone"></p>
+									<p class="none-mb" id="detail-email"></p>
+									<p class="none-mb" id="detail-address"></p>
+									<p class="none-mb" id="detail-department"></p>
+									<p class="none-mb" id="detail-position"></p>
+									<p class="none-mb" id="detail-account"></p>
+									<p class="none-mb" id="detail-role"></p>
+									<label class="">Mô tả:</label>
+									<textarea id="detail-description" class="form-control mb-2" rows="6" disabled></textarea>
+								</div>
 							</div>
 						</div>
 					</div>
+					{{!-- <div class="modal-header bg-info text-light">
+						<h5 class="modal-title" id="detailUser">Thông tin chi tiết</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body bg-dark">
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-xl-9 col-lg-8">
+									<ul class="list-group">
+										<li class="list-group-item bg-dark text-green border-green">
+											<h3 class="" id="detail-firstLastName">{{this.firstName}} {{this.lastName}}</h3>
+											<p class="" id="detail-birth" for="detail-birth">{{this.birth}}</p>
+											<p class="" id="detail-gender">{{this.gender}}</p>
+											<p class="" id="detail-phone">{{this.phone}}</p>
+											<p class="" id="detail-email">{{this.email}}</p>
+											<p class="" id="detail-address">{{this.address}}</p>
+											<p class="" id="detail-department">{{this.department}}</p>
+											<p class="" id="detail-position">{{this.position}}</p>
+											<label class="">Mô tả:</label>
+											<textarea id="detail-description" class="form-control  bg-dark text-green border-green mb-3" rows="6" disabled>{{this.description}}</textarea>
+										</li>
+									</ul>    
+								</div>
+								<div class="col-xl-3 col-lg-4">
+									<img id="detail-avt" class="rounded mx-auto d-block add-avata" alt="...">
+									<p class=" text-green mt-3 text-center-sm" id="detail-account">{{this.account}}</p>
+									<p class=" text-green text-center-sm" id="detail-role">{{this.role}}</p>
+								</div>
+							</div>
+						</div>
+					</div> --}}
 				</div>
 			</div>
 		</div>
@@ -121,8 +149,15 @@
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<form method="POST" id="create-user-form" class="row" enctype="multipart/form-data">
-							<div class="col-xl-8">
+						<form method="POST" action="/root/user" id="create-user-form" class="row" enctype="multipart/form-data">
+							<div class="mt-3 text-center mb-3">
+								<img src="/img/user-icon.png" id="add-avt" class="rounded mx-auto d-block add-avata" alt="...">
+								<label for="create-img" class="label-avt btn btn-sm btn-primary mt-3">
+									<h6>Chọn ảnh đại diện</h6>
+								</label>
+								<input id="create-img" type="file" name="image" accept="image/png, image/gif, image/jpeg">
+							</div>
+							<div class="col-xl-8 mb-3">
 								<ul class="list-group">
 									<li class="list-group-item bg-info">
 										<div class="row">
@@ -195,14 +230,7 @@
 								</ul>
 							</div>
 							<div class="col-xl-4">
-								<img src="/img/user-icon.png" id="add-avt" class="rounded mx-auto d-block add-avata" alt="...">
-								<div class="mt-3 text-center">
-									<label for="create-img" class="label-avt btn btn-sm btn-primary">
-										<h6>Chọn ảnh đại diện</h6>
-									</label>
-									<input id="create-img" type="file" name="image">
-								</div>
-								<ul class="list-group mt-3">
+								<ul class="list-group">
 									<li class="list-group-item bg-danger text-light">
 										<div class="col-xl">
 											<label for="account" class="form-label"><h6>Tài khoản</h6></label>
@@ -244,8 +272,15 @@
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<form method="POST" id="edit-user-form" class="row" >
-							<div class="col-xl-8">
+						<form method="POST" id="edit-user-form" class="row" enctype="multipart/form-data">
+							<img src="/img/user-icon.png" id="edit-avt" class="rounded mx-auto d-block" alt="...">
+							<div class="mt-3 mb-3 text-center">
+								<label for="edit-img" class="label-avt btn btn-sm btn-primary">
+									<h6>Chọn ảnh đại diện</h6>
+								</label>
+								<input class="form-control" id="edit-img" type="file" name="image" accept="image/png, image/gif, image/jpeg">	
+							</div>
+							<div class="col-xl-8 mb-3">
 								<ul class="list-group">
 									<li class="list-group-item bg-info text-light">
 										<div class="row">
@@ -318,14 +353,7 @@
 								</ul>    
 							</div>
 							<div class="col-xl-4">
-								<img src="/img/user-icon.png" id="edit-avt" class="rounded mx-auto d-block add-avata" alt="...">
-								<div class="mt-3 text-center">
-									<label for="edit-img" class="label-avt btn btn-sm btn-primary">
-										<h6>Chọn ảnh đại diện</h6>
-									</label>
-									<input class="form-control form-control-sm" id="edit-img" type="file" name="image">	
-								</div>
-								<ul class="list-group mt-3">
+								<ul class="list-group">
 									<li class="list-group-item bg-danger text-light">
 										<div class="col-xl">
 											<label for="account" class="form-label"><h6>Tài khoản</h6></label>

@@ -5,7 +5,6 @@ const clc = require("cli-color");
     
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        console.log(clc.blueBright('app root', appRoot));
         cb(null, appRoot + '/src/public/img/uploads/users/');
     },
 

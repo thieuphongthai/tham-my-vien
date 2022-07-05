@@ -1,7 +1,6 @@
 const multer = require('multer');
 const path = require('path');
 const appRoot = require('app-root-path');
-const clc = require("cli-color");
     
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {

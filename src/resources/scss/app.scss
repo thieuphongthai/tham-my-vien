@@ -62,7 +62,7 @@ a{
     }
 
     .add-avata {
-        height: 50vw;
+        height: 50vmin;
         object-fit: cover;
     }
 }
@@ -258,7 +258,7 @@ a{
 
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 821px) and (max-width: 1280px) {
     #sidebar-wrapper {
         display: flex;
     }
@@ -270,7 +270,28 @@ a{
     }
     .add-avata {
         // width: 240px;
-        height: 50vh !important;
+        height: 20vmax !important;
+        object-fit: cover;
+    }
+
+    #detail-avt {
+        margin-top: 16px;
+    }
+}
+
+@media screen and (min-width: 1281px) {
+    #sidebar-wrapper {
+        display: flex;
+    }
+
+    .container-content-page {
+        max-height: 88vh !important;
+        overflow: auto;
+        
+    }
+    .add-avata {
+        // width: 240px;
+        height: 20vmax !important;
         object-fit: cover;
     }
 
@@ -282,6 +303,7 @@ a{
 @media screen and (max-width: 767px) {
 
     .add-avata {
+        height: 50vmax;
         object-fit: cover;
     }
 
@@ -289,9 +311,6 @@ a{
         max-height: 86vh !important;
         overflow: auto;
         // margin-bottom: 60px;
-    }
-    .add-avata {
-        object-fit: cover;
     }
 
     #sub-nav-sm {

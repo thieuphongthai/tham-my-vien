@@ -65,7 +65,7 @@ class RootController {
 
     // [POST] /user
 	postRootUserDashboard(req, res, next) {
-        
+        console.log('this is', req.file);
         if (req.file) {
             const user = new User({
                 firstName: req.body.firstName,
@@ -137,28 +137,35 @@ class RootController {
 
     // [PUT] /user
     putRootUser(req, res, next) {
-        console.log('req file in controllers', req.file);
-        console.log('req body in controllers', req.body);
-        User.updateOne({ _id: req.params.id }, {
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            birth: req.body.birth,
-            gender: req.body.gender,
-            phone: req.body.phone,
-            email: req.body.email,
-            address: req.body.address,
-            department: req.body. department,
-            position: req.body. position,
-            description: req.body.description,
-            password: bcrypt.hashSync(req.body.password, 8),
-            role: req.body.role,
-            image: {
-                name: req.file.filename,
-                url: req.file.path,
-            }
-        })
-            .then(() => res.redirect('/root/user'))
-            .catch(next);
+        console.log('req path', req.file.path);
+        if (req.file) {
+            User.updateOne({ _id: req.params.id }, {
+                firstName: req.body.filename,
+                lastName: req.body.lastName,
+                birth: req.body.birth,
+                gender: req.body.gender,
+                phone: req.body.phone,
+                email: req.body.email,
+                address: req.body.address,
+                department: req.body.department,
+                position: req.body.position,
+                description: req.body.description,
+                account: req.body.account,
+                password: bcrypt.hashSync(req.body.password, 8),
+                role: req.body.role,
+                image: {
+                    name: req.file.filename,
+                    url:  req.file.path,
+                },
+
+            })
+                .then(() => res.redirect('/root/user'))
+                .catch(next);
+        } else {
+            User.updateOne({ _id: req.params.id }, req.body)
+                .then(() => res.redirect('/root/user'))
+                .catch(next);
+        }
         // console.log((helpers.imageFilter(req.body)));
     }
      

@@ -10,6 +10,7 @@ const cors = require("cors");
 const cookieSession = require("cookie-session");
 const session = require('express-session');
 const flash = require('connect-flash');
+const bodyParser = require('body-parser');
 
 require("dotenv").config();
 
@@ -58,7 +59,7 @@ db.connect();
 app.use(express.static(path.join(__dirname, "public")));
 
 // Phân tích cú pháp yêu cầu của các loại nội dung
-app.use(express.urlencoded());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Xem những yêu cầu được ghi chép lại

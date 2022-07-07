@@ -1,0 +1,354 @@
+{{!-- <div class="row">
+    {{> page/sidebar/sales/sidebar-manager}} --}}
+    <div class="content ">
+        <nav class="navbar bg-info d-flex justify-content-between pr-3 pl-3">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-danger btn-storage">
+                <i class="ti-archive"></i> Kho lưu trữ
+            </button>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary btn-create" data-bs-toggle="modal"
+                data-bs-target="#exampleModal">
+                <i class="ti-plus"></i> Tạo người dùng
+            </button>
+        </nav>
+        <div class="container-fluid mt-3">
+            <div class="table-responsive mt-3">
+                <table id="user" class="table table-sm table-bordered align-middle">
+                    <thead class="table-info">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Họ tên</th>
+                            <th scope="col">Ngày sinh</th>
+                            <th scope="col">Giới tính</th>
+                            <th scope="col">Số điện thoại</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Địa chỉ</th>
+                            <th scope="col">Option</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each customers}}
+                        <tr class="info">
+                            <th scope="row">{{sum @index 1}}</th>
+                            <td>{{this.firstName}} {{this.middleName}} {{this.lastName}}</td>
+                            <td>{{this.birth}}</td>
+                            <td>{{this.gender}}</td>
+                            <td>0{{this.phone}}</td>
+                            <td>{{this.email}}</td>
+                            <td>{{this.address}}</td>
+                            <td class="text-center">
+                                <button class="btn btn-outline-info btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#updateModal" data-idd="{{this._id}}"
+                                    data-lastname="{{this.lastName}}" data-firstname="{{this.firstName}}"
+                                    data-birth="{{this.birth}}" data-gender="{{this.gender}}"
+                                    data-phone="{{this.phone}}" data-email="{{this.email}}"
+                                    data-address="{{this.address}}" data-derctipt="{{this.description}}">Sửa
+                                </button>
+                                <button class="btn btn-outline-danger btn-sm" data-id="{{this._id}}"
+                                    data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    {{!-- Modal Create --}}
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg bg-dark" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tạo khách hàng mới</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST">
+                        <div class="col-xl-12">
+                            <ul class="list-group">
+                                <li class="list-group-item bg-info">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label for="firstName" class="form-label">
+                                                <h6>Họ</h6>
+                                            </label>
+                                            <input type="text" class="form-control form-control-sm" id="firstName"
+                                                placeholder="Vd: Trần Văn" name="firstName"
+                                                title="Username should only contain lowercase letters. e.g. john"
+                                                required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="lastName" class="form-label">
+                                                <h6>Tên</h6>
+                                            </label>
+                                            <input type="text" class="form-control form-control-sm" id="lastName"
+                                                placeholder="Vd: Khánh" name="lastName" required>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-6">
+                                            <label for="birth" class="form-label">
+                                                <h6>Ngày sinh</h6>
+                                            </label>
+                                            <input type="date" class="form-control form-control-sm" id="birth"
+                                                aria-describedby="birthFeedback" name="birth" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="gender" class="form-label">
+                                                <h6>Giới tính</h6>
+                                            </label>
+                                            <select class="form-select form-select-sm"
+                                                aria-label=".form-select-sm example" name="gender">
+                                                <option value="" selected>-- Chọn giới tính --</option>
+                                                <option value="Nữ">Nữ</option>
+                                                <option value="Nam">Nam</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-6">
+                                            <label for="phone" class="form-label">
+                                                <h6>Số điện thoại</h6>
+                                            </label>
+                                            <input type="tel" class="form-control form-control-sm" id="phone"
+                                                placeholder="Vd: 0909888888" name="phone" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="email" class="form-label">
+                                                <h6>Email</h6>
+                                            </label>
+                                            <input type="email" class="form-control form-control-sm" id="email"
+                                                placeholder="Vd: tranvankhanh@gmail.com" name="email" required>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-12">
+                                            <label for="address" class="form-label">
+                                                <h6>Địa chỉ</h6>
+                                            </label>
+                                            <input type="text" class="form-control form-control-sm" id="address"
+                                                aria-describedby="addressFeedback" placeholder="Vd: 123 Đường số 10"
+                                                name="address" required>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-12 mb-3">
+                                            <label for="description" class="form-label">
+                                                <h6>Mô tả</h6>
+                                            </label>
+                                            <textarea class="form-control" id="description" rows="6"
+                                                placeholder="Mô tả khách hàng" name="description"></textarea>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                            <button type="submit" class="btn btn-primary">Lưu</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{!-- Modal Delete --}}
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Xóa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có đồng ý xóa không?
+                </div>
+                <div class="modal-footer">
+                    <button id="btn-delete" type="button" class="btn btn-danger">Có, chắc chắn</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Không</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form name="delete-form" method="POST"></form>
+    {{!-- Modal Update --}}
+    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateModalLabel">Thông tin khách hàng</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form name="update-form" id="update-form" method="POST">
+                        <div class="col-xl-12">
+                            <ul class="list-group">
+                                <li class="list-group-item bg-info">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label for="lastName" class="form-label">
+                                                <h6>Họ</h6>
+                                            </label>
+                                            <input type="text" class="form-control form-control-sm" id="updFirstName"
+                                               name="firstName" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="lastName" class="form-label">
+                                                <h6>Tên</h6>
+                                            </label>
+                                            <input type="text" class="form-control form-control-sm" id="updLastName"
+                                                name="lastName" required>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-6">
+                                            <label for="birth" class="form-label">
+                                                <h6>Ngày sinh</h6>
+                                            </label>
+                                            <input type="date" class="form-control form-control-sm" id="updBirth"
+                                                aria-describedby="birthFeedback" name="birth" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="gender" class="form-label">
+                                                <h6>Giới tính</h6>
+                                            </label>
+                                            <select class="form-select form-select-sm"
+                                                aria-label=".form-select-sm example" name="updGender" id="updGender">
+                                                <option value="Nam">Nam</option>
+                                                <option value="Nữ">Nữ</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-6">
+                                            <label for="phone" class="form-label">
+                                                <h6>Số điện thoại</h6>
+                                            </label>
+                                            <input type="tel" class="form-control form-control-sm" id="updPhone"
+                                                placeholder="Vd: 0909888888" name="phone" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="email" class="form-label">
+                                                <h6>Email</h6>
+                                            </label>
+                                            <input type="email" class="form-control form-control-sm" id="updEmail"
+                                                placeholder="Vd: tranvankhanh@gmail.com" name="email" required>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-12">
+                                            <label for="address" class="form-label">
+                                                <h6>Địa chỉ</h6>
+                                            </label>
+                                            <input type="text" class="form-control form-control-sm" id="updAddress"
+                                                aria-describedby="addressFeedback" placeholder="Vd: 123 Đường số 10"
+                                                name="address" required>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-12 mb-3">
+                                            <label for="description" class="form-label">
+                                                <h6>Mô tả</h6>
+                                            </label>
+                                            <textarea class="form-control" id="updDescription" rows="6"
+                                                placeholder="Mô tả khách hàng" name="description"></textarea>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                            <button id="btn-update" type="button" class="btn btn-primary">Lưu</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            $(document).ready(function () {
+                $('#user').DataTable({
+                    paginate: true,
+                    scrollY: 300,
+                    scrollX: 0
+                });
+            });
+
+            //DELETE
+            var id;
+            var btnDel = document.getElementById('btn-delete');
+            var delForm = document.forms['delete-form'];
+
+            $('#deleteModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                id = button.data('id');
+
+            })
+
+            btnDel.onclick = function () {
+                delForm.action = '/admin/customer/' + id + '?_method=DELETE';
+                delForm.submit();
+            }
+            //END DELETE
+
+            //UPDATE
+            var idd;
+            var btnUpd = document.getElementById('btn-update');
+            var updForm = document.forms['update-form'];
+
+            var updCustomer = document.getElementById("updateModal");
+            updCustomer.addEventListener("show.bs.modal", function (event) {
+                // Button that triggered the modal
+                var button = event.relatedTarget;
+                idd = button.getAttribute("data-idd");
+
+                // Get data from edit button
+                var firstName = button.getAttribute("data-firstname");
+                var lastName = button.getAttribute("data-lastname");
+                var birth = button.getAttribute("data-birth");
+                var gender = button.getAttribute("data-gender");
+                var phone = button.getAttribute("data-phone");
+                var email = button.getAttribute("data-email");
+                var address = button.getAttribute("data-address");
+                var decription = button.getAttribute("data-decript");
+
+                // Get element need embeded input
+                var updFirstName = document.getElementById("updFirstName");
+                var updLastName = document.getElementById("updLastName");
+                var updBirth = document.getElementById("updBirth");
+                var updGender = document.getElementById("updGender");
+                var updPhone = document.getElementById("updPhone");
+                var updEmail = document.getElementById("updEmail");
+                var updAddress = document.getElementById("updAddress");
+                var updDecript = document.getElementById("updDescription");
+
+                updFirstName.value = firstName;
+                updLastName.value = lastName;
+                updBirth.value = birth;
+                updGender.value = gender;
+                updPhone.value = 0 + phone;
+                updEmail.value = email;
+                updAddress.value = address;
+                updDescription.value = decription;
+            });
+            btnUpd.onclick = function () {
+                updForm.action = '/admin/' + idd + '?_method=PUT';
+                updForm.submit();
+            }
+            //END UPDATE
+        });
+
+
+
+    </script>

@@ -21,7 +21,7 @@ class AdminController {
   getAdminCustomer(req, res, next) {
     Customer.find({})
       .then(customers => {
-        res.render('admin/admin-customer', {
+        res.render('admin/customer/admin-customer', {
           customers: multipleMongooseToObject(customers)
         });
       })
@@ -35,14 +35,6 @@ class AdminController {
       .catch(next)
   }
 
-  editCustomer(req, res, next) {
-    Customer.findById(req.params.id)
-      .then(customer => res.render('admin/admin-customer', {
-        customer: mongooseToObject(customer)
-      }))
-      .catch(next);
-  }
-
   updateCustomer(req, res, next) {
     Customer.updateOne({ _id: req.params.id }, req.body)
       .then(() => res.redirect('back'))
@@ -50,6 +42,7 @@ class AdminController {
   }
 
   destroyCustomer(req, res, next){
+    console.log('customer', req.params.id)
     Customer.deleteOne({ _id: req.params.id })
       .then(() => res.redirect('back'))
       .catch(next);
@@ -60,7 +53,7 @@ class AdminController {
   getAdminUser(req, res, next) {
     Promise.all([User.find({}), Department.find({}), Position.find({}), Role.find({})])
       .then(([users, departments, positions, roles]) => {
-        res.render('admin/admin-user', {
+        res.render('admin/user/admin-user', {
           users: multipleMongooseToObject(users),
           departments: multipleMongooseToObject(departments),
           positions: multipleMongooseToObject(positions),
@@ -88,17 +81,9 @@ class AdminController {
       .catch(next)
   }
 
-  editUser(req, res, next) {
-    User.findById(req.params.id)
-      .then(user => res.render('admin/admin-useredit', {
-        user: mongooseToObject(user)
-      }))
-      .catch(next);
-  }
-
   updateUser(req, res, next) {
     User.updateOne({ _id: req.params.id }, req.body)
-      .then(() => res.redirect('/admin/user'))
+      .then(() => res.redirect('back'))
       .catch(next);
   }
 
@@ -113,7 +98,7 @@ class AdminController {
   getAdminDepartment(req, res, next) {
     Department.find({})
       .then(departments => {
-        res.render("admin/admin-department", {
+        res.render("admin/department/admin-department", {
           departments: multipleMongooseToObject(departments)
         });
       })
@@ -127,18 +112,16 @@ class AdminController {
       .catch(next)
   }
 
-  editDepartment(req, res, next) {
-    Department.findById(req.params.id)
-      .then(department => res.render('admin/admin-departmentedit', {
-        department: mongooseToObject(department)
-      }))
+  updateDepartment(req, res, next) {
+    Department.updateOne({ _id: req.params.id }, req.body)
+      .then(() => res.redirect('back'))
       .catch(next);
   }
 
-  updateDepartment(req, res, next) {
-    Department.updateOne({ _id: req.params.id }, req.body)
-      .then(() => res.redirect('/admin/department'))
-      .catch(next);
+  destroyDepartment(req, res, next){
+    Department.deleteOne({_id: req.params.id })
+      .then(() => res.redirect('back'))
+      .catch(next)
   }
 
 
@@ -148,7 +131,7 @@ class AdminController {
   getAdminAccount(req, res, next) {
     Promise.all([Account.find({}), User.find({}), Position.find({}), Role.find({})])
       .then(([accounts, users, positions, roles]) => {
-        res.render('admin/admin-account', {
+        res.render('admin/account/admin-account', {
           accounts: multipleMongooseToObject(accounts),
           users: multipleMongooseToObject(users),
           positions: multipleMongooseToObject(positions),
@@ -217,7 +200,7 @@ class AdminController {
   getAdminRole(req, res, next) {
     Role.find({})
       .then(roles => {
-        res.render("admin/admin-role", {
+        res.render("admin/role/admin-role", {
           roles: multipleMongooseToObject(roles)
         });
       })
@@ -229,7 +212,7 @@ class AdminController {
   getAdminPosition(req, res, next) {
     Position.find({})
       .then(positions => {
-        res.render("admin/admin-position", {
+        res.render("admin/position/admin-position", {
           positions: multipleMongooseToObject(positions)
         });
       })
@@ -263,7 +246,7 @@ class AdminController {
   getAdminServiceNote(req, res, next) {
     Promise.all([ServiceNote.find({}), Customer.find({}), User.find({}), Status.find({}), Service.find({})])
       .then(([serviceNotes, customers, users, status, services]) => {
-        res.render('admin/admin-service-note', {
+        res.render('admin/service-note/admin-service-note', {
           serviceNotes: multipleMongooseToObject(serviceNotes),
           customers: multipleMongooseToObject(customers),
           users: multipleMongooseToObject(users),

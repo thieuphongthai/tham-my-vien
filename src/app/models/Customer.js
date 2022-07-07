@@ -5,12 +5,12 @@ const Customer = new Schema({
 	firstName: String,
 	middleName: String,
 	lastName: String,
-	name: String,
 	birth: String,
 	gender: String,
 	phone: Number,
     email: String,
   	address: String,
+	description: String,
 	image: String
 }, {
 	timestamps: true

@@ -13,11 +13,10 @@
         </nav>
         <div class="container-fluid mt-3">
             <div class="table-responsive mt-3">
-                <table id="user" class="display nowrap order-column compact">
-                    <thead>
+                <table id="user" class="table table-sm table-bordered align-middle">
+                    <thead class="table-info">
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Mã người dùng</th>
                             <th scope="col">Họ tên</th>
                             <th scope="col">Ngày sinh</th>
                             <th scope="col">Giới tính</th>
@@ -33,7 +32,6 @@
                         {{#each users}}
                         <tr class="info">
                             <th scope="row" class="text-center">{{sum @index 1}}</th>
-                            <td>{{this._id}}</td>
                             <td>{{this.firstName}}{{this.middleName}} {{this.lastName}}</td>
                             <td>{{this.birth}}</td>
                             <td>{{this.gender}}</td>
@@ -44,7 +42,7 @@
                             <td>{{this.position}}</td>
                             <td class="text-center">
                                 <button class="btn btn-outline-info btn-sm">Sửa</button>
-                                <button class="btn btn-outline-danger btn-sm" data-id="{{this._id}}"
+                                <button class="btn btn-outline-danger btn-sm" data-id="{{this._id}}"data-
                                     data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
                             </td>
                         </tr>
@@ -239,7 +237,7 @@
             })
 
             btnDel.onclick = function () {
-                delForm.action = '/admin/' + id + '?_method=DELETE';
+                delForm.action = '/admin/user/' + id + '?_method=DELETE';
                 delForm.submit();
             }
             //END DELETE

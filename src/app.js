@@ -8,11 +8,26 @@ const route = require("./routes/routes");
 const db = require("./config/db/db");
 const cors = require("cors");
 const cookieSession = require("cookie-session");
-const bcrypt = require('bcryptjs');
+const session = require('express-session');
+const flash = require('connect-flash');
+const bodyParser = require('body-parser');
 
 require("dotenv").config();
 
-if (process.env.NODE_ENV !== "production") {
+// app.use(session({
+//     secret: 'maxbaormataj',
+//     saveUninitialized: true,
+//     resave: true
+// }));
+
+// app.use(flash());
+
+// app.use(function(req, res, next){
+//     res.locals.message = req.flash();
+//     next();
+// });
+
+if (`${process.env.NODE_ENV}` !== "production") {
 	require("dotenv").config();
 }
 
@@ -44,7 +59,7 @@ db.connect();
 app.use(express.static(path.join(__dirname, "public")));
 
 // Phân tích cú pháp yêu cầu của các loại nội dung
-app.use(express.urlencoded());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Xem những yêu cầu được ghi chép lại
@@ -59,7 +74,6 @@ app.engine(
 			sum: (a, b) => a + b,
 			cutString: (str, num) => {
 				var newStr = str.toString();
-				console.log(newStr.length)
 				return newStr.length > num ?  "..." + newStr.slice(num, newStr.length) : newStr;
 			},
 			cutPassword: (str, num) => {
@@ -88,6 +102,6 @@ app.use(function (req, res, next) {
 // Khởi tạo các tuyến đường
 route(app);
 
-app.listen(process.env.PORT, () => {
+app.listen(`${process.env.PORT}`, () => {
 	console.log(`Ứng dụng đang chạy trên port ${process.env.PORT}`);
 });

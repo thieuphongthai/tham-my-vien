@@ -4,8 +4,10 @@ const User = require('../models/User');
 const Department = require('../models/Department');
 const Position = require('../models/Position');
 const { multipleMongooseToObject, mongooseToObject } = require('../../util/mongoose');
-// const { multipleMongooseToObject } = require('../../util/mongoose');
-var bcrypt = require("bcryptjs");
+const bcrypt = require("bcryptjs");
+const multer = require('multer');
+const uploadAvatar = multer().single('image');
+const helpers = require('../../middleware/helpers');
 
 
 class RootController {
@@ -19,6 +21,7 @@ class RootController {
 	}
 
     getRootDashboard(req, res, next) {
+        // req.flash('message', 'Welcome to Blog');
 		res.render("root/root-dashboard");
     }
 
@@ -46,8 +49,6 @@ class RootController {
 		res.render("root/root-service-note");
     }
 
-
-
 	// [GET] /user
     getRootUserDashboard(req, res, next) {
 		Promise.all([User.find({}), Department.find({}), Position.find({}), Role.find({})])
@@ -64,37 +65,109 @@ class RootController {
 
     // [POST] /user
 	postRootUserDashboard(req, res, next) {
-        console.log(req.body);
-        const user = new User({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            birth: req.body.birth,
-            gender: req.body.gender,
-            phone: req.body.phone,
-            email: req.body.email,
-            address: req.body.address,
-            department: req.body.department,
-            position: req.body.position,
-            description: req.body.description,
-            account: req.body.account,
-            password: bcrypt.hashSync(req.body.password, 8),
-            role: req.body.role
-        });
-        User.findOne({ account: req.body.account })
-            .then(account => {
-                if (!account) {
-                    user.save();
-                    res.redirect('user');
-                    return;
-                } else {
-                    user.account = user.account + Math.floor(Math.random() * 100)
-                    user.save();
-                    res.redirect('user');
-                    return;
-                }
-            })
-            .catch(next);
+        console.log('this is', req.file);
+        if (req.file) {
+            const user = new User({
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                birth: req.body.birth,
+                gender: req.body.gender,
+                phone: req.body.phone,
+                email: req.body.email,
+                address: req.body.address,
+                department: req.body.department,
+                position: req.body.position,
+                description: req.body.description,
+                account: req.body.account,
+                password: bcrypt.hashSync(req.body.password, 8),
+                role: req.body.role,
+                image: {
+                    name: req.file.filename,
+                    url:  req.file.path,
+                },
+            });
+            User.findOne({ account: req.body.account })
+                .then(account => {
+                    if (!account) {
+                        user.save();
+                        res.redirect('user');
+                        return;
+                    } else {
+                        user.account = user.account + Math.floor(Math.random() * 100)
+                        user.save();
+                    }
+                })
+                .catch(next);
+        } else {
+            const user = new User({
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                birth: req.body.birth,
+                gender: req.body.gender,
+                phone: req.body.phone,
+                email: req.body.email,
+                address: req.body.address,
+                department: req.body.department,
+                position: req.body.position,
+                description: req.body.description,
+                account: req.body.account,
+                password: bcrypt.hashSync(req.body.password, 8),
+                role: req.body.role,
+                image: {
+                    name: '',
+                    url:  '',
+                },
+            });
+            User.findOne({ account: req.body.account })
+                .then(account => {
+                    if (!account) {
+                        user.save();
+                        res.redirect('user');
+                        return;
+                    } else {
+                        user.account = user.account + Math.floor(Math.random() * 100)
+                        user.save();
+                    }
+                })
+                .catch(next);
+        }
+        res.redirect('user');
+        return;
 	}
+
+    // [PUT] /user
+    putRootUser(req, res, next) {
+        console.log('req path', req.file.path);
+        if (req.file) {
+            User.updateOne({ _id: req.params.id }, {
+                firstName: req.body.filename,
+                lastName: req.body.lastName,
+                birth: req.body.birth,
+                gender: req.body.gender,
+                phone: req.body.phone,
+                email: req.body.email,
+                address: req.body.address,
+                department: req.body.department,
+                position: req.body.position,
+                description: req.body.description,
+                account: req.body.account,
+                password: bcrypt.hashSync(req.body.password, 8),
+                role: req.body.role,
+                image: {
+                    name: req.file.filename,
+                    url:  req.file.path,
+                },
+
+            })
+                .then(() => res.redirect('/root/user'))
+                .catch(next);
+        } else {
+            User.updateOne({ _id: req.params.id }, req.body)
+                .then(() => res.redirect('/root/user'))
+                .catch(next);
+        }
+        // console.log((helpers.imageFilter(req.body)));
+    }
      
 	// [POST] /account
     postRootAccountDashboard(req, res, next) {

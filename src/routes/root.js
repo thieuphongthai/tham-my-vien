@@ -4,6 +4,9 @@ const AuthController = require('../app/controllers/AuthController');
 const RootController = require('../app/controllers/RootController');
 const verifyRegister = require('../middleware/VerifyRegister');
 const authJwt = require("../middleware/authJwt");
+const validateUploadImage = require('../middleware/validateUploadImage');
+// const session = require('express-session');
+// const flash = require('connect-flash');
 
 /* -----------------------------------------Quản lý Operating-room Start-------------------------------------------------- */
 
@@ -43,13 +46,16 @@ router.get('/marketing', RootController.getRootMarketingDashboard);
 /* -----------------------------------------Quản lý User Start-------------------------------------------------- */
 
 // [GET] Root User UI
+
+
+// [GET] Root User UI
 router.get('/user', RootController.getRootUserDashboard);
 
-// [POST] Root User UI
-router.post('/user', RootController.postRootUserDashboard);
+// [POST] Root Create User UI
+router.post('/user', validateUploadImage.upload, RootController.postRootUserDashboard);
 
 // [PUT] Root User UI
-// router.put('/user/:id', RootController.getRootUserCreateDashboard)
+router.put('/user/:id', validateUploadImage.upload, RootController.putRootUser)
 
 // [DELETE] Root User UI
 // router.delete('/user/:id', RootController.deleteRootUserDashboard);
@@ -130,7 +136,7 @@ router.get('/status', RootController.getRootStatusDashboard);
 // [GET] Root Dashboard UI
 router.get('/dashboard', RootController.getRootDashboard);
 router.post('/', AuthController.postLogin);
-router.get('/', AuthController.getRootLogin);
+router.get('/',  AuthController.getRootLogin);
 
 
 module.exports = router;

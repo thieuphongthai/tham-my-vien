@@ -10,6 +10,11 @@
 		<div class="d-flex" id="wrapper">
 			{{> page/sidebar/admin/sidebar-admin}}
 			<div id="page-content-wrapper">
+				{{#if message}}
+				<div class="alert alert-{{message.type}}" role="alert">
+					{{message.intro}}{{message.message}}
+				</div>
+				{{/if}}
 				<nav id="sub-nav-lg" class="navbar navbar-light" style="background-color: #e3f2fd;">
 					<!-- Navbar content -->
 					<button type="button" class="btn btn-danger btn-storage">
@@ -41,7 +46,11 @@
 										<input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
 									</div>
 								</div>
+								{{#if this.image.name}}
 								<img src="/img/uploads/users/{{this.image.name}}" class="card-img-top add-avata" alt="...">
+								{{else}}
+								<img src="/img/user-icon.png" class="card-img-top add-avata" alt="...">
+								{{/if}}
 								<div class="card-body">
 									<a href="#" class="text-decoration-none" data-bs-toggle="modal" data-detail-id="{{this._id}}" data-detail-img="{{this.image.name}}" data-detail-first-name="{{this.firstName}}"
 										data-detail-last-name="{{this.lastName}}" data-detail-birth="{{this.birth}}" data-detail-gender="{{this.gender}}" data-detail-phone="{{this.phone}}" data-detail-email="{{this.email}}"
@@ -51,8 +60,6 @@
 									</a>
 									<p class="none-mb"><strong>Phòng ban: </strong>{{this.department}}</p>
 									<p class="none-mb"><strong>Chức vụ: </strong>{{this.position}}</p>
-									{{!-- <label><strong>Mô tả: </strong></label>
-									<p class="text-wrap none-mb">{{this.description}}</p> --}}
 								</div>
 								<div class="card-footer">
 									<div class="row">
@@ -104,37 +111,6 @@
 							</div>
 						</div>
 					</div>
-					{{!-- <div class="modal-header bg-info text-light">
-						<h5 class="modal-title" id="detailUser">Thông tin chi tiết</h5>
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-					</div>
-					<div class="modal-body bg-dark">
-						<div class="container-fluid">
-							<div class="row">
-								<div class="col-xl-9 col-lg-8">
-									<ul class="list-group">
-										<li class="list-group-item bg-dark text-green border-green">
-											<h3 class="" id="detail-firstLastName">{{this.firstName}} {{this.lastName}}</h3>
-											<p class="" id="detail-birth" for="detail-birth">{{this.birth}}</p>
-											<p class="" id="detail-gender">{{this.gender}}</p>
-											<p class="" id="detail-phone">{{this.phone}}</p>
-											<p class="" id="detail-email">{{this.email}}</p>
-											<p class="" id="detail-address">{{this.address}}</p>
-											<p class="" id="detail-department">{{this.department}}</p>
-											<p class="" id="detail-position">{{this.position}}</p>
-											<label class="">Mô tả:</label>
-											<textarea id="detail-description" class="form-control  bg-dark text-green border-green mb-3" rows="6" disabled>{{this.description}}</textarea>
-										</li>
-									</ul>    
-								</div>
-								<div class="col-xl-3 col-lg-4">
-									<img id="detail-avt" class="rounded mx-auto d-block add-avata" alt="...">
-									<p class=" text-green mt-3 text-center-sm" id="detail-account">{{this.account}}</p>
-									<p class=" text-green text-center-sm" id="detail-role">{{this.role}}</p>
-								</div>
-							</div>
-						</div>
-					</div> --}}
 				</div>
 			</div>
 		</div>
@@ -163,11 +139,11 @@
 										<div class="row">
 											<div class="col-md-6">
 												<label for="firstName" class="form-label"><h6>Họ</h6></label>
-												<input type="text" class="form-control form-control-sm" id="firstName" pattern="[a-z]{1,15}"  placeholder="Vd: Trần Văn" name="firstName" title="Username should only contain lowercase letters. e.g. john" required>
+												<input type="text" class="form-control form-control-sm firstName" id="firstName" pattern="[a-z]{1,15}"  placeholder="Vd: Trần Văn" name="firstName" title="Username should only contain lowercase letters. e.g. john" autofocus required>
 											</div>
 											<div class="col-md-6">
 												<label for="lastName" class="form-label"><h6>Tên</h6></label>
-												<input type="text" class="form-control form-control-sm" id="lastName" placeholder="Vd: Khánh" name="lastName" required>
+												<input type="text" class="form-control form-control-sm lastName" id="lastName" placeholder="Vd: Khánh" name="lastName" required>
 											</div>
 										</div>
 										<div class="row mt-3">
@@ -234,7 +210,7 @@
 									<li class="list-group-item bg-danger text-light">
 										<div class="col-xl">
 											<label for="account" class="form-label"><h6>Tài khoản</h6></label>
-											<input type="text" class="form-control form-control-sm" id="account" name="account" required>
+											<input type="text" class="form-control form-control-sm account" id="account" name="account" required>
 										</div>
 										<div class="col-xl mt-3">
 											<label for="password" class="form-label"><h6>Mật khẩu</h6></label>
@@ -286,11 +262,11 @@
 										<div class="row">
 											<div class="col-md-6">
 												<label for="firstName" class="form-label"><h6>Họ</h6></label>
-												<input type="text" class="form-control form-control-sm" data-bs-focus="focus" id="edit-firstName" name="firstName" required>
+												<input type="text" class="form-control form-control-sm firstName" data-bs-focus="focus" id="edit-firstName" name="firstName" disabled>
 											</div>
 											<div class="col-md-6">
 												<label for="lastName" class="form-label"><h6>Tên</h6></label>
-												<input type="text" class="form-control form-control-sm" id="edit-lastName" name="lastName" required>
+												<input type="text" class="form-control form-control-sm lastName" id="edit-lastName" name="lastName" disabled>
 											</div>
 										</div>
 										<div class="row mt-3">
@@ -357,7 +333,7 @@
 									<li class="list-group-item bg-danger text-light">
 										<div class="col-xl">
 											<label for="account" class="form-label"><h6>Tài khoản</h6></label>
-											<input type="text" class="form-control form-control-sm" id="edit-account" value="{{this.account}}" name="account" disabled>
+											<input type="text" class="form-control form-control-sm account" id="edit-account" value="{{this.account}}" name="account" disabled>
 										</div>
 										<div class="col-xl mt-3">
 											<label for="password" class="form-label"><h6>Mật khẩu</h6></label>

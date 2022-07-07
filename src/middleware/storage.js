@@ -9,6 +9,7 @@ const storage = multer.diskStorage({
 
     // By default, multer removes file extensions so let's add them back
     filename: function(req, file, cb) {
+        // console.log('tên file',)
         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
     }
 });

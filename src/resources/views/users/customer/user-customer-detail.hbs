@@ -2,69 +2,81 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý người dùng</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Quản lý người dùng</title>
 </head>
 
 <body>
-    <div class="d-flex" id="wrapper">
-        {{> page/sidebar/sales/sidebar-staff}}
-        <div id="page-content-wrapper">
-            <div class="container-fluid mt-3 ">
-                <div class="table-responsive row mt-3">
-                    <div class="mt-3 text-center col-xl-4 mb-3">
-                        <img src="/img/user-icon.png" id="add-avt" class="rounded mx-auto d-block add-avata" alt="...">
-                        <label for="create-img" class="label-avt btn btn-sm btn-primary mt-3">
-                            <h6>Chọn ảnh đại diện</h6>
-                        </label>
-                        <input id="create-img" type="file" name="image" accept="image/png, image/gif, image/jpeg">
-                    </div>
-                    <div class="col-xl-4 mb-3">
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h3 class="none-mb">{{customer.firstName}} {{customer.lastName}}</h3>
-                                <p class="none-mb" value="" for="detail-birth">{{customer.birth}}</p>
-                                <p class="none-mb" value="">{{customer.gender}}</p>
-                                <p class="none-mb" value="">{{customer.phone}}</p>
-                                <p class="none-mb" value="">{{customer.email}}</p>
-                                <p class="none-mb" value="">{{customer.address}}</p>
-                                <p class="none-mb" value="">{{customer.description}}</p>
-                                <label class="">Mô tả:</label>
-                                <textarea id="detail-description" class="form-control mb-2" rows="6"
-                                    disabled></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4">
-                        <ul class="list-group">
-                            <li class="list-group-item bg-danger text-light">
-
-                                {{#each customer.comments}}
-                                <p class="none-mb comment-content" value="">{{this.comment}}</p>
-                                <p class="none-mb comment-createdAt" value="{{this.createdAt}}">{{this.createdAt}}</p>
-
-    {{/each}}
-                                <form method="POST">
-                                    <div class="col-xl">
-                                        <label for="account" class="form-label">
-                                            <h6>Hoạt động</h6>
-                                        </label>
-                                        <input type="text" class="form-control form-control-sm" id="comments"
-                                            name="comments" required>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Đóng</button>
-                                        <button type="submit" class="btn btn-primary">Lưu</button>
-                                    </div>
-                                </form>
-
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="d-flex" id="wrapper">
+		{{> page/sidebar/sales/sidebar-staff}}
+		<div id="page-content-wrapper">
+			<nav id="sub-nav-lg" class="navbar navbar-light" style="background-color: #e3f2fd;">
+				<!-- Navbar content -->
+				<button type="button" class="btn btn-danger btn-storage">
+					<i class="ti-archive"></i> Kho lưu trữ
+				</button>
+				<!-- Button trigger modal -->
+				<button type="button" class="btn btn-primary btn-create" data-bs-toggle="modal"
+					data-bs-target="#create-user">
+					<i class="ti-plus"></i> Tạo người dùng
+				</button>
+			</nav>
+			<nav id="sub-nav-sm" class="navbar navbar-light d-flex justify-content-between"
+				style="background-color: #e3f2fd;">
+				<!-- Navbar content -->
+				<button type="button" class="btn btn-danger btn-storage">
+					<i class="ti-archive"></i>
+				</button>
+				<!-- Button trigger modal -->
+				<button type="button" class="btn btn-primary btn-create" data-bs-toggle="modal"
+					data-bs-target="#create-user">
+					<i class="ti-plus"></i>
+				</button>
+			</nav>
+			<div class="container-fluid container-content-page">
+				<div class="row mt-3">
+					<div class="text-center col-xl-3 mb-3">
+						<img src="/img/user-icon.png" id="add-avt" class="rounded mx-auto d-block add-avata" alt="...">
+						<div class="card-body">
+							<h3 class="none-mb">{{customer.firstName}} {{customer.lastName}}</h3>
+							<p class="none-mb" value="" for="detail-birth"><strong>Ngày sinh:
+								</strong>{{customer.birth}}</p>
+							<p class="none-mb" value=""><strong>Giới tính: </strong>{{customer.gender}}</p>
+							<p class="none-mb" value=""><strong>Điện thoại: </strong>{{customer.phone}}</p>
+							<p class="none-mb" value=""><strong>Email: </strong>{{customer.email}}</p>
+							<p class="none-mb" value=""><strong>Địa chỉ: </strong>{{customer.address}}</p>
+							<label class=""><strong>Mô tả:</strong></label>
+							<textarea id="detail-description" class="form-control mb-2" rows="6"
+								disabled>{{customer.description}}</textarea>
+						</div>
+					</div>
+					<div class="col-xl-9">
+						<ul class="list-group comment-content-page border">
+							{{#each customer.comments}}
+							<li class="list-group-item bg-light">
+								<p id="createdAt" class="none-mb comment-createdAt"><strong>{{formatDate
+										this.createdAt}}</strong></p>
+								<br>
+								<p class="none-mb comment-content" value="">{{this.comment}}</p>
+							</li>
+							{{/each}}
+						</ul>
+						<form method="POST">
+							<div class="col-xl mt-3">
+								<label for="account" class="form-label">
+									<h6>Hoạt động</h6>
+								</label>
+								<input type="text" class="form-control form-control-sm" id="comments" name="comments"
+									required>
+							</div>
+							<div class="modal-footer">
+								<button type="submit" class="btn btn-primary">Lưu</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

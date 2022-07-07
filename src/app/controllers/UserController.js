@@ -39,14 +39,16 @@ class UserController {
 				let commnetArray = customer.comments;
 				commnetArray.forEach(element => {
 					var date = new Date(element.createdAt);
-					var d = date.getDate();
-					var m = date.getMonth()+1;
-					console.log('day', d)
-					console.log('month', m)
+					// var d = date.getDate();
+					// var m = date.getMonth()+1;
+					var newDate = date.toLocaleString('en-GB', {day:'numeric', month: 'numeric', year:'numeric'})
+					console.log('day', newDate)
+					return newDate;
+					// console.log('month', m)
 				})
-				// res.render('users/customer/user-customer-detail', {
-				// 	customer: mongooseToObject(customer)
-				// });
+				res.render('users/customer/user-customer-detail', {
+					customer: mongooseToObject(customer),
+				});
 			})
 			.catch(next);
 	}

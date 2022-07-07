@@ -12,8 +12,8 @@ html{
 
 body {
     overflow: hidden;
-    // width: 100vw;
-    min-height: 100%;
+    // // width: 100vw;
+    // min-height: 100%;
 }
 
 textarea {
@@ -64,6 +64,10 @@ a{
     .add-avata {
         height: 50vmin;
         object-fit: cover;
+    }
+    .container-content-page {
+        max-height: 90vh;
+        overflow: auto;
     }
 }
 
@@ -264,7 +268,7 @@ a{
     }
 
     .container-content-page {
-        max-height: 88vh !important;
+        // max-height: 88vh !important;
         overflow: auto;
         
     }
@@ -280,12 +284,9 @@ a{
 }
 
 @media screen and (min-width: 1281px) {
-    #sidebar-wrapper {
-        display: flex;
-    }
 
     .container-content-page {
-        max-height: 88vh !important;
+        // max-height: 88vh !important;
         overflow: auto;
         
     }
@@ -303,14 +304,14 @@ a{
 @media screen and (max-width: 767px) {
 
     .add-avata {
-        height: 50vmax;
+        width: inherit;
+        height: 43vmax;
         object-fit: cover;
     }
 
     .container-content-page {
         max-height: 86vh !important;
         overflow: auto;
-        // margin-bottom: 60px;
     }
 
     #sub-nav-sm {
@@ -354,7 +355,12 @@ a{
 }
 
 .container-content-page {
-    max-height: 90vh;
+    max-height: 100vh;
+    overflow: auto;
+}
+
+.comment-content-page {
+    max-height: 65vh;
     overflow: auto;
 }
 

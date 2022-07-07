@@ -1,12 +1,3 @@
-// let sidebarBtn = document.querySelector("#sidebarToggleBtn");
-// let sidebar = document.querySelector("#sidebar-wrapper");
-
-// sidebarBtn.onclick = function () {
-// 	sidebar.classList.toggle("active");
-// 	sidebarBtn.classList.toggle("rotate");
-// };
-
-
 // Handle create info user
 var create = document.getElementById("create");
 var createUserForm = document.forms["create-user-form"];
@@ -61,7 +52,7 @@ function convert_vi_to_en(str) {
 	return str;
 }
 
-// Handle insert first-name and last-name to account
+// Handle insert first-name and last-name to account in create modal
 var inputFirstName = document.getElementById("firstName");
 var inputLastName = document.getElementById("lastName");
 var inputAccount = document.getElementById("account");
@@ -71,7 +62,7 @@ inputFirstName.addEventListener("input", () => {
 	firstNameValue = convert_vi_to_en(inputFirstName.value).split(" ");
 	var a;
 	var b = "";
-	firstNameValue.forEach((element, index) => {
+	firstNameValue.forEach((element) => {
 		a = element.split("", 1);
 		b += a;
 	});
@@ -83,6 +74,30 @@ inputFirstName.addEventListener("input", () => {
 		inputAccount.setAttribute("value", lastNameValue + b.toLowerCase());
 	});
 });
+
+// Handle insert first-name and last-name to account in edit modal
+var inputEditFirstName = document.getElementById("edit-firstName");
+var inputEditLastName = document.getElementById("edit-lastName");
+var inputEditAccount = document.getElementById("edit-account");
+var editFirstNameValue;
+var editLastNameValue;
+inputEditFirstName.addEventListener("input", () => {
+	editFirstNameValue = convert_vi_to_en(inputEditFirstName.value).split(" ");
+	var a;
+	var b = "";
+	editFirstNameValue.forEach((element) => {
+		a = element.split("", 1);
+		b += a;
+	});
+	inputEditLastName.addEventListener("input", () => {
+		editLastNameValue = convert_vi_to_en(inputEditLastName.value)
+			.split(" ")
+			.join("")
+			.toLowerCase();
+		inputEditAccount.setAttribute("value", editLastNameValue + b.toLowerCase());
+	});
+});
+
 
 // Handle push data to edit modal
 var editUser = document.getElementById("edit-user");
@@ -122,8 +137,10 @@ editUser.addEventListener("show.bs.modal", function (event) {
 	var editPassword = document.getElementById("edit-password");
 	var editRole = document.getElementById("edit-role");
 
+	editFirstName.focus();
+
 	if (imageEdit === '') {
-		editAvt.setAttribute('src', '/img//user-icon.png');
+		editAvt.setAttribute('src', '/img/user-icon.png');
 	} else {
 		editAvt.setAttribute('src', '/img/uploads/users/' + imageEdit);
 	}

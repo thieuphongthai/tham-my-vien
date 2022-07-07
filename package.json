@@ -24,6 +24,7 @@
     "cli-color": "^2.0.2",
     "cloudinary": "^1.30.0",
     "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.6",
     "cookie-session": "^2.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",

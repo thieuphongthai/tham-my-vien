@@ -11,21 +11,9 @@ const cookieSession = require("cookie-session");
 const session = require('express-session');
 const flash = require('connect-flash');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 
 require("dotenv").config();
-
-// app.use(session({
-//     secret: 'maxbaormataj',
-//     saveUninitialized: true,
-//     resave: true
-// }));
-
-// app.use(flash());
-
-// app.use(function(req, res, next){
-//     res.locals.message = req.flash();
-//     next();
-// });
 
 if (`${process.env.NODE_ENV}` !== "production") {
 	require("dotenv").config();
@@ -52,6 +40,24 @@ app.use(
 	})
 );
 
+app.use(cookieParser('secret'));
+
+app.use(session({
+	cookie: { maxAge: 5000 },
+    secret: process.env.FLASH_SESSION_KEY,
+    saveUninitialized: false,
+    resave: false
+}));
+
+app.use(flash());
+
+app.use(function(req, res, next){
+    res.locals.message = req.session.message;
+	delete req.session.messages
+    next();
+});
+
+
 // Kết nối tới cơ sở dữ liệu
 db.connect();
 
@@ -60,7 +66,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Phân tích cú pháp yêu cầu của các loại nội dung
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(bodyParser.json());
 
 // Xem những yêu cầu được ghi chép lại
 app.use(morgan("combined"));
@@ -81,6 +87,11 @@ app.engine(
 					return str.length > num ?  str.slice(0, num) + '...' : str;
 				}
 
+			},
+			formatDate: (d) => {
+				let date = new Date(d);
+				let newDate = date.toLocaleString('vi-VI', {weekday:"long", day:'numeric', month: 'numeric', year:'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric'});
+				return newDate;
 			}
 		},
 	})

@@ -8,10 +8,20 @@ const Customer = new Schema({
 	birth: String,
 	gender: String,
 	phone: Number,
-    email: String,
-  	address: String,
+	email: String,
+	address: String,
 	description: String,
-	image: String
+	image: String,
+	comments: [
+		{
+			type: new mongoose.Schema(
+				{
+					comment: String,
+				},
+				{ timestamps: true }
+			)
+		}
+	]
 }, {
 	timestamps: true
 });

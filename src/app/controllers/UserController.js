@@ -4,7 +4,7 @@ const Service = require('../models/Service');
 const ServiceNote = require('../models/ServiceNote');
 const Status = require('../models/Status');
 const Customer = require('../models/Customer');
-
+const Comment = require('../models/Comment');
 
 
 
@@ -14,8 +14,57 @@ const Customer = require('../models/Customer');
 class UserController {
 
 	getUserDashboard(req, res, next) {
+
 		res.render('users/user');
 	}
+
+	//BUSINESS
+	getBusinessDashboard(req, res, next) {
+		res.render('users/user')
+	}
+
+	getBusinessCustomer(req, res, next) {
+		Customer.find({})
+			.then(customers => {
+				res.render('users/customer/user-customer', {
+					customers: multipleMongooseToObject(customers)
+				});
+			})
+			.catch(next);
+	}
+
+	getOneBusinessCustomer(req, res, next) {
+		Customer.findById(req.params.id)
+			.then(customer => {
+				let commnetArray = customer.comments;
+				commnetArray.forEach(element => {
+					var date = new Date(element.createdAt);
+					var d = date.getDate();
+					var m = date.getMonth()+1;
+					console.log('day', d)
+					console.log('month', m)
+				})
+				// res.render('users/customer/user-customer-detail', {
+				// 	customer: mongooseToObject(customer)
+				// });
+			})
+			.catch(next);
+	}
+
+
+	createComment(req, res, next) {
+		Customer.findByIdAndUpdate({ _id: req.params.id }, {$push: {comments: {comment: req.body.comments}}})
+			.then(() => res.redirect('back'))
+			.catch(next);
+	}
+
+	// createComment(req, res, next) {
+	// 	const comment = new Comment(req.body);
+	// 	comment.save()
+	// 		.then(() => res.redirect('customer'))
+	// 		.catch(next)
+	// }
+	//END BUSINESS
 
 	//CUSTOMER
 	getUserCustomer(req, res, next) {

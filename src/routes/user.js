@@ -21,11 +21,6 @@ router.get('/service-note', UserController.getUserServiceNote)
 
 
 
-router.get("/marketing", marketingRouter.getMarketingDashboard);
-router.get("/business", businessRouter.getBusinessDashboard);
-router.get("/reception", receptionRouter.getReceptionDashboard);
-router.get("/operating-room", operatingRoomRouter.getDoctorDashboard);
-router.get("/human-resource", humanResourceRouter.getHRDashboard);
-router.get('/manager', managerRouter.getManagerDasboard)
+               
 
 module.exports = router;

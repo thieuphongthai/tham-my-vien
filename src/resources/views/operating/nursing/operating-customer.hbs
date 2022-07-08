@@ -10,7 +10,7 @@
 
 <body>
 	<div class="d-flex" id="wrapper">
-		{{> page/sidebar/sales/sidebar-staff}}
+		{{> page/sidebar/sales/sidebar-staff2}}
 		<div id="page-content-wrapper">
 			<nav id="sub-nav-lg" class="navbar taskbar justify-content-end">
 				<!-- Button trigger modal -->
@@ -41,7 +41,7 @@
 						{{#each customers}}
 						<tr>
 							<th scope="row">{{sum @index 1}}</th>
-							<td><button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">{{this.firstName}} {{this.lastName}}</button></td>
+							<td><a type="button" class="btn btn-primary btn-sm" href="{{this._id}}/customer-detail">{{this.firstName}} {{this.lastName}} </a></td>
 							<td>{{this.birth}}</td>
 							<td>{{this.gender}}</td>
 							<td>{{this.phone}}</td>
@@ -49,7 +49,12 @@
 							<td>{{this.address}}</td>
 							<td>{{this.description}}</td>
 							<td class="text-center">
-								<div class="btn btn-info btn-sm">Sửa thông tin</div>
+								<div class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#edit-customer"data-firstname="{{this.firstName}}"
+									data-lastname="{{this.lastName}}" data-birth="{{this.birth}}"
+									data-gender="{{this.gender}}" data-phone="{{this.phone}}"
+									data-email="{{this.email}}" data-address="{{this.address}}"
+									data-decript="{{this.description}}" >
+									Sửa thông tin</div>
 							</td>
 						</tr>
 						{{/each}}
@@ -60,41 +65,6 @@
 		</div>
 	</div>
 
-	<!-- Modal Details User -->
-	<div class="modal fade" id="detail-customer" tabindex="-1" aria-labelledby="detailCustomer" aria-hidden="true">
-		<div class="modal-dialog modal-xl">
-			<div class="modal-content">
-				<div class="modal-header bg-info text-light">
-					<h5 class="modal-title" id="detailCustomer">Thông tin chi tiết</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="card">
-					<div class="row g-0">
-						<div class="col-md-4 text-center">
-							<img id="detail-avt" class="img-fluid rounded-start" alt="...">
-						</div>
-						<div class="col-md-8">
-							<div class="card-body">
-								<h3 class="none-mb" id="detail-firstLastName"></h3>
-								<p class="none-mb" id="detail-birth" for="detail-birth"></p>
-								<p class="none-mb" id="detail-gender"></p>
-								<p class="none-mb" id="detail-phone"></p>
-								<p class="none-mb" id="detail-email"></p>
-								<p class="none-mb" id="detail-address"></p>
-								<p class="none-mb" id="detail-department"></p>
-								<p class="none-mb" id="detail-position"></p>
-								<p class="none-mb" id="detail-account"></p>
-								<p class="none-mb" id="detail-role"></p>
-								<label class="">Mô tả:</label>
-								<textarea id="detail-description" class="form-control mb-2" rows="6"
-									disabled></textarea>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 
 
 	<!-- Modal Create User -->
@@ -106,7 +76,7 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<form method="POST" action="/business/customer" id="create-customer-form" class="row"
+					<form method="POST" action="/operating/nursing/customer" id="create-customer-form" class="row"
 						enctype="multipart/form-data">
 						<div class="col-xl-3 text-center mb-3">
 							<img src="/img/user-icon.png" id="add-avt-customer"
@@ -224,7 +194,7 @@
 							<input class="form-control" id="edit-img" type="file" name="image"
 								accept="image/png, image/gif, image/jpeg">
 						</div>
-						<div class="col-xl-8 mb-3">
+						<div class="col-xl-12 mb-3">
 							<ul class="list-group">
 								<li class="list-group-item bg-info text-light">
 									<div class="row">
@@ -233,14 +203,14 @@
 												<h6>Họ</h6>
 											</label>
 											<input type="text" class="form-control form-control-sm firstName"
-												data-bs-focus="focus" id="edit-firstName" name="firstName" disabled>
+												data-bs-focus="focus" id="edit-firstName" name="firstName" >
 										</div>
 										<div class="col-md-6">
 											<label for="lastName" class="form-label">
 												<h6>Tên</h6>
 											</label>
 											<input type="text" class="form-control form-control-sm lastName"
-												id="edit-lastName" name="lastName" disabled>
+												id="edit-lastName" name="lastName" >
 										</div>
 									</div>
 									<div class="row mt-3">
@@ -289,32 +259,6 @@
 										</div>
 									</div>
 									<div class="row mt-3">
-										<div class="col-md-6">
-											<label for="departments" class="form-label">
-												<h6>Phòng ban</h6>
-											</label>
-											<select id="edit-department" class="form-select form-select-sm"
-												aria-label=".form-select-sm example" name="department">
-												<option value="" selected>-- Chọn phòng ban --</option>
-												{{#each departments}}
-												<option value="{{this.name}}">{{this.name}}</option>
-												{{/each}}
-											</select>
-										</div>
-										<div class="col-md-6">
-											<label for="positions" class="form-label">
-												<h6>Chức vụ</h6>
-											</label>
-											<select id="edit-position" class="form-select form-select-sm"
-												aria-label=".form-select-sm example" name="position">
-												<option value="" selected>-- Chọn chức vụ --</option>
-												{{#each positions}}
-												<option value="{{this.name}}">{{this.name}}</option>
-												{{/each}}
-											</select>
-										</div>
-									</div>
-									<div class="row mt-3">
 										<div class="col-md-12 mb-3">
 											<label for="description" class="form-label">
 												<h6>Mô tả</h6>
@@ -322,38 +266,6 @@
 											<textarea class="form-control" id="edit-description" rows="6"
 												name="description"></textarea>
 										</div>
-									</div>
-								</li>
-							</ul>
-						</div>
-						<div class="col-xl-4">
-							<ul class="list-group">
-								<li class="list-group-item bg-danger text-light">
-									<div class="col-xl">
-										<label for="account" class="form-label">
-											<h6>Tài khoản</h6>
-										</label>
-										<input type="text" class="form-control form-control-sm account"
-											id="edit-account" value="{{this.account}}" name="account" disabled>
-									</div>
-									<div class="col-xl mt-3">
-										<label for="password" class="form-label">
-											<h6>Mật khẩu</h6>
-										</label>
-										<input type="password" class="form-control form-control-sm" id="edit-password"
-											name="password" required>
-									</div>
-									<div class="col-xl mb-3 mt-3">
-										<label for="roles" class="form-label">
-											<h6>Quyền hạn</h6>
-										</label>
-										<select id="edit-role" class="form-select form-select-sm"
-											aria-label=".form-select-sm example" name="role">
-											<option value="" selected>-- Chọn quyền hạn --</option>
-											{{#each roles}}
-											<option value="{{this.name}}">{{this.name}}</option>
-											{{/each}}
-										</select>
 									</div>
 								</li>
 							</ul>
@@ -367,6 +279,7 @@
 			</div>
 		</div>
 	</div>
+
 	<script src="/js/customer.js"></script>
 	<script>
 		document.addEventListener('DOMContentLoaded', function () {
@@ -376,6 +289,42 @@
 					paging: true,
 					reponsive: true
 				});
+			});
+
+			var viewCustomer = document.getElementById("edit-customer");
+			viewCustomer.addEventListener("show.bs.modal", function (event) {
+				// Button that triggered the modal
+				var button = event.relatedTarget;
+
+				// Get data from edit button
+				var firstName = button.getAttribute("data-firstname");
+				var lastName = button.getAttribute("data-lastname");
+				var birth = button.getAttribute("data-birth");
+				var gender = button.getAttribute("data-gender");
+				var phone = button.getAttribute("data-phone");
+				var email = button.getAttribute("data-email");
+				var address = button.getAttribute("data-address");
+				var decription = button.getAttribute("data-decription");
+
+				// Get element need embeded input
+				var editFirstName = document.getElementById("edit-firstName")
+				var editLastName = document.getElementById("edit-lastName")
+				var editBirth = document.getElementById("edit-birth")
+				var editGender = document.getElementById("edit-gender")
+				var editPhone = document.getElementById("edit-phone")
+				var editEmail = document.getElementById("edit-email") 
+				var editAddress = document.getElementById("edit-address")
+				var editdescipt = document.getElementById("edit-description")
+
+				editFirstName.value = firstName;
+				editLastName.value = lastName;
+				editBirth.value = birth;
+				editGender.value = gender;
+				editPhone.value = phone;
+				editEmail.value = email;
+				editAddress.value = address;
+				editdescipt.value = decription;
+
 			});
 		});
 	</script>

@@ -7,6 +7,7 @@ const businessRouter = require("./departments/business")
 const marketingRouter = require("./departments/marketing")
 const receptionRouter = require("./departments/reception")
 const operatingRouter = require("./departments/operating-room")
+const saleRouter = require("./departments/sale")
 const hrRouter = require("./departments/human-resource")
 
 
@@ -19,6 +20,7 @@ function route(app) {
   app.use("/marketing", marketingRouter);
   app.use("/reception", receptionRouter);
   app.use("/operating", operatingRouter);
+  app.use("/sale", saleRouter);
   app.use("/hr", hrRouter);
 
   app.use("/", signinRouter);

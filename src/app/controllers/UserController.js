@@ -14,13 +14,12 @@ const Comment = require('../models/Comment');
 class UserController {
 
 	getUserDashboard(req, res, next) {
-
-		res.render('users/user');
+		res.render('/users/customer/user-customer-dashboard');
 	}
 
 	//BUSINESS
 	getBusinessDashboard(req, res, next) {
-		res.render('users/user')
+		res.render('users/customer/user-customer-dashboard')
 	}
 
 	getBusinessCustomer(req, res, next) {

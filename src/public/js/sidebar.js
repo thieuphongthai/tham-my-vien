@@ -212,5 +212,10 @@ detailUser.addEventListener("show.bs.modal", function (event) {
 	detailRole.innerHTML = '<strong>Quyền hạn: </strong>' + roleDetail;
 });
 
+// document.addEventListener('DOMContentLoaded', function () {
+// 	$(document).ready(function () {
+// 		$('#user_table').DataTable({});
+// 	});
+// });
 
 

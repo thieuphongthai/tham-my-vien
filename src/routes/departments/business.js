@@ -1,14 +1,22 @@
 const express = require('express');
-const UserController = require('../../app/controllers/UserController');
+const BusinessController = require('../../app/controllers/BusinessController');
 const router = express.Router();
+const validateUploadImage = require('../../middleware/validateUploadImage');
 
 
-router.get('/user', UserController.getBusinessDashboard)
+// router.get('/manager', ManagerController.getBusinessManagerDashboard);
+// router.get('/manager', ManagerController.getBusinessManagerDashboard);
+// router.get('/manager', ManagerController.getBusinessManagerDashboard);
 
-router.get('/user/customer', UserController.getBusinessCustomer)
+// router.post('/employ/:id/customer-detail', UserController.createComment);
+// router.get('/employ/:id/customer-detail', UserController.getOneBusinessCustomer);
+// router.get('/employ/customer', UserController.getBusinessDashboard);
+// router.get('/employ', EmployController.getBusinessEmployDashboard);
+router.get('/service-note', BusinessController.getServiceNoteDashboard);
+router.post('/customer', validateUploadImage.upload, BusinessController.createCustomer);
+router.get('/customer', BusinessController.showCustomer);
+router.get('/', BusinessController.getBusinessDashboard);
 
-router.get('/user/:id/customer-detail', UserController.getOneBusinessCustomer)
 
-router.post('/user/:id/customer-detail', UserController.createComment)
 
 module.exports = router;

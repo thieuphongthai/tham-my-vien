@@ -3,7 +3,6 @@ const Schema = mongoose.Schema;
 
 const Customer = new Schema({
 	firstName: String,
-	middleName: String,
 	lastName: String,
 	birth: String,
 	gender: String,
@@ -11,7 +10,10 @@ const Customer = new Schema({
 	email: String,
 	address: String,
 	description: String,
-	image: String,
+	image: {
+		name: String,
+		url: String,
+	},
 	comments: [
 		{
 			type: new mongoose.Schema(

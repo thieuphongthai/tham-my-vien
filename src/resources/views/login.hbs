@@ -10,6 +10,11 @@
 
 </head>
 <body class="bg-primary">
+	{{#if message}}
+	<div class="alert alert-{{message.type}}" role="alert">
+		<trong>{{message.intro}}</trong>{{message.message}}
+	</div>
+	{{/if}}
 	<div id="layoutAuthentication">
 		<div id="layoutAuthentication_content">
 			<main>

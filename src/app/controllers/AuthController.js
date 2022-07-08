@@ -1,10 +1,11 @@
 // Xử lý các hành động đăng ký, đăng nhập và đăng nhập
-const Account = require('../models/Account');
+const User = require('../models/User');
 const Role = require('../models/Role');
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { multipleMongooseToObject, mongooseToObject } = require('../../util/mongoose');
 const mongoose = require("../../util/mongoose");
+const flash = require('connect-flash');
 
 
 class AuthController {
@@ -28,7 +29,7 @@ class AuthController {
     }
 
     postRootRegister(req, res) {
-        const account = new Account({
+        const user = new User({
             userName: req.body.userName,
             email: req.body.email,
             password: bcrypt.hashSync(req.body.password, 8),
@@ -39,7 +40,7 @@ class AuthController {
             res.redirect('register');
         }
         if (req.body.roleEngName) {
-            account.save((err, account) => {
+            user.save((err, user) => {
                 if (err) {
                     res.status(500).send({ message: err });
                     return;
@@ -50,12 +51,12 @@ class AuthController {
                             res.status(500).send({ message: err });
                             return;
                         }
-                        account.role = role.map((role) => {
+                        user.role = role.map((role) => {
                             console.log("role", role)
                             role.engname;
                         })
-                        account.save((err) => {
-                            res.redirect('account');
+                        user.save((err) => {
+                            res.redirect('user');
                         });
                     }
                     );
@@ -65,39 +66,39 @@ class AuthController {
     }
 
     postRootLogin(req, res, next) {
-        Account.findOne({email: req.body.email})
-            .then( account => {
-                console.log(account);
+        User.findOne({email: req.body.email})
+            .then( user => {
+                console.log(user);
                 if (!next) {
                     res.status(500).send({ message: 'Đã có lỗi xảy ra tại máy chủ' });
                     return;
                 }
-                if (!account) {
+                if (!user) {
                     return res.status(404).send({ message: "Không tìm thấy người dùng này" });
                 }
                 // so sánh password nhập vào với password trong db
                 var passwordIsValid = bcrypt.compareSync(
                     req.body.password,
-                    account.password
+                    user.password
                 );
                 console.log(passwordIsValid)
                 if (!passwordIsValid) {
-                    return res.status(401).send({ message: "Mật khẩu đăng nhập không đúng!" });
+                    return res.status(401).send('/login', { message: "Mật khẩu đăng nhập không đúng!" });
                 }
-                var token = jwt.sign({ id: account._id, role: account.role }, process.env.SECURITY_KEY, {
+                var token = jwt.sign({ id: user._id, role: user.role }, process.env.SECURITY_KEY, {
                     expiresIn: 30, // 10 phút
                 });
-                const { password, ...others } = account._doc;
+                const { password, ...others } = user._doc;
                 var authorities = [];
-                console.log(account.role)
-                authorities.push("ROLES_" + account.role.toUpperCase());
+                console.log(user.role)
+                authorities.push("ROLES_" + user.role.toUpperCase());
                 console.log(authorities);
                 req.session.token = token;
                 // res.status(200).json({...others, token});
                 res.status(200).render('root/root', {
-                    id: account._id,
-                    userName: account.userName,
-                    email: account.email,
+                    id: user._id,
+                    userName: user.userName,
+                    email: user.email,
                     role: authorities,
                     token: accesstoken
                 });
@@ -107,39 +108,45 @@ class AuthController {
 
     //[GET] Login UI
 	getLogin(req, res) {
-		res.render("login", { layout: false });
+		res.render("login");
 	}
 
     // [POST] Login
     postLogin(req, res, next) {
-        Account.findOne({email: req.body.email})
-            .then( account => {
-                console.log(account);
+        User.findOne({email: req.body.email})
+            .then( user => {
+                console.log(user);
                 if (!next) {
                     res.status(500).send({ message: 'Đã có lỗi xảy ra tại máy chủ' });
                     return;
                 }
-                if (!account) {
-                    return res.status(404).send({ message: "Không tìm thấy tài khoản này" });
+                if (!user) {
+					res.send(req.flash('message'))
                 }
                 // so sánh password nhập vào với password trong db
                 var passwordIsValid = bcrypt.compareSync(
                     req.body.password,
-                    account.password
+                    user.password
                 );
                 console.log(passwordIsValid)
                 if (!passwordIsValid) {
-                    return res.status(401).send({ message: "Mật khẩu đăng nhập không đúng!" });
+					
+					res.sendFile('login', req.session.message = {
+						type: 'danger',
+                        intro: 'Chúc mừng! ',
+                        message: 'Bạn tạo người dùng thành công',
+					})
                 }
-                var accessToken = jwt.sign({ id: account._id, role: account.role }, process.env.ACCESSTOKEN_KEY, {
+                const accessToken = jwt.sign({ id: user._id, role: user.role }, process.env.ACCESSTOKEN_KEY, {
                     expiresIn: 600, // 10 phút
                 });
-                const refreshToken = jwt.sign({ id: account._id, role: account.role }, process.env.REFRESHTOKEN_KEY, {
+
+                const refreshToken = jwt.sign({ id: user._id, role: user.role }, process.env.REFRESHTOKEN_KEY, {
                     expiresIn: 86400, // 24 giờ
                 })
                 // var authorities = [];
-                console.log(account.role)
-                // authorities.push("ROLES_" + account.role.toUpperCase());
+                console.log(user.role)
+                // authorities.push("ROLES_" + user.role.toUpperCase());
                 // console.log(authorities);
                 res.cookies = ('refreshToken', refreshToken, {
                     httpOnly: true,
@@ -147,15 +154,14 @@ class AuthController {
                     path: '/',
                     sameSite: 'strict'
                 });
-                // const { password, ...others } = account._doc;
+                // const { password, ...others } = user._doc;
                 // {...others, accessToken, refreshToken});
                 // res.status(200).render('root/root-dashboard', { ...others, accessToken });
                 res.status(200).render('users/user', {
-                    id: account._id,
-                    userName: account.userName,
-                    email: account.email,
-                    role: account.engName,
-                    // token: accesstoken
+                    id: user._id,
+                    userName: user.userName,
+                    email: user.email,
+                    role: user.engName,
                 });
             })
             .catch(next);

@@ -18,7 +18,16 @@ const User = new Schema({
 	account: String,
 	password: String,
 	role: String,
-	description: String
+	description: String,
+	customers: [
+		{ 
+			type: Schema.Types.ObjectId,
+			ref: 'Customer',
+		},
+		{
+			timestamps: true
+		}
+	]
 }, {
     timestamps: true
 });

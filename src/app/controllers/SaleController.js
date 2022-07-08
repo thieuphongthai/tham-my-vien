@@ -1,24 +1,24 @@
 const Customer = require('../models/Customer');
 const { mongooseToObject, multipleMongooseToObject } = require('../../util/mongoose');
 
-class BusinessController {
+class SaleController {
 
-	//BUSINESS EMPLOY
-	getBusinessDashboard(req, res) {
-		res.render('business/employ/business-overview');
-	}
+    //EMPLOY
+    getSaleDashboard(req, res) {
+        res.render('sale/employ/sale-overview');
+    }
 
-	showCustomer(req, res, next) {
-		Customer.find({})
-			.then((customers) => {
-				res.render('business/employ/business-customer', {
-					customers: multipleMongooseToObject(customers)
-				})
-			})
-			.catch(next)
-	}
+    showCustomer(req, res, next) {
+        Customer.find({})
+            .then((customers) => {
+                res.render('sale/employ/sale-customer', {
+                    customers: multipleMongooseToObject(customers)
+                })
+            })
+            .catch(next)
+    }
 
-	createCustomer(req, res, next) {
+    createCustomer(req, res, next) {
 		if (req.file) {
 			const customer = new Customer({
 				firstName: req.body.firstName,
@@ -54,8 +54,7 @@ class BusinessController {
 		}
 		res.redirect('back');
 	}
-
-	getOneBusinessCustomer(req, res, next) {
+    getOneSaleCustomer(req, res, next) {
 		Customer.findById(req.params.id)
 			.then(customer => {
 				let commnetArray = customer.comments;
@@ -65,39 +64,39 @@ class BusinessController {
 					console.log('day', newDate)
 					return newDate;
 				})
-				res.render('business/employ/business-customer-detail', {
+				res.render('sale/employ/sale-customer-detail', {
 					customer: mongooseToObject(customer),
 				});
 			})
 			.catch(next);
 	}
 
-	createComment(req, res, next) {
+    createComment(req, res, next) {
 		Customer.findByIdAndUpdate({ _id: req.params.id }, { $push: { comments: { comment: req.body.comments } } })
 			.then(() => res.redirect('back'))
 			.catch(next);
 	}
 
 	getServiceNoteDashboard(req, res) {
-		res.render('business/employ/business-service-note');
+		res.render('sale/employ/sale-service-note');
 	}
 
-	//BUSINESS MANAGER
-	getMNGBusinessDashboard(req, res) {
-		res.render('business/manager/business-overview');
-	}
+    //MANAGER
+    getMNGSaleDashboard(req, res) {
+        res.render('sale/manager/sale-overview');
+    }
 
-	showMNGCustomer(req, res, next) {
-		Customer.find({})
-			.then((customers) => {
-				res.render('business/manager/business-customer', {
-					customers: multipleMongooseToObject(customers)
-				})
-			})
-			.catch(next)
-	}
+    showMNGCustomer(req, res, next) {
+        Customer.find({})
+            .then((customers) => {
+                res.render('sale/manager/sale-customer', {
+                    customers: multipleMongooseToObject(customers)
+                })
+            })
+            .catch(next)
+    }
 
-	getMNGOneBusinessCustomer(req, res, next) {
+    getMNGOneSaleCustomer(req, res, next) {
 		Customer.findById(req.params.id)
 			.then(customer => {
 				let commnetArray = customer.comments;
@@ -107,16 +106,13 @@ class BusinessController {
 					console.log('day', newDate)
 					return newDate;
 				})
-				res.render('business/manager/business-customer-detail', {
+				res.render('sale/manager/sale-customer-detail', {
 					customer: mongooseToObject(customer),
 				});
 			})
 			.catch(next);
 	}
+};
 
-	getMNGServiceNoteDashboard(req, res) {
-		res.render('business/manager/business-service-note');
-	}
-}
+module.exports = new SaleController;
 
-module.exports = new BusinessController;

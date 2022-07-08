@@ -59,9 +59,9 @@
 									data-phone="{{this.phone}}" data-email="{{this.email}}"
 									data-address="{{this.address}}" data-decript="{{this.description}}">
 									Sửa thông tin</div>
-								<button type="button" class="btn btn-danger btn-storage">
-									<i class="ti-archive"></i> Kho lưu trữ
-								</button>
+																<div class="btn btn-danger btn-sm" data-id="{{this._id}}"
+                                    data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</div>
+
 							</td>
 						</tr>
 						{{/each}}

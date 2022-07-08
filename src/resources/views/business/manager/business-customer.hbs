@@ -59,8 +59,8 @@
 									data-phone="{{this.phone}}" data-email="{{this.email}}"
 									data-address="{{this.address}}" data-decript="{{this.description}}">
 									Sửa thông tin</div>
-								<div class="btn btn-danger btn-sm" data-id="{{this._id}}"
-                                    data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</div>
+								<div class="btn btn-danger btn-sm" data-id="{{this._id}}" data-bs-toggle="modal"
+									data-bs-target="#deleteModal">Xóa</div>
 							</td>
 						</tr>
 						{{/each}}
@@ -164,8 +164,7 @@
 												<h6>Mô tả</h6>
 											</label>
 											<textarea class="form-control" id="customer-description" rows="6"
-												placeholder="Vd: Sở thích..."
-												name="description"></textarea>
+												placeholder="Vd: Sở thích..." name="description"></textarea>
 										</div>
 									</div>
 								</li>
@@ -286,25 +285,25 @@
 	</div>
 
 
-    <form name="delete-form" method="POST"></form>
+	<form name="delete-form" method="POST"></form>
 	{{!-- Modal Delete --}}
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Xóa</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Bạn có đồng ý xóa không?
-                </div>
-                <div class="modal-footer">
-                    <button id="btn-delete" type="button" class="btn btn-danger">Có, chắc chắn</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Không</button>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Xóa</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					Bạn có đồng ý xóa không?
+				</div>
+				<div class="modal-footer">
+					<button id="btn-delete" type="button" class="btn btn-danger">Có, chắc chắn</button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Không</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<script src="/js/customer.js"></script>
 	<script>
@@ -316,59 +315,21 @@
 					reponsive: true
 				});
 			});
-
 			//DELETE
 			var id;
-            var btnDel = document.getElementById('btn-delete');
-            var delForm = document.forms['delete-form'];
+			var btnDel = document.getElementById('btn-delete');
+			var delForm = document.forms['delete-form'];
 
-            $('#deleteModal').on('show.bs.modal', function (event) {
-                var button = $(event.relatedTarget);
-                id = button.data('id');
+			$('#deleteModal').on('show.bs.modal', function (event) {
+				var button = $(event.relatedTarget);
+				id = button.data('id');
 
-            })
+			})
 
-            btnDel.onclick = function () {
-                delForm.action = '/admin/customer/' + id + '?_method=DELETE';
-                delForm.submit();
-            }
-
-			//UPDATE
-			var viewCustomer = document.getElementById("edit-customer");
-			viewCustomer.addEventListener("show.bs.modal", function (event) {
-				// Button that triggered the modal
-				var button = event.relatedTarget;
-
-				// Get data from edit button
-				var firstName = button.getAttribute("data-firstname");
-				var lastName = button.getAttribute("data-lastname");
-				var birth = button.getAttribute("data-birth");
-				var gender = button.getAttribute("data-gender");
-				var phone = button.getAttribute("data-phone");
-				var email = button.getAttribute("data-email");
-				var address = button.getAttribute("data-address");
-				var decription = button.getAttribute("data-decription");
-
-				// Get element need embeded input
-				var editFirstName = document.getElementById("edit-firstName")
-				var editLastName = document.getElementById("edit-lastName")
-				var editBirth = document.getElementById("edit-birth")
-				var editGender = document.getElementById("edit-gender")
-				var editPhone = document.getElementById("edit-phone")
-				var editEmail = document.getElementById("edit-email")
-				var editAddress = document.getElementById("edit-address")
-				var editdescipt = document.getElementById("edit-description")
-
-				editFirstName.value = firstName;
-				editLastName.value = lastName;
-				editBirth.value = birth;
-				editGender.value = gender;
-				editPhone.value = phone;
-				editEmail.value = email;
-				editAddress.value = address;
-				editdescipt.value = decription;
-
-			});
+			btnDel.onclick = function () {
+				delForm.action = '/admin/customer/' + id + '?_method=DELETE';
+				delForm.submit();
+			}
 		});
 	</script>
 </body>

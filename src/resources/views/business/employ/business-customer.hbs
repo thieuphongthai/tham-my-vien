@@ -290,42 +290,6 @@
 					reponsive: true
 				});
 			});
-
-			var viewCustomer = document.getElementById("edit-customer");
-			viewCustomer.addEventListener("show.bs.modal", function (event) {
-				// Button that triggered the modal
-				var button = event.relatedTarget;
-
-				// Get data from edit button
-				var firstName = button.getAttribute("data-firstname");
-				var lastName = button.getAttribute("data-lastname");
-				var birth = button.getAttribute("data-birth");
-				var gender = button.getAttribute("data-gender");
-				var phone = button.getAttribute("data-phone");
-				var email = button.getAttribute("data-email");
-				var address = button.getAttribute("data-address");
-				var decription = button.getAttribute("data-decription");
-
-				// Get element need embeded input
-				var editFirstName = document.getElementById("edit-firstName")
-				var editLastName = document.getElementById("edit-lastName")
-				var editBirth = document.getElementById("edit-birth")
-				var editGender = document.getElementById("edit-gender")
-				var editPhone = document.getElementById("edit-phone")
-				var editEmail = document.getElementById("edit-email") 
-				var editAddress = document.getElementById("edit-address")
-				var editdescipt = document.getElementById("edit-description")
-
-				editFirstName.value = firstName;
-				editLastName.value = lastName;
-				editBirth.value = birth;
-				editGender.value = gender;
-				editPhone.value = phone;
-				editEmail.value = email;
-				editAddress.value = address;
-				editdescipt.value = decription;
-
-			});
 		});
 	</script>
 </body>

@@ -116,7 +116,7 @@ class BusinessController {
 					return newDate;
 				});
 				res.render("business/employ/business-customer-detail", {
-					// customer: mongooseToObject(customer)
+					customer: mongooseToObject(customer)
 				});
 			})
 			.catch(next);

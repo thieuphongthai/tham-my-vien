@@ -1,7 +1,6 @@
 // Handle create info Customer
 var create = document.getElementById("create");
 var createCustomerForm = document.forms["create-customer-form"];
-console.log(createCustomerForm);
 create.addEventListener("click", () => {
 	createCustomerForm.submit();
 });
@@ -11,6 +10,13 @@ var edit = document.getElementById("edit");
 var editCustomerForm = document.forms["edit-customer-form"];
 edit.addEventListener("click", () => {
 	editCustomerForm.submit();
+});
+
+// Handle create service note
+var createServiceNote = document.getElementById("create-service-note-btn");
+var createServiceNoteForm = document.forms["create-service-note-form"];
+createServiceNote.addEventListener("click", () => {
+	createServiceNoteForm.submit();
 });
 
 
@@ -28,26 +34,26 @@ editImg.addEventListener('change', (e) => {
 	editAvt.src = URL.createObjectURL(e.target.files[0]);
 });
 
-
-
-
-//UPDATE
+// EDIT
 var viewCustomer = document.getElementById("edit-customer");
 viewCustomer.addEventListener("show.bs.modal", function (event) {
 	// Button that triggered the modal
 	var button = event.relatedTarget;
 
 	// Get data from edit button
-	var firstName = button.getAttribute("data-firstname");
-	var lastName = button.getAttribute("data-lastname");
-	var birth = button.getAttribute("data-birth");
-	var gender = button.getAttribute("data-gender");
-	var phone = button.getAttribute("data-phone");
-	var email = button.getAttribute("data-email");
-	var address = button.getAttribute("data-address");
-	var decription = button.getAttribute("data-decription");
+	var editID = button.getAttribute('data-id');
+	var editImage = button.getAttribute("data-edit-img");
+	var firstName = button.getAttribute("data-edit-firstname");
+	var lastName = button.getAttribute("data-edit-lastname");
+	var birth = button.getAttribute("data-edit-birth");
+	var gender = button.getAttribute("data-edit-gender");
+	var phone = button.getAttribute("data-edit-phone");
+	var email = button.getAttribute("data-edit-email");
+	var address = button.getAttribute("data-edit-address");
+	var description = button.getAttribute("data-edit-description");
 
 	// Get element need embeded input
+	var editAvt = document.getElementById("edit-customer-avt");
 	var editFirstName = document.getElementById("edit-firstName")
 	var editLastName = document.getElementById("edit-lastName")
 	var editBirth = document.getElementById("edit-birth")
@@ -57,73 +63,64 @@ viewCustomer.addEventListener("show.bs.modal", function (event) {
 	var editAddress = document.getElementById("edit-address")
 	var editdescipt = document.getElementById("edit-description")
 
+	if (editImage === '') {
+		editAvt.setAttribute('src', '/img/user-icon.png');
+	} else {
+		editAvt.setAttribute('src', '/img/uploads/users/' + editImage)
+	}
+	editCustomerForm.setAttribute('action', `/business/employ/customers/${editID}?_method=PUT`);
 	editFirstName.value = firstName;
+	// editFirstName.setAttribute('value', firstName);
 	editLastName.value = lastName;
 	editBirth.value = birth;
 	editGender.value = gender;
 	editPhone.value = phone;
 	editEmail.value = email;
 	editAddress.value = address;
-	editdescipt.value = decription;
+	editdescipt.value = description;
 
 });
 
-// // Handle detail Customer
-// var detailCustomer = document.getElementById("detail-customer");
-// detailCustomer.addEventListener("show.bs.modal", function (event) {
-// 	// Button that triggered the modal
-// 	var button = event.relatedTarget;
-// 	// Get data from detail button
-// 	var imageDetail = button.getAttribute("data-detail-img");
-// 	var firstNameDetail = button.getAttribute("data-detail-first-name");
-// 	var lastNameDetail = button.getAttribute("data-detail-last-name");
-// 	var birthDetail = button.getAttribute("data-detail-birth");
-// 	var genderDetail = button.getAttribute("data-detail-gender");
-// 	var phoneDetail = button.getAttribute("data-detail-phone");
-// 	var emailDetail = button.getAttribute("data-detail-email");
-// 	var addressDetail = button.getAttribute("data-detail-address");
-// 	var departmentDetail = button.getAttribute("data-detail-department");
-// 	var positionDetail = button.getAttribute("data-detail-position");
-// 	var desciptionDetail = button.getAttribute("data-detail-description");
-// 	var accountDetail = button.getAttribute("data-detail-account");
-// 	var roleDetail = button.getAttribute("data-detail-role");
+// Handle create service-note
+var createServiceNote = document.getElementById("create-service-note");
+createServiceNote.addEventListener("show.bs.modal", function (event) {
+	// Button that triggered the modal
+	var button = event.relatedTarget;
+	// Get data from detail button
+	// Handle edit info Customer
+	var dataServiceNoteID = button.getAttribute('data-service-note-id');
+	var dataFirstName = button.getAttribute("data-service-note-firstname");
+	var dataLastName = button.getAttribute("data-service-note-lastname");
+	var dataBirth = button.getAttribute("data-service-note-birth");
+	var dataGender = button.getAttribute("data-service-note-gender");
+	var dataPhone = button.getAttribute("data-service-note-phone");
+	var dataEmail = button.getAttribute("data-service-note-email");
+	var dataAddress = button.getAttribute("data-service-note-address");
 
-// 	// // Get element need embeded input
-	
-// 	var detailAvt = document.getElementById("detail-avt");
-// 	var detailFirstName = document.getElementById("detail-firstLastName");
-// 	var detailBirth = document.getElementById("detail-birth");
-// 	var detailGender = document.getElementById("detail-gender");
-// 	var detailPhone = document.getElementById("detail-phone");
-// 	var detailEmail = document.getElementById("detail-email");
-// 	var detailAddress = document.getElementById("detail-address");
-// 	var detailDepartment = document.getElementById("detail-department");
-// 	var detailPosition = document.getElementById("detail-position");
-// 	var detailDescription = document.getElementById("detail-description");
-// 	var detailAccount = document.getElementById("detail-account");
-// 	var detailRole = document.getElementById("detail-role");
-// 	if (imageDetail === '') {
-// 		detailAvt.setAttribute('src', '/img//Customer-icon.png');
-// 	} else {
-// 		detailAvt.setAttribute('src', '/img/uploads/Customers/' + imageDetail)
-// 	}
-// 	detailFirstName.innerHTML = firstNameDetail + " " + lastNameDetail;
-// 	detailBirth.innerHTML = '<strong>Ngày sinh: </strong> ' + birthDetail;
-// 	detailGender.innerHTML = '<strong>Giới tính: </strong>' + genderDetail;
-// 	detailPhone.innerHTML = '<strong>Điện thoại: </strong>' + phoneDetail;
-// 	detailEmail.innerHTML = '<strong>Email: </strong>' + emailDetail;
-// 	detailAddress.innerHTML = '<strong>Địa chỉ: </strong>' + addressDetail;
-// 	detailDepartment.innerHTML = '<strong>Phòng ban: </strong>' + departmentDetail;
-// 	detailPosition.innerHTML = '<strong>Chức vụ: </strong>' + positionDetail;
-// 	detailDescription.innerHTML = desciptionDetail;
-// 	detailAccount.innerHTML = '<strong>Tài khoản: </strong>' + accountDetail;
-// 	detailRole.innerHTML = '<strong>Quyền hạn: </strong>' + roleDetail;
-// });
+	// // Get element need embeded input
+	var serviceNoteFirstLastName = document.getElementById("create-service-note-firstLastName");
+	var serviceNoteBirth = document.getElementById("create-service-note-birth");
+	var serviceNoteGender = document.getElementById("create-service-note-gender");
+	var serviceNotePhone = document.getElementById("create-service-note-phone");
+	var serviceNoteEmail = document.getElementById("create-service-note-email");
+	var serviceNoteAddress = document.getElementById("create-service-note-address");
 
-// document.addEventListener('DOMContentLoaded', function () {
-// 	$(document).ready(function () {
-// 		$('#Customer_table').DataTable({});
-// 	});
-// });
+	createServiceNoteForm.setAttribute('action', `/business/employ/customers/${dataServiceNoteID}/service-note`);
+	serviceNoteFirstLastName.value = dataFirstName + ' ' + dataLastName;
+	serviceNoteBirth.value = dataBirth;
+	serviceNoteGender.value = dataGender;
+	serviceNotePhone.value = dataPhone;
+	serviceNoteEmail.value = dataEmail;
+	serviceNoteAddress.value = dataAddress;
+
+});
 
 
+document.addEventListener('DOMContentLoaded', function () {
+	$(document).ready(function () {
+		$('#customer_table').DataTable({
+			paging: true,
+			reponsive: true
+		});
+	});
+});

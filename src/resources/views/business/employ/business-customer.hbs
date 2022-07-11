@@ -12,54 +12,100 @@
 	<div class="d-flex" id="wrapper">
 		{{> page/sidebar/sales/sidebar-staff}}
 		<div id="page-content-wrapper">
-			<nav id="sub-nav-lg" class="navbar taskbar justify-content-end">
-				<!-- Button trigger modal -->
-				<button type="button" class="btn btn-primary btn-create" data-bs-toggle="modal"
-					data-bs-target="#create-customer">
-					<i class="ti-plus"></i> Tạo người dùng
-				</button>
+			<nav id="sub-nav-lg" class="navbar taskbar justify-content-between">
+				<div class="title">
+
+				</div>
+				<h3 class="title text-light">Quản lý khách hàng</h3>
+				<div class="stask">
+					<!-- Button trigger modal -->
+					<a href="/business/employ/service-note" type="button" class="btn btn-primary btn-create">
+						<i class="ti-receipt"></i> Phiếu dịch vụ
+					</a>
+					<!-- Button trigger modal -->
+					<button type="button" class="btn btn-primary btn-create" data-bs-toggle="modal"
+						data-bs-target="#create-customer">
+						<i class="ti-plus"></i>
+					</button>
+				</div>
 			</nav>
-			{{!-- <div class="sub-nav-mobile bg-info d-flex justify-content-end">
-				<div class="btn btn-primary"><i class="ti-plus"></i></div>
-			</div> --}}
-			<div class="container-fluid mt-3">
-				<table id="customer_table" class="table table-hover table-sm">
-					<thead class="table-info">
-						<tr class="text-center">
-							<th scope="col">#</th>
-							<th scope="col">Họ tên</th>
-							<th scope="col">Ngày sinh</th>
-							<th scope="col">Giới tính</th>
-							<th scope="col">Số điện thoại</th>
-							<th scope="col">Email</th>
-							<th scope="col">Địa chỉ</th>
-							<th scope="col">Mô tả</th>
-							<th scope="col">Hành động</th>
-						</tr>
-					</thead>
-					<tbody>
-						{{#each customers}}
-						<tr>
-							<th scope="row">{{sum @index 1}}</th>
-							<td><a type="button" class="btn btn-primary btn-sm" href="{{this._id}}/customer-detail">{{this.firstName}} {{this.lastName}} </a></td>
-							<td>{{this.birth}}</td>
-							<td>{{this.gender}}</td>
-							<td>{{this.phone}}</td>
-							<td>{{this.email}}</td>
-							<td>{{this.address}}</td>
-							<td>{{this.description}}</td>
-							<td class="text-center">
-								<div class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#edit-customer"data-firstname="{{this.firstName}}"
-									data-lastname="{{this.lastName}}" data-birth="{{this.birth}}"
-									data-gender="{{this.gender}}" data-phone="{{this.phone}}"
-									data-email="{{this.email}}" data-address="{{this.address}}"
-									data-decript="{{this.description}}" >
-									Sửa thông tin</div>
-							</td>
-						</tr>
-						{{/each}}
-					</tbody>
-				</table>
+			<div class="container-fluid mt-3 container-content-page">
+				<div class="container-table">
+					<table id="customer_table" class="table table-hover table-sm">
+						<thead class="table-info">
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Họ tên</th>
+								<th scope="col">Ngày sinh</th>
+								<th scope="col">Giới tính</th>
+								<th scope="col">Số điện thoại</th>
+								<th scope="col">Email</th>
+								<th scope="col">Địa chỉ</th>
+								<th scope="col">Mô tả</th>
+								<th class="text-center" scope="col">Hành động</th>
+							</tr>
+						</thead>
+						<tbody id="table-content">
+							{{#each customers}}
+							<tr>
+								<th scope="row">{{sum @index 1}}</th>
+								<td><a href="/business/employ/customers/{{this._id}}/detail">{{this.firstName}}
+										{{this.lastName}}</a></td>
+								<td class="text-center">{{this.birth}}</td>
+								<td class="text-center">{{this.gender}}</td>
+								<td class="text-center">{{this.phone}}</td>
+								<td>{{this.email}}</td>
+								<td>{{this.address}}</td>
+								<td>{{this.description}}</td>
+								<td class="text-center">
+									<div class="btn-group">
+										<button type="button" class="btn btn-primary btn-sm dropdown-toggle"
+											data-bs-toggle="dropdown" aria-expanded="false">
+											Hành động
+										</button>
+										<ul class="dropdown-menu dropdown-menu-sm">
+											<li>
+												<a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#edit-customer"
+													data-id="{{this._id}}" data-edit-img="{{this.image.name}}"
+													data-edit-firstname="{{this.firstName}}" data-edit-lastname="{{this.lastName}}"
+													data-edit-birth="{{this.birth}}" data-edit-gender="{{this.gender}}"
+													data-edit-phone="{{this.phone}}" data-edit-email="{{this.email}}"
+													data-edit-address="{{this.address}}"
+													data-edit-description="{{this.description}}">Sửa thông tin khách hàng</a>
+											</li>
+											<hr class="dropdown-divider">
+											<li>
+												<a class="dropdown-item" data-bs-toggle="modal" data-service-note-id="{{this._id}}"
+													data-service-note-firstname="{{this.firstName}}"
+													data-service-note-lastname="{{this.lastName}}"
+													data-service-note-birth="{{this.birth}}"
+													data-service-note-gender="{{this.gender}}"
+													data-service-note-phone="{{this.phone}}" data-service-note-email="{{this.email}}"
+													data-service-note-address="{{this.address}}"
+													data-service-note-description="{{this.description}}"
+													data-bs-target="#create-service-note">Tạo phiếu dịch vụ</a>
+											</li>
+										</ul>
+									</div>
+								</td>
+							</tr>
+							{{/each}}
+						</tbody>
+					</table>
+				</div>
+				{{#each customers}}
+				<div class="card text-dark bg-info mb-3">
+					<div class="card-header">
+						<h5 class="card-title">{{this.firstName}} {{this.lastName}}</h5>
+					</div>
+					<div class="card-body">
+						<p class="card-text">Ngày sinh: {{this.birth}}</p>
+						<p class="card-text">Giới tính: {{this.gender}}</p>
+						<p class="card-text">Email: {{this.email}}</p>
+						<p class="card-text">Địa chỉ: {{this.address}}</p>
+					</div>
+				</div>
+				{{/each}}
 			</div>
 			{{> page/sidebar/admin/sidebar-mobile}}
 		</div>
@@ -67,7 +113,7 @@
 
 
 
-	<!-- Modal Create User -->
+	<!-- Modal Create Customer -->
 	<div class="modal fade" id="create-customer" tabindex="-1" aria-labelledby="infoCustomer" aria-hidden="true">
 		<div class="modal-dialog modal-xl">
 			<div class="modal-content">
@@ -76,11 +122,11 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<form method="POST" action="/business/employ/customer" id="create-customer-form" class="row"
+					<form method="POST" action="/business/employ/customers" id="create-customer-form" class="row"
 						enctype="multipart/form-data">
 						<div class="col-xl-3 text-center mb-3">
-							<img src="/img/user-icon.png" id="add-avt-customer"
-								class="rounded mx-auto d-block add-avata" alt="...">
+							<img src="/img/user-icon.png" id="add-avt-customer" class="rounded mx-auto d-block add-avata"
+								alt="...">
 							<label for="create-img" class="label-avt btn btn-sm btn-primary mt-3">
 								<h6>Chọn ảnh đại diện</h6>
 							</label>
@@ -102,8 +148,8 @@
 											<label for="lastName" class="form-label">
 												<h6>Tên</h6>
 											</label>
-											<input type="text" class="form-control form-control-sm lastName"
-												id="customer-lastName" placeholder="Vd: Khánh" name="lastName" required>
+											<input type="text" class="form-control form-control-sm lastName" id="customer-lastName"
+												placeholder="Vd: Khánh" name="lastName" required>
 										</div>
 									</div>
 									<div class="row mt-3">
@@ -118,8 +164,8 @@
 											<label for="gender" class="form-label">
 												<h6>Giới tính</h6>
 											</label>
-											<select class="form-select form-select-sm"
-												aria-label=".form-select-sm example" name="gender">
+											<select class="form-select form-select-sm" aria-label=".form-select-sm example"
+												name="gender">
 												<option value="" selected>-- Chọn giới tính --</option>
 												<option value="Nữ">Nữ</option>
 												<option value="Nam">Nam</option>
@@ -147,9 +193,9 @@
 											<label for="address" class="form-label">
 												<h6>Địa chỉ</h6>
 											</label>
-											<input type="text" class="form-control form-control-sm"
-												id="customer-address" aria-describedby="addressFeedback"
-												placeholder="Vd: 123 Đường số 10" name="address" required>
+											<input type="text" class="form-control form-control-sm" id="customer-address"
+												aria-describedby="addressFeedback" placeholder="Vd: 123 Đường số 10" name="address"
+												required>
 										</div>
 									</div>
 									<div class="row mt-3">
@@ -158,8 +204,7 @@
 												<h6>Mô tả</h6>
 											</label>
 											<textarea class="form-control" id="customer-description" rows="6"
-												placeholder="Vd: Kinh nghiệm làm việc, sở thích..."
-												name="description"></textarea>
+												placeholder="Vd: Kinh nghiệm làm việc, sở thích..." name="description"></textarea>
 										</div>
 									</div>
 								</li>
@@ -175,26 +220,121 @@
 		</div>
 	</div>
 
-
-	<!-- Modal Edit User -->
-	<div class="modal fade" id="edit-customer" tabindex="-1" aria-labelledby="editCustomer" aria-hidden="true">
+	<!-- Modal Create Service Note -->
+	<div class="modal fade" id="create-service-note" tabindex="-1" aria-labelledby="create-service-note"
+		aria-hidden="true">
 		<div class="modal-dialog modal-xl">
 			<div class="modal-content">
 				<div class="modal-header bg-info text-light">
-					<h5 class="modal-title" id="editCustomer">Sửa / Cập nhật thông tin người dùng</h5>
+					<h5 class="modal-title" id="create-service-note">Tạo phiếu dịch vụ</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+						<li class="nav-item" role="presentation">
+							<button class="nav-link active" id="pills-profile-customer-tab" data-bs-toggle="pill"
+								data-bs-target="#pills-profile-customer" type="button" role="tab" aria-controls="pills-home"
+								aria-selected="true">Thông tin khách hàng</button>
+						</li>
+						<li class="nav-item" role="presentation">
+							<button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+								data-bs-target="#pills-service" type="button" role="tab" aria-controls="pills-profile"
+								aria-selected="false">Thông tin dịch vụ</button>
+						</li>
+					</ul>
+					<div class="tab-content" id="pills-tabContent">
+						<div class="tab-pane fade show active" id="pills-profile-customer" role="tabpanel"
+							aria-labelledby="pills-home-tab">
+							<ul class="list-group">
+								<li class="list-group-item">
+									<div class="form-floating mb-3">
+										<input type="email" class="form-control" id="create-service-note-firstLastName" name=""
+											readonly>
+										<label for="floatingInput">Email address</label>
+									</div>
+									<div class="form-floating mb-3">
+										<input type="email" class="form-control" id="create-service-note-birth" readonly>
+										<label for="floatingInput">Email address</label>
+									</div>
+									<div class="form-floating mb-3">
+										<input type="email" class="form-control" id="create-service-note-gender" readonly>
+										<label for="floatingInput">Email address</label>
+									</div>
+									<div class="form-floating mb-3">
+										<input type="email" class="form-control" id="create-service-note-email" readonly>
+										<label for="floatingInput">Email address</label>
+									</div>
+									<div class="form-floating mb-3">
+										<input type="email" class="form-control" id="create-service-note-phone" readonly>
+										<label for="floatingInput">Email address</label>
+									</div>
+									<div class="form-floating mb-3">
+										<input type="email" class="form-control" id="create-service-note-address" readonly>
+										<label for="floatingInput">Email address</label>
+									</div>
+								</li>
+							</ul>
+						</div>
+						<div class="tab-pane fade" id="pills-service" role="tabpanel" aria-labelledby="pills-profile-tab">
+							<form method="POST" id="create-service-note-form" class="row">
+								<label for="gender" class="form-label">
+									<h6>Loại dịch vụ</h6>
+								</label>
+								<select id="select-types" class="form-select form-select-sm" aria-label=".form-select-sm example" name="typeservice">
+									<option value="" selected>-- Chọn loại dịch vụ --</option>
+									{{#each typeservices}}
+									<option class="opt-type" value="{{this.name}}" >{{this.name}}</option>
+									{{/each}}
+								</select>
+								<label for="gender" class="form-label">
+									<h6>Dịch vụ</h6>
+								</label>
+								<select class="form-select form-select-sm" aria-label=".form-select-sm example" name="gender">
+									<option value="" selected>-- Chọn dịch vụ --</option>
+									<option class="opt-service">{{this.service}}</option>
+								</select>
+								<div class="mb-3">
+									<label for="description" class="form-label">
+										<h6>Ghi chú: </h6>
+									</label>
+									<textarea class="form-control" id="customer-description" rows="6"
+										placeholder="Vd: Kinh nghiệm làm việc, sở thích..." name="description"></textarea>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng lại</button>
+					<button type="button" id="create-service-note-btn" class="btn btn-primary">Lưu thay đổi</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Modal Edit User -->
+	<div class="modal fade" id="edit-customer" tabindex="-1" aria-labelledby="edit-customer" aria-hidden="true">
+		<div class="modal-dialog modal-xl">
+			<div class="modal-content">
+				<div class="modal-header bg-info text-light">
+					<h5 class="modal-title" id="edit-customer">Sửa / Cập nhật thông tin người dùng</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
 					<form method="POST" id="edit-customer-form" class="row" enctype="multipart/form-data">
-						<img src="/img/user-icon.png" id="edit-avt" class="rounded mx-auto d-block add-avata" alt="...">
-						<div class="mt-3 mb-3 text-center">
-							<label for="edit-img" class="label-avt btn btn-sm btn-primary">
-								<h6>Chọn ảnh đại diện</h6>
-							</label>
-							<input class="form-control" id="edit-img" type="file" name="image"
-								accept="image/png, image/gif, image/jpeg">
+						<div class="col-xl-3">
+							<img src="/img/user-icon.png" id="edit-customer-avt" class="rounded mx-auto d-block add-avata"
+								alt="...">
+							<div class="mt-3 mb-3 text-center">
+								<label for="edit-img" class="label-avt btn btn-sm btn-primary">
+									<h6>Chọn ảnh đại diện</h6>
+								</label>
+								<input class="form-control" id="edit-img" type="file" name="image"
+									accept="image/png, image/gif, image/jpeg">
+							</div>
 						</div>
-						<div class="col-xl-12 mb-3">
+						<div class="col-xl-9 mb-3">
 							<ul class="list-group">
 								<li class="list-group-item bg-info text-light">
 									<div class="row">
@@ -202,15 +342,15 @@
 											<label for="firstName" class="form-label">
 												<h6>Họ</h6>
 											</label>
-											<input type="text" class="form-control form-control-sm firstName"
-												data-bs-focus="focus" id="edit-firstName" name="firstName" >
+											<input type="text" class="form-control form-control-sm firstName" data-bs-focus="focus"
+												id="edit-firstName" name="firstName">
 										</div>
 										<div class="col-md-6">
 											<label for="lastName" class="form-label">
 												<h6>Tên</h6>
 											</label>
-											<input type="text" class="form-control form-control-sm lastName"
-												id="edit-lastName" name="lastName" >
+											<input type="text" class="form-control form-control-sm lastName" id="edit-lastName"
+												name="lastName">
 										</div>
 									</div>
 									<div class="row mt-3">
@@ -238,15 +378,15 @@
 											<label for="phone" class="form-label">
 												<h6>Số điện thoại</h6>
 											</label>
-											<input type="tel" class="form-control form-control-sm" id="edit-phone"
-												name="phone" required>
+											<input type="tel" class="form-control form-control-sm" id="edit-phone" name="phone"
+												required>
 										</div>
 										<div class="col-md-6">
 											<label for="email" class="form-label">
 												<h6>Email</h6>
 											</label>
-											<input type="email" class="form-control form-control-sm" id="edit-email"
-												name="email" required>
+											<input type="email" class="form-control form-control-sm" id="edit-email" name="email"
+												required>
 										</div>
 									</div>
 									<div class="row mt-3">
@@ -283,14 +423,13 @@
 	<script src="/js/customer.js"></script>
 	<script>
 		document.addEventListener('DOMContentLoaded', function () {
-			$(document).ready(function () {
-				$('#customer_table').DataTable({
-					scrollY: 300,
-					paging: true,
-					reponsive: true
-				});
-			});
-		});
+			var selectTypes = document.getElementById('select-types');
+			var optTypes = document.getElementsByClassName('opt-types');
+			selectTypes.addEventListener('change', (e) => {
+				console.log(e.target.option.value)
+				
+			})
+		})
 	</script>
 </body>
 

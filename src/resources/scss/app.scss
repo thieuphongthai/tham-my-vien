@@ -61,10 +61,7 @@ a{
 //         margin-left: 32px !important;
 //     }
 
-//     .add-avata {
-//         height: 50vmin;
-//         object-fit: cover;
-//     }
+//     
 //     .container-content-page {
 //         max-height: 60vh;
 //         overflow: auto;
@@ -236,6 +233,10 @@ a{
     margin-left: 12px;
 }
 
+.title {
+    margin-left: 12px !important;
+}
+
 .text-green {
     color: #00f284 !important;
 }
@@ -272,16 +273,33 @@ a{
 }
 
 .container-content-page {
-    max-height: 90vh;
+    margin-left: 6px;
+    // margin-right: 16px;
+    max-height: 100vh;
     overflow: auto;
 }
 
 .comment-content-page {
-    max-height: 65vh;
+    height: 79vh;
     overflow: auto;
 }
+
+// .scroll {
+//     max-height: 80%;
+//     overflow-y: scroll;
+// }
+
+.table-content {
+    width: 100%;
+    height: 50%;
+}
+
+.activate {
+    max-height: 100%;
+}
+
 .taskbar {
-    background-color: #343a40;
+    background-color: #4da6ff;
 }
 
 #customer_table_wrapper {
@@ -304,10 +322,12 @@ a{
     object-fit: contain;
     margin-right: 12px;
 }
-// #user_table {
-//     width: 100%;
-//     height: 50vh;
-// }
+
+.add-avata {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+}
 
 #body-table {
     display: block;
@@ -322,6 +342,23 @@ a{
 
 .none-mb {
     margin-bottom: 0 !important;
+}
+
+#user {
+    position: fixed;
+    bottom: 20px;
+    right: 0;
+    left: 0;
+}
+
+.user-img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    margin-left: 11px;
+    border-radius: 50%;
+    border: #fff 1px solid;
+
 }
 
 @media screen and (min-width: 320px) and (max-width: 360px) {
@@ -349,7 +386,6 @@ a{
         display: inline-block;
         text-align: center;
         width: 64px;
-        // height: 64px;
         line-height: 38px;
         margin-left: 8px;
         margin-right: 8px;
@@ -358,7 +394,6 @@ a{
     }
 
     .nav-mobile .nav-bottom:active {
-        // background-color: #fff;
         color: #0080ff;
     }
 
@@ -570,9 +605,9 @@ a{
         display: none;
     }
 
-    #sub-nav-sm {
-        display: block;
-    }
+    // #sub-nav-sm {
+    //     display: block;
+    // }
 
     #sub-nav-lg {
         display: none;
@@ -581,9 +616,13 @@ a{
     .nav-mobile {
         width: 100%;
         // height: 64px;
-        background:#343a40;
+        background:#0080ff;
         display: flex;
         justify-content: center;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        left: 0;
     }
 
     .nav-mobile .nav-bottom {
@@ -603,13 +642,23 @@ a{
         color: #0080ff;
     }
 
-    .comment-content-page {
-        max-height: 60vh;
-        overflow: auto;
-    }
-    .container-content-page {
-        max-height: 89.5%;
-        overflow: auto;
+    // .comment-content-page {
+    //     max-height: 60vh;
+    //     overflow: auto;
+    // }
+    // .container-content-page {
+    //     max-height: 95vh;
+    //     overflow: auto;
+    // }
+
+        // .container-mobile {
+        //     max-height: 95vh;
+        //     overflow: auto;
+
+        // }
+
+    .container-table {
+        display: none;
     }
 }
 

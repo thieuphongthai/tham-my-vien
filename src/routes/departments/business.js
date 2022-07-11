@@ -12,14 +12,19 @@ const validateUploadImage = require('../../middleware/validateUploadImage');
 // router.get('/employ/:id/customer-detail', UserController.getOneBusinessCustomer);
 // router.get('/employ/customer', UserController.getBusinessDashboard);
 // router.get('/employ', EmployController.getBusinessEmployDashboard);
-router.get('/service-note', BusinessController.getServiceNoteDashboard);
 //BUSINESS 
 //EMPLOY
-router.post('/employ/customer', validateUploadImage.upload, BusinessController.createCustomer);
-router.get('/employ/customer', BusinessController.showCustomer);
-router.get('/employ/:id/customer-detail', BusinessController.getOneBusinessCustomer)
-router.post('/employ/:id/customer-detail', BusinessController.createComment)
+router.get('/employ/service-note', BusinessController.showServiceNote);
+router.post('/employ/customers/:id/service-note', BusinessController.createServiceNote);
+router.patch('/employ/customers/:id/comment', BusinessController.createComment)
+router.get('/employ/customers/:id/detail', BusinessController.getOneBusinessCustomer)
+router.put('/employ/customers/:id', validateUploadImage.upload, BusinessController.editCustomer);
+router.post('/employ/customers', validateUploadImage.upload, BusinessController.createCustomer);
+router.get('/employ/customers', BusinessController.showCustomer);
 router.get('/employ', BusinessController.getBusinessDashboard);
+
+
+
 //MANAGER
 router.post('/manager/customer', validateUploadImage.upload, BusinessController.createCustomer);
 router.get('/manager/customer', BusinessController.showMNGCustomer);

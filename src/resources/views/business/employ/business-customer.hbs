@@ -277,22 +277,20 @@
 						</div>
 						<div class="tab-pane fade" id="pills-service" role="tabpanel" aria-labelledby="pills-profile-tab">
 							<form method="POST" id="create-service-note-form" class="row">
-								<label for="gender" class="form-label">
-									<h6>Loại dịch vụ</h6>
-								</label>
-								<select id="select-types" class="form-select form-select-sm" aria-label=".form-select-sm example" name="typeservice">
-									<option value="" selected>-- Chọn loại dịch vụ --</option>
-									{{#each typeservices}}
-									<option class="opt-type" value="{{this.name}}" >{{this.name}}</option>
-									{{/each}}
-								</select>
-								<label for="gender" class="form-label">
-									<h6>Dịch vụ</h6>
-								</label>
-								<select class="form-select form-select-sm" aria-label=".form-select-sm example" name="gender">
-									<option value="" selected>-- Chọn dịch vụ --</option>
-									<option class="opt-service">{{this.service}}</option>
-								</select>
+								<div class="mb-3">
+									<label for="gender" class="form-label">
+										<h6>Chọn dịch vụ</h6>
+									</label>
+									<select id="select-service" class="chosen-select" multiple tabindex="6" name="service">
+										{{#each typeservices}}
+										<optgroup label="{{this.name}}">
+											{{#each this.services}}
+												<option value="{{this.service}}">{{this.service}}</option>
+											{{/each}}
+										<optgroup>
+										{{/each}}
+									</select>
+								</div>
 								<div class="mb-3">
 									<label for="description" class="form-label">
 										<h6>Ghi chú: </h6>
@@ -420,17 +418,8 @@
 		</div>
 	</div>
 
+
 	<script src="/js/customer.js"></script>
-	<script>
-		document.addEventListener('DOMContentLoaded', function () {
-			var selectTypes = document.getElementById('select-types');
-			var optTypes = document.getElementsByClassName('opt-types');
-			selectTypes.addEventListener('change', (e) => {
-				console.log(e.target.option.value)
-				
-			})
-		})
-	</script>
 </body>
 
 </html>

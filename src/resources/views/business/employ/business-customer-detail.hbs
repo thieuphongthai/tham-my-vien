@@ -26,16 +26,16 @@
 					<div class="col-xl-5 mb-3">
 						<img src="/img/uploads/users/{{customer.image.name}}" id="add-avt" class="rounded mx-auto d-block add-avata" alt="...">
 						<div class="card-body">
-							<h3 class="">{{customer.firstName}} {{customer.lastName}}</h3>
+							<h3 class="">{{this.firstName}} {{this.lastName}}</h3>
 							<p class="" value="" for="detail-birth"><strong>Ngày sinh:
-								</strong>{{customer.birth}}</p>
-							<p class="" value=""><strong>Giới tính: </strong>{{customer.gender}}</p>
-							<p class="" value=""><strong>Điện thoại: </strong>{{customer.phone}}</p>
-							<p class="" value=""><strong>Email: </strong>{{customer.email}}</p>
-							<p class="" value=""><strong>Địa chỉ: </strong>{{customer.address}}</p>
+								</strong>{{this.birth}}</p>
+							<p class="" value=""><strong>Giới tính: </strong>{{this.gender}}</p>
+							<p class="" value=""><strong>Điện thoại: </strong>{{this.phone}}</p>
+							<p class="" value=""><strong>Email: </strong>{{this.email}}</p>
+							<p class="" value=""><strong>Địa chỉ: </strong>{{this.address}}</p>
 							<label class="mb-2"><strong>Mô tả:</strong></label>
 							<textarea id="detail-description" class="form-control mb-2" rows="6"
-								disabled>{{customer.description}}</textarea>
+								disabled>{{this.description}}</textarea>
 						</div>
 					</div>
 					<div class="col-xl-7 activate">

@@ -1,5 +1,43 @@
 <div class="nav-mobile text-light">
-	<a href="business/users" class="nav-bottom"><i class="ti-user"></i></a>
-	<a href="/users/customer" class="nav-bottom"><i class="ti-receipt"></i></a>
-	<a href="business/users" class="nav-bottom"><i class="ti-bar-chart"></i></a>
+	<ul class="nav-bottom">
+		<li class="list active">
+			<a href="/users/customer">
+				<span class="nav-mobile-icon"><i class="ti-receipt"></i></span>
+				<span class="nav-text">Thông tin</span>
+			</a>
+		</li>
+		<li class="list">
+			<a>
+				<span class="nav-mobile-icon"><i class="ti-user"></i></span>
+				<span class="nav-text">Cá nhân</span>
+			</a>
+		</li>
+		<li class="list">
+			<a>
+				<span class="nav-mobile-icon"><i class="ti-bar-chart"></i></span>
+				<span class="nav-text">Báo cáo</span>
+			</a>
+		</li>
+	</ul>
 </div>
+
+<script>
+	const list = document.querySelectorAll('.list');
+	function activeTab(){
+		list.forEach((item) =>
+		item.classList.remove('active'));
+		this.classList.add('active')
+	}
+	list.forEach((item) =>
+	item.addEventListener('click',activeTab))
+</script>
+
+
+	{{!-- <a href="business/users" class="nav-bottom">
+		<i class="ti-user"></i>
+		<span class="nav-text">Cá nhân</span>
+	</a>
+	<a href="business/users" class="nav-bottom">
+		<i class="ti-bar-chart"></i>
+		<span class="nav-text">Báo cáo</span>
+	</a> --}}

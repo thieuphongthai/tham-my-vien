@@ -21,6 +21,7 @@ router.get('/employ/customers/:id/detail', BusinessController.getOneBusinessCust
 router.put('/employ/customers/:id', validateUploadImage.upload, BusinessController.editCustomer);
 router.post('/employ/customers', validateUploadImage.upload, BusinessController.createCustomer);
 router.get('/employ/customers', BusinessController.showCustomer);
+router.get('/employ/customers/get-services', BusinessController.showServices);
 router.get('/employ', BusinessController.getBusinessDashboard);
 
 

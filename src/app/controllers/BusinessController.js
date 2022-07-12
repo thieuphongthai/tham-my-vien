@@ -4,8 +4,13 @@ const TypeService = require("../models/TypeService");
 
 class BusinessController {
 	//BUSINESS EMPLOY
-	getBusinessDashboard(req, res) {
+	getBusinessDashboard(req, res, next) {
 		res.render("business/employ/business-overview");
+	}
+
+	showServices(req, res, next) {
+		console.log(req.body)
+		// TypeService.findOne({})
 	}
 
 	showCustomer(req, res, next) {
@@ -116,7 +121,7 @@ class BusinessController {
 					return newDate;
 				});
 				res.render("business/employ/business-customer-detail", {
-					// customer: mongooseToObject(customer)
+					customer: mongooseToObject(customer)
 				});
 			})
 			.catch(next);

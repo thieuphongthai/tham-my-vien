@@ -1,5 +1,3 @@
-@import '_variables';
-
 * {
     margin: 0;
     padding: 0;
@@ -646,9 +644,14 @@ a{
         display: none;
     }
 
+    #sub-nav-sm {
+        display: block;
+    }
+
     #sub-nav-lg {
         display: none;
     }
+
 
     .nav-mobile {
         position: relative;

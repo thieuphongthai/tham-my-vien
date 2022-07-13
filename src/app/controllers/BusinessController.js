@@ -5,7 +5,9 @@ const TypeService = require("../models/TypeService");
 class BusinessController {
 	//BUSINESS EMPLOY
 	getBusinessDashboard(req, res, next) {
-		res.render("business/employ/business-overview");
+		res.render("business/employ/business-overview", {
+			title: 'Kinh doanh'
+		});
 	}
 
 	showServices(req, res, next) {
@@ -19,6 +21,7 @@ class BusinessController {
 				res.render("business/employ/business-customer", {
 					customers: multipleMongooseToObject(customers),
 					typeservices: multipleMongooseToObject(typeservices),
+					title: 'Quản lý khách hàng'
 				});
 			})
 			.catch(next);

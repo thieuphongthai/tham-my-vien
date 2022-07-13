@@ -372,8 +372,9 @@ a{
         display: none;
     }
 
+
     .nav-mobile {
-        position: relative;
+        position: fixed;
         width: 100%;
         background:#343a40;
         display: flex;
@@ -383,13 +384,13 @@ a{
         right: 0;
         left: 0;
         border-radius: 10px;
+        z-index: 5;
     }
 
     .nav-mobile .nav-bottom{
         display: flex;
         width: 100%;
         padding-left: 0;
-        margin-bottom: 0;
     }
 
 
@@ -417,13 +418,14 @@ a{
         position: relative;
         display: block;
         line-height: 65px;
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         transition: 0.5s;
         color: #fff;
+        margin-top: 5px;
     }
 
     .nav-mobile .nav-bottom li.active a .nav-mobile-icon{
-        transform: translateY(-20px);
+        transform: translateY(-6px);
         color: #edbc64;
     }
 
@@ -434,7 +436,7 @@ a{
         padding: 2px 7px;
         border-radius: 12px;
         font-weight: 400;
-        font-size: 0.9em;
+        font-size: 0.6em;
         letter-spacing: 0.05em;
         transition: 0.5s;
         transform: translateY(15px);
@@ -443,7 +445,7 @@ a{
     }
 
     .nav-mobile .nav-bottom li.active a .nav-text{
-        transform: translateY(-2px);
+        transform: translateY(18px);
         opacity: 1;
     }
 
@@ -465,6 +467,7 @@ a{
         display: none;
     }
 
+
     .nav-mobile {
         position: fixed;
         width: 100%;
@@ -476,13 +479,13 @@ a{
         right: 0;
         left: 0;
         border-radius: 10px;
+        z-index: 5;
     }
 
     .nav-mobile .nav-bottom{
         display: flex;
         width: 100%;
         padding-left: 0;
-        margin-bottom: 0;
     }
 
 
@@ -510,13 +513,14 @@ a{
         position: relative;
         display: block;
         line-height: 65px;
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         transition: 0.5s;
         color: #fff;
+        margin-top: 5px;
     }
 
     .nav-mobile .nav-bottom li.active a .nav-mobile-icon{
-        transform: translateY(-20px);
+        transform: translateY(-6px);
         color: #edbc64;
     }
 
@@ -527,7 +531,7 @@ a{
         padding: 2px 7px;
         border-radius: 12px;
         font-weight: 400;
-        font-size: 0.9em;
+        font-size: 0.6em;
         letter-spacing: 0.05em;
         transition: 0.5s;
         transform: translateY(15px);
@@ -536,7 +540,7 @@ a{
     }
 
     .nav-mobile .nav-bottom li.active a .nav-text{
-        transform: translateY(-2px);
+        transform: translateY(18px);
         opacity: 1;
     }
 
@@ -545,7 +549,7 @@ a{
     }
 }
 
-@media screen and (min-width: 391px) and (max-width: 393px) {
+@media screen and (min-width: 375px) and (max-width: 412px) {
     #sidebar-wrapper {
         display: none;
     }
@@ -558,8 +562,9 @@ a{
         display: none;
     }
 
+
     .nav-mobile {
-        position: relative;
+        position: fixed;
         width: 100%;
         background:#343a40;
         display: flex;
@@ -569,13 +574,13 @@ a{
         right: 0;
         left: 0;
         border-radius: 10px;
+        z-index: 5;
     }
 
     .nav-mobile .nav-bottom{
         display: flex;
         width: 100%;
         padding-left: 0;
-        margin-bottom: 0;
     }
 
 
@@ -603,13 +608,14 @@ a{
         position: relative;
         display: block;
         line-height: 65px;
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         transition: 0.5s;
         color: #fff;
+        margin-top: 5px;
     }
 
     .nav-mobile .nav-bottom li.active a .nav-mobile-icon{
-        transform: translateY(-20px);
+        transform: translateY(-6px);
         color: #edbc64;
     }
 
@@ -620,7 +626,7 @@ a{
         padding: 2px 7px;
         border-radius: 12px;
         font-weight: 400;
-        font-size: 0.9em;
+        font-size: 0.6em;
         letter-spacing: 0.05em;
         transition: 0.5s;
         transform: translateY(15px);
@@ -629,7 +635,7 @@ a{
     }
 
     .nav-mobile .nav-bottom li.active a .nav-text{
-        transform: translateY(-2px);
+        transform: translateY(18px);
         opacity: 1;
     }
 
@@ -655,22 +661,28 @@ a{
 
     .nav-mobile {
         position: fixed;
-        width: 100%;
+        width: 65px;
         background:#343a40;
         display: flex;
         justify-content: center;
         align-items: center;
         bottom: 0;
-        right: 0;
+        // right: 0;
         left: 0;
-        border-radius: 10px;
-        height: 68px;
+        // border-radius: 10px;
+        z-index: 5;
+        top: 0;
+        height: 100%;
     }
 
     .nav-mobile .nav-bottom{
         display: flex;
-        width: 100%;
+        width: 65px;
         padding-left: 0;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        height: 100%;
     }
 
 
@@ -679,7 +691,7 @@ a{
         position: relative;
         width: calc(100% / 3);
         z-index: 2;
-        margin-top: 5px;
+        margin: 25px 0;
     }
 
     .nav-mobile .nav-bottom li a{
@@ -698,13 +710,14 @@ a{
         position: relative;
         display: block;
         line-height: 65px;
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         transition: 0.5s;
         color: #fff;
+        // margin-top: 5px;
     }
 
     .nav-mobile .nav-bottom li.active a .nav-mobile-icon{
-        transform: translateY(-20px);
+        transform: translateY(-6px);
         color: #edbc64;
     }
 
@@ -715,16 +728,17 @@ a{
         padding: 2px 7px;
         border-radius: 12px;
         font-weight: 400;
-        font-size: 0.9em;
+        font-size: 0.6em;
         letter-spacing: 0.05em;
         transition: 0.5s;
         transform: translateY(15px);
         opacity: 0;
-        bottom: 5px;
+        white-space: nowrap;
+        // bottom: 5px;
     }
 
     .nav-mobile .nav-bottom li.active a .nav-text{
-        transform: translateY(-2px);
+        transform: translateY(18px);
         opacity: 1;
     }
 

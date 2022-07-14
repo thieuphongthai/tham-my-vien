@@ -109,7 +109,7 @@ viewCustomer.addEventListener("show.bs.modal", function (event) {
   }
   editCustomerForm.setAttribute(
     "action",
-    `/business/employ/customers/${editID}?_method=PUT`
+    `/customers/${editID}?_method=PUT`
   );
   editFirstName.value = firstName;
   // editFirstName.setAttribute('value', firstName);
@@ -152,7 +152,7 @@ createServiceNote.addEventListener("show.bs.modal", function (event) {
 
   createServiceNoteForm.setAttribute(
     "action",
-    `/business/employ/customers/${dataServiceNoteID}/service-note`
+    `/customers/${dataServiceNoteID}/service-note`
   );
   serviceNoteFirstLastName.value = dataFirstName + " " + dataLastName;
   serviceNoteBirth.value = dataBirth;

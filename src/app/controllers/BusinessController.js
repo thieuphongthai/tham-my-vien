@@ -3,6 +3,7 @@ const Status = require("../models/Status");
 
 const { mongooseToObject, multipleMongooseToObject } = require("../../util/mongoose");
 const TypeService = require("../models/TypeService");
+const ServiceNote = require('../models/ServiceNote');
 
 class BusinessController {
 	//BUSINESS EMPLOY
@@ -153,6 +154,7 @@ class BusinessController {
 	}
 
 	createServiceNote(req, res, next) {
+		console.log(req.body.service)
 		const serviceNote = new ServiceNote({
 			customer: req.body.customer,
 			user: req.body.user,

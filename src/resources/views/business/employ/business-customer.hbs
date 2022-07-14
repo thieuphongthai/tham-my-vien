@@ -3,9 +3,11 @@
 
 	</div>
 	<h3 class="title text-light">Quản lý khách hàng</h3>
+    {{> page/sidebar/admin/sidebar-mobile}}
+
 	<div class="stask">
 		<!-- Button trigger modal -->
-		<a href="/business/employ/service-note" type="button" class="btn btn-primary btn-create">
+		<a href="/service-note" type="button" class="btn btn-primary btn-create">
 			<i class="ti-receipt"></i> Phiếu dịch vụ
 		</a>
 		<!-- Button trigger modal -->
@@ -111,7 +113,7 @@
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
-				<form method="POST" action="/business/employ/customers" id="create-customer-form" class="row"
+				<form method="POST" action="/customers" id="create-customer-form" class="row"
 					enctype="multipart/form-data">
 					<div class="col-xl-3 text-center mb-3">
 						<img src="/img/user-icon.png" id="add-avt-customer" class="rounded mx-auto d-block add-avata"
@@ -246,7 +248,7 @@
 							aria-selected="false">Thông tin dịch vụ</button>
 					</li>
 				</ul>
-				<form method="POST" id="create-service-note-form" class="row">
+				<form method="POST" id="create-service-note-form" class="row" action="/customers">
 					<div class="tab-content" id="pills-tabContent">
 						<div class="tab-pane fade show active" id="pills-profile-customer" role="tabpanel"
 							aria-labelledby="pills-home-tab">

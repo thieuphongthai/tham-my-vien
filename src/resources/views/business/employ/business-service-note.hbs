@@ -9,9 +9,11 @@
 </head>
 
 <body>
+    {{> page/sidebar/admin/sidebar-mobile}}
+
             <nav id="sub-nav-lg" class="navbar taskbar justify-content-between">
                 <div class="title">
-					<a href="/business/employ/customers" class="text-light"><i class="ti-back-left"></i> Quay lại</a>
+					<a href="/customers" class="text-light"><i class="ti-back-left"></i> Quay lại</a>
 				</div>
                 <h3 class="title text-light">Quản lý phiếu dịch vụ</h3>
 				<div class="stask">
@@ -19,21 +21,25 @@
                 </div>
             </nav>
             <div class="container-fluid mt-3">
-                {{!-- {{#each cards}} --}}
-                {{#each serviceNotes}}
-                <div class="card text-dark bg-info mb-3" style="max-width: 18rem;">
-                    <div class="card-header">{{this.status}}</div>
-                    <div class="card-body">
-                        <h5 class="card-title">{{this.customer}}</h5>
-                        <p class="card-text">{{this.user}}</p>
-                        <p class="card-text">{{this.service}}</p>
-                        {{#each comments}}
-                        <p class="card-text">{{this.comment}}</p>
-                        {{/each}}
+                <div class="row ml-2">
+                        {{#each serviceNotes}}
+                    <div class="col-xl-2 ">
+                        <div class="card text-dark bg-info mb-3 ml-3">
+                            <div class="card-header">{{this.status}}</div>
+                            <div class="card-body">
+                                <h5 class="card-title">{{this.customer}}</h5>
+                                <p class="card-text">{{this.user}}</p>
+                                {{#each service}}
+                                <p class="card-text">{{this}}</p>
+                                {{/each}}
+                                {{#each comments}}
+                                <p class="card-text">{{this.comment}}</p>
+                                {{/each}}
+                            </div>
+                        </div>
                     </div>
+                        {{/each}}
                 </div>
-                {{/each}}
-                {{!-- {{/each}} --}}
             </div>
 </body>
 

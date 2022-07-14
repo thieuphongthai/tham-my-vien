@@ -6,7 +6,7 @@ class BusinessController {
 	//BUSINESS EMPLOY
 	getBusinessDashboard(req, res, next) {
 		res.render("business/employ/business-overview", {
-			title: 'Kinh doanh'
+			title: 'Bảng báo cáo'
 		});
 	}
 

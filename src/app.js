@@ -52,7 +52,7 @@ app.use(session({
 app.use(flash());
 
 app.use(function(req, res, next){
-    res.locals.message = req.flash();
+    res.locals.user = req.user;
     next();
 });
 

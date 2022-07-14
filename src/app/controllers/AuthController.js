@@ -6,13 +6,14 @@ const bcrypt = require("bcryptjs");
 const { multipleMongooseToObject, mongooseToObject } = require('../../util/mongoose');
 const mongoose = require("../../util/mongoose");
 const flash = require('connect-flash');
+const url = require('url');
 
 
 class AuthController {
     
 
     getRootLogin(req, res) {
-        res.render('root/root-login');
+        res.render('root/root-login', {layout: false});
     }
 
     getAdminLogin(req, res) {
@@ -70,11 +71,11 @@ class AuthController {
             .then( user => {
                 console.log(user);
                 if (!next) {
-                    res.status(500).send({ message: 'Đã có lỗi xảy ra tại máy chủ' });
+                    res.status(500).json({ message: 'Đã có lỗi xảy ra tại máy chủ' });
                     return;
                 }
                 if (!user) {
-                    return res.status(404).send({ message: "Không tìm thấy người dùng này" });
+                    return res.status(404).json({ message: "Không tìm thấy người dùng này" });
                 }
                 // so sánh password nhập vào với password trong db
                 var passwordIsValid = bcrypt.compareSync(
@@ -83,7 +84,7 @@ class AuthController {
                 );
                 console.log(passwordIsValid)
                 if (!passwordIsValid) {
-                    return res.status(401).send('/login', { message: "Mật khẩu đăng nhập không đúng!" });
+                    return res.redirect('/');
                 }
                 var token = jwt.sign({ id: user._id, role: user.role }, process.env.SECURITY_KEY, {
                     expiresIn: 30, // 10 phút
@@ -108,12 +109,12 @@ class AuthController {
 
     //[GET] Login UI
 	getLogin(req, res) {
-		res.render("login");
+		res.render("login", {layout: false});
 	}
 
     // [POST] Login
     postLogin(req, res, next) {
-        User.findOne({email: req.body.email})
+        User.findOne({account: req.body.account})
             .then( user => {
                 console.log(user);
                 if (!next) {
@@ -121,7 +122,7 @@ class AuthController {
                     return;
                 }
                 if (!user) {
-					res.send(req.flash('message'))
+					res.send('sai account roi ba')
                 }
                 // so sánh password nhập vào với password trong db
                 var passwordIsValid = bcrypt.compareSync(
@@ -130,18 +131,13 @@ class AuthController {
                 );
                 console.log(passwordIsValid)
                 if (!passwordIsValid) {
-					
-					res.sendFile('login', req.session.message = {
-						type: 'danger',
-                        intro: 'Chúc mừng! ',
-                        message: 'Bạn tạo người dùng thành công',
-					})
+					res.json('sai mat khau roi ba');
                 }
-                const accessToken = jwt.sign({ id: user._id, role: user.role }, process.env.ACCESSTOKEN_KEY, {
+                const accessToken = jwt.sign({ id: user._id, role: user.role, department: user.department, position: user.position }, process.env.ACCESSTOKEN_KEY, {
                     expiresIn: 600, // 10 phút
                 });
 
-                const refreshToken = jwt.sign({ id: user._id, role: user.role }, process.env.REFRESHTOKEN_KEY, {
+                const refreshToken = jwt.sign({ id: user._id, role: user.role, department: user.department, position: user.position }, process.env.REFRESHTOKEN_KEY, {
                     expiresIn: 86400, // 24 giờ
                 })
                 // var authorities = [];
@@ -151,18 +147,12 @@ class AuthController {
                 res.cookies = ('refreshToken', refreshToken, {
                     httpOnly: true,
                     secure: false,
-                    path: '/',
+                    path: `/${user.department}`,
                     sameSite: 'strict'
                 });
-                // const { password, ...others } = user._doc;
-                // {...others, accessToken, refreshToken});
-                // res.status(200).render('root/root-dashboard', { ...others, accessToken });
-                res.status(200).render('users/user', {
-                    id: user._id,
-                    userName: user.userName,
-                    email: user.email,
-                    role: user.engName,
-                });
+                console.log(accessToken);
+                res.status(200).render(`${user.departmentEng}/${user.positionEng}/${user.departmentEng}-overview`, {user, accessToken});
+                // res.json({user, accessToken})
             })
             .catch(next);
     };

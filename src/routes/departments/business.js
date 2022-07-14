@@ -14,15 +14,15 @@ const validateUploadImage = require('../../middleware/validateUploadImage');
 // router.get('/employ', EmployController.getBusinessEmployDashboard);
 //BUSINESS 
 //EMPLOY
-router.get('/employ/service-note', BusinessController.showServiceNote);
-router.post('/employ/customers/:id/service-note', BusinessController.createServiceNote);
-router.patch('/employ/customers/:id/comment', BusinessController.createComment)
-router.get('/employ/customers/:id/detail', BusinessController.getOneBusinessCustomer)
-router.put('/employ/customers/:id', validateUploadImage.upload, BusinessController.editCustomer);
-router.post('/employ/customers', validateUploadImage.upload, BusinessController.createCustomer);
-router.get('/employ/customers', BusinessController.showCustomer);
-router.get('/employ/customers/get-services', BusinessController.showServices);
-router.get('/employ', BusinessController.getBusinessDashboard);
+router.get('/service-note', BusinessController.showServiceNote);
+router.post('/customers/:id/service-note', BusinessController.createServiceNote);
+router.patch('/customers/:id/comment', BusinessController.createComment)
+router.get('/customers/:id/detail', BusinessController.getOneBusinessCustomer)
+router.put('/customers/:id', validateUploadImage.upload, BusinessController.editCustomer);
+router.post('/customers', validateUploadImage.upload, BusinessController.createCustomer);
+router.get('/customers', BusinessController.showCustomer);
+router.get('/get-services', BusinessController.showServices);
+router.get('/', BusinessController.getBusinessDashboard);
 
 
 

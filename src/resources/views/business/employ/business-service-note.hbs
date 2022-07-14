@@ -20,14 +20,19 @@
             </nav>
             <div class="container-fluid mt-3">
                 {{!-- {{#each cards}} --}}
+                {{#each serviceNotes}}
                 <div class="card text-dark bg-info mb-3" style="max-width: 18rem;">
-                    <div class="card-header">Header</div>
+                    <div class="card-header">{{this.status}}</div>
                     <div class="card-body">
-                        <h5 class="card-title">Info card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
+                        <h5 class="card-title">{{this.customer}}</h5>
+                        <p class="card-text">{{this.user}}</p>
+                        <p class="card-text">{{this.service}}</p>
+                        {{#each comments}}
+                        <p class="card-text">{{this.comment}}</p>
+                        {{/each}}
                     </div>
                 </div>
+                {{/each}}
                 {{!-- {{/each}} --}}
             </div>
 </body>

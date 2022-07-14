@@ -15,7 +15,7 @@ const hrRouter = require("./departments/human-resource")
 
 router.get("/root", rootRouter);
 router.get("/admin", adminRouter);
-router.get("/customers", [authJwt.verifyToken, authJwt.isUser], businessRouter);
+router.get("/customers",  businessRouter);
 router.get("/marketing", [authJwt.verifyToken, authJwt.isUser], marketingRouter);
 router.get("/reception", receptionRouter);
 router.get("/operating", operatingRouter);

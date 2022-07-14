@@ -1,4 +1,6 @@
 const Customer = require("../models/Customer");
+const Status = require("../models/Status");
+
 const { mongooseToObject, multipleMongooseToObject } = require("../../util/mongoose");
 const TypeService = require("../models/TypeService");
 
@@ -16,11 +18,12 @@ class BusinessController {
 	}
 
 	showCustomer(req, res, next) {
-		Promise.all([Customer.find({}), TypeService.find({})])
-			.then(([customers, typeservices]) => {
+		Promise.all([Customer.find({}), TypeService.find({}), Status.find({})])
+			.then(([customers, typeservices, statuses]) => {
 				res.render("business/employ/business-customer", {
 					customers: multipleMongooseToObject(customers),
 					typeservices: multipleMongooseToObject(typeservices),
+					statuses: multipleMongooseToObject(statuses),
 					title: 'Quản lý khách hàng'
 				});
 			})
@@ -140,12 +143,25 @@ class BusinessController {
 	}
 
 	showServiceNote(req, res, next) {
-		res.render("business/employ/business-service-note");
+		ServiceNote.find({})
+			.then(serviceNotes => {
+				res.render('business/employ/business-service-note', {
+					serviceNotes: multipleMongooseToObject(serviceNotes)
+				});
+			})
+			.catch(next);
 	}
 
 	createServiceNote(req, res, next) {
-		console.log(req.params.id);
-		res.json("ok");
+		const serviceNote = new ServiceNote({
+			customer: req.body.customer,
+			user: req.body.user,
+			status: req.body.status,
+			service: req.body.service,
+			comments: {comment: req.body.comment}
+		});
+		serviceNote.save();
+		res.redirect('back');
 	}
 
 	//BUSINESS MANAGER

@@ -1,0 +1,30 @@
+
+<div class="d-flex" id="wrapper">
+	<div class="border-end" id="sidebar-wrapper">
+		<div class="sidebar-toggle" id="sidebarToggleBtn">
+			<i class="ti-arrow-circle-right"></i>
+		</div>
+		<div class="list-group list-group-flush">
+			<a href="#" class="text-dark pt-2 pb-2 inline bg-white"><img src="/img/logo-svg.svg" alt="" class="logo-img"><h5 class="text-dashboar">BẢNG ĐIỀU KHIỂN</h5></a>
+			<a
+				class="list-group-item p-3 sidebar-menu"
+				href="/business/employ"
+			><i class="ti-user"></i>Tổng quan</a>
+			<a
+				class="list-group-item p-3 sidebar-menu"
+				href="/business/employ/customers"
+			><i class="ti-face-smile"></i>Quản lý khách hàng</a>
+		</div>
+		<div class="user-toggle" id="user">
+			<img src="/img/uploads/users/image-1656751461092.jpg" alt="" class="user-img">
+		</div>
+	</div>
+</div>
+
+<script>
+	let sidebarBtn = document.querySelector("#sidebarToggleBtn");
+	let sidebar = document.querySelector("#sidebar-wrapper");
+	sidebarBtn.onclick = function () {
+		sidebar.classList.toggle("active"); sidebarBtn.classList.toggle("rotate");
+	};
+</script>

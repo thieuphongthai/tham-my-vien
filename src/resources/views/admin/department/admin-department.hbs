@@ -1,0 +1,212 @@
+{{!-- <div class="row bg-dark">
+    {{> page/sidebar/sales/sidebar-manager}} --}}
+    <div class="content">
+        <nav class="navbar bg-info d-flex justify-content-between pr-3 pl-3">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-danger btn-storage">
+                <i class="ti-archive"></i> Kho lưu trữ
+            </button>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary btn-create" data-bs-toggle="modal"
+                data-bs-target="#exampleModal">
+                <i class="ti-plus"></i> Tạo người dùng
+            </button>
+        </nav>
+        <div class="container-fluid mt-3">
+            <div class="table-responsive mt-3">
+                <table id="user" class="table table-sm table-bordered align-middle">
+                    <thead class="table-info">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Phòng ban</th>
+                            <th scope="col">Mô tả</th>
+                            <th scope="col">Option</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each departments}}
+                        <tr class="info">
+                            <th scope="row">{{sum @index 1}}</th>
+                            <td>{{this.name}}</td>
+                            <td>{{this.description}}</td>
+                            <td class="text-center">
+                                <button class="btn btn-outline-info btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#updateModal" data-idd="{{this._id}}" data-name="{{this.name}}" data-decription="{{this.decription}}">Sửa
+                                </button>
+                                <button class="btn btn-outline-danger btn-sm" data-id="{{this._id}}"
+                                    data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- Modal Create --}}
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg bg-dark" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Tạo phòng ban</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST">
+                    <div class="col-xl-12">
+                        <ul class="list-group">
+                            <li class="list-group-item bg-info">
+                                <div class="row">
+                                    <div class="">
+                                        <label for="firstName" class="form-label">
+                                            <h6>Phòng ban</h6>
+                                        </label>
+                                        <input type="text" class="form-control form-control-sm" id="departName"
+                                            placeholder="Tên phòng ban" name="departName"
+                                            title="Username should only contain lowercase letters. e.g. john" required>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-12 mb-3">
+                                        <label for="description" class="form-label">
+                                            <h6>Mô tả</h6>
+                                        </label>
+                                        <textarea class="form-control" id="description" rows="6"
+                                            placeholder="Mô tả phòng ban" name="description"></textarea>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                        <button type="submit" class="btn btn-primary">Lưu</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- Modal Delete --}}
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Xóa</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Bạn có đồng ý xóa không?
+            </div>
+            <div class="modal-footer">
+                <button id="btn-delete" type="button" class="btn btn-danger">Có, chắc chắn</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Không</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- Modal Update --}}
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateModalLabel">Thông tin phòng ban</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form name="update-form" id="update-form" method="POST">
+                    <div class="row">
+                        <div class="">
+                            <label for="firstName" class="form-label">
+                                <h6>Phòng ban</h6>
+                            </label>
+                            <input type="text" class="form-control form-control-sm" id="updDepartName"
+                                placeholder="Tên phòng ban" name="departName"
+                                title="Username should only contain lowercase letters. e.g. john" required>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12 mb-3">
+                            <label for="description" class="form-label">
+                                <h6>Mô tả</h6>
+                            </label>
+                            <textarea class="form-control" id="updDescription" rows="6" placeholder="Mô tả phòng ban"
+                                name="description"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                        <button id="btn-update" type="button" class="btn btn-primary">Lưu</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        $(document).ready(function () {
+            $('#user').DataTable({
+                paginate: true,
+                scrollY: 300,
+                scrollX: 0
+            });
+        });
+
+        //DELETE
+        var id;
+        var btnDel = document.getElementById('btn-delete');
+        var delForm = document.forms['delete-form'];
+
+        $('#deleteModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            id = button.data('id');
+
+        })
+
+        btnDel.onclick = function () {
+            delForm.action = '/admin/customer/' + id + '?_method=DELETE';
+            delForm.submit();
+        }
+        //END DELETE
+
+        //UPDATE
+        var idd;
+        var btnUpd = document.getElementById('btn-update');
+        var updForm = document.forms['update-form'];
+
+        var updCustomer = document.getElementById("updateModal");
+        updCustomer.addEventListener("show.bs.modal", function (event) {
+            // Button that triggered the modal
+            var button = event.relatedTarget;
+            idd = button.getAttribute("data-idd");
+
+            // Get data from edit button
+            var name = button.getAttribute("data-name");
+            var decription = button.getAttribute("data-decription");
+
+            // Get element need embeded input
+            var updName = document.getElementById("updDepartName");
+            var updDecript = document.getElementById("updDescription");
+
+            updName.value = name;
+            updDecript.value = decription;
+            
+        });
+        btnUpd.onclick = function () {
+            updForm.action = '/admin/' + idd + '?_method=PUT';
+            updForm.submit();
+        }
+        //END UPDATE
+    });
+</script>

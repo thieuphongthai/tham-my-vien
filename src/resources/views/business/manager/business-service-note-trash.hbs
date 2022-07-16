@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phiếu dịch vụ đã xóa</title>
+</head>
+
+<body>
+    {{> page/sidebar/admin/sidebar-mobile}}
+
+    <nav id="sub-nav-lg" class="navbar taskbar justify-content-between">
+        <div class="title">
+            <a href="/manager/service-note" class="text-light"><i class="ti-back-left"></i> Quay lại</a>
+        </div>
+        <h3 class="title text-light">Quản lý phiếu dịch vụ</h3>
+        <a type="button" class="btn btn-success btn-storage text-light">
+            <i class="ti-archive"></i> Kho lưu trữ
+        </a>
+    </nav>
+    <div class="container-fluid mt-3">
+        <div class="row ml-2">
+            {{#each serviceNotes}}
+            <div class="col-12">
+                <h3 name="status" class="form-label">{{this.status}}</h3>
+            </div>
+            <hr class="row g-3">
+            {{#each customer}}
+            <div class="col-12">
+                <label for="name" class="form-label">Khách hàng:</label>
+                <label name="name" class="form-label">{{this.name}}</label>
+            </div>
+            <div class="col-md-6">
+                <label for="birth" class="form-label">Ngày sinh:</label>
+                <label name="birth" class="form-label"> {{this.birth}}</label>
+
+            </div>
+            <div class="col-md-6">
+                <label for="gender" class="form-label">Giới tính:</label>
+                <label name="gender" class="form-label">{{this.gender}}</label>
+            </div>
+            <div class="col-md-6">
+                <label for="email" class="form-label">Email: </label>
+                <label name="email" class="form-label"> {{this.email}}</label>
+
+            </div>
+            <div class="col-md-6">
+                <label for="phone" class="form-label">Số điện thoại:</label>
+                <label name="phone" class="form-label">{{this.phone}}</label>
+            </div>
+            <div class="col-12">
+                <label for="address" class="form-label">Địa chỉ:</label>
+                <label name="address" class="form-label">{{this.address}}</label>
+            </div>
+            {{/each}}
+            <hr>
+            {{#each user}}
+            <div class="col-12">
+                <label for="performUser" class="form-label">Bác sĩ: </label>
+                <label name="performUser" class="form-label">{{this.performUser}}</label>
+            </div>
+            {{/each}}
+            <div class="col-md-6">
+                <label for="service" class="form-label">Dịch vụ: </label>
+                <label name="service" class="form-label">{{this.service}}</label>
+            </div>
+            <div class="col-md-6">
+                <label for="reason" class="form-label">Lý do:  </label>
+                <label name="reason" class="form-label">{{this.reason}}</label>
+            </div>
+            {{#each comments}}
+            <div class="col-md-6">
+                <label for="comment" class="form-label">Ghi chú: </label>
+                <label name="comment" class="form-label">{{this.comment}}</label>
+            </div>
+            {{/each}}
+            <div class="btn btn-primary btn-sm col-md-6 " id="btn-restore" data-idd="{{this._id}}">Khôi phục</div>
+            <div class="col-md-6">
+                <label for="schedule" class="form-label">Lịch hẹn: </label>
+                <label name="schedule" class="form-label">{{this.schedule}}</label>
+            </div>
+            <div class="btn btn-danger btn-sm col-md-6" data-id="{{this._id}}" data-bs-toggle="modal"
+                data-bs-target="#deleteModal">Xóa vĩnh viễn</div>
+            </form>
+            {{/each}}
+        </div>
+    </div>
+
+	<form name="restore-form" method="POST"></form>
+	{{!-- Modal Delete --}}
+	<form name="delete-form" method="POST"></form>
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Xóa</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					Bạn có đồng ý xóa vĩnh viễn không?
+				</div>
+				<div class="modal-footer">
+					<button id="btn-delete" type="button" class="btn btn-danger">Có, chắc chắn</button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Không</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			//DELETE
+			var id;
+			var btnDel = document.getElementById('btn-delete');
+			var delForm = document.forms['delete-form'];
+			var resForm = document.forms['restore-form'];
+
+            var btnRestore = document.getElementById('btn-restore');
+
+			$('#deleteModal').on('show.bs.modal', function (event) {
+				var button = $(event.relatedTarget);
+				id = button.data('id');
+
+			})
+
+			btnDel.onclick = function () {
+				delForm.action = '/manager/service-note-trash/' + id + '?_method=DELETE';
+				delForm.submit();
+			}
+
+			btnRestore.onclick = function(e){
+                e.preventDefault();
+                var idd = $(this).data('idd');
+                resForm.action = '/manager/service-note-trash/' + idd + '/restore?_method=PATCH';
+                resForm.submit();
+            }
+		});
+	</script>
+</html>

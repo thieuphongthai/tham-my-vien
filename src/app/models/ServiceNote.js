@@ -1,21 +1,38 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const mongooseDelete = require("mongoose-delete");
 
 const ServiceNote = new Schema({
 	name: String,
-    customer: [
+	customer: [
 		{
-			type: String,
+			type: new mongoose.Schema(
+				{
+					name: String,
+					birth: String,
+					gender: String,
+					email: String,
+					phone: Number,
+					address: String,
+				},
+				{ timestamps: true }
+			),
 			ref: "Customer"
 		}
 	],
-    user: [
+	user: [
 		{
-			type: String,
+			type: new mongoose.Schema(
+				{
+					createName: String,
+					performName: String,
+				},
+				{ timestamps: true }
+			),
 			ref: "User"
 		}
 	],
-    status: [
+	status: [
 		{
 			type: String,
 			ref: "Status"
@@ -27,14 +44,20 @@ const ServiceNote = new Schema({
 			ref: "Service"
 		}
 	],
-    comments: [
+	comments: [
 		{
 			comment: String
 		}
 	],
-	appointmentDate: Date,
+	schedule: String,
+	reason: String,
 }, {
 	timestamps: true
+});
+
+ServiceNote.plugin(mongooseDelete, {
+	deletedAt: true,
+	overrideMethods: 'all',
 });
 
 module.exports = mongoose.model('ServiceNote', ServiceNote);

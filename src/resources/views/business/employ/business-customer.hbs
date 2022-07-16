@@ -3,7 +3,7 @@
 
 	</div>
 	<h3 class="title text-light">Quản lý khách hàng</h3>
-    {{> page/sidebar/admin/sidebar-mobile}}
+	{{> page/sidebar/admin/sidebar-mobile}}
 
 	<div class="stask">
 		<!-- Button trigger modal -->
@@ -134,9 +134,9 @@
 										<input type="text" class="form-control form-control-sm firstName"
 											id="customer-firstName" placeholder="Vd: Trần Văn" name="firstName"
 											required>
-										<div id="feedback-firstname">
+										<p id="feedback-firstname"></p>
 
-										</div>
+										</p>
 									</div>
 									<div class="col-md-6">
 										<label for="lastName" class="form-label">
@@ -255,34 +255,34 @@
 							<ul class="list-group">
 								<li class="list-group-item">
 									<div class="form-floating mb-3">
-										<input type="email" class="form-control" id="create-service-note-firstLastName"
-											name="customer" readonly>
-										<label for="floatingInput">Email address</label>
+										<input type="text" class="form-control" id="create-service-note-firstLastName"
+											name="name" readonly>
+										<label for="name">Họ tên</label>
 									</div>
 									<div class="form-floating mb-3">
-										<input type="email" class="form-control" id="create-service-note-birth"
-											readonly>
-										<label for="floatingInput">Email address</label>
+										<input type="date" class="form-control" id="create-service-note-birth"
+											name="birth" readonly>
+										<label for="birth">Ngày sinh</label>
 									</div>
 									<div class="form-floating mb-3">
-										<input type="email" class="form-control" id="create-service-note-gender"
-											readonly>
-										<label for="floatingInput">Email address</label>
+										<input type="text" class="form-control" id="create-service-note-gender"
+											name="gender" readonly>
+										<label for="gender">Giới tính</label>
 									</div>
 									<div class="form-floating mb-3">
 										<input type="email" class="form-control" id="create-service-note-email"
-											readonly>
-										<label for="floatingInput">Email address</label>
+											name="email" readonly>
+										<label for="email">Email address</label>
 									</div>
 									<div class="form-floating mb-3">
-										<input type="email" class="form-control" id="create-service-note-phone"
-											readonly>
-										<label for="floatingInput">Email address</label>
+										<input type="number" class="form-control" id="create-service-note-phone"
+											name="phone" readonly>
+										<label for="phone">Số điện thoại</label>
 									</div>
 									<div class="form-floating mb-3">
-										<input type="email" class="form-control" id="create-service-note-address"
-											readonly>
-										<label for="floatingInput">Email address</label>
+										<input type="text" class="form-control" id="create-service-note-address"
+											name="address" readonly>
+										<label for="address">Địa chỉ</label>
 									</div>
 								</li>
 							</ul>
@@ -290,7 +290,7 @@
 						<div class="tab-pane fade" id="pills-service" role="tabpanel"
 							aria-labelledby="pills-profile-tab">
 							<div class="mb-3">
-								<label for="gender" class="form-label">
+								<label for="service" class="form-label">
 									<h6>Chọn dịch vụ</h6>
 								</label>
 								<select id="select-service" class="chosen-select" multiple tabindex="6" name="service">
@@ -303,22 +303,40 @@
 										{{/each}}
 								</select>
 							</div>
+
 							<div class="mb-3">
-								<label for="gender" class="form-label">
-									<h6>Chọn dịch vụ</h6>
+								<label for="performUser" class="form-label">
+									<h6>Nhân viên thực hiện</h6>
 								</label>
-								<select class="form-select" aria-label="Default select example" name="status">
-									{{#each statuses}}
-									<option value="{{this.name}}">{{this.name}}</option>
+								<select id="select-service" class="chosen-select" multiple tabindex="6"
+									name="performUser">
+									{{#each users}}
+									<option value="{{this.firstName}} {{this.lastName}}">{{this.firstName}}
+										{{this.lastName}}</option>
 									{{/each}}
 								</select>
 							</div>
+
 							<div class="mb-3">
-								<label for="description" class="form-label">
+								<label for="gender" class="form-label">
+									<h6>Trạng thái</h6>
+								</label>
+								<input type="datetime-local" class="form-control" id="create-service-note-address" name="schedule">
+							</div>
+
+							<div class="mb-3">
+								<label for="gender" class="form-label">
+									<h6>Trạng thái</h6>
+								</label>
+								<input type="text" class="form-control" id="create-service-note-address" name="status"
+									value="{{status.name}}" readonly>
+							</div>
+							<div class="mb-3">
+								<label for="comment" class="form-label">
 									<h6>Ghi chú: </h6>
 								</label>
 								<textarea class="form-control" id="customer-description" rows="6"
-									placeholder="Vd: Kinh nghiệm làm việc, sở thích..." name="description"></textarea>
+									placeholder="Vd: Kinh nghiệm làm việc, sở thích..." name="comment"></textarea>
 							</div>
 						</div>
 					</div>

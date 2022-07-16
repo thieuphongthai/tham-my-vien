@@ -1,6 +1,6 @@
 const Customer = require("../models/Customer");
 const Status = require("../models/Status");
-
+const User = require("../models/User");
 const { mongooseToObject, multipleMongooseToObject } = require("../../util/mongoose");
 const TypeService = require("../models/TypeService");
 const ServiceNote = require('../models/ServiceNote');
@@ -19,14 +19,16 @@ class BusinessController {
 	}
 
 	showCustomer(req, res, next) {
-		Promise.all([Customer.find({}), TypeService.find({}), Status.find({})])
-			.then(([customers, typeservices, statuses]) => {
+		Promise.all([Customer.find({}), TypeService.find({}), Status.findById("62bdafa2c2815bf0e273e5a2"), User.find({ department: "Phẩu thuật" })])
+			.then(([customers, typeservices, status, users]) => {
 				res.render("business/employ/business-customer", {
 					customers: multipleMongooseToObject(customers),
 					typeservices: multipleMongooseToObject(typeservices),
-					statuses: multipleMongooseToObject(statuses),
+					status: mongooseToObject(status),
+					users: multipleMongooseToObject(users),
 					title: 'Quản lý khách hàng'
 				});
+				users.forEach(user => console.log(user.firstName));
 			})
 			.catch(next);
 	}
@@ -154,14 +156,25 @@ class BusinessController {
 	}
 
 	createServiceNote(req, res, next) {
-		console.log(req.body.service)
 		const serviceNote = new ServiceNote({
-			customer: req.body.customer,
-			user: req.body.user,
+			customer: {
+				name: req.body.name,
+				birth: req.body.birth,
+				gender: req.body.gender,
+				email: req.body.email,
+				phone: req.body.phone,
+				address: req.body.address
+			},
+			user: {
+				performName: req.body.performUser,
+				createName: req.body.name,
+			},
 			status: req.body.status,
 			service: req.body.service,
-			comments: {comment: req.body.comment}
+			comments: { comment: req.body.comment },
+			schedule: req.body.schedule,
 		});
+		console.log(serviceNote);
 		serviceNote.save();
 		res.redirect('back');
 	}
@@ -172,11 +185,16 @@ class BusinessController {
 	}
 
 	showMNGCustomer(req, res, next) {
-		Customer.find({})
-			.then((customers) => {
+		Promise.all([Customer.find({}), TypeService.find({}), Status.findById("62bdafa2c2815bf0e273e5a2"), User.find({ department: "Phẩu thuật" })])
+			.then(([customers, typeservices, status, users]) => {
 				res.render("business/manager/business-customer", {
 					customers: multipleMongooseToObject(customers),
+					typeservices: multipleMongooseToObject(typeservices),
+					status: mongooseToObject(status),
+					users: multipleMongooseToObject(users),
+					title: 'Quản lý khách hàng'
 				});
+				users.forEach(user => console.log(user.firstName));
 			})
 			.catch(next);
 	}
@@ -202,8 +220,45 @@ class BusinessController {
 			.catch(next);
 	}
 
-	getMNGServiceNoteDashboard(req, res) {
-		res.render("business/manager/business-service-note");
+	showMNGServiceNote(req, res, next) {
+		ServiceNote.find({})
+			.then(serviceNotes => {
+				res.render('business/manager/business-service-note', {
+					serviceNotes: multipleMongooseToObject(serviceNotes)
+				});
+			})
+			.catch(next);
+	}
+
+	destroyServiceNote(req, res, next){
+		console.log(req.params.id);
+		ServiceNote.delete({_id: req.params.id})
+			.then(() => res.redirect("back"))
+			.catch(next);
+	}
+	
+	realDestroyServiceNote(req, res, next){
+		ServiceNote.deleteOne({_id: req.params.id})
+			.then(() => res.redirect("back"))
+			.catch(next);
+	}
+
+	trashServiceNote(req, res, next){
+		ServiceNote.findDeleted({})
+			.then(serviceNotes => {
+				res.render('business/manager/business-service-note-trash', {
+					serviceNotes: multipleMongooseToObject(serviceNotes)
+				});
+			})
+			.catch(next);
+	}
+	//PATH RESTORE
+	restoreServiceNote(req, res, next){
+		console.log(req.params.id)
+		ServiceNote.restore({_id: req.params.id})
+			.then(() => res.redirect("back"))
+			.catch(next);
+			
 	}
 }
 

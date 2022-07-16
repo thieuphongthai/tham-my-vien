@@ -1,7 +1,6 @@
 // Handle create info Customer
 var create = document.getElementById("create");
 var createServiceNoteForm = document.forms["create-service-note-form"];
-console.log(createServiceNoteForm);
 create.addEventListener("click", () => {
 	createServiceNoteForm.submit();
 });
@@ -96,7 +95,7 @@ detailCustomer.addEventListener("show.bs.modal", function (event) {
 	var roleDetail = button.getAttribute("data-detail-role");
 
 	// // Get element need embeded input
-	
+
 	var detailAvt = document.getElementById("detail-avt");
 	var detailFirstName = document.getElementById("detail-firstLastName");
 	var detailBirth = document.getElementById("detail-birth");
@@ -126,6 +125,22 @@ detailCustomer.addEventListener("show.bs.modal", function (event) {
 	detailAccount.innerHTML = '<strong>Tài khoản: </strong>' + accountDetail;
 	detailRole.innerHTML = '<strong>Quyền hạn: </strong>' + roleDetail;
 });
+
+//DELETE
+var id;
+var btnDel = document.getElementById('btn-delete');
+var delForm = document.forms['delete-form'];
+
+$('#deleteModal').on('show.bs.modal', function (event) {
+	var button = $(event.relatedTarget);
+	id = button.data('id');
+
+})
+
+btnDel.onclick = function () {
+	delForm.action = '/manager/service-note/' + id + '?_method=DELETE';
+	delForm.submit();
+}
 
 // document.addEventListener('DOMContentLoaded', function () {
 // 	$(document).ready(function () {

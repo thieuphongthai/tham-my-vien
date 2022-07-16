@@ -26,6 +26,19 @@ router.put('/customers/:id', validateUploadImage.upload, BusinessController.edit
 router.post('/customers', validateUploadImage.upload, BusinessController.createCustomer);
 router.get('/customers', BusinessController.showCustomer);
 
+router.get('/manager/customer', BusinessController.showMNGCustomer);
+router.get('/manager/service-note', BusinessController.showMNGServiceNote);
+router.delete('/manager/service-note/:id', BusinessController.destroyServiceNote);
+router.delete('/manager/service-note-trash/:id', BusinessController.realDestroyServiceNote);
+
+router.get('/manager/service-note/trash', BusinessController.trashServiceNote);
+
+
+router.patch('/manager/service-note-trash/:id/restore', BusinessController.restoreServiceNote);
+
+
+
+
 
 router.get("/marketing", [authJwt.verifyToken, authJwt.isUser], marketingRouter);
 router.get("/reception", receptionRouter);

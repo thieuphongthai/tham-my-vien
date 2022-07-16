@@ -1,10 +1,10 @@
 
 
-var iCFName = document.forms["create-customer-form"]["customer-firstName"].value;
-var iCLName = document.forms["create-customer-form"]["customer-lastName"].value;
-var iCBirth = document.forms["create-customer-form"]["customer-birth"].value;
-var iCGender = document.forms["create-customer-form"]["customer-gender"].value;
-var iCPhone = document.forms["create-customer-form"]["customer-phone"].value;
+var iCFName = document.forms["create-customer-form"]["customer-firstName"];
+var iCLName = document.forms["create-customer-form"]["customer-lastName"];
+var iCBirth = document.forms["create-customer-form"]["customer-birth"];
+var iCGender = document.forms["create-customer-form"]["customer-gender"];
+var iCPhone = document.forms["create-customer-form"]["customer-phone"];
 // Handle create info Customer
 var create = document.getElementById("create");
 var cCForm = document.forms["create-customer-form"];
@@ -13,25 +13,25 @@ var fbLName = document.getElementById("feedback-lastname");
 var fbBirth = document.getElementById("feedback-birth");
 var fbGender = document.getElementById("feedback-gender");
 var fbPhone = document.getElementById("feedback-phone");
+
 create.addEventListener("click", () => {
-  if (iCFName == "" || iCFName == null) {
-   	fbFName.setAttribute('class', 'alert alert-danger mt-1');
-		fbFName.innerHTML = 'Khong duoc de trong truong nay';
-		endif
-	} else if (iCLName == "" || iCLName == null) {
+  if (iCFName.value == "" || iCFName.value == null) {
+    fbFName.setAttribute('class', 'alert alert-danger mt-1');
+		fbFName.innerHTML = 'Khong duoc de trong truong nay'
+	} else if (iCLName.value == "" || iCLName.value == null) {
 		fbLName.setAttribute('class', 'alert alert-danger mt-1');
 		fbLName.innerHTML = 'Khong duoc de trong truong nay'
-	} else if (iCBirth == "" || iCBirth == null) {
+	} else if (iCBirth.value == "" || iCBirth.value == null) {
 		fbBirth.setAttribute('class', 'alert alert-danger mt-1');
 		fbBirth.innerHTML = 'Khong duoc de trong truong nay'
-	} else if (iCGender == "" || iCGender == null) {
+	} else if (iCGender.value == "" || iCGender.value == null) {
 		fbGender.setAttribute('class', 'alert alert-danger mt-1');
 		fbGender.innerHTML = 'Khong duoc de trong truong nay'
-	} else if (iCPhone == "" || iCPhone == null) {
+	} else if (iCPhone.value == "" || iCPhone.value == null) {
 		fbPhone.setAttribute('class', 'alert alert-danger mt-1');
 		fbPhone.innerHTML = 'Khong duoc de trong truong nay'
 	} else {
-   	createCustomerForm.submit();
+   	cCForm.submit();
 	}
 });
 

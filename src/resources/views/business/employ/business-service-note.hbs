@@ -11,36 +11,75 @@
 <body>
     {{> page/sidebar/admin/sidebar-mobile}}
 
-            <nav id="sub-nav-lg" class="navbar taskbar justify-content-between">
-                <div class="title">
-					<a href="/customers" class="text-light"><i class="ti-back-left"></i> Quay lại</a>
-				</div>
-                <h3 class="title text-light">Quản lý phiếu dịch vụ</h3>
-				<div class="stask">
-                    
-                </div>
-            </nav>
-            <div class="container-fluid mt-3">
-                <div class="row ml-2">
-                        {{#each serviceNotes}}
-                    <div class="col-xl-2 ">
-                        <div class="card text-dark bg-info mb-3 ml-3">
-                            <div class="card-header">{{this.status}}</div>
-                            <div class="card-body">
-                                <h5 class="card-title">{{this.customer}}</h5>
-                                <p class="card-text">{{this.user}}</p>
-                                {{#each service}}
-                                <p class="card-text">{{this}}</p>
-                                {{/each}}
-                                {{#each comments}}
-                                <p class="card-text">{{this.comment}}</p>
-                                {{/each}}
-                            </div>
-                        </div>
-                    </div>
-                        {{/each}}
-                </div>
+    <nav id="sub-nav-lg" class="navbar taskbar justify-content-between">
+        <div class="title">
+            <a href="/customers" class="text-light"><i class="ti-back-left"></i> Quay lại</a>
+        </div>
+        <h3 class="title text-light">Quản lý phiếu dịch vụ</h3>
+        <div class="stask">
+
+        </div>
+    </nav>
+    <div class="container-fluid mt-3">
+        <div class="row ml-2">
+            {{#each serviceNotes}}
+            <div class="col-12">
+                <h3 name="status" class="form-label">{{this.status}}</>
             </div>
+            <hr class="row g-3">
+            {{#each customer}}
+            <div class="col-12">
+                <label for="name" class="form-label">Khách hàng:</label>
+                <label name="name" class="form-label">{{this.name}}</label>
+            </div>
+            <div class="col-md-6">
+                <label for="birth" class="form-label">Ngày sinh:</label>
+                <label name="birth" class="form-label"> {{this.birth}}</label>
+
+            </div>
+            <div class="col-md-6">
+                <label for="gender" class="form-label">Giới tính:</label>
+                <label name="gender" class="form-label">{{this.gender}}</label>
+            </div>
+            <div class="col-md-6">
+                <label for="email" class="form-label">Email: </label>
+                <label name="email" class="form-label"> {{this.email}}</label>
+
+            </div>
+            <div class="col-md-6">
+                <label for="phone" class="form-label">Số điện thoại:</label>
+                <label name="phone" class="form-label">{{this.phone}}</label>
+            </div>
+            <div class="col-12">
+                <label for="address" class="form-label">Địa chỉ:</label>
+                <label name="address" class="form-label">{{this.address}}</label>
+            </div>
+            {{/each}}
+            <hr>
+            {{#each user}}
+            <div class="col-12">
+                <label for="performUser" class="form-label">Bác sĩ: </label>
+                <label name="performUser" class="form-label">{{this.performUser}}</label>
+            </div>
+            {{/each}}
+            <div class="col-12">
+                <label for="service" class="form-label">Dịch vụ: </label>
+                <label name="service" class="form-label">{{this.service}}</label>
+            </div>
+            {{#each comments}}
+            <div class="col-12">
+                <label for="comment" class="form-label">Ghi chú: </label>
+                <label name="comment" class="form-label">{{this.comment}}</label>
+            </div>
+            {{/each}}
+            <div class="col-12">
+                <label for="schedule" class="form-label">Lịch hẹn: </label>
+                <label name="schedule" class="form-label">{{this.schedule}}</label>
+            </div>
+            </form>
+            {{/each}}
+        </div>
+    </div>
 </body>
 
 </html>

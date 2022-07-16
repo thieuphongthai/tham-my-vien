@@ -50,14 +50,14 @@ router.put('/customers/:id', validateUploadImage.upload, BusinessController.edit
 /* Business Employ End*/
 
 /* Business Manager Start*/
-router.get('/customers', BusinessController.showMNGCustomer);
-router.post('/customers', validateUploadImage.upload, BusinessController.createCustomer);
-router.get('/service-note', BusinessController.showMNGServiceNote);
-router.post('/customers/:id/service-note', BusinessController.createServiceNote);
-router.get('/customers/:id/detail', BusinessController.getMNGOneBusinessCustomer);
-router.patch('/customers/:id/comment', BusinessController.createComment)
-router.put('/customers/:id', validateUploadImage.upload, BusinessController.editCustomer);
-router.delete('/service-note/:id', BusinessController.destroyServiceNote);
+router.get('/manager/customers', BusinessController.showMNGCustomer);
+router.post('/manager/customers', validateUploadImage.upload, BusinessController.createCustomer);
+router.get('/manager/service-note', BusinessController.showMNGServiceNote);
+router.post('/manager/customers/:id/service-note', BusinessController.createServiceNote);
+router.get('/manager/customers/:id/detail', BusinessController.getMNGOneBusinessCustomer);
+router.patch('/manager/customers/:id/comment', BusinessController.createComment)
+router.put('/manager/customers/:id', validateUploadImage.upload, BusinessController.editCustomer);
+router.delete('/manager/service-note/:id', BusinessController.destroyServiceNote);
 // Them route theo tung phong ban va chia theo chuc vu vao cap comment /*...*/
 /* Business Manager End*/
 

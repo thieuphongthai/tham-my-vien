@@ -9,11 +9,11 @@
 </head>
 
 <body>
-    {{> page/sidebar/admin/sidebar-mobile}}
+    {{> page/sidebar/admin/sidebar-owner}}
 
     <nav id="sub-nav-lg" class="navbar taskbar justify-content-between">
         <div class="title">
-            <a href="/manager/service-note" class="text-light"><i class="ti-back-left"></i> Quay lại</a>
+            <a href="/admin/service-note" class="text-light"><i class="ti-back-left"></i> Quay lại</a>
         </div>
         <h3 class="title text-light">Quản lý phiếu dịch vụ</h3>
         <a type="button" class="btn btn-success btn-storage text-light">
@@ -128,14 +128,14 @@
 			})
 
 			btnDel.onclick = function () {
-				delForm.action = '/manager/service-note-trash/' + id + '?_method=DELETE';
+				delForm.action = '/admin/service-note-trash/' + id + '?_method=DELETE';
 				delForm.submit();
 			}
 
 			btnRestore.onclick = function(e){
                 e.preventDefault();
                 var idd = $(this).data('idd');
-                resForm.action = '/manager/service-note-trash/' + idd + '/restore?_method=PATCH';
+                resForm.action = '/admin/service-note-trash/' + idd + '/restore?_method=PATCH';
                 resForm.submit();
             }
 		});

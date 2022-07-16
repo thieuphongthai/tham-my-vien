@@ -165,10 +165,8 @@ class BusinessController {
 				phone: req.body.phone,
 				address: req.body.address
 			},
-			user: {
-				performName: req.body.performUser,
-				createName: req.body.name,
-			},
+			performName: req.body.performUser,
+			createName: req.body.name,
 			status: req.body.status,
 			service: req.body.service,
 			comments: { comment: req.body.comment },
@@ -230,36 +228,14 @@ class BusinessController {
 			.catch(next);
 	}
 
-	destroyServiceNote(req, res, next){
+	destroyServiceNote(req, res, next) {
 		console.log(req.params.id);
-		ServiceNote.delete({_id: req.params.id})
-			.then(() => res.redirect("back"))
-			.catch(next);
-	}
-	
-	realDestroyServiceNote(req, res, next){
-		ServiceNote.deleteOne({_id: req.params.id})
+		ServiceNote.delete({ _id: req.params.id })
 			.then(() => res.redirect("back"))
 			.catch(next);
 	}
 
-	trashServiceNote(req, res, next){
-		ServiceNote.findDeleted({})
-			.then(serviceNotes => {
-				res.render('business/manager/business-service-note-trash', {
-					serviceNotes: multipleMongooseToObject(serviceNotes)
-				});
-			})
-			.catch(next);
-	}
-	//PATH RESTORE
-	restoreServiceNote(req, res, next){
-		console.log(req.params.id)
-		ServiceNote.restore({_id: req.params.id})
-			.then(() => res.redirect("back"))
-			.catch(next);
-			
-	}
+	
 }
 
 module.exports = new BusinessController();

@@ -1,179 +1,122 @@
-{{!-- <div class="row">
-    {{> page/sidebar/sales/sidebar-manager}} --}}
-    <div class="content">
-        <nav class="navbar bg-info d-flex justify-content-between pr-3 pl-3">
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-danger btn-storage">
-                <i class="ti-archive"></i> Kho lưu trữ
-            </button>
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary ml-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <i class="ti-plus"></i> Tạo người dùng
-            </button>
-        </nav>
-        <div class="container-fluid mt-3">
-            <div class="table-responsive mt-3">
-                <table id="serviceNote" class="display nowrap order-column compact">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Khách hàng</th>
-                            <th scope="col">Nhân viên</th>
-                            <th scope="col">Dịch vụ</th>
-                            <th scope="col">Trạng thái</th>
-                            <th scope="col">Ghi chú</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {{#each serviceNotes}}
-                        <tr class="info">
-                            <td scope="row" class="text-center">{{sum @index 1}}</td>
-                            <td class="cursor-pointer customer" data-bs-toggle="modal"
-                                data-bs-target="#serviceNoteModal">{{this.customer}}</td>
-                            <td>{{this.user}}</td>
-                            <td>{{this.service}}</td>
-                            <td>{{this.status}}</td>
-                            <td>{{this.comments}}</td>
-                            <td class="text-center">
-                                <button class="btn btn-outline-info btn-sm">Sửa</button>
-                                <button class="btn btn-outline-danger btn-sm" data-id="{{this._id}}"
-                                    data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
-                            </td>
-                        </tr>
-                        {{/each}}
-                    </tbody>
-                </table>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phiếu dịch vụ</title>
+</head>
+
+<body>
+    {{> page/sidebar/admin/sidebar-owner}}
+
+    <nav id="sub-nav-lg" class="navbar taskbar justify-content-between">
+        <div class="title">
+            <a href="/admin/customers" class="text-light"><i class="ti-back-left"></i> Quay lại</a>
+        </div>
+        <h3 class="title text-light">Quản lý phiếu dịch vụ</h3>
+        <a href="/admin/service-note/trash" type="button" class="btn btn-danger btn-storage text-light">
+            <i class="ti-archive"></i> Kho lưu trữ
+        </a>
+    </nav>
+    <div class="container-fluid mt-3">
+        <div class="row ml-2">
+            {{#each serviceNotes}}
+            <div class="col-12">
+                <h3 name="status" class="form-label">{{this.status}}</h3>
             </div>
+            <hr class="row g-3">
+            {{#each customer}}
+            <div class="col-12">
+                <label for="name" class="form-label">Khách hàng:</label>
+                <label name="name" class="form-label">{{this.name}}</label>
+            </div>
+            <div class="col-md-6">
+                <label for="birth" class="form-label">Ngày sinh:</label>
+                <label name="birth" class="form-label"> {{this.birth}}</label>
+
+            </div>
+            <div class="col-md-6">
+                <label for="gender" class="form-label">Giới tính:</label>
+                <label name="gender" class="form-label">{{this.gender}}</label>
+            </div>
+            <div class="col-md-6">
+                <label for="email" class="form-label">Email: </label>
+                <label name="email" class="form-label"> {{this.email}}</label>
+
+            </div>
+            <div class="col-md-6">
+                <label for="phone" class="form-label">Số điện thoại:</label>
+                <label name="phone" class="form-label">{{this.phone}}</label>
+            </div>
+            <div class="col-12">
+                <label for="address" class="form-label">Địa chỉ:</label>
+                <label name="address" class="form-label">{{this.address}}</label>
+            </div>
+            {{/each}}
+            <hr>
+            <div class="col-12">
+                <label for="performUser" class="form-label">Bác sĩ: </label>
+                <label name="performUser" class="form-label">{{this.performName}}</label>
+            </div>
+            <div class="col-12">
+                <label for="service" class="form-label">Dịch vụ: </label>
+                <label name="service" class="form-label">{{this.service}}</label>
+            </div>
+            {{#each comments}}
+            <div class="col-12">
+                <label for="comment" class="form-label">Ghi chú: </label>
+                <label name="comment" class="form-label">{{this.comment}}</label>
+            </div>
+            {{/each}}
+            <div class="col-md-6">
+                <label for="schedule" class="form-label">Lịch hẹn: </label>
+                <label name="schedule" class="form-label">{{this.schedule}}</label>
+            </div>
+            <div class="btn btn-danger btn-sm col-md-6" data-id="{{this._id}}" data-bs-toggle="modal"
+                data-bs-target="#deleteModal">Xóa</div>
+            </form>
+            {{else}}
+            <div class="col-12">
+                <h5 class="form-label text-center">Chưa có phiếu dịch vụ. <a href="/admin/customers">Tạo
+                        phiếu</a></h5>
+            </div>
+            {{/each}}
         </div>
     </div>
-</div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg bg-dark" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Thông tin tài khoản</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form method="POST">
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label class="form-lable" for="customer">Khách hàng</label>
-                            <select class="form-control" id="customer" name="customer">
-                                <option>-- Chọn khách hàng --</option>
-                                {{#each customers}}
-                                <option value="{{this.name}}">{{this.name}}</option>
-                                {{/each}}
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="form-lable" for="user">Nhân viên</label>
-                            <select class="form-control" id="user" name="user">
-                                <option>-- Chọn nhân viên --</option>
-                                {{#each users}}
-                                <option value="{{this.firstName}} {{this.lastName}}">{{this.firstName}}
-                                    {{this.lastName}}</option>
-                                {{/each}}
-                            </select>
-                        </div>
+    {{!-- Modal Delete --}}
+    <form name="delete-form" method="POST"></form>
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Xóa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <label for="reason" class="form-label">
+                        <h6>Lý do<span class="text-danger"></span></h6>
+                    </label>
+                    <input type="tel" class="form-control form-control-sm" id="reason" placeholder="...." name="reason"
+                        required>
+                    <div id="feedback-reason">
                     </div>
-
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label class="form-lable" for="service">Dịch vụ</label>
-                            <select class="form-control" id="service" name="service">
-                                <option value="">-- Chọn dịch vụ --</option>
-                                {{#each services}}
-                                <option value="{{this.name}}">{{this.name}}</option>
-                                {{/each}}
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="form-lable" for="status">Trạng thái</label>
-                            <select class="form-control" id="status" name="status">
-                                <option>-- Chọn trạng thái --</option>
-                                {{#each status}}
-                                <option value="{{this.name}}">{{this.name}}</option>
-                                {{/each}}
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                        <button type="submit" class="btn btn-primary">Lưu</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="serviceNoteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg bg-dark" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Thông tin tài khoản</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form method="GET">
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label class="form-lable" for="customer">Khách hàng</label>
-                            <input class="form-control" value="{{serviceNote.customer}}" id="customer" name="customer">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="form-lable" for="user">Nhân viên</label>
-                            <input class="form-control" value="{{serviceNote.user}}" id="user" name="user">
-                        </div>
+                    <div class="mt-3">
+                        Bạn có đồng ý xóa không?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                        <button type="submit" class="btn btn-primary">Lưu</button>
+                        <button id="btn-delete" type="button" class="btn btn-danger">Có, chắc chắn</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Không</button>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Xóa</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Bạn có đồng ý xóa không?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" id="btn-delete">Có, chắc chắn</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Không</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<form name="delete-form" method="POST"></form>
-
+</body>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        $(document).ready(function () {
-            $('#serviceNote').DataTable({
-                paginate: true,
-                scrollY: 300,
-                scrollX: 0
-            });
-        });
-
+        //DELETE
         var id;
         var btnDel = document.getElementById('btn-delete');
         var delForm = document.forms['delete-form'];
@@ -188,6 +131,9 @@
             delForm.action = '/admin/service-note/' + id + '?_method=DELETE';
             delForm.submit();
         }
-    })
 
+
+    });
 </script>
+
+</html>

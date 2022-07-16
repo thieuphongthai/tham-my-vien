@@ -20,18 +20,37 @@ const ServiceNote = new Schema({
 			ref: "Customer"
 		}
 	],
-	user: [
+	// user: [
+	// 	{
+	// 		type: new mongoose.Schema(
+	// 			{
+	// 				createName: String,
+
+	// 				performNames: [
+	// 					{
+	// 						performName: String,
+	// 					}
+	// 				],
+	// 			},
+	// 			{ timestamps: true }
+	// 		),
+	// 		ref: "User"
+	// 	}
+	// ],
+	createName: [
 		{
-			type: new mongoose.Schema(
-				{
-					createName: String,
-					performName: String,
-				},
-				{ timestamps: true }
-			),
+			type: String,
 			ref: "User"
 		}
 	],
+
+	performName: [
+		{
+			type: String,
+			ref: "User"
+		}
+	],
+
 	status: [
 		{
 			type: String,

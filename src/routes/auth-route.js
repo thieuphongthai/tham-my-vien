@@ -5,42 +5,60 @@ const router = express.Router();
 const authJwt = require('../middleware/authJwt');
 const controller = require("../app/controllers/AuthController");
 const rootRouter = require("./root");
-const adminRouter = require("./admin");
+// const adminRouter = require("./admin");
 const marketingRouter = require("./departments/marketing");
 const receptionRouter = require("./departments/reception");
 const operatingRouter = require("./departments/operating-room");
 const hrRouter = require("./departments/human-resource");
 const BusinessController = require('../app/controllers/BusinessController');
 const validateUploadImage = require('../middleware/validateUploadImage');
+const AdminController = require('../app/controllers/AdminController')
+
 
 router.get("/root", rootRouter);
-router.get("/admin", adminRouter);
+
+
+/*Amin Start*/
+router.get("/admin",  AdminController.getAdminDashboard);
+
+router.get('/admin/customers', AdminController.getAdminCustomer)
+router.post('/admin/customers', AdminController.createCustomer)
+router.get('/admin/service-note', AdminController.showServiceNote);
+router.post('/admin/customers/:id/service-note', AdminController.createServiceNote);
+router.get('/admin/customers/:id/detail', AdminController.getOneBusinessCustomer)
+router.patch('/admin/customers/:id/comment', AdminController.createComment)
+router.put('/admin/customers/:id', validateUploadImage.upload, AdminController.editCustomer);
+
+router.delete('/admin/service-note/:id', AdminController.destroyServiceNote);
+
+router.get('/admin/service-note/trash', AdminController.trashServiceNote);
+router.delete('/admin/service-note-trash/:id', AdminController.realDestroyServiceNote);
+router.patch('/admin/service-note-trash/:id/restore', AdminController.restoreServiceNote);
+/*Admin End*/
 
 /* Business Employ Start*/
-router.get('/customers/:id/detail', BusinessController.getOneBusinessCustomer)
-router.post('/customers/:id/service-note', BusinessController.createServiceNote);
+router.get('/customers', [authJwt.verifyToken, authJwt.isBusinessEmploy], BusinessController.showCustomer);
+router.post('/customers', validateUploadImage.upload, BusinessController.createCustomer);
 router.get('/service-note', BusinessController.showServiceNote);
+router.post('/customers/:id/service-note', BusinessController.createServiceNote);
+router.get('/customers/:id/detail', BusinessController.getOneBusinessCustomer)
 router.patch('/customers/:id/comment', BusinessController.createComment)
 router.put('/customers/:id', validateUploadImage.upload, BusinessController.editCustomer);
-router.post('/customers', validateUploadImage.upload, BusinessController.createCustomer);
-router.get('/customers', [authJwt.verifyToken, authJwt.isBusinessEmploy], BusinessController.showCustomer);
 /* Business Employ End*/
 
-router.get('/manager/customer', BusinessController.showMNGCustomer);
-router.get('/manager/service-note', BusinessController.showMNGServiceNote);
-router.delete('/manager/service-note/:id', BusinessController.destroyServiceNote);
-router.delete('/manager/service-note-trash/:id', BusinessController.realDestroyServiceNote);
-
-router.get('/manager/service-note/trash', BusinessController.trashServiceNote);
-
-
-router.patch('/manager/service-note-trash/:id/restore', BusinessController.restoreServiceNote);
-
-
-
-
-
 /* Business Manager Start*/
+router.get('/customers', BusinessController.showMNGCustomer);
+router.post('/customers', validateUploadImage.upload, BusinessController.createCustomer);
+router.get('/service-note', BusinessController.showMNGServiceNote);
+router.post('/customers/:id/service-note', BusinessController.createServiceNote);
+router.get('/customers/:id/detail', BusinessController.getMNGOneBusinessCustomer);
+router.patch('/customers/:id/comment', BusinessController.createComment)
+router.put('/customers/:id', validateUploadImage.upload, BusinessController.editCustomer);
+router.delete('/service-note/:id', BusinessController.destroyServiceNote);
+
+
+
+
 // Them route theo tung phong ban va chia theo chuc vu vao cap comment /*...*/
 /* Business Manager End*/
 

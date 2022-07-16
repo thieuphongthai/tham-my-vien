@@ -13,7 +13,7 @@
 
     <nav id="sub-nav-lg" class="navbar taskbar justify-content-between">
         <div class="title">
-            <a href="/manager/customer" class="text-light"><i class="ti-back-left"></i> Quay lại</a>
+            <a href="/manager/customers" class="text-light"><i class="ti-back-left"></i> Quay lại</a>
         </div>
         <h3 class="title text-light">Quản lý phiếu dịch vụ</h3>
         <a href="/manager/service-note/trash" type="button" class="btn btn-danger btn-storage text-light">
@@ -56,12 +56,10 @@
             </div>
             {{/each}}
             <hr>
-            {{#each user}}
             <div class="col-12">
                 <label for="performUser" class="form-label">Bác sĩ: </label>
-                <label name="performUser" class="form-label">{{this.performUser}}</label>
+                <label name="performUser" class="form-label">{{this.performName}}</label>
             </div>
-            {{/each}}
             <div class="col-12">
                 <label for="service" class="form-label">Dịch vụ: </label>
                 <label name="service" class="form-label">{{this.service}}</label>

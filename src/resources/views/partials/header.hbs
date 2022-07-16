@@ -10,8 +10,8 @@
 				<li class="nav-item">
 					{{!-- <a class="nav-link active" aria-current="page" href="#"></a> --}}
 					<h1>My Title</h1>
-					{{#if user}}
-						<p>Hello {{user.firstName}}</p>
+					{{#if users}}
+						<p>Hello {{users.firstName}}</p>
 					{{else}}
 						<p>Please <a href='/login'>Log In</a></p>
 					{{/if}}

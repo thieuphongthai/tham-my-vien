@@ -87,7 +87,7 @@ class AuthController {
                     return res.redirect('/');
                 }
                 var token = jwt.sign({ id: user._id, role: user.role }, process.env.SECURITY_KEY, {
-                    expiresIn: 30, // 10 phút
+                    expiresIn: '30s', // 30 giay
                 });
                 const { password, ...others } = user._doc;
                 var authorities = [];
@@ -116,7 +116,7 @@ class AuthController {
     postLogin(req, res, next) {
         User.findOne({account: req.body.account})
             .then( user => {
-                console.log(user);
+                console.log('user', user);
                 if (!next) {
                     res.status(500).send({ message: 'Đã có lỗi xảy ra tại máy chủ' });
                     return;
@@ -133,11 +133,24 @@ class AuthController {
                 if (!passwordIsValid) {
 					res.json('sai mat khau roi ba');
                 }
-                const accessToken = jwt.sign({ id: user._id, role: user.role, department: user.department, position: user.position }, process.env.ACCESSTOKEN_KEY, {
-                    expiresIn: 600, // 10 phút
+                const accessToken = jwt.sign({ 
+                    id: user._id,
+                    role: user.role,
+                    department: user.department,
+                    position: user.position,
+                    
+                }, process.env.ACCESSTOKEN_KEY, {
+                    expiresIn: 600, // 10p
                 });
 
-                const refreshToken = jwt.sign({ id: user._id, role: user.role, department: user.department, position: user.position }, process.env.REFRESHTOKEN_KEY, {
+                const { password, ...others } = user._doc;
+
+                const refreshToken = jwt.sign({
+                    id: user._id,
+                    role: user.role,
+                    department: user.department,
+                    position: user.position
+                }, process.env.REFRESHTOKEN_KEY, {
                     expiresIn: 86400, // 24 giờ
                 })
                 // var authorities = [];
@@ -147,12 +160,13 @@ class AuthController {
                 res.cookies = ('refreshToken', refreshToken, {
                     httpOnly: true,
                     secure: false,
-                    path: `/${user.department}`,
+                    path: `/`,
                     sameSite: 'strict'
                 });
-                console.log(accessToken);
-                res.status(200).render(`${user.departmentEng}/${user.positionEng}/${user.departmentEng}-overview`, {user, accessToken});
-                // res.json({user, accessToken})
+                console.log('refreshToken', refreshToken);
+                console.log('err', next)
+                // res.status(200).render(`${user.departmentEng}/${user.positionEng}/${user.departmentEng}-overview`, {...others, accessToken});
+                res.json({ ...others, accessToken });
             })
             .catch(next);
     };

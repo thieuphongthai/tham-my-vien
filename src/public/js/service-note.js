@@ -58,7 +58,7 @@ editCustomer.addEventListener("show.bs.modal", function (event) {
 	} else {
 		editAvt.setAttribute('src', '/img/uploads/Customers/' + imageEdit);
 	}
-	editCustomerForm.setAttribute('action', `/root/Customer/${idEdit}?_method=PUT`);
+	editCustomer.setAttribute('action', `/root/Customer/${idEdit}?_method=PUT`);
 	editFirstName.value = firstName;
 	editLastName.value = lastName;
 	editBirth.value = birth;
@@ -126,21 +126,7 @@ detailCustomer.addEventListener("show.bs.modal", function (event) {
 	detailRole.innerHTML = '<strong>Quyền hạn: </strong>' + roleDetail;
 });
 
-//DELETE
-var id;
-var btnDel = document.getElementById('btn-delete');
-var delForm = document.forms['delete-form'];
 
-$('#deleteModal').on('show.bs.modal', function (event) {
-	var button = $(event.relatedTarget);
-	id = button.data('id');
-
-})
-
-btnDel.onclick = function () {
-	delForm.action = '/manager/service-note/' + id + '?_method=DELETE';
-	delForm.submit();
-}
 
 // document.addEventListener('DOMContentLoaded', function () {
 // 	$(document).ready(function () {

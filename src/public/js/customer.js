@@ -1,54 +1,60 @@
 
 
-var iCFName = document.forms["create-customer-form"]["customer-firstName"];
-var iCLName = document.forms["create-customer-form"]["customer-lastName"];
-var iCBirth = document.forms["create-customer-form"]["customer-birth"];
-var iCGender = document.forms["create-customer-form"]["customer-gender"];
-var iCPhone = document.forms["create-customer-form"]["customer-phone"];
-// Handle create info Customer
-var create = document.getElementById("create");
-var cCForm = document.forms["create-customer-form"];
-var fbFName = document.getElementById("feedback-firstname");
-var fbLName = document.getElementById("feedback-lastname");
-var fbBirth = document.getElementById("feedback-birth");
-var fbGender = document.getElementById("feedback-gender");
-var fbPhone = document.getElementById("feedback-phone");
+// var iCFName = document.forms["create-customer-form"]["customer-firstName"];
+// var iCLName = document.forms["create-customer-form"]["customer-lastName"];
+// var iCBirth = document.forms["create-customer-form"]["customer-birth"];
+// var iCGender = document.forms["create-customer-form"]["customer-gender"];
+// var iCPhone = document.forms["create-customer-form"]["customer-phone"];
+// // Handle create info Customer
+// var create = document.getElementById("create");
+// var cCForm = document.forms["create-customer-form"];
+// var fbFName = document.getElementById("feedback-firstname");
+// var fbLName = document.getElementById("feedback-lastname");
+// var fbBirth = document.getElementById("feedback-birth");
+// var fbGender = document.getElementById("feedback-gender");
+// var fbPhone = document.getElementById("feedback-phone");
 
-create.addEventListener("click", () => {
-  if (iCFName.value == "" || iCFName.value == null) {
-    fbFName.setAttribute('class', 'alert alert-danger mt-1');
-		fbFName.innerHTML = 'Khong duoc de trong truong nay'
-	} else if (iCLName.value == "" || iCLName.value == null) {
-		fbLName.setAttribute('class', 'alert alert-danger mt-1');
-		fbLName.innerHTML = 'Khong duoc de trong truong nay'
-	} else if (iCBirth.value == "" || iCBirth.value == null) {
-		fbBirth.setAttribute('class', 'alert alert-danger mt-1');
-		fbBirth.innerHTML = 'Khong duoc de trong truong nay'
-	} else if (iCGender.value == "" || iCGender.value == null) {
-		fbGender.setAttribute('class', 'alert alert-danger mt-1');
-		fbGender.innerHTML = 'Khong duoc de trong truong nay'
-	} else if (iCPhone.value == "" || iCPhone.value == null) {
-		fbPhone.setAttribute('class', 'alert alert-danger mt-1');
-		fbPhone.innerHTML = 'Khong duoc de trong truong nay'
-	} else {
-   	cCForm.submit();
-	}
-});
+// create.addEventListener("click", () => {
+//   // if (iCFName.value == "" || iCFName.value == null) {
+//   //   fbFName.setAttribute('class', 'alert alert-danger mt-1');
+// 	// 	fbFName.innerHTML = 'Khong duoc de trong truong nay'
+// 	// } else if (iCLName.value == "" || iCLName.value == null) {
+// 	// 	fbLName.setAttribute('class', 'alert alert-danger mt-1');
+// 	// 	fbLName.innerHTML = 'Khong duoc de trong truong nay'
+// 	// } else if (iCBirth.value == "" || iCBirth.value == null) {
+// 	// 	fbBirth.setAttribute('class', 'alert alert-danger mt-1');
+// 	// 	fbBirth.innerHTML = 'Khong duoc de trong truong nay'
+// 	// } else if (iCGender.value == "" || iCGender.value == null) {
+// 	// 	fbGender.setAttribute('class', 'alert alert-danger mt-1');
+// 	// 	fbGender.innerHTML = 'Khong duoc de trong truong nay'
+// 	// } else if (iCPhone.value == "" || iCPhone.value == null) {
+// 	// 	fbPhone.setAttribute('class', 'alert alert-danger mt-1');
+// 	// 	fbPhone.innerHTML = 'Khong duoc de trong truong nay'
+// 	// } else {
+//   //  	cCForm.submit();
+// 	// }
+//   cCForm.submit();
+// });
 
 
-var inpCFName = document.getElementById('customer-firstName');
-inpCFName.addEventListener('input', () => {
-	if (iCFName == "" || iCFName == null) {
-		fbFName.removeAttribute('class', 'alert alert-danger mt-1');
-		fbFName.innerHTML = '';
-	}
-	// fbFName.removeAttribute('class', 'alert alert-danger mt-1');
-})
+// var inpCFName = document.getElementById('customer-firstName');
+// inpCFName.addEventListener('input', () => {
+// 	if (iCFName == "" || iCFName == null) {
+// 		fbFName.removeAttribute('class', 'alert alert-danger mt-1');
+// 		fbFName.innerHTML = '';
+// 	}
+// 	// fbFName.removeAttribute('class', 'alert alert-danger mt-1');
+// })
 
 // Handle edit info Customer
 var edit = document.getElementById("edit");
+var editID 
 var eCForm = document.forms["edit-customer-form"];
 edit.addEventListener("click", () => {
+  eCForm.setAttribute(
+    "action",
+    `/customers/${editID}?_method=PUT`
+  );
   eCForm.submit();
 });
 
@@ -80,7 +86,7 @@ viewCustomer.addEventListener("show.bs.modal", function (event) {
   var button = event.relatedTarget;
 
   // Get data from edit button
-  var editID = button.getAttribute("data-id");
+  editID = button.getAttribute("data-id");
   var editImage = button.getAttribute("data-edit-img");
   var firstName = button.getAttribute("data-edit-firstname");
   var lastName = button.getAttribute("data-edit-lastname");
@@ -107,10 +113,10 @@ viewCustomer.addEventListener("show.bs.modal", function (event) {
   } else {
     editAvt.setAttribute("src", "/img/uploads/users/" + editImage);
   }
-  editCustomerForm.setAttribute(
-    "action",
-    `/customers/${editID}?_method=PUT`
-  );
+  // viewCustomer.setAttribute(
+  //   "action",
+  //   `/customers/${editID}?_method=PUT`
+  // );
   editFirstName.value = firstName;
   // editFirstName.setAttribute('value', firstName);
   editLastName.value = lastName;

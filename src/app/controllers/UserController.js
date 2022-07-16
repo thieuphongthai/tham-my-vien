@@ -102,6 +102,12 @@ class UserController {
 			})
 			.catch(next);
 	}
+	createCustomer(req, res, next){
+		const customer = new Customer(req.body);
+		customer.save()
+			.then(() => res.redirect('back'))
+			.catch(next)
+	}
 
 }
 

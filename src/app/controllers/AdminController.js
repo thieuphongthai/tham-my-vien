@@ -1,13 +1,12 @@
-const Customer = require("../models/Customer");
 const Department = require("../models/Department");
 const User = require("../models/User");
 const Account = require("../models/Account");
 const Role = require("../models/Role");
 const Position = require("../models/Position");
 const Status = require("../models/Status");
-const Service = require("../models/Service");
 const ServiceNote = require("../models/ServiceNote");
 const TypeService = require("../models/TypeService");
+const Customer = require("../models/Customer")
 
 const {
   multipleMongooseToObject,
@@ -52,6 +51,7 @@ class AdminController {
           url: req.file.path,
         },
       });
+      console.log(req.body.firstName);
       customer.save();
     } else {
       const customer = new Customer({
@@ -68,6 +68,7 @@ class AdminController {
           url: "",
         },
       });
+      console.log(req.body.firstName);
       customer.save();
     }
     res.redirect("back");

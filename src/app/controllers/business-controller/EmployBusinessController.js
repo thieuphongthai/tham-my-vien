@@ -8,21 +8,16 @@ const ServiceNote = require('../../models/ServiceNote');
 class EmployBusinessController {
 	//BUSINESS EMPLOY
 
-	show404(req, res, next) {
-		res.render("err/404", {
-			title: 'Bảng báo cáo'
-		});
-	}
+	// show404(req, res, next) {
+	// 	res.render("err/404", {
+	// 		title: 'Bảng báo cáo'
+	// 	});
+	// }
 
 	showDashboard(req, res, next) {
 		res.render("business/employ/business-overview", {
 			title: 'Bảng báo cáo'
 		});
-	}
-
-	showServices(req, res, next) {
-		console.log(req.body)
-		// TypeService.findOne({})
 	}
 
 	/** Customer */
@@ -39,10 +34,6 @@ class EmployBusinessController {
 				users.forEach(user => console.log(user.firstName));
 			})
 			.catch(next);
-	}
-
-	showCustomerCreate(req, res, next) {
-		res.render('business/employ/employ-customer-create');
 	}
 
 	createCustomer(req, res, next) {
@@ -80,10 +71,6 @@ class EmployBusinessController {
 			customer.save();
 		}
 		res.redirect("back");
-	}
-
-	showCustomerEdit(req, res, next) {
-		res.render('/business/employ/employ-customer-edit');
 	}
 
 	editCustomer(req, res, next) {
@@ -169,10 +156,6 @@ class EmployBusinessController {
 				});
 			})
 			.catch(next);
-	}
-
-	showServiceNoteCreate(req, res, next) {
-		res.render('/business/employ/employ-service-note-create')
 	}
 
 	createServiceNote(req, res, next) {

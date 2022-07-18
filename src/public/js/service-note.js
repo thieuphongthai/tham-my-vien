@@ -1,77 +1,9 @@
-// Handle create info Customer
-var create = document.getElementById("create");
+
+// Handle create service note
+var createServiceNote = document.getElementById("create-service-note-btn");
 var createServiceNoteForm = document.forms["create-service-note-form"];
-create.addEventListener("click", () => {
-	createServiceNoteForm.submit();
-});
-
-// Handle edit info Customer
-var edit = document.getElementById("edit");
-var editServiceNoteForm = document.forms["edit-service-note-form"];
-edit.addEventListener("click", () => {
-	editServiceNoteForm.submit();
-});
-
-
-// Handle push data to edit modal
-var editCustomer = document.getElementById("edit-customer");
-editCustomer.addEventListener("show.bs.modal", function (event) {
-	// Button that triggered the modal
-	var button = event.relatedTarget;
-	// Get data from edit button
-	var idEdit = button.getAttribute('data-id');
-	var imageEdit = button.getAttribute("data-edit-img");
-	var firstName = button.getAttribute("data-first-name");
-	var lastName = button.getAttribute("data-last-name");
-	var birth = button.getAttribute("data-birth");
-	var gender = button.getAttribute("data-gender");
-	var phone = button.getAttribute("data-phone");
-	var email = button.getAttribute("data-email");
-	var address = button.getAttribute("data-address");
-	var department = button.getAttribute("data-department");
-	var position = button.getAttribute("data-position");
-	var desciption = button.getAttribute("data-description");
-	var account = button.getAttribute("data-account");
-	var password = button.getAttribute("data-password");
-	var role = button.getAttribute("data-role");
-
-	// Get element need embeded input
-	var editAvt = document.getElementById("edit-avt");
-	var editFirstName = document.getElementById("edit-firstName");
-	var editLastName = document.getElementById("edit-lastName");
-	var editBirth = document.getElementById("edit-birth");
-	var editGender = document.getElementById("edit-gender");
-	var editPhone = document.getElementById("edit-phone");
-	var editEmail = document.getElementById("edit-email");
-	var editAddress = document.getElementById("edit-address");
-	var editDepartment = document.getElementById("edit-department");
-	var editPosition = document.getElementById("edit-position");
-	var editDescription = document.getElementById("edit-description");
-	var editAccount = document.getElementById("edit-account");
-	var editPassword = document.getElementById("edit-password");
-	var editRole = document.getElementById("edit-role");
-
-	editFirstName.focus();
-
-	if (imageEdit === '') {
-		editAvt.setAttribute('src', '/img/user-icon.png');
-	} else {
-		editAvt.setAttribute('src', '/img/uploads/Customers/' + imageEdit);
-	}
-	editCustomer.setAttribute('action', `/root/Customer/${idEdit}?_method=PUT`);
-	editFirstName.value = firstName;
-	editLastName.value = lastName;
-	editBirth.value = birth;
-	editGender.value = gender;
-	editPhone.value = phone;
-	editEmail.value = email;
-	editAddress.value = address;
-	editDepartment.value = department;
-	editPosition.value = position;
-	editDescription.value = desciption;
-	editAccount.value = account;
-	editPassword.value = password;
-	editRole.value = role;
+createServiceNote.addEventListener("click", () => {
+  createServiceNoteForm.submit();
 });
 
 // Handle detail Customer
@@ -125,13 +57,5 @@ detailCustomer.addEventListener("show.bs.modal", function (event) {
 	detailAccount.innerHTML = '<strong>Tài khoản: </strong>' + accountDetail;
 	detailRole.innerHTML = '<strong>Quyền hạn: </strong>' + roleDetail;
 });
-
-
-
-// document.addEventListener('DOMContentLoaded', function () {
-// 	$(document).ready(function () {
-// 		$('#Customer_table').DataTable({});
-// 	});
-// });
 
 

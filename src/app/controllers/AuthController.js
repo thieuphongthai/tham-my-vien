@@ -165,8 +165,8 @@ class AuthController {
                 });
                 console.log('refreshToken', refreshToken);
                 console.log('err', next)
-                // res.status(200).render(`${user.departmentEng}/${user.positionEng}/${user.departmentEng}-overview`, {...others, accessToken});
-                res.json({ ...others, accessToken });
+                res.status(200).render(`${user.departmentEng}/${user.positionEng}/${user.positionEng}-overview`, {...others, accessToken});
+                // res.json({ ...others, accessToken });
             })
             .catch(next);
     };

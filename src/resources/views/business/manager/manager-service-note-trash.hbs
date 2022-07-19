@@ -9,11 +9,12 @@
 </head>
 
 <body>
-    {{> page/sidebar/admin/sidebar-mobile}}
+    {{> page/sidebar/business/sidebar-manager-business}}
+
 
     <nav id="sub-nav-lg" class="navbar taskbar justify-content-between">
         <div class="title">
-            <a href="/manager/service-note" class="text-light"><i class="ti-back-left"></i> Quay lại</a>
+            <a href="/business/manager/service-note" class="text-light"><i class="ti-back-left"></i> Quay lại</a>
         </div>
         <h3 class="title text-light">Quản lý phiếu dịch vụ</h3>
         <a type="button" class="btn btn-success btn-storage text-light">
@@ -65,7 +66,7 @@
                 <label name="serv ice" class="form-label">{{this.service}}</label>
             </div>
             <div class="col-md-6">
-                <label for="reason" class="form-label">Lý do:  </label>
+                <label for="reason" class="form-label">Lý do: </label>
                 <label name="reason" class="form-label">{{this.reason}}</label>
             </div>
             {{#each comments}}
@@ -90,54 +91,55 @@
         </div>
     </div>
 
-	<form name="restore-form" method="POST"></form>
-	{{!-- Modal Delete --}}
-	<form name="delete-form" method="POST"></form>
+    <form name="restore-form" method="POST"></form>
+    {{!-- Modal Delete --}}
+    <form name="delete-form" method="POST"></form>
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Xóa</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					Bạn có đồng ý xóa vĩnh viễn không?
-				</div>
-				<div class="modal-footer">
-					<button id="btn-delete" type="button" class="btn btn-danger">Có, chắc chắn</button>
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Không</button>
-				</div>
-			</div>
-		</div>
-	</div>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Xóa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có đồng ý xóa vĩnh viễn không?
+                </div>
+                <div class="modal-footer">
+                    <button id="btn-delete" type="button" class="btn btn-danger">Có, chắc chắn</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Không</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 <script>
-		document.addEventListener('DOMContentLoaded', function () {
-			//DELETE
-			var id;
-			var btnDel = document.getElementById('btn-delete');
-			var delForm = document.forms['delete-form'];
-			var resForm = document.forms['restore-form'];
+    document.addEventListener('DOMContentLoaded', function () {
+        //DELETE
+        var id;
+        var btnDel = document.getElementById('btn-delete');
+        var delForm = document.forms['delete-form'];
+        var resForm = document.forms['restore-form'];
 
-            var btnRestore = document.getElementById('btn-restore');
+        var btnRestore = document.getElementById('btn-restore');
 
-			$('#deleteModal').on('show.bs.modal', function (event) {
-				var button = $(event.relatedTarget);
-				id = button.data('id');
+        $('#deleteModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            id = button.data('id');
 
-			})
+        })
 
-			btnDel.onclick = function () {
-				delForm.action = '/manager/service-note-trash/' + id + '?_method=DELETE';
-				delForm.submit();
-			}
+        btnDel.onclick = function () {
+            delForm.action = '/manager/service-note-trash/' + id + '?_method=DELETE';
+            delForm.submit();
+        }
 
-			btnRestore.onclick = function(e){
-                e.preventDefault();
-                var idd = $(this).data('idd');
-                resForm.action = '/manager/service-note-trash/' + idd + '/restore?_method=PATCH';
-                resForm.submit();
-            }
-		});
-	</script>
+        btnRestore.onclick = function (e) {
+            e.preventDefault();
+            var idd = $(this).data('idd');
+            resForm.action = '/manager/service-note-trash/' + idd + '/restore?_method=PATCH';
+            resForm.submit();
+        }
+    });
+</script>
+
 </html>

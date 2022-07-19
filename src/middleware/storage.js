@@ -4,7 +4,7 @@ const appRoot = require('app-root-path');
     
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, appRoot + '/src/public/img/uploads/users/');
+        cb(null, appRoot + '/src/public/img/uploads/customers/');
     },
 
     // By default, multer removes file extensions so let's add them back

@@ -3,11 +3,11 @@
 
 	</div>
 	<h3 class="title text-light">Quản lý khách hàng</h3>
-	{{> page/sidebar/admin/sidebar-mobile}}
+	{{> page/sidebar/business/sidebar-employ-business}}
 
 	<div class="stask">
 		<!-- Button trigger modal -->
-		<a href="/business/service-note" type="button" class="btn btn-primary btn-create">
+		<a href="/business/employ/service-note" type="button" class="btn btn-primary btn-create">
 			<i class="ti-receipt"></i> Phiếu dịch vụ
 		</a>
 		<!-- Button trigger modal -->
@@ -39,7 +39,7 @@
 				{{#each customers}}
 				<tr>
 					<th class="text-center" scope="row">{{sum @index 1}}</th>
-					<td><a href="/customers/{{this._id}}/detail">{{this.firstName}}
+					<td><a href="/business/employ/customers/{{this._id}}/detail">{{this.firstName}}
 							{{this.lastName}}</a></td>
 					<td class="text-center">{{this.birth}}</td>
 					<td class="text-center">{{this.gender}}</td>
@@ -55,12 +55,12 @@
 							</button>
 							<ul class="dropdown-menu dropdown-menu-sm">
 								<li>
-									<button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#edit-customer-modal"
-										data-id="{{this._id}}" data-edit-img="{{this.image.name}}"
-										data-edit-firstname="{{this.firstName}}" data-edit-lastname="{{this.lastName}}"
-										data-edit-birth="{{this.birth}}" data-edit-gender="{{this.gender}}"
-										data-edit-phone="{{this.phone}}" data-edit-email="{{this.email}}"
-										data-edit-address="{{this.address}}"
+									<button class="dropdown-item" data-bs-toggle="modal"
+										data-bs-target="#edit-customer-modal" data-id="{{this._id}}"
+										data-edit-img="{{this.image.name}}" data-edit-firstname="{{this.firstName}}"
+										data-edit-lastname="{{this.lastName}}" data-edit-birth="{{this.birth}}"
+										data-edit-gender="{{this.gender}}" data-edit-phone="{{this.phone}}"
+										data-edit-email="{{this.email}}" data-edit-address="{{this.address}}"
 										data-edit-description="{{this.description}}">Sửa thông tin khách hàng</button>
 								</li>
 								<hr class="dropdown-divider">
@@ -104,7 +104,8 @@
 
 
 <!-- Modal Create Customer -->
-<div class="modal fade" id="create-customer-modal" tabindex="-1" aria-labelledby="create-customer-modal" aria-hidden="true">
+<div class="modal fade" id="create-customer-modal" tabindex="-1" aria-labelledby="create-customer-modal"
+	aria-hidden="true">
 	<div class="modal-dialog modal-xl">
 		<div class="modal-content">
 			<div class="modal-header bg-primary">
@@ -119,7 +120,8 @@
 						<label for="input-create-img" class="label-avt btn btn-sm btn-primary mt-3">
 							<h6>Chọn ảnh đại diện</h6>
 						</label>
-						<input hidden id="input-create-img" type="file" name="image" accept="image/png, image/gif, image/jpeg">
+						<input hidden id="input-create-img" type="file" name="image"
+							accept="image/png, image/gif, image/jpeg">
 					</div>
 					<div class="col-xl-9 mb-3">
 						<ul class="list-group">
@@ -222,7 +224,7 @@
 						<img src="/img/user-icon.png" id="edit-customer-avt" class="rounded mx-auto d-block add-avata"
 							alt="...">
 						<div class="mt-3 mb-3 text-center">
-							<label for="edit-img" class="label-avt btn btn-sm btn-primary">
+							<label for="input-edit-img" class="label-avt btn btn-sm btn-primary">
 								<h6>Chọn ảnh đại diện</h6>
 							</label>
 							<input hidden class="form-control" id="input-edit-img" type="file" name="image"
@@ -315,26 +317,9 @@
 	</div>
 </div>
 
-<!-- Modal Detail Customer -->
-<div class="modal fade" id="detail-customer-modal" tabindex="-1" aria-labelledby="detail-customer" aria-hidden="true">
-	<div class="modal-dialog modal-xl">
-		<div class="modal-content">
-			<div class="modal-header bg-primary">
-				<h5 class="modal-title text-light" id="detail-customer-title">Tạo thông tin khách hàng</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				Detail Customer
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-			</div>
-		</div>
-	</div>
-</div>
-
 <!-- Modal Create Service Note -->
-<div class="modal fade" id="create-service-note-modal" tabindex="-1" aria-labelledby="create-service-note" aria-hidden="true">
+<div class="modal fade" id="create-service-note-modal" tabindex="-1" aria-labelledby="create-service-note"
+	aria-hidden="true">
 	<div class="modal-dialog modal-xl">
 		<div class="modal-content">
 			<div class="modal-header bg-info text-light">
@@ -406,7 +391,7 @@
 										<option value="{{this.service}}">{{this.service}}</option>
 										{{/each}}
 									<optgroup>
-									{{/each}}
+										{{/each}}
 								</select>
 							</div>
 
@@ -435,7 +420,8 @@
 								<label for="comment" class="form-label">
 									<h6>Ghi chú: </h6>
 								</label>
-								<textarea class="form-control" id="create-service-note-description" rows="6" name="comment"></textarea>
+								<textarea class="form-control" id="create-service-note-description" rows="6"
+									name="comment"></textarea>
 							</div>
 						</div>
 					</div>
@@ -450,4 +436,3 @@
 </div>
 
 <script src="/js/customer.js"></script>
-<script src="/js/service-note.js"></script>

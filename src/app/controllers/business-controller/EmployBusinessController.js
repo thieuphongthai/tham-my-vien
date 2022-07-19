@@ -4,6 +4,9 @@ const User = require("../../models/User");
 const { mongooseToObject, multipleMongooseToObject } = require("../../../util/mongoose");
 const TypeService = require("../../models/TypeService");
 const ServiceNote = require('../../models/ServiceNote');
+const fs = require('fs');
+const appRoot = require('app-root-path');
+
 
 class EmployBusinessController {
 	//BUSINESS EMPLOY
@@ -22,16 +25,14 @@ class EmployBusinessController {
 
 	/** Customer */
 	showCustomer(req, res, next) {
-		Promise.all([Customer.find({}), TypeService.find({}), Status.findById("62bdafa2c2815bf0e273e5a2"), User.find({ department: "Phẩu thuật" })])
-			.then(([customers, typeservices, status, users]) => {
+		Promise.all([Customer.find({}), TypeService.find({}), User.find({ department: "Phẩu thuật" })])
+			.then(([customers, typeservices, users]) => {
 				res.render("business/employ/employ-customer", {
 					customers: multipleMongooseToObject(customers),
 					typeservices: multipleMongooseToObject(typeservices),
-					status: mongooseToObject(status),
 					users: multipleMongooseToObject(users),
 					title: 'Quản lý khách hàng'
 				});
-				users.forEach(user => console.log(user.firstName));
 			})
 			.catch(next);
 	}
@@ -95,7 +96,7 @@ class EmployBusinessController {
 				.then((customer) => {
 					// console.log(customer.image.name);
 					let imgCustomer = customer.image.name;
-					let url = user.image.url;
+					let url = customer.image.url;
 					let files = fs.readdirSync(
 						appRoot + "/src/public/img/uploads/customers/"
 					);
@@ -133,7 +134,8 @@ class EmployBusinessController {
 					return newDate;
 				});
 				res.render("business/employ/employ-customer-detail", {
-					customer: mongooseToObject(customer)
+					customer: mongooseToObject(customer),
+					title: "Chi tiết khách hàng"
 				});
 			})
 			.catch(next);
@@ -152,7 +154,8 @@ class EmployBusinessController {
 		ServiceNote.find({})
 			.then(serviceNotes => {
 				res.render('business/employ/employ-service-note', {
-					serviceNotes: multipleMongooseToObject(serviceNotes)
+					serviceNotes: multipleMongooseToObject(serviceNotes),
+					title: "Quản lý phiếu dịch vụ"
 				});
 			})
 			.catch(next);

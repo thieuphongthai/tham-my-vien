@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const MarketingController = require('../../app/controllers/marketing-controller/EmployMarketingController');
 const validateUploadImage = require('../../middleware/validateUploadImage');
-const getHeaderToken = require('../getHeaderToken');
+// const getHeaderToken = require('../getHeaderToken');
+
 //Employ
 router.patch('/customers/:id/comment', MarketingController.createComment);
 router.put('/customers/:id', validateUploadImage.upload, MarketingController.editCustomer);

@@ -143,8 +143,6 @@ class AuthController {
                     expiresIn: 600, // 10p
                 });
 
-                const { password, ...others } = user._doc;
-
                 const refreshToken = jwt.sign({
                     id: user._id,
                     role: user.role,
@@ -165,7 +163,7 @@ class AuthController {
                 });
                 console.log('refreshToken', refreshToken);
                 console.log('err', next)
-                res.status(200).render(`${user.departmentEng}/${user.positionEng}/${user.positionEng}-overview`, {...others, accessToken});
+                res.status(200).render(`${user.departmentEng}/${user.positionEng}/${user.positionEng}-overview`, {user: mongooseToObject(user), accessToken});
                 // res.json({ ...others, accessToken });
             })
             .catch(next);

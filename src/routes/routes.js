@@ -13,8 +13,8 @@ const managerBusinessRouter = require('./managers/business-manager');
 const employBusinessRouter = require('./employes/business-employ');
 
 function route(app) {
-  app.use("/marketing/manager",[authJwt.verifyToken, authJwt.isMarketingManager], managerMarketingRouter);
-  app.use("/marketing/employ",[authJwt.verifyToken, authJwt.isMarketingEmploy], employMarketingRouter);
+  app.use("/marketing/manager", [authJwt.verifyToken, authJwt.isMarketingManager], managerMarketingRouter);
+  app.use("/marketing/employ", [authJwt.verifyToken, authJwt.isMarketingEmploy], employMarketingRouter);
   app.use("/reception/manager", managerReceptionRouter);
   app.use("/reception/employ", employReceptionRouter);
   app.use("/operating/doctor", doctorOperatingRouter);

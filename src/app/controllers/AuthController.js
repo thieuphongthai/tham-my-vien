@@ -143,7 +143,7 @@ class AuthController {
                     expiresIn: 600, // 10p
                 });
 
-                const { password, ...others } = user._doc;
+                // const { password, ...others } = user._doc;
 
                 const refreshToken = jwt.sign({
                     id: user._id,
@@ -158,15 +158,15 @@ class AuthController {
                 // authorities.push("ROLES_" + user.role.toUpperCase());
                 // console.log(authorities);
                 res.cookies = ('refreshToken', refreshToken, {
-                    httpOnly: true,
+                    httpOnly: false,
                     secure: false,
                     path: `/`,
                     sameSite: 'strict'
                 });
                 console.log('refreshToken', refreshToken);
-                console.log('err', next)
-                res.status(200).render(`${user.departmentEng}/${user.positionEng}/${user.positionEng}-overview`, {...others, accessToken});
-                // res.json({ ...others, accessToken });
+                console.log('user', user.firstName);
+                res.status(200).render(`${user.departmentEng}/${user.positionEng}/${user.positionEng}-overview`, {user, accessToken});
+                // res.json({ user, accessToken });
             })
             .catch(next);
     };

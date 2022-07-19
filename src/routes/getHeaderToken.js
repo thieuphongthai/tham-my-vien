@@ -3,7 +3,7 @@ const express = require('express');
 class getHeaderToken {
 
     getHeader(req, res, next) {
-        res.header(
+        res.headers(
           "Access-Control-Allow-Headers",
           "x-access-token, Origin, Content-Type, Accept"
         );

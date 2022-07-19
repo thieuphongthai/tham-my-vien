@@ -4,14 +4,14 @@ const { mongooseToObject, multipleMongooseToObject } = require('../../../util/mo
 class MarketingController {
 
     //EMPLOY
-    getMarketingDashboard(req, res) {
+    showDashboard(req, res) {
         res.render('marketing/employ/marketing-overview');
     }
 
     showCustomer(req, res, next) {
         Customer.find({})
             .then((customers) => {
-                res.render('marketing/employ/marketing-customer', {
+                res.render('marketing/employ/employ-customer', {
                     customers: multipleMongooseToObject(customers)
                 })
             })

@@ -65,7 +65,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Phân tích cú pháp yêu cầu của các loại nội dung
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(express.json());
 
 // Xem những yêu cầu được ghi chép lại
 app.use(morgan("combined"));
@@ -91,6 +91,21 @@ app.engine(
 				let date = new Date(d);
 				let newDate = date.toLocaleString('vi-VI', {weekday:"long", day:'numeric', month: 'numeric', year:'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric'});
 				return newDate;
+			},
+			show: (a) => {
+				console.log('log user', a);
+				let fName = a.firstName;
+				let lName = a.lastName;
+				return fName+ ' ' + lName;
+			},
+			showID: (a) => {
+				// console.log('log user id', a);
+				let id = a._id;
+				return id
+			},
+			showIMG: (a) => {
+				let img = a.image.name;
+				return img;
 			}
 		},
 	})

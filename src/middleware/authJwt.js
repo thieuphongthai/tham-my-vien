@@ -7,8 +7,8 @@ const Position = require("../app/models/Position");
 
 class authJwt {
 	verifyToken(req, res, next) {
-		let token = req.headers.token;
-		// console.log('auth token', token);
+		let token = req.headers["x-access-token"];
+		console.log('auth token', token);
 		if (!token) {
 			return res
 				.status(403)

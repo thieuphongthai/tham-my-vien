@@ -9,14 +9,15 @@
 </head>
 
 <body>
-    {{> page/sidebar/admin/sidebar-mobile}}
+    {{> page/sidebar/business/sidebar-manager-business}}
+
 
     <nav id="sub-nav-lg" class="navbar taskbar justify-content-between">
         <div class="title">
-            <a href="/manager/customers" class="text-light"><i class="ti-back-left"></i> Quay lại</a>
+            <a href="/business/manager/customers" class="text-light"><i class="ti-back-left"></i> Quay lại</a>
         </div>
         <h3 class="title text-light">Quản lý phiếu dịch vụ</h3>
-        <div></div>
+        <div class="stask">
     </nav>
     <div class="container-fluid mt-3">
         <div class="row ml-2">
@@ -72,12 +73,12 @@
                 <label for="schedule" class="form-label">Lịch hẹn: </label>
                 <label name="schedule" class="form-label">{{this.schedule}}</label>
             </div>
-            <div class="btn btn-danger btn-sm col-md-6" data-id="{{this._id}}" data-bs-toggle="modal"
-                data-bs-target="#deleteModal">Xóa</div>
+            <div class="btn btn-danger btn-sm col-md-6" data-del-service-note-id="{{this._id}}" data-bs-toggle="modal"
+                data-bs-target="#del-service-note-modal">Xóa</div>
             </form>
             {{else}}
             <div class="col-12">
-                <h5 class="form-label text-center">Chưa có phiếu dịch vụ. <a href="/manager/customers">Tạo
+                <h5 class="form-label text-center">Chưa có phiếu dịch vụ. <a href="/business/manager/customers">Tạo
                         phiếu</a></h5>
             </div>
             {{/each}}
@@ -85,8 +86,9 @@
     </div>
 
     {{!-- Modal Delete --}}
-    <form name="delete-form" method="POST"></form>
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form name="delete-service-note-form" method="POST"></form>
+    <div class="modal fade" id="del-service-note-modal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -105,33 +107,14 @@
                         Bạn có đồng ý xóa không?
                     </div>
                     <div class="modal-footer">
-                        <button id="btn-delete" type="button" class="btn btn-danger">Có, chắc chắn</button>
+                        <button id="btn-delete-service-note" type="button" class="btn btn-danger">Có, chắc
+                            chắn</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Không</button>
                     </div>
                 </div>
             </div>
         </div>
 </body>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        //DELETE
-        var id;
-        var btnDel = document.getElementById('btn-delete');
-        var delForm = document.forms['delete-form'];
-
-        $('#deleteModal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget);
-            id = button.data('id');
-
-        })
-
-        btnDel.onclick = function () {
-            delForm.action = '/manager/service-note/' + id + '?_method=DELETE';
-            delForm.submit();
-        }
-
-
-    });
-</script>
+<script src="/js/service-note.js"></script>
 
 </html>

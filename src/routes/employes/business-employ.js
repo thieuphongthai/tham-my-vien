@@ -4,11 +4,14 @@ const router = express.Router();
 const validateUploadImage = require('../../middleware/validateUploadImage');
 
 /* Business Employ Start*/
-router.post('/customers/:id/service-note', EmployBusinessController.createServiceNote);
-router.get('/service-note', EmployBusinessController.showServiceNote);
 router.patch('/customers/:id/comment', EmployBusinessController.createComment);
 router.put('/customers/:id', validateUploadImage.upload, EmployBusinessController.editCustomer);
+
+router.post('/customers/:id/service-note', EmployBusinessController.createServiceNote);
 router.post('/customers', validateUploadImage.upload, EmployBusinessController.createCustomer);
+
+router.get('/customers/:id/detail', EmployBusinessController.showCustomerDetail)
+router.get('/service-note', EmployBusinessController.showServiceNote);
 router.get('/customers', EmployBusinessController.showCustomer);
 router.get('/', EmployBusinessController.showDashboard);
 // router.get('/', EmployBusinessController.show404);

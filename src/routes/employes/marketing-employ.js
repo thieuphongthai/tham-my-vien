@@ -5,11 +5,11 @@ const validateUploadImage = require('../../middleware/validateUploadImage');
 const getHeaderToken = require('../getHeaderToken');
 //Employ
 router.patch('/customers/:id/comment', MarketingController.createComment);
-// router.get('/customers/:id/detail', MarketingController.showCustomerDetail)
-// router.put('/customers/:id/edit', validateUploadImage.upload, MarketingController.editCustomer);
-// router.get('/customers/:id/edit', EmployBusinessController.showCustomerEdit);
-router.post('/customers/create', validateUploadImage.upload, MarketingController.createCustomer);
-// router.get('/customers/create', MarketingController.showCustomerCreate);
+router.put('/customers/:id', validateUploadImage.upload, MarketingController.editCustomer);
+
+router.post('/customers', validateUploadImage.upload, MarketingController.createCustomer);
+
+router.get('/customers/:id/detail', MarketingController.showCustomerDetail);
 router.get('/customers', MarketingController.showCustomer);
 router.get('/', MarketingController.showDashboard);
 

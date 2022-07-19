@@ -1,44 +1,13 @@
-{{!-- <div class="d-flex" id="wrapper">
-	{{!-- <div class="dashboard"><h5>BẢNG ĐIỀU KHIỂN</h5></div> --}}
-	<div class="border-end bg-white" id="sidebar-wrapper">
-		<div class="sidebar-toggle" id="sidebarToggleBtn">
-			<i class="ti-arrow-circle-right"></i>
-		</div>
-		<div class="list-group list-group-flush">
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/customer"><i class="ti-user"></i>Quản lý khách hàng</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/user"><i class="ti-user ml-3 mr-3"></i>Quản lý nhân viên</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/account"><i class="ti-pencil-alt ml-3 mr-3"></i>Quản lý tài khoản</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/department"><i class="ti-close ml-3 mr-3"></i>Quản lý phòng ban</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/position"><i class="ti-close ml-3 mr-3"></i>Quản lý chức vụ</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/role"><i class="ti-close ml-3 mr-3"></i>Quản lý quyền</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/service-note"><i class="ti-close ml-3 mr-3"></i>Quản lý quyền</a>
-        </div>
-	</div>
-</div>
-	{{!-- <div class="dashboard-footer text-light">
-		<div class="copyrightLine" data-text="Copyright@Hachitech">Copyright@Hachitech</div>
-	</div> --}}
-
-<script>
-	let sidebarBtn = document.querySelector("#sidebarToggleBtn");
-	let sidebar = document.querySelector("#sidebar-wrapper");
-	
-	sidebarBtn.onclick = function(){
-	sidebar.classList.toggle("active");
-	sidebarBtn.classList.toggle("rotate");
-}
-</script> --}}
-
 <div class="nav-mobile text-light">
 	<ul class="nav-bottom">
 		<li class="list active">
-			<a href="business/manager/service-note">
+			<a href="/business/manager/service-note">
 				<span class="nav-mobile-icon"><i class="ti-receipt"></i></span>
 				<span class="nav-text">Dịch vụ</span>
 			</a>
 		</li>
 		<li class="list">
-			<a href="business/manager/customers">
+			<a href="/business/manager/customers">
 				<span class="nav-mobile-icon"><i class="ti-user"></i></span>
 				<span class="nav-text">Khách hàng</span>
 			</a>

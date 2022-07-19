@@ -9,11 +9,11 @@
 </head>
 
 <body>
-    {{> page/sidebar/admin/sidebar-mobile}}
+    {{> page/sidebar/business/sidebar-employ-business}}
 
     <nav id="sub-nav-lg" class="navbar taskbar justify-content-between">
         <div class="title">
-            <a href="/customers" class="text-light"><i class="ti-back-left"></i> Quay lại</a>
+            <a href="/business/employ/customers" class="text-light"><i class="ti-back-left"></i> Quay lại</a>
         </div>
         <h3 class="title text-light">Quản lý phiếu dịch vụ</h3>
         <div class="stask">
@@ -77,6 +77,11 @@
                 <label name="schedule" class="form-label">{{this.schedule}}</label>
             </div>
             </form>
+            {{else}}
+            <div class="col-12">
+                <h5 class="form-label text-center">Chưa có phiếu dịch vụ. <a href="/business/employ/customers">Tạo
+                        phiếu</a></h5>
+            </div>
             {{/each}}
         </div>
     </div>

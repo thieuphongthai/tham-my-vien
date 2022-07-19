@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const OperatingController = require('../../app/controllers/OperationRoomController');
+const OperatingController = require('../../app/controllers/reception-controller/EmployReceptionController');
 const validateUploadImage = require('../../middleware/validateUploadImage');
 
 

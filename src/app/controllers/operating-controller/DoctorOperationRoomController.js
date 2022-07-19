@@ -1,5 +1,5 @@
-const Customer = require('../models/Customer');
-const { mongooseToObject, multipleMongooseToObject } = require('../../util/mongoose');
+const Customer = require('../../models/Customer');
+const { mongooseToObject, multipleMongooseToObject } = require('../../../util/mongoose');
 
 class OperationRoomController {
     //doctor

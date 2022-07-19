@@ -168,9 +168,9 @@ class EmployBusinessController {
 				phone: req.body.phone,
 				address: req.body.address
 			},
-			performName: req.body.performUser,
+			performer: req.body.performer,
 			createName: req.body.name,
-			status: req.body.status,
+			status: "Tạo mới",
 			service: req.body.service,
 			comments: { comment: req.body.comment },
 			schedule: req.body.schedule,

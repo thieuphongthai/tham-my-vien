@@ -46,47 +46,50 @@
 // 	// fbFName.removeAttribute('class', 'alert alert-danger mt-1');
 // })
 
+//CREATE: submit create customer forms
 // Handle create info Customer
-var createCustomer = document.getElementById("create-customer");
+var createCustomer = document.getElementById("create-customer-btn");
 var createCustomerForm = document.forms["create-customer-form"];
 createCustomer.addEventListener("click", () => {
 	createCustomerForm.submit();
 });
 
 // Handle select image from modal create
-var addImg = document.getElementById("create-img");
+var addImg = document.getElementById("input-create-img");
 var addAvt = document.getElementById("add-avt-customer");
 addImg.addEventListener("change", (e) => {
 	addAvt.src = URL.createObjectURL(e.target.files[0]);
 });
+//END CREATE: submit create customer forms
+
+//EDIT: Load edit customer modal and submit edit customer forms
 
 // Handle select image from modal edit
-var editImg = document.getElementById("edit-img");
-var editAvt = document.getElementById("edit-avt");
+var editImg = document.getElementById("input-edit-img");
+var editAvt = document.getElementById("edit-customer-avt");
 editImg.addEventListener("change", (e) => {
 	editAvt.src = URL.createObjectURL(e.target.files[0]);
 });
 
 // Handle push data to edit modal
-var editCustomer = document.getElementById("edit-customer");
+var editCustomer = document.getElementById("edit-customer-modal");
 editCustomer.addEventListener("show.bs.modal", function (event) {
 	// Button that triggered the modal
 	var button = event.relatedTarget;
 	// Get data from edit button
 	var idEdit = button.getAttribute('data-id');
 	var imageEdit = button.getAttribute("data-edit-img");
-	var firstName = button.getAttribute("data-first-name");
-	var lastName = button.getAttribute("data-last-name");
-	var birth = button.getAttribute("data-birth");
-	var gender = button.getAttribute("data-gender");
-	var phone = button.getAttribute("data-phone");
-	var email = button.getAttribute("data-email");
-	var address = button.getAttribute("data-address");
-	var desciption = button.getAttribute("data-description");
-	var role = button.getAttribute("data-role");
+	var firstName = button.getAttribute("data-edit-firstname");
+	var lastName = button.getAttribute("data-edit-lastname");
+	var birth = button.getAttribute("data-edit-birth");
+	var gender = button.getAttribute("data-edit-gender");
+	var phone = button.getAttribute("data-edit-phone");
+	var email = button.getAttribute("data-edit-email");
+	var address = button.getAttribute("data-edit-address");
+	var desciption = button.getAttribute("data-edit-description");
 
 	// Get element need embeded input
-	var editAvt = document.getElementById("edit-avt");
+	var editAvt = document.getElementById("edit-customer-avt");
 	var editFirstName = document.getElementById("edit-firstName");
 	var editLastName = document.getElementById("edit-lastName");
 	var editBirth = document.getElementById("edit-birth");
@@ -104,7 +107,7 @@ editCustomer.addEventListener("show.bs.modal", function (event) {
 	} else {
 		editAvt.setAttribute('src', '/img/uploads/Customers/' + imageEdit);
 	}
-	editCustomer.setAttribute('action', `/customer/${idEdit}?_method=PUT`);
+	editCustomer.setAttribute('action', `/business/employ/customers/${idEdit}?_method=PUT`);
 	editFirstName.value = firstName;
 	editLastName.value = lastName;
 	editBirth.value = birth;
@@ -118,13 +121,16 @@ editCustomer.addEventListener("show.bs.modal", function (event) {
 
 // Handle edit info Customer
 var editBtn = document.getElementById("edit-customer-btn");
-var editServiceNoteForm = document.forms["edit-service-note-form"];
+var editCustomer = document.forms["edit-customer-form"];
 editBtn.addEventListener("click", () => {
-	editServiceNoteForm.submit();
+	editCustomer.submit();
 });
+//EDIT END: Load edit customer modal and submit edit customer forms
 
+
+//CREATE: submit create service note forms
 // Handle create service-note
-var createServiceNote = document.getElementById("create-service-note");
+var createServiceNote = document.getElementById("create-service-note-modal");
 createServiceNote.addEventListener("show.bs.modal", function (event) {
 	// Button that triggered the modal
 	var button = event.relatedTarget;
@@ -153,7 +159,7 @@ createServiceNote.addEventListener("show.bs.modal", function (event) {
 
 	createServiceNoteForm.setAttribute(
 		"action",
-		`/customers/${dataServiceNoteID}/service-note`
+		`/business/employ/customers/${dataServiceNoteID}/service-note`
 	);
 	serviceNoteFirstLastName.value = dataFirstName + " " + dataLastName;
 	serviceNoteBirth.value = dataBirth;
@@ -162,6 +168,9 @@ createServiceNote.addEventListener("show.bs.modal", function (event) {
 	serviceNoteEmail.value = dataEmail;
 	serviceNoteAddress.value = dataAddress;
 });
+
+//CREATE: submit create service note forms
+
 
 document.addEventListener("DOMContentLoaded", function () {
 	$(document).ready(function () {

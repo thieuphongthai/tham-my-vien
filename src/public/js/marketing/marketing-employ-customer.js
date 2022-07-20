@@ -58,7 +58,7 @@ editCustomer.addEventListener("show.bs.modal", function (event) {
 	} else {
 		editAvt.setAttribute('src', '/img/uploads/customers/' + imageEdit);
 	}
-	editCustomer.setAttribute('action', `/marketing/employ/customers/${idEdit}?_method=PUT`);
+	editCustomerForm.setAttribute('action', `/marketing/employ/customers/${idEdit}?_method=PUT`);
 	editFirstName.value = firstName;
 	editLastName.value = lastName;
 	editBirth.value = birth;
@@ -71,11 +71,68 @@ editCustomer.addEventListener("show.bs.modal", function (event) {
 
 // Handle edit info Customer
 var editBtn = document.getElementById("edit-customer-btn");
-var editCustomer = document.forms["edit-customer-form"];
+var editCustomerForm = document.forms["edit-customer-form"];
 editBtn.addEventListener("click", () => {
-	editCustomer.submit();
+	editCustomerForm.submit();
 });
 //EDIT END: Load edit customer modal and submit edit customer forms
+
+
+
+// //PUSH COMMENT CUSTOMER: detail customer and submit push comment
+// var detailCustomerAddComment = document.getElementById("detail-customer-add-comment");
+// var detailCustomerComment = document.forms["detail-customer-form"];
+// detailCustomerAddComment.addEventListener("click", () => {
+// 	detailCustomerComment.submit();
+// })
+// var detailCustomer = document.getElementById("detail-customer-modal");
+// detailCustomer.addEventListener("show.bs.modal", function (event) {
+// 	// Button that triggered the modal
+// 	var button = event.relatedTarget;
+// 	// Get data from edit button
+// 	var idDetail = button.getAttribute('data-detail-id');
+// 	var imageDetail = button.getAttribute("data-detail-img");
+// 	var firstName = button.getAttribute("data-detail-firstname");
+// 	var lastName = button.getAttribute("data-detail-lastname");
+// 	var birth = button.getAttribute("data-detail-birth");
+// 	var gender = button.getAttribute("data-detial-gender");
+// 	var phone = button.getAttribute("data-detail-phone");
+// 	var email = button.getAttribute("data-detail-phone");
+// 	var address = button.getAttribute("data-detail-address");
+// 	var desciption = button.getAttribute("data-detail-description");
+// 	var comment = button.getAttribute("data-detail-comment");
+
+// 	// Get element need embeded input
+// 	var detailAvt = document.getElementById("detail-customer-avt");
+// 	var detailName = document.getElementById("detail-customer-name");
+// 	var detailBirth = document.getElementById("detail-customer-birth");
+// 	var detailGender = document.getElementById("detail-customer-gender");
+// 	var detailPhone = document.getElementById("detail-customer-phone");
+// 	var detailEmail = document.getElementById("detail-customer-email");
+// 	var detailAddress = document.getElementById("detail-customer-address");
+// 	var detailDescription = document.getElementById("detail-customer-description");
+// 	var detailComment = document.getElementById("detail-customer-comment");
+
+// 	if (imageDetail === '') {
+// 		editAvt.setAttribute('src', '/img/user-icon.png');
+// 	} else {
+// 		detailAvt.setAttribute('src', '/img/uploads/customers/' + imageDetail);
+// 	}
+// 	detailCustomerComment.setAttribute('action', `/marketing/employ/customers/${idDetail}?_method=PATCH`);
+// 	detailName.innerHTML = firstName + " " + lastName;
+// 	detailBirth.innerHTML = birth;
+// 	detailGender.innerHTML = gender;
+// 	detailPhone.innerHTML = phone;
+// 	detailEmail.innerHTML = email;
+// 	detailAddress.innerHTML = address;
+// 	detailDescription.innerHTML = desciption;
+// 	detailComment.innerHTML = comment;
+// });
+
+// //END PUSH COMMENT CUSTOMER: detail customer and submit push comment
+
+
+
 
 document.addEventListener("DOMContentLoaded", function () {
 	$(document).ready(function () {

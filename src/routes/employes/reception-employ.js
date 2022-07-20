@@ -1,10 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const OperatingController = require('../../app/controllers/reception-controller/EmployReceptionController');
+const ReceptionController = require('../../app/controllers/reception-controller/EmployReceptionController');
 const validateUploadImage = require('../../middleware/validateUploadImage');
 
 
 //Employ
+router.patch('/service-note/:id',ReceptionController.pushPerformer)
+
+
+router.get('/service-note', ReceptionController.showServiceNote)
 
 
 module.exports = router;

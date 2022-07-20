@@ -59,7 +59,7 @@ editCustomer.addEventListener("show.bs.modal", function (event) {
 	} else {
 		editAvt.setAttribute('src', '/img/uploads/customers/' + imageEdit);
 	}
-	editCustomer.setAttribute('action', `/marketing/manager/customers/${idEdit}?_method=PUT`);
+	editCustomerForm.setAttribute('action', `/marketing/manager/customers/${idEdit}?_method=PUT`);
 	editFirstName.value = firstName;
 	editLastName.value = lastName;
 	editBirth.value = birth;
@@ -73,9 +73,9 @@ editCustomer.addEventListener("show.bs.modal", function (event) {
 
 // Handle edit info Customer
 var editBtn = document.getElementById("edit-customer-btn");
-var editCustomer = document.forms["edit-customer-form"];
+var editCustomerForm = document.forms["edit-customer-form"];
 editBtn.addEventListener("click", () => {
-	editCustomer.submit();
+	editCustomerForm.submit();
 });
 //EDIT END: Load edit customer modal and submit edit customer forms
 

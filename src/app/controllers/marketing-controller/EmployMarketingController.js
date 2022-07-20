@@ -5,23 +5,42 @@ const appRoot = require('app-root-path');
 
 class MarketingController {
 
-    //EMPLOY
-    showDashboard(req, res) {
-        res.render('marketing/employ/marketing-overview');
-    }
+	//EMPLOY
+	showDashboard(req, res) {
+		res.render('marketing/employ/marketing-overview');
+	}
 
-    showCustomer(req, res, next) {
-        Customer.find({})
-            .then((customers) => {
-                res.render('marketing/employ/employ-customer', {
-                    customers: multipleMongooseToObject(customers),
+	showCustomer(req, res, next) {
+		Customer.find({})
+			.then((customers) => {
+
+				res.render('marketing/employ/employ-customer', {
+					customers: multipleMongooseToObject(customers),
 					title: 'Quản lý khách hàng'
-                })
-            })
-            .catch(next)
-    }
+				})
+			})
+			.catch(next);
 
-    createCustomer(req, res, next) {
+	}
+	showCustomerDetail(req, res, next) {
+		Customer.findById(req.params.id)
+			.then(customer => {
+				let commnetArray = customer.comments;
+				commnetArray.forEach(element => {
+					var date = new Date(element.createdAt);
+					var newDate = date.toLocaleString('en-GB', { day: 'numeric', month: 'numeric', year: 'numeric' })
+					console.log('day', newDate)
+					return newDate;
+				})
+				res.render('marketing/employ/employ-customer-detail', {
+					customer: mongooseToObject(customer),
+					title: "Chi tiết khách hàng"
+				});
+			})
+			.catch(next);
+	}
+
+	createCustomer(req, res, next) {
 		if (req.file) {
 			const customer = new Customer({
 				firstName: req.body.firstName,
@@ -103,25 +122,9 @@ class MarketingController {
 		}
 	}
 
-    showCustomerDetail(req, res, next) {
-		Customer.findById(req.params.id)
-			.then(customer => {
-				let commnetArray = customer.comments;
-				commnetArray.forEach(element => {
-					var date = new Date(element.createdAt);
-					var newDate = date.toLocaleString('en-GB', { day: 'numeric', month: 'numeric', year: 'numeric' })
-					console.log('day', newDate)
-					return newDate;
-				})
-				res.render('marketing/employ/employ-customer-detail', {
-					customer: mongooseToObject(customer),
-					title: "Chi tiết khách hàng"
-				});
-			})
-			.catch(next);
-	}
 
-    createComment(req, res, next) {
+
+	createComment(req, res, next) {
 		Customer.findByIdAndUpdate({ _id: req.params.id }, { $push: { comments: { comment: req.body.comments } } })
 			.then(() => res.redirect('back'))
 			.catch(next);

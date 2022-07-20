@@ -50,7 +50,6 @@ editCustomer.addEventListener("show.bs.modal", function (event) {
 	var editEmail = document.getElementById("edit-email");
 	var editAddress = document.getElementById("edit-address");
 	var editDescription = document.getElementById("edit-description");
-	var editRole = document.getElementById("edit-role");
 
 	editFirstName.focus();
 
@@ -68,7 +67,6 @@ editCustomer.addEventListener("show.bs.modal", function (event) {
 	editEmail.value = email;
 	editAddress.value = address;
 	editDescription.value = desciption;
-	editRole.value = role;
 });
 
 // Handle edit info Customer

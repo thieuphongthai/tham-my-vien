@@ -2,16 +2,17 @@ const express = require('express');
 const router = express.Router();
 const MarketingController = require('../../app/controllers/marketing-controller/ManagerMarketingController');
 const validateUploadImage = require('../../middleware/validateUploadImage');
+// const getHeaderToken = require('../getHeaderToken');
 
+//Employ
+router.patch('/customers/:id/comment', MarketingController.createComment);
+router.put('/customers/:id', validateUploadImage.upload, MarketingController.editCustomer);
 
+router.post('/customers', validateUploadImage.upload, MarketingController.createCustomer);
 
-
-//Manager
-router.post('/manager/customer', validateUploadImage.upload, MarketingController.createCustomer);
-// router.get('/manager/customer', MarketingController.showMNGCustomer);
-// router.get('/manager/:id/customer-detail', MarketingController.getMNGOneMarketingCustomer)
-// router.post('/manager/:id/customer-detail', MarketingController.createComment);
-// router.get('/manager', MarketingController.getMNGMarketingDashboard);
+router.get('/customers/:id/detail', MarketingController.showCustomerDetail);
+router.get('/customers', MarketingController.showCustomer);
+router.get('/', MarketingController.showDashboard);
 
 
 module.exports = router;

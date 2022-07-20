@@ -52,6 +52,7 @@ const ServiceNote = new Schema({
 			comment: String
 		}
 	],
+	stored: String,
 	schedule: String,
 	reason: String,
 }, {

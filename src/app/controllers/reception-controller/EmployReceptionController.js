@@ -1,15 +1,33 @@
-// Trả về nội dung công khai và được bảo vệ
+const ServiceNote = require('../../models/ServiceNote');
+const User = require('../../models/User');
+const { mongooseToObject, multipleMongooseToObject } = require('../../../util/mongoose');
 
-class getUI {
-    rootBoard(req, res) {
-        res.status(200).render('/root');
-    };
-    adminBoard(req, res) {
-        res.status(200).send("/admin");
-    };
-    userBoard(req, res) {
-        res.status(200).send("/user");
-    };
-}
 
-module.exports = new getUI;
+
+class ReceptionController {
+    getReceptionDashboard(req, res) {
+        res.render('reception/reception-overview');
+    }
+
+    showServiceNote(req, res, next) {
+        Promise.all([ServiceNote.find({}).sort({ schedule: 1 }), User.find({ department: "Phẩu thuật" })])
+            .then(([serviceNotes, users]) => {
+                res.render('reception/employ/reception-schedule', {
+                    serviceNotes: multipleMongooseToObject(serviceNotes),
+                    users: multipleMongooseToObject(users),
+                    title: "Quản lý dịch vụ"
+                });
+
+            })
+            .catch(next);
+    }
+
+    pushPerformer(req, res, next) {
+        ServiceNote.findByIdAndUpdate({ _id: req.params.id }, { $push: { performer: req.body.performer } })
+            .then(() => res.redirect("back"))
+            .catch(next);
+    }
+};
+
+
+module.exports = new ReceptionController;

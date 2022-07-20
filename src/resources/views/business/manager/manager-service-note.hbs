@@ -20,6 +20,7 @@
         <div class="stask">
     </nav>
     <div class="container-fluid mt-3">
+        <form method="POST" id="update-stored-status">
         <div class="row ml-2">
             {{#each serviceNotes}}
             <div class="col-12">
@@ -83,6 +84,7 @@
             </div>
             {{/each}}
         </div>
+        </form>
     </div>
 
     {{!-- Modal Delete --}}
@@ -115,6 +117,6 @@
             </div>
         </div>
 </body>
-<script src="/js/business-manager-service-note.js"></script>
+<script src="/js/business/business-manager-service-note.js"></script>
 
 </html>

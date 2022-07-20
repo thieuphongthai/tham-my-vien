@@ -7,15 +7,13 @@ const Position = require("../app/models/Position");
 
 class authJwt {
 	verifyToken(req, res, next) {
-		let token = req.headers["x-access-token"];
+		let token = req.headers['cookie'];
 		console.log('auth token', token);
 		if (!token) {
-			return res
-				.status(403)
-				.send({ message: "Không có mã token được cung cấp" });
+			return res.status(403).send({message: 'Khong co quyen su dung chuc nang nay'});
 		}
-		const formatToken = token.split(" ")[1];
-		// console.log('formatToken', formatToken);
+		const formatToken = token.split("=")[1].split('; ')[0];
+		console.log('formatToken', formatToken);
 		jwt.verify(formatToken, process.env.ACCESSTOKEN_KEY, (err, decoded) => {
 			if (err) {
 				// console.log(err)
@@ -31,8 +29,8 @@ class authJwt {
 			.then((users) => {
 				if (users.department === users[0].name && users.position === users[1].name) {
 					next();
-					res.status(403).send({ message: "Nhan vien Marketing" });
-					return;
+					// res.status(403).send({ message: "Nhan vien Marketing" });
+					// return;
 				}
 			}).catch(next);
 	}

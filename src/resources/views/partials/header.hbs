@@ -1,9 +1,29 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-info border-bottom">
 	<div class="container-fluid">
 		<a class="navbar-brand" href="#">Trang chủ</a>
-		<div class="img-container">
-			{{!-- <img src="/img/uploads/Customers/{{showIMG user}}" alt="">
-			<a class="" href="#" data-user-id="{{showID user}}">{{show user}}</a> --}}
-		</div>
+		{{!-- <div class="img-container"> --}}
+			<li class="nav-item dropdown img-container">
+				<img src="/img/uploads/customers/{{user.image.name}}" alt="" />
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
+					data-bs-toggle="dropdown" aria-expanded="false">
+					{{user.firstName}} {{user.lastName}}
+				</a>
+				<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+					<li><a id="logoutBtn" class="dropdown-item" type="button">Action</a></li>
+					<li><a class="dropdown-item" href="#">Another action</a></li>
+					<li><a class="dropdown-item" href="#">Something else here</a></li>
+				</ul>
+			</li>
+		{{!-- </div> --}}
 	</div>
 </nav>
+<form id="logoutForm" action="/logout" method="POST"></form>
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		var logoutBtn = document.getElementById('logoutBtn');
+		var logoutForm = document.forms['logoutForm'];
+		logoutBtn.addEventListener('click', () => {
+			logoutForm.submit();
+		})
+	})
+</script>

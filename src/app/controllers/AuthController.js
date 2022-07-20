@@ -143,7 +143,9 @@ class AuthController {
                     expiresIn: 600, // 10p
                 });
 
-                // const { password, ...others } = user._doc;
+                // const resUser = user.map(user => {
+                //     console.log(user)
+                // })
 
                 const refreshToken = jwt.sign({
                     id: user._id,
@@ -157,25 +159,29 @@ class AuthController {
                 console.log(user.role)
                 // authorities.push("ROLES_" + user.role.toUpperCase());
                 // console.log(authorities);
-                res.cookies = ('refreshToken', refreshToken, {
-                    httpOnly: false,
-                    secure: false,
+                res.cookie('accessToken', accessToken, {
+                    httpOnly: true,
+                    secure: true,
                     path: `/`,
                     sameSite: 'strict'
                 });
-                console.log('refreshToken', refreshToken);
-                console.log('user', user.firstName);
-                res.status(200).render(`${user.departmentEng}/${user.positionEng}/${user.positionEng}-overview`, {user, accessToken});
-                // res.json({ user, accessToken });
+                res.cookie('refreshToken', refreshToken, {
+                    httpOnly: true,
+                    secure: true,
+                    path: `/`,
+                    sameSite: 'strict'
+                });
+                res.status(200).render(`${user.departmentEng}/${user.positionEng}/${user.positionEng}-overview`, {user: mongooseToObject(user), accessToken});
+                // res.json({ user: mongooseToObject(user), accessToken });
             })
             .catch(next);
     };
 
 
     // Logout
-    logout = async (req, res) => {
+    logout = async (req, res, next) => {
         try {
-            req.session = null;
+            req.cookie('accessToken', null);
             return res.status(200).send({ message: "Bạn đã đăng xuất!" });
         } catch (err) {
             this.next(err);

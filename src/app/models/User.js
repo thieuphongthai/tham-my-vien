@@ -21,6 +21,7 @@ const User = new Schema({
 	password: String,
 	role: String,
 	description: String,
+	state: String,
 	customers: [
 		{ 
 			type: Schema.Types.ObjectId,

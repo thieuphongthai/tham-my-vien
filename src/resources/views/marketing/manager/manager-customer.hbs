@@ -35,7 +35,7 @@
 				{{#each customers}}
 				<tr>
 					<th class="text-center" scope="row">{{sum @index 1}}</th>
-					<td><a href="/marketing/employ/customers/{{this._id}}/detail">{{this.firstName}}
+					<td><a href="/marketing/manager/customers/{{this._id}}/detail">{{this.firstName}}
 							{{this.lastName}}</a></td>
 					<td class="text-center">{{this.birth}}</td>
 					<td class="text-center">{{this.gender}}</td>
@@ -50,7 +50,7 @@
 							data-edit-birth="{{this.birth}}" data-edit-gender="{{this.gender}}"
 							data-edit-phone="{{this.phone}}" data-edit-email="{{this.email}}"
 							data-edit-address="{{this.address}}" data-edit-description="{{this.description}}">Sửa thông
-							tin khách hàng</button>
+							tin</button>
 					</td>
 				</tr>
 				{{/each}}
@@ -292,4 +292,4 @@
 
 
 
-<script src="/js/marketing.js"></script>
+<script src="/js/marketing/marketing-manager-customer.js"></script>

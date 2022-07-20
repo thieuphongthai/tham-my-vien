@@ -388,7 +388,7 @@ class AdminController {
 	}
 
 	trashServiceNote(req, res, next) {
-		ServiceNote.findDeleted({})
+		ServiceNote.findDeleted({stored : "Yes"})
 			.then(serviceNotes => {
 				res.render('admin/service-note/admin-service-note-trash', {
 					serviceNotes: multipleMongooseToObject(serviceNotes)

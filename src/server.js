@@ -116,12 +116,6 @@ app.set("view engine", "hbs");
 // Cấu hình đường dẫn đến tệp tin chứa giao diện người dùng
 app.set("views", path.join(__dirname, "resources", "views"));
 
-app.use(function(req, res, next){
-    res.locals.message = req.session.message;
-    delete req.session.message;
-    next();
-});
-
 app.use(function (req, res, next) {
 	res.header(
 		"Access-Control-Allow-Headers",

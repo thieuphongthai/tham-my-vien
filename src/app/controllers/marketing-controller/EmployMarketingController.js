@@ -1,4 +1,5 @@
 const Customer = require('../../models/Customer');
+const User = require('../../models/User');
 const { mongooseToObject, multipleMongooseToObject } = require('../../../util/mongoose');
 const fs = require('fs');
 const appRoot = require('app-root-path');
@@ -6,19 +7,28 @@ const appRoot = require('app-root-path');
 class MarketingController {
 
     //EMPLOY
-    showDashboard(req, res) {
-        res.render('marketing/employ/marketing-overview');
+    showDashboard(req, res, next) {
+		User.findById({_id: req.userId})
+			.then(user => {
+				res.render('marketing/employ/employ-overview', {
+					user: mongooseToObject(user)
+				});
+			})
+			.catch(next);
     }
 
     showCustomer(req, res, next) {
-        Customer.find({})
-            .then((customers) => {
+		console.log('req', req.userId)
+		Promise.all([User.findById({_id: req.userId}), Customer.find({})])
+            .then(([user, customers]) => {
+				// console.log('user', mongooseToObject(user))
                 res.render('marketing/employ/employ-customer', {
+					user: mongooseToObject(user),
                     customers: multipleMongooseToObject(customers),
 					title: 'Quản lý khách hàng'
                 })
             })
-            .catch(next)
+            .catch(next);
     }
 
     createCustomer(req, res, next) {

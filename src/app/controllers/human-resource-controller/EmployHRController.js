@@ -2,7 +2,12 @@ const { mongooseToObject, multipleMongooseToObject } = require("../../../util/mo
 const User = require("../../models/User");
 const fs = require("fs");
 const appRoot = require("app-root-path");
-
+const bcrypt = require("bcryptjs");
+const multer = require("multer");
+const uploadAvatar = multer().single("image");
+const helpers = require("../../../middleware/helpers");
+const path = require("path");
+const flash = require('connect-flash');
 
 class EmployHRController {
 

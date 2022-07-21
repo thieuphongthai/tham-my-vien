@@ -58,7 +58,7 @@ edituser.addEventListener("show.bs.modal", function (event) {
 	} else {
 		editAvt.setAttribute('src', '/img/uploads/users/' + imageEdit);
 	}
-	edituserForm.setAttribute('action', `/business/employ/users/${idEdit}?_method=PUT`);
+	edituserForm.setAttribute('action', `/hr/employ/users/${idEdit}?_method=PUT`);
 	editFirstName.value = firstName;
 	editLastName.value = lastName;
 	editBirth.value = birth;

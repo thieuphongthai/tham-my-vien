@@ -10,7 +10,7 @@ class ReceptionController {
     }
 
     showServiceNote(req, res, next) {
-        Promise.all([ServiceNote.find({}).sort({ schedule: 1 }), User.find({ department: "Phẩu thuật" })])
+        Promise.all([ServiceNote.find({}).sort({ schedule: 1 }), User.find({ department: "Phẩu thuật", position: "Bác sĩ" })])
             .then(([serviceNotes, users]) => {
                 res.render('reception/employ/reception-schedule', {
                     serviceNotes: multipleMongooseToObject(serviceNotes),
@@ -23,9 +23,8 @@ class ReceptionController {
     }
 
     pushPerformer(req, res, next) {
-        console.log(req.body.userid);
         Promise.all([
-            ServiceNote.delete({}), 
+            ServiceNote.delete({_id: req.params.id }), 
             ServiceNote.findByIdAndUpdate({ _id: req.params.id }, 
                 { $push: { performer: req.body.performer },$set: { stored: "No" } }),
             User.updateMany({_id: req.body.userid},{$set: {state : "Busy"}})
@@ -34,8 +33,7 @@ class ReceptionController {
             .catch(next);
     }
 
-    updateStateUser(req, res, next){
-    }
+    
 };
 
 

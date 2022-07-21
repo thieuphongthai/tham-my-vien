@@ -5,6 +5,7 @@ const validateUploadImage = require('../../middleware/validateUploadImage');
 
 
 //Employ
+router.put("/users", HRController.editUser);
 
 router.post("/users", HRController.createUser);
 

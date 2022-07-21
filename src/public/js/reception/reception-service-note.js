@@ -1,8 +1,10 @@
 //PATCH: load form and submit push performer forms
 var pushPerformerBtn = document.getElementById("add-performer-btn");
 var performerForm = document.forms['add-performer-form'];
+var userStateForm = document.forms['user-state-form'];
 pushPerformerBtn.addEventListener("click", () => {
 	performerForm.submit();
+	userStateForm.submit();
 })
 
 var performerModal = document.getElementById("add-performer-modal");
@@ -34,7 +36,8 @@ performerModal.addEventListener("show.bs.modal", function (event) {
 	var modalSchedule = document.getElementById("add-performer-schedule");
 	var modalComment = document.getElementById("add-performer-comment");
 
-	performerForm.setAttribute('action', `/reception/employ/service-note/${id}?_method=PATCH`)
+	performerForm.setAttribute('action', `/reception/employ/service-note/${id}?_method=DELETE`)
+	userStateForm.setAttribute('action', `/reception/employ/service-note/${id}?_method=PATCH`)
 
 	modalName.value = name;
 	modalBirth.value = birth;
@@ -61,7 +64,7 @@ function getValueSelect(obj){
 	// lặp qua từng option và kiểm tra thuộc tính selected
 	for (var i = 0; i < options.length; i++){
 		if (options[i].selected){
-			html += '<input class="user-busy name="userid" value="' + options[i].getAttribute("data-userID") +'">' ;
+			html += '<input class="user-busy" name="userid" value="' + options[i].getAttribute("data-userID") +'">' ;
 		}
 	}
 	document.getElementById('receive-userid').innerHTML = html;

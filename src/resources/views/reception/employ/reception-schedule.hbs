@@ -71,6 +71,7 @@
 
 
 <!-- Modal Add Performer-->
+<form method="POST" id="add-performer-form"></form>
 <div class="modal fade" id="add-performer-modal" tabindex="-1" aria-labelledby="add-performer" aria-hidden="true">
 	<div class="modal-dialog modal-xl">
 		<div class="modal-content">
@@ -91,7 +92,7 @@
 							aria-selected="false">Thông tin dịch vụ</button>
 					</li>
 				</ul>
-				<form method="POST" id="add-performer-form" class="row">
+				<form method="POST" id="user-state-form" class="row">
 					<div class="tab-content" id="pills-tabContent">
 						<div class="tab-pane fade show active" id="pills-profile-customer" role="tabpanel"
 							aria-labelledby="pills-home-tab">
@@ -141,7 +142,7 @@
 							aria-labelledby="pills-profile-tab">
 							<div class="mb-3">
 								<label for="performer" class="form-label">
-									<h6>Chọn nhân viên thực hiện</h6>
+									<h6>Chọn bác sĩ</h6>
 								</label>
 								<select id="select-performer" class="chosen-select" multiple tabindex="6"
 									name="performer" onchange="getValueSelect(this)">
@@ -159,7 +160,7 @@
 								<label for="service" class="form-label">
 									<h6>Dịch vụ</h6>
 								</label>
-								<input type="text" class="form-control" id="add-performer-service" name="status"
+								<input type="text" class="form-control" id="add-performer-service" name="service"
 									readonly>
 							</div>
 							<div class="mb-3">

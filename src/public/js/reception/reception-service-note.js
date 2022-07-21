@@ -37,28 +37,43 @@ performerModal.addEventListener("show.bs.modal", function (event) {
 	performerForm.setAttribute('action', `/reception/employ/service-note/${id}?_method=PATCH`)
 
 	modalName.value = name;
-	modalBirth.value = birth; 
-	modalGender.value = gender; 
-	modalEmail.value = email; 
-	modalPhone.value = phone; 
-	modalAddress.value = address; 
-	modalCreateName.value = createName; 
-	modalService.value = service; 
-	modalSchedule.value = schedule; 
-	modalComment.value = comment; 
+	modalBirth.value = birth;
+	modalGender.value = gender;
+	modalEmail.value = email;
+	modalPhone.value = phone;
+	modalAddress.value = address;
+	modalCreateName.value = createName;
+	modalService.value = service;
+	modalSchedule.value = schedule;
+	modalComment.value = comment;
 
+	// var userID = document.getElementById("get-userID");
+	// var getUserID = userID.getAttribute("data-userID");
+	// var inpUserID = document.getElementById("input-userid");
 })
+function getValueSelect(obj){
+	// Lấy danh sách các options
+	var options = obj.children;
+
+	// Biến lưu trữ các chuyên mục đa chọn
+	var html = '';
+
+	// lặp qua từng option và kiểm tra thuộc tính selected
+	for (var i = 0; i < options.length; i++){
+		if (options[i].selected){
+			html += '<input class="user-busy name="userid" value="' + options[i].getAttribute("data-userID") +'">' ;
+		}
+	}
+	document.getElementById('receive-userid').innerHTML = html;
+ 	var userBusys = document.querySelectorAll(".user-busy");
+	for( var i =0; i < userBusys.length; i++){
+		console.log(userBusys[i].value);
+	}
+}
+
+
 
 //END PATCH: load form and submit push performer forms
-
-
-
-
-
-
-
-
-
 
 document.addEventListener("DOMContentLoaded", function () {
 	$(document).ready(function () {

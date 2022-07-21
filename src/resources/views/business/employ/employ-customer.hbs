@@ -394,20 +394,6 @@
 										{{/each}}
 								</select>
 							</div>
-
-							<div class="mb-3">
-								<label for="performer" class="form-label">
-									<h6>Nhân viên thực hiện</h6>
-								</label>
-								<select id="select-performer" class="chosen-select" multiple tabindex="6"
-									name="performer">
-									{{#each users}}
-									<option value="{{this.firstName}} {{this.lastName}}">{{this.firstName}}
-										{{this.lastName}}</option>
-									{{/each}}
-								</select>
-							</div>
-
 							<div class="mb-3">
 								<label for="gender" class="form-label">
 									<h6>Ngày hẹn</h6>
@@ -435,4 +421,4 @@
 	</div>
 </div>
 
-<script src="/js/business/business-employ-customer.js"></script>
+<script src="/js/hr/hr-employ-user.js"></script>

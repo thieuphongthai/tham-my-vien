@@ -25,12 +25,11 @@ class EmployBusinessController {
 
 	/** Customer */
 	showCustomer(req, res, next) {
-		Promise.all([Customer.find({}), TypeService.find({}), User.find({ department: "Phẩu thuật" })])
-			.then(([customers, typeservices, users]) => {
+		Promise.all([Customer.find({}), TypeService.find({})])
+			.then(([customers, typeservices]) => {
 				res.render("business/employ/employ-customer", {
 					customers: multipleMongooseToObject(customers),
 					typeservices: multipleMongooseToObject(typeservices),
-					users: multipleMongooseToObject(users),
 					title: 'Quản lý khách hàng'
 				});
 			})
@@ -178,7 +177,6 @@ class EmployBusinessController {
 			comments: { comment: req.body.comment },
 			schedule: req.body.schedule,
 		});
-		console.log(serviceNote);
 		serviceNote.save();
 		res.redirect('back');
 	}

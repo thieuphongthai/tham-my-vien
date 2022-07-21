@@ -388,7 +388,7 @@ class AdminController {
 	}
 
 	trashServiceNote(req, res, next) {
-		ServiceNote.findDeleted({stored : "Yes"})
+		ServiceNote.findDeleted({ stored: "Yes"})
 			.then(serviceNotes => {
 				res.render('admin/service-note/admin-service-note-trash', {
 					serviceNotes: multipleMongooseToObject(serviceNotes)
@@ -398,7 +398,7 @@ class AdminController {
 	}
 	//PATCH RESTORE
 	restoreServiceNote(req, res, next) {
-		ServiceNote.restore({ _id: req.params.id })
+    Promise.all([ServiceNote.restore({ _id: req.params.id }), ServiceNote.findByIdAndUpdate( { _id: req.params.id },{$set: { stored: "No" } })])
 			.then(() => res.redirect("back"))
 			.catch(next);
 

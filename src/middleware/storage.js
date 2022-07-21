@@ -7,6 +7,10 @@ const storage = multer.diskStorage({
         cb(null, appRoot + '/src/public/img/uploads/customers/');
     },
 
+    destination: function(req, file, cb){
+        cb(null, appRoot + '/src/public/img/uploads/users/');
+    },
+
     // By default, multer removes file extensions so let's add them back
     filename: function(req, file, cb) {
         // console.log('tên file',)

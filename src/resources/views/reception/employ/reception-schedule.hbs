@@ -29,7 +29,7 @@
 					<th class="text-center" scope="row">{{sum @index 1}}</th>
 					<td class="text-center">
 						<a href="" data-bs-toggle="modal" data-bs-target="#add-performer-modal" data-id="{{this._id}}"
-							{{#each this.customer}} data-name="{{this.name}}" data-birth="{{this.birth}}"
+							{{#each this.customer}} data-customerID="{{this.customerID}}" data-name="{{this.name}}" data-birth="{{this.birth}}"
 							data-gender="{{this.gender}}" data-email="{{this.email}}" data-phone="{{this.phone}}"
 							data-address="{{this.address}}" {{/each}} data-createName="{{this.createName}}"
 							data-service="{{this.service}}" data-schedule="{{this.schedule}}" {{#each comments}}
@@ -70,7 +70,7 @@
 
 
 
-<!-- Modal Edit Customer -->
+<!-- Modal Add Performer-->
 <div class="modal fade" id="add-performer-modal" tabindex="-1" aria-labelledby="add-performer" aria-hidden="true">
 	<div class="modal-dialog modal-xl">
 		<div class="modal-content">
@@ -97,6 +97,8 @@
 							aria-labelledby="pills-home-tab">
 							<ul class="list-group">
 								<li class="list-group-item">
+									<input hidden type="text" class="form-control" id="customerID"
+											name="customerID" readonly>
 									<div class="form-floating mb-3">
 										<input type="text" class="form-control" id="add-performer-firstLastName"
 											name="name" readonly>
@@ -142,12 +144,16 @@
 									<h6>Chọn nhân viên thực hiện</h6>
 								</label>
 								<select id="select-performer" class="chosen-select" multiple tabindex="6"
-									name="performer">
+									name="performer" onchange="getValueSelect(this)">
 									{{#each users}}
-									<option value="{{this.firstName}} {{this.lastName}}">{{this.firstName}}
+									<option data-userID="{{this._id}}" value="{{this.firstName}} {{this.lastName}}">{{this.firstName}}
 										{{this.lastName}}</option>
+										
 									{{/each}}
 								</select>
+								<div hidden id="receive-userid">
+
+								</div>
 							</div>
 							<div class="mb-3">
 								<label for="service" class="form-label">

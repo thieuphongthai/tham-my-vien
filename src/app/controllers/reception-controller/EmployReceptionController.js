@@ -23,9 +23,18 @@ class ReceptionController {
     }
 
     pushPerformer(req, res, next) {
-        ServiceNote.findByIdAndUpdate({ _id: req.params.id }, { $push: { performer: req.body.performer } })
+        console.log(req.body.userid);
+        Promise.all([
+            ServiceNote.delete({}), 
+            ServiceNote.findByIdAndUpdate({ _id: req.params.id }, 
+                { $push: { performer: req.body.performer },$set: { stored: "No" } }),
+            User.updateMany({_id: req.body.userid},{$set: {state : "Busy"}})
+            ])
             .then(() => res.redirect("back"))
             .catch(next);
+    }
+
+    updateStateUser(req, res, next){
     }
 };
 

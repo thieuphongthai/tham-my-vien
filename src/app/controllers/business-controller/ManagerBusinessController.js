@@ -22,15 +22,13 @@ class ManagerBusinessController {
 	}
 
 	showCustomer(req, res, next) {
-		Promise.all([Customer.find({}), TypeService.find({}), User.find({ department: "Phẩu thuật" })])
-			.then(([customers, typeservices, users]) => {
+		Promise.all([Customer.find({}), TypeService.find({})])
+			.then(([customers, typeservices]) => {
 				res.render("business/manager/manager-customer", {
 					customers: multipleMongooseToObject(customers),
 					typeservices: multipleMongooseToObject(typeservices),
-					users: multipleMongooseToObject(users),
 					title: 'Quản lý khách hàng'
 				});
-				users.forEach(user => console.log(user.firstName));
 			})
 			.catch(next);
 	}
@@ -173,19 +171,17 @@ class ManagerBusinessController {
 			},
 			performName: req.body.performUser,
 			createName: req.body.name,
-			status: req.body.status,
+			status: "Tạo mới",
 			service: req.body.service,
 			comments: { comment: req.body.comment },
 			schedule: req.body.schedule,
 		});
-		console.log(serviceNote);
 		serviceNote.save();
 		res.redirect('back');
 	}
 
 	deleteServiceNote(req, res, next) {
 		Promise.all([ServiceNote.delete({ _id: req.params.id }), ServiceNote.findByIdAndUpdate({ _id: req.params.id},{ $set: { stored: "Yes" }})])
-		ServiceNote.delete({ _id: req.params.id })
 			.then(() => res.redirect("back"))
 			.catch(next);
 	}

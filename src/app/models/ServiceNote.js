@@ -20,6 +20,20 @@ const ServiceNote = new Schema({
 			ref: "Customer"
 		}
 	],
+
+	result: [
+		{
+			type: new mongoose.Schema(
+				{
+					serviceName: String,
+					before: String,
+					after:String,
+				},
+				{ timestamps: true }
+			)
+		}
+
+	],
 	
 	createName: [
 		{
@@ -29,6 +43,20 @@ const ServiceNote = new Schema({
 	],
 
 	performer: [
+		{
+			type: String,
+			ref: "User"
+		}
+	],
+
+	nursing: [
+		{
+			type: String,
+			ref: "User"
+		}
+	],
+
+	recept:[
 		{
 			type: String,
 			ref: "User"

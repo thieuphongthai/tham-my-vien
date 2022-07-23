@@ -24,6 +24,16 @@ class ManagerBusinessController {
 	showCustomer(req, res, next) {
 		Promise.all([Customer.find({}), TypeService.find({})])
 			.then(([customers, typeservices]) => {
+				let commnetArray = customers;
+				commnetArray.forEach((element) => {
+					var date = new Date(element.comments.comment);
+					var newDate = date.toLocaleString("en-GB", {
+						day: "numeric",
+						month: "numeric",
+						year: "numeric",
+					});
+					return newDate;
+				});
 				res.render("business/manager/manager-customer", {
 					customers: multipleMongooseToObject(customers),
 					typeservices: multipleMongooseToObject(typeservices),

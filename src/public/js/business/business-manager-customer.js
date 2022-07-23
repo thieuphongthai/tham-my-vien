@@ -123,11 +123,10 @@ createServiceNote.addEventListener("show.bs.modal", function (event) {
 	serviceNoteEmail.value = dataEmail;
 	serviceNoteAddress.value = dataAddress;
 });
+//END CREATE: submit create service note forms
 
 
-
-//CREATE: submit create service note forms
-
+//DETAIL: detail customer and push comment
 
 document.addEventListener("DOMContentLoaded", function () {
 	$(document).ready(function () {

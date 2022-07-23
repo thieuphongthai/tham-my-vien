@@ -15,7 +15,7 @@ performerModal.addEventListener("show.bs.modal", function (event) {
 	var id = button.getAttribute("data-id");
 	var name = button.getAttribute("data-name");
 	var birth = button.getAttribute("data-birth");
-	var gender = button.getAttribute("data-birth");
+	var gender = button.getAttribute("data-gender");
 	var email = button.getAttribute("data-email");
 	var phone = button.getAttribute("data-phone");
 	var address = button.getAttribute("data-address");

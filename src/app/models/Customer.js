@@ -23,7 +23,13 @@ const Customer = new Schema({
 				{ timestamps: true }
 			)
 		}
-	]
+	],
+	userName: [
+		{
+			type: String,
+			ref: "User"
+		}
+	],
 }, {
 	timestamps: true
 });

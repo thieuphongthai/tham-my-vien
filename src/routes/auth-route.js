@@ -36,13 +36,6 @@ router.patch('/admin/service-note-trash/:id/restore', AdminController.restoreSer
 /*Admin End*/
 // [authJwt.verifyToken, authJwt.isBusinessEmploy]
 
-
-
-
-
-
-
-
 router.post("/logout", controller.logout);
 router.post("/", controller.postLogin);
 router.get('/', controller.getLogin);

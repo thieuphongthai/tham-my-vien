@@ -36,25 +36,20 @@ app.use(
 		name: "Hachitech-session",
 		secret: `${process.env.SECURITY_KEY}`,
 		httpOnly: true,
-		secure: true,
+		secure: false, // change to 'true' when switching to production enviroment
+		sameSite: 'strict',
+		path: '/'
 	})
 );
 
 // app.use(cookieParser('secret'));
 
-app.use(session({
-	cookie: { maxAge: 5000 },
-    secret: process.env.FLASH_SESSION_KEY,
-    saveUninitialized: true,
-    resave: true
-}));
-
-app.use(flash());
-
-app.use(function(req, res, next){
-    res.locals.user = req.user;
-    next();
-});
+// app.use(session({
+// 	cookie: { maxAge: 5000 },
+//     secret: process.env.FLASH_SESSION_KEY,
+//     saveUninitialized: true,
+//     resave: true
+// }));
 
 
 // Kết nối tới cơ sở dữ liệu
@@ -92,20 +87,8 @@ app.engine(
 				let newDate = date.toLocaleString('vi-VI', {weekday:"long", day:'numeric', month: 'numeric', year:'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric'});
 				return newDate;
 			},
-			show: (a) => {
-				console.log('log user', a);
-				let fName = a.firstName;
-				let lName = a.lastName;
-				return fName+ ' ' + lName;
-			},
-			showID: (a) => {
-				// console.log('log user id', a);
-				let id = a._id;
-				return id
-			},
-			showIMG: (a) => {
-				let img = a.image.name;
-				return img;
+			showUser: (users) => {
+				console.log(users)
 			}
 		},
 	})

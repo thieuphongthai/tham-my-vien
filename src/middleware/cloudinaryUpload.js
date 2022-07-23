@@ -12,15 +12,15 @@ cloudinary.config({
 class cloudinaryUpload {
 
     uploadSingle(file) {
-        console.log(file.path)
+        console.log(file.path);
         return new Promise(resolve => {
             cloudinary.uploader.upload(file.path, {
                     folder: file.path,
                 })
                 .then(result => {
                     if (result) {
-                        const fs = require('fs')
-                        fs.unlinkSync(file)
+                        const fs = require('fs');
+                        fs.unlinkSync(file);
                         resolve({
                             url: result.secure_url
                         })

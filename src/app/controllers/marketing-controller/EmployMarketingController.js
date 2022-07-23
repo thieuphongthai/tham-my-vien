@@ -6,7 +6,6 @@ const appRoot = require('app-root-path');
 
 class MarketingController {
 
-<<<<<<< HEAD
     //EMPLOY
     showDashboard(req, res, next) {
 		User.findById({_id: req.userId})
@@ -31,25 +30,7 @@ class MarketingController {
             })
             .catch(next);
     }
-=======
-	//EMPLOY
-	showDashboard(req, res) {
-		res.render('marketing/employ/marketing-overview');
-	}
 
-	showCustomer(req, res, next) {
-		Customer.find({})
-			.then((customers) => {
-
-				res.render('marketing/employ/employ-customer', {
-					customers: multipleMongooseToObject(customers),
-					title: 'Quản lý khách hàng'
-				})
-			})
-			.catch(next);
->>>>>>> origin/vinh
-
-	}
 	showCustomerDetail(req, res, next) {
 		Customer.findById(req.params.id)
 			.then(customer => {

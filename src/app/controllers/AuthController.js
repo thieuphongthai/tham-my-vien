@@ -140,12 +140,8 @@ class AuthController {
                     position: user.position,
                     
                 }, process.env.ACCESSTOKEN_KEY, {
-                    expiresIn: 600, // 10p
+                    expiresIn: 600000, // 10p
                 });
-
-                // const resUser = user.map(user => {
-                //     console.log(user)
-                // })
 
                 const refreshToken = jwt.sign({
                     id: user._id,
@@ -155,24 +151,11 @@ class AuthController {
                 }, process.env.REFRESHTOKEN_KEY, {
                     expiresIn: 86400, // 24 giờ
                 })
-                // var authorities = [];
+                
                 console.log(user.role)
-                // authorities.push("ROLES_" + user.role.toUpperCase());
-                // console.log(authorities);
-                res.cookie('accessToken', accessToken, {
-                    httpOnly: true,
-                    secure: true,
-                    path: `/`,
-                    sameSite: 'strict'
-                });
-                res.cookie('refreshToken', refreshToken, {
-                    httpOnly: true,
-                    secure: true,
-                    path: `/`,
-                    sameSite: 'strict'
-                });
-                res.status(200).render(`${user.departmentEng}/${user.positionEng}/${user.positionEng}-overview`, {user: mongooseToObject(user), accessToken});
-                // res.json({ user: mongooseToObject(user), accessToken });
+                req.session.token = accessToken;
+                res.status(200).render(`${user.departmentEng}/${user.positionEng}/${user.positionEng}-overview`, {user: mongooseToObject(user)});
+                // res.status(200).json({ user: mongooseToObject(user)});
             })
             .catch(next);
     };
@@ -181,8 +164,8 @@ class AuthController {
     // Logout
     logout = async (req, res, next) => {
         try {
-            req.cookie('accessToken', null);
-            return res.status(200).send({ message: "Bạn đã đăng xuất!" });
+            req.session = null;
+            return res.status(200).redirect('/');
         } catch (err) {
             this.next(err);
         }

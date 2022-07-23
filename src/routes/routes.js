@@ -16,7 +16,11 @@ function route(app) {
   // [authJwt.verifyToken, authJwt.isMarketingManager],
   // 
   app.use("/marketing/manager", managerMarketingRouter);
+<<<<<<< HEAD
   app.use("/marketing/employ", [authJwt.verifyToken, authJwt.isMarketingEmploy], employMarketingRouter);
+=======
+  app.use("/marketing/employ",[authJwt.verifyToken, authJwt.isMarketingEmploy], employMarketingRouter);
+>>>>>>> refs/remotes/origin/dev
   app.use("/reception/manager", managerReceptionRouter);
   app.use("/reception/employ", employReceptionRouter);
   app.use("/operating/doctor", doctorOperatingRouter);

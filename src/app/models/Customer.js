@@ -24,7 +24,7 @@ const Customer = new Schema({
 			)
 		}
 	],
-	userName: [
+	userID: [
 		{
 			type: String,
 			ref: "User"

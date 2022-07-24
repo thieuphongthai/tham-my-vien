@@ -72,7 +72,8 @@
 
 
 <!-- Modal Add Performer-->
-<form method="POST" id="add-performer-form"></form>
+	
+
 <div class="modal fade" id="add-performer-modal" tabindex="-1" aria-labelledby="add-performer" aria-hidden="true">
 	<div class="modal-dialog modal-xl">
 		<div class="modal-content">
@@ -93,7 +94,7 @@
 							aria-selected="false">Thông tin dịch vụ</button>
 					</li>
 				</ul>
-				<form method="POST" id="user-state-form" class="row">
+				<form method="POST" id="add-performer-form">
 					<div class="tab-content" id="pills-tabContent">
 						<div class="tab-pane fade show active" id="pills-profile-customer" role="tabpanel"
 							aria-labelledby="pills-home-tab">
@@ -146,26 +147,21 @@
 									<h6>Chọn bác sĩ</h6>
 								</label>
 								<select id="select-performer" class="chosen-select" multiple tabindex="6"
-									name="performer" onchange="getValueSelect(this)">
+									 name="performer"onchange="getValueSelect(this)">
 									{{#each users}}
-									<option data-userID="{{this._id}}" value="{{this.firstName}} {{this.lastName}}">
+									<option data-userID="{{this._id}}">
 										{{this.firstName}}
 										{{this.lastName}}</option>
 
 									{{/each}}
 								</select>
-
-
-								<div hidden id="receive-userid">
-
-								</div>
 							</div>
 							<div class="mb-3">
-								<label for="performer" class="form-label">
+								<label for="nursing" class="form-label">
 									<h6>Chọn Y tá</h6>
 								</label>
 								<select id="select-nursing" class="chosen-select" multiple tabindex="6" name="nursing"
-									onchange="getValueSelect(this)">
+									onchange="getValueSelect1(this)">
 									{{#each user1s}}
 									<option data-userID="{{this._id}}" value="{{this.firstName}} {{this.lastName}}">
 										{{this.firstName}}

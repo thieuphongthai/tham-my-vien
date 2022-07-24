@@ -376,7 +376,8 @@ class AdminController {
   }
 
   destroyServiceNote(req, res, next) {
-		Promise.all([ServiceNote.delete({ _id: req.params.id }), ServiceNote.findByIdAndUpdate({ _id: req.params.id},{ $set: { stored: "Yes" }})])
+		Promise.all([ServiceNote.delete({ _id: req.params.id }), 
+      ServiceNote.findByIdAndUpdate({ _id: req.params.id},{ $set: { stored: "Yes" }})])
 			.then(() => res.redirect("back"))
 			.catch(next);
 	}
@@ -398,7 +399,8 @@ class AdminController {
 	}
 	//PATCH RESTORE
 	restoreServiceNote(req, res, next) {
-    Promise.all([ServiceNote.restore({ _id: req.params.id }), ServiceNote.findByIdAndUpdate( { _id: req.params.id },{$set: { stored: "No" } })])
+    Promise.all([ServiceNote.restore({ _id: req.params.id }), 
+      ServiceNote.findByIdAndUpdate( { _id: req.params.id },{$set: { stored: "No" } })])
 			.then(() => res.redirect("back"))
 			.catch(next);
 

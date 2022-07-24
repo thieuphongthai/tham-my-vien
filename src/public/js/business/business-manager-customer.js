@@ -73,7 +73,7 @@ editCustomer.addEventListener("show.bs.modal", function (event) {
 var editBtn = document.getElementById("edit-customer-btn");
 var editCustomerForm = document.forms["edit-customer-form"];
 editBtn.addEventListener("click", () => {
-	editCustomerForm.submit();
+	
 });
 //EDIT END: Load edit customer modal and submit edit customer forms
 

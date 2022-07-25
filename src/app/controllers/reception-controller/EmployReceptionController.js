@@ -12,10 +12,10 @@ class ReceptionController {
     }
 
     showServiceNote(req, res, next) {
-        Promise.all([ServiceNote.find({}).sort({ schedule: 1 }), 
-                    User.find({ department: "Phẩu thuật", position: "Bác sĩ" }),
-                    User1.find({ department: "Phẩu thuật", $or:[{position: "Y tá"}, {position: "Điều dưỡng"}] })
-                ])
+        Promise.all([ServiceNote.find({}).sort({ schedule: 1 }),
+        User.find({ department: "Phẩu thuật", position: "Bác sĩ" }),
+        User1.find({ department: "Phẩu thuật", $or: [{ position: "Y tá" }, { position: "Điều dưỡng" }] })
+        ])
             .then(([serviceNotes, users, user1s]) => {
                 let commnetArray = serviceNotes;
                 commnetArray.forEach((element) => {
@@ -42,14 +42,14 @@ class ReceptionController {
     pushPerformer(req, res, next) {
         console.log(req.body);
         Promise.all([
-            ServiceNote.delete({ _id: req.params.id }),
             ServiceNote.findByIdAndUpdate({ _id: req.params.id },
                 { $push: { performer: req.body.performer, nursing: req.body.nursing }, $set: { stored: "No" } }),
+            ServiceNote.delete({ _id: req.params.id }),
             User.updateMany({ _id: req.body.doctorIDs }, { $set: { state: "Busy" } })
         ])
             .then((serviceNote) => {
                 res.redirect("back")
-                })
+            })
             .catch(next);
     }
 

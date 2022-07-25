@@ -73,7 +73,7 @@ editCustomer.addEventListener("show.bs.modal", function (event) {
 var editBtn = document.getElementById("edit-customer-btn");
 var editCustomerForm = document.forms["edit-customer-form"];
 editBtn.addEventListener("click", () => {
-	
+	editCustomerForm.submit();
 });
 //EDIT END: Load edit customer modal and submit edit customer forms
 
@@ -127,21 +127,7 @@ createServiceNote.addEventListener("show.bs.modal", function (event) {
 
 //ADD USER to CUSTOMER
 //Hidden and remove hidden attribute
-var rmHiddenBtn = document.getElementById("remove-hidden");
-var addhidden = document.getElementById("add-hidden");
-var hiddenRemove = document.querySelectorAll(".hidden");
 
-rmHiddenBtn.addEventListener("click", () => {
-	for (i = 0; i < hiddenRemove.length; i++) {
-		hiddenRemove[i].removeAttribute('hidden');
-	};
-});
-
-addhidden.addEventListener("click", () => {
-	for (i = 0; i < hiddenRemove.length; i++) {
-		hiddenRemove[i].setAttribute('hidden', 'true');
-	}
-})
 
 //Check all customer
 var customerItemCheckbox = document.querySelectorAll('.check-box-customer');
@@ -172,13 +158,25 @@ function renderCheckallBtn(){
 }
 //Check all submit button click
 var addUserCusForm = document.forms['add-user-customer-form'];
-checkAllSubmitBtn.addEventListener("click", function(e)  {
-	e.preventDefault();
-	var isSubmittable = !checkAllSubmitBtn.classList.constains("disabled")
-	if(isSubmittable){
+var addUseridToCustomerBtn = document.getElementById("add-userid-to-customer");
+var addUseridToCustomerModal = document.getElementById("add-userid-to-customer-modal");
+addUseridToCustomerModal.addEventListener("show.bs.modal", function(event){
+	var button = event.relatedTarget;
 
-	}
+	addUserCusForm.setAttribute('action',`/business/manager/customers/userid`)
 })
+
+addUseridToCustomerBtn.addEventListener("click", () => {
+	addUserCusForm.submit();
+})
+
+// checkAllSubmitBtn.addEventListener("click", function(e)  {
+// 	e.preventDefault();
+// 	var isSubmittable = checkAllSubmitBtn.classList.contains('disabled');
+// 	if(!isSubmittable){
+
+// 	}
+// })
 
 
 

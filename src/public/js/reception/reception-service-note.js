@@ -58,7 +58,7 @@ performerModal.addEventListener("show.bs.modal", function (event) {
 	var modalSchedule = document.getElementById("add-performer-schedule");
 	var modalComment = document.getElementById("add-performer-comment");
 
-	performerForm.setAttribute('action', `/reception/employ/service-note/${id}?_method=DELETE`)
+	performerForm.setAttribute('action', `/reception/employ/service-note/${id}?_method=DELETE`);
 
 	// userStateForm.setAttribute('action', `/reception/employ/service-note/${id}?_method=PATCH`)
 

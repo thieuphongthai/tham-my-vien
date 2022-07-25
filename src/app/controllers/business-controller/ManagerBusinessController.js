@@ -1,5 +1,4 @@
 const Customer = require("../../models/Customer");
-const Status = require("../../models/Status");
 const User = require("../../models/User");
 const { mongooseToObject, multipleMongooseToObject } = require("../../../util/mongoose");
 const TypeService = require("../../models/TypeService");
@@ -22,8 +21,9 @@ class ManagerBusinessController {
 	}
 
 	showCustomer(req, res, next) {
-		Promise.all([Customer.find({}), TypeService.find({})])
-			.then(([customers, typeservices]) => {
+		Promise.all([Customer.find({ userID: null }), 
+			TypeService.find({}), User.find({ department: "Kinh doanh", position: "Nhân viên"})])
+			.then(([customers, typeservices, users]) => {
 				let commnetArray = customers;
 				commnetArray.forEach((element) => {
 					var date = new Date(element.comments.comment);
@@ -37,6 +37,7 @@ class ManagerBusinessController {
 				res.render("business/manager/manager-customer", {
 					customers: multipleMongooseToObject(customers),
 					typeservices: multipleMongooseToObject(typeservices),
+					users: multipleMongooseToObject(users),
 					title: 'Quản lý khách hàng'
 				});
 			})
@@ -125,6 +126,13 @@ class ManagerBusinessController {
 				})
 				.catch(next);
 		}
+	}
+
+	addUseridToCustomer(req, res, next){
+		Customer.updateMany({_id: {$in : req.body.customerIds}}, {$set: {userID: req.body.userID}})
+			.then(() => res.redirect('back'))
+			.catch(next);
+		
 	}
 
 	showCustomerDetail(req, res, next) {

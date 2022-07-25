@@ -22,25 +22,21 @@
 	</div>
 
 	<div class="container-table">
-		<div type="button" class="ml-3 mb-3 btn btn-primary btn-sm" id="remove-hidden">Chọn nhiều khách hàng
-		</div>
-		<div hidden type="button" class="hidden mb-3 btn btn-danger btn-sm" id="add-hidden">X</div>
 
 
-			<div class="ml-3 mb-3 form-check d-flex align-items-center">
-				<input hidden type="checkbox" class="hidden form-check-input" id="check-customer-all">
-				<label hidden class="hidden form-check-label" for="check-customer-all">Chọn tất cả</label>
-				<select hidden class="hidden form-select form-control-sm" style="width:160px; margin: 6px">
-					<option>--chọn--</option>
-					<option>Thêm nhân viên</option>
-				</select>
-				<div hidden id="add-user-customer-btn" class="hidden btn btn-primary btn-sm disabled">Thêm nhân viên
-				</div>
+		<div class="ml-3 mb-3 form-check d-flex align-items-center">
+			<input type="checkbox" class="hidden form-check-input" id="check-customer-all">
+			<label class="hidden form-check-label" for="check-customer-all">Chọn tất cả</label>
+			<div id="add-user-customer-btn" class="hidden ml-3 btn btn-primary btn-sm disabled" data-bs-toggle="modal"
+				data-bs-target="#add-userid-to-customer-modal">Thêm nhân viên
 			</div>
+		</div>
+		<form method="POST" action="" id="add-user-customer-form">
+
 			<table id="customer_table" class="table table-hover table-bordered table-sm">
 				<thead class="table-info">
 					<tr>
-						<th class="text-center hidden" hidden scope="col">&nbsp;&nbsp;&nbsp;&nbsp;</th>
+						<th class="text-center hidden" scope="col">&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th class="text-center" scope="col">#</th>
 						<th class="text-center" scope="col">Họ tên</th>
 						<th class="text-center" scope="col">Ngày sinh</th>
@@ -55,7 +51,7 @@
 				<tbody id="table-content">
 					{{#each customers}}
 					<tr>
-						<td class="hidden text-right" scope="row" hidden>
+						<td class="hidden text-right" scope="row">
 							<input type="checkbox" class="form-check-input check-box-customer" name="customerIds[]"
 								value="{{this._id}}" id="">
 						</td>
@@ -106,7 +102,6 @@
 					{{/each}}
 				</tbody>
 			</table>
-
 	</div>
 	<div class="container-card">
 		{{#each customers}}
@@ -125,7 +120,36 @@
 	</div>
 </div>
 
+<!--Push userid to customer Modal -->
+<div class="modal fade" id="add-userid-to-customer-modal" tabindex="-1" aria-labelledby="detail-customer"
+	aria-hidden="true">
+	<div class="modal-dialog modal-xl">
+		<div class="modal-content">
+			<div class="modal-header bg-primary">
+				<h5 class="modal-title text-light" id="detail-customer-title">Chọn nhân viên</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<label for="add-userid-to-cus" class="form-label">
+					<h6>Chọn nhân viên</h6>
+				</label>
+				<select class="form-select form-select-sm" aria-label=".form-select-sm example" name="userID"
+					id="userID">
+					<option value="">-- Chọn nhân viên --</option>
+					{{#each users}}
+					<option value="{{this._id}}">{{this.firstName}} {{this.lastName}}</option>
+					{{/each}}
 
+				</select>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+				<button type="button" id="add-userid-to-customer" class="btn btn-primary">Thêm</button>
+			</div>
+		</div>
+	</div>
+</div>
+</form>
 
 <!-- Modal Create Customer -->
 <div class="modal fade" id="create-customer-modal" tabindex="-1" aria-labelledby="create-customer-modal"
@@ -228,7 +252,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-				<button id="create-customer-btn" type="submit" class="btn btn-primary">Tạo mới</button>
+				<button id="create-customer-btn" type="button" class="btn btn-primary">Tạo mới</button>
 			</div>
 		</div>
 	</div>

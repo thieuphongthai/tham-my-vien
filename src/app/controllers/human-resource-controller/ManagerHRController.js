@@ -15,6 +15,14 @@ const appRoot = require("app-root-path");
 const fs = require("fs");
 const bcrypt = require("bcryptjs");
 
+const User = require("../../models/User");
+const Department = require("../../models/Department");
+const Position = require("../../models/Position");
+const { mongooseToObject, multipleMongooseToObject } = require("../../../util/mongoose");
+const appRoot = require("app-root-path");
+const fs = require("fs");
+const bcrypt = require("bcryptjs");
+
 class HRController{
 
     showDashboard(req, res){

@@ -1,82 +1,142 @@
-//CREATE: submit create customer forms
+// CREATE: submit create customer forms
 // Handle create info Customer
-// var createCustomer = document.getElementById("create-customer-btn");
-// var createCustomerForm = document.forms["create-customer-form"];
-// createCustomer.addEventListener("click", () => {
-// 	createCustomerForm.submit();
-// });
+var createUser = document.getElementById("create-user-btn");
+var createUserForm = document.forms["create-user-form"];
+createUser.addEventListener("click", () => {
+	createUserForm.submit();
+});
 
 // Handle select image from modal create
-var addUserImg = document.getElementById("input-create-img");
+var addUserImg = document.getElementById("input-create-user-img");
 var addUserAvt = document.getElementById("add-avt-user");
 addUserImg.addEventListener("change", (e) => {
 	addUserAvt.src = URL.createObjectURL(e.target.files[0]);
 });
+
+// Function convert Vietnameses to English
+function convert_vi_to_en(str) {
+	str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
+	str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
+	str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
+	str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
+	str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
+	str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
+	str = str.replace(/đ/g, "d");
+	str = str.replace(/À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ/g, "A");
+	str = str.replace(/È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ/g, "E");
+	str = str.replace(/Ì|Í|Ị|Ỉ|Ĩ/g, "I");
+	str = str.replace(/Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ/g, "O");
+	str = str.replace(/Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ/g, "U");
+	str = str.replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g, "Y");
+	str = str.replace(/Đ/g, "D");
+	str = str.replace(
+		/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g,
+		" "
+	);
+	str = str.replace(/  +/g, " ");
+	return str;
+}
+
+// Handle insert first-name and last-name to account in edit modal
+var inputCreateFirstName = document.getElementById("create-user-firstName");
+var inputCreateLastName = document.getElementById("create-user-lastName");
+var inputCreateAccount = document.getElementById("create-user-account");
+var createFirstNameValue;
+var createLastNameValue;
+inputCreateFirstName.addEventListener("input", () => {
+	createFirstNameValue = convert_vi_to_en(inputCreateFirstName.value).split(" ");
+	var a;
+	var b = "";
+	createFirstNameValue.forEach((element) => {
+		a = element.split("", 1);
+		b += a;
+	});
+	inputCreateLastName.addEventListener("input", () => {
+		createLastNameValue = convert_vi_to_en(inputCreateLastName.value)
+			.split(" ")
+			.join("")
+			.toLowerCase();
+		inputCreateAccount.setAttribute("value", createLastNameValue + b.toLowerCase());
+	});
+});
+
 //END CREATE: submit create customer forms
+
+
+
 
 //EDIT: Load edit customer modal and submit edit customer forms
 
+// Handle edit info Customer
+var editUserBtn = document.getElementById("edit-user-btn");
+var editUserForm = document.forms["edit-user-form"];
+editUserBtn.addEventListener("click", () => {
+	editUserForm.submit();
+});
+
 // Handle select image from modal edit
-// var editImg = document.getElementById("input-edit-img");
-// var editAvt = document.getElementById("edit-customer-avt");
-// editImg.addEventListener("change", (e) => {
-// 	editAvt.src = URL.createObjectURL(e.target.files[0]);
-// });
+var editUserImg = document.getElementById("input-edit-user-img");
+var editUserAvt = document.getElementById("edit-user-avt");
+editUserImg.addEventListener("change", (e) => {
+	editUserAvt.src = URL.createObjectURL(e.target.files[0]);
+});
 
 // Handle push data to edit modal
-// var editCustomer = document.getElementById("edit-customer-modal");
-// editCustomer.addEventListener("show.bs.modal", function (event) {
-// 	// Button that triggered the modal
-// 	var button = event.relatedTarget;
-// 	// Get data from edit button
-// 	var idEdit = button.getAttribute('data-id');
-// 	var imageEdit = button.getAttribute("data-edit-img");
-// 	var firstName = button.getAttribute("data-edit-firstname");
-// 	var lastName = button.getAttribute("data-edit-lastname");
-// 	var birth = button.getAttribute("data-edit-birth");
-// 	var gender = button.getAttribute("data-edit-gender");
-// 	var phone = button.getAttribute("data-edit-phone");
-// 	var email = button.getAttribute("data-edit-email");
-// 	var address = button.getAttribute("data-edit-address");
-// 	var desciption = button.getAttribute("data-edit-description");
+var editUser = document.getElementById("edit-user-modal");
+editUser.addEventListener("show.bs.modal", function (event) {
+	// Button that triggered the modal
+	var button = event.relatedTarget;
+	// Get data from edit button
+	var editDataUserId = button.getAttribute('data-id');
+	var editDataUserImg = button.getAttribute("data-edit-img");
+	var editDataUserFirstName = button.getAttribute("data-edit-firstname");
+	var editDataUserLastName = button.getAttribute("data-edit-lastname");
+	var editDataUserBirth = button.getAttribute("data-edit-birth");
+	var editDataUserGender = button.getAttribute("data-edit-gender");
+	var editDataUserPhone = button.getAttribute("data-edit-phone");
+	var editDataUserEmail = button.getAttribute("data-edit-email");
+	var editDataUserDepartment = button.getAttribute("data-edit-department");
+	var editDataUserPosition = button.getAttribute("data-edit-position");
+	var editDataUserAddress = button.getAttribute("data-edit-address");
+	var editDataUserDesciption = button.getAttribute("data-edit-description");
+	var editDataUserAccount = button.getAttribute("data-edit-account");
 
-// 	// Get element need embeded input
-// 	var editAvt = document.getElementById("edit-customer-avt");
-// 	var editFirstName = document.getElementById("edit-firstName");
-// 	var editLastName = document.getElementById("edit-lastName");
-// 	var editBirth = document.getElementById("edit-birth");
-// 	var editGender = document.getElementById("edit-gender");
-// 	var editPhone = document.getElementById("edit-phone");
-// 	var editEmail = document.getElementById("edit-email");
-// 	var editAddress = document.getElementById("edit-address");
-// 	var editDescription = document.getElementById("edit-description");
-// 	var editRole = document.getElementById("edit-role");
+	// Get element need embeded input
+	// var editUserAvt = document.getElementById("edit-user-avt");
+	var editUserFirstName = document.getElementById("edit-user-firstName");
+	var editUserLastName = document.getElementById("edit-user-lastName");
+	var editUserBirth = document.getElementById("edit-user-birth");
+	var editUserGender = document.getElementById("edit-user-gender");
+	var editUserPhone = document.getElementById("edit-user-phone");
+	var editUserEmail = document.getElementById("edit-user-email");
+	var editUserDepartment = document.getElementById("edit-user-department");
+	var editUserPosition = document.getElementById("edit-user-position");
+	var editUserAddress = document.getElementById("edit-user-address");
+	var editUserDescription = document.getElementById("edit-user-description");
+	var editUserAccount = document.getElementById("edit-user-account");
 
-// 	editFirstName.focus();
+	// editFirstName.focus();
 
-// 	if (imageEdit === '') {
-// 		editAvt.setAttribute('src', '/img/user-icon.png');
-// 	} else {
-// 		editAvt.setAttribute('src', '/img/uploads/customers/' + imageEdit);
-// 	}
-// 	editCustomerForm.setAttribute('action', `/marketing/manager/customers/${idEdit}?_method=PUT`);
-// 	editFirstName.value = firstName;
-// 	editLastName.value = lastName;
-// 	editBirth.value = birth;
-// 	editGender.value = gender;
-// 	editPhone.value = phone;
-// 	editEmail.value = email;
-// 	editAddress.value = address;
-// 	editDescription.value = desciption;
-// 	editRole.value = role;
-// });
+	if (editDataUserImg === '') {
+		editUserAvt.setAttribute('src', '/img/user-icon.png');
+	} else {
+		editUserAvt.setAttribute('src', '/img/uploads/customers/' + editDataUserImg);
+	}
+	editUserForm.setAttribute('action', `/marketing/manager/customers/${editDataUserId}?_method=PUT`);
+	editUserFirstName.value = editDataUserFirstName;
+	editUserLastName.value = editDataUserLastName;
+	editUserBirth.value = editDataUserBirth;
+	editUserGender.value = editDataUserGender;
+	editUserPhone.value = editDataUserPhone;
+	editUserEmail.value = editDataUserEmail;
+	editUserDepartment.value = editDataUserDepartment;
+	editUserPosition.value = editDataUserPosition;
+	editUserAddress.value = editDataUserAddress;
+	editUserDescription.value = editDataUserDesciption;
+	editUserAccount.value = editDataUserAccount;
+});
 
-// Handle edit info Customer
-// var editBtn = document.getElementById("edit-customer-btn");
-// var editCustomerForm = document.forms["edit-customer-form"];
-// editBtn.addEventListener("click", () => {
-// 	editCustomerForm.submit();
-// });
+
 //EDIT END: Load edit customer modal and submit edit customer forms
 
 document.addEventListener("DOMContentLoaded", function () {

@@ -52,10 +52,10 @@ router.get('/marketing', RootController.getRootMarketingDashboard);
 router.get('/user', RootController.getRootUserDashboard);
 
 // [POST] Root Create User UI
-router.post('/user', validateUploadImage.upload, RootController.postRootUserDashboard);
+router.post('/user', validateUploadImage.uploadSingleUser, RootController.postRootUserDashboard);
 
 // [PUT] Root User UI
-router.put('/user/:id', validateUploadImage.upload, RootController.putRootUser)
+router.put('/user/:id', validateUploadImage.uploadSingleUser, RootController.putRootUser)
 
 // [DELETE] Root User UI
 // router.delete('/user/:id', RootController.deleteRootUserDashboard);

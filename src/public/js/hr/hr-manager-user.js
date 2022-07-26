@@ -65,9 +65,9 @@ inputCreateFirstName.addEventListener("input", () => {
 
 
 
-//EDIT: Load edit customer modal and submit edit customer forms
+//EDIT: Load edit user modal and submit edit user forms
 
-// Handle edit info Customer
+// Handle edit info User
 var editUserBtn = document.getElementById("edit-user-btn");
 var editUserForm = document.forms["edit-user-form"];
 editUserBtn.addEventListener("click", () => {
@@ -120,9 +120,9 @@ editUser.addEventListener("show.bs.modal", function (event) {
 	if (editDataUserImg === '') {
 		editUserAvt.setAttribute('src', '/img/user-icon.png');
 	} else {
-		editUserAvt.setAttribute('src', '/img/uploads/customers/' + editDataUserImg);
+		editUserAvt.setAttribute('src', '/img/uploads/users/' + editDataUserImg);
 	}
-	editUserForm.setAttribute('action', `/marketing/manager/customers/${editDataUserId}?_method=PUT`);
+	editUserForm.setAttribute('action', `/hr/manager/users/${editDataUserId}/edit?_method=PUT`);
 	editUserFirstName.value = editDataUserFirstName;
 	editUserLastName.value = editDataUserLastName;
 	editUserBirth.value = editDataUserBirth;

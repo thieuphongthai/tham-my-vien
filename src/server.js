@@ -60,7 +60,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Phân tích cú pháp yêu cầu của các loại nội dung
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(bodyParser.json());
 
 // Xem những yêu cầu được ghi chép lại
 app.use(morgan("combined"));
@@ -87,9 +87,6 @@ app.engine(
 				let newDate = date.toLocaleString('vi-VI', {weekday:"long", day:'numeric', month: 'numeric', year:'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric'});
 				return newDate;
 			},
-			showUser: (users) => {
-				console.log(users)
-			}
 		},
 	})
 );

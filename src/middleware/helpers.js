@@ -1,6 +1,3 @@
-const appRoot = require('app-root-path');
-const fs = require('fs');
-const storage = require('./storage');
 const imageFilter = function(req, file, cb) {
     // Accept images only
     if (!file.originalname.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG)$/)) {

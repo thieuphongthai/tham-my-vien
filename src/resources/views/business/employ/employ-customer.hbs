@@ -384,7 +384,7 @@
 								<label for="service" class="form-label">
 									<h6>Chọn dịch vụ</h6>
 								</label>
-								<select id="select-service" class="chosen-select" multiple tabindex="6" name="service">
+								<select id="select-service" class="chosen-select" multiple tabindex="6" name="service[]">
 									{{#each typeservices}}
 									<optgroup label="{{this.name}}">
 										{{#each this.services}}
@@ -409,6 +409,7 @@
 								<textarea class="form-control" id="create-service-note-description" rows="6"
 									name="comment"></textarea>
 							</div>
+							
 						</div>
 					</div>
 				</form>

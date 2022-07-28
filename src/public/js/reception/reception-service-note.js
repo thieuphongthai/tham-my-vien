@@ -7,6 +7,7 @@ pushPerformerBtn.addEventListener("click", () => {
 	// userStateForm.submit();
 })
 
+
 function getValueSelect(obj){
 	// Lấy danh sách các options
 	var options = obj.children;
@@ -20,13 +21,35 @@ function getValueSelect(obj){
 	// lặp qua từng option và kiểm tra thuộc tính selected
 	for (var i = 0; i < options.length; i++){
 		if (options[i].selected){
-			// html += '<input class="user-busy" name="userid" value="' + options[i].getAttribute("data-userID") +'">' ;
-			let userId = options[i].getAttribute("data-userID");
-			doctorIDs.push(userId);
+			html += '<input class="user-busy" name="userid[]" value="' + options[i].getAttribute("data-userID") +'">' ;
+			
+			document.getElementById("receive-performer").innerHTML = html;
+		}
+	}
+
+	// var selectDoctor = document.getElementById('receive-performer');
+	// selectDoctor.setAttribute('value', `${doctorIDs}`);
+}
+
+function getValueSelect1(obj){
+	// Lấy danh sách các options
+	var options = obj.children;
+
+	// Biến lưu trữ các chuyên mục đa chọn
+	var html = '';
+
+	//Array userID
+	var nursingIDs = []; 
+
+	// lặp qua từng option và kiểm tra thuộc tính selected
+	for (var i = 0; i < options.length; i++){
+		if (options[i].selected){
+			html += '<input class="user-busy" name="userid[]" value="' + options[i].getAttribute("data-userID") +'">' ;
+			
+			document.getElementById("receive-nursing").innerHTML = html;
 
 		}
 	}
-	console.log("doctor",doctorIDs);
 }
 
 var performerModal = document.getElementById("add-performer-modal");
@@ -74,9 +97,7 @@ performerModal.addEventListener("show.bs.modal", function (event) {
 	modalComment.value = comment;
 
 
-	var selectDoctor = document.getElementById('select-performer');
-	selectDoctor.setAttribute('name', 'doctorIDs[]');
-	console.log(selectDoctor);	
+	
 	// var userID = document.getElementById("get-userID");
 	// var getUserID = userID.getAttribute("data-userID");
 	// var inpUserID = document.getElementById("input-userid");
@@ -84,26 +105,7 @@ performerModal.addEventListener("show.bs.modal", function (event) {
 
 
 
-function getValueSelect1	(obj){
-	// Lấy danh sách các options
-	var options = obj.children;
 
-	// Biến lưu trữ các chuyên mục đa chọn
-	var html = '';
-
-	//Array userID
-	var nursingIDs = []; 
-
-	// lặp qua từng option và kiểm tra thuộc tính selected
-	for (var i = 0; i < options.length; i++){
-		if (options[i].selected){
-			// html += '<input class="user-busy" name="userid" value="' + options[i].getAttribute("data-userID") +'">' ;
-			let userId = options[i].getAttribute("data-userID");
-			nursingIDs.push(userId);
-		}
-	}
-	console.log("nursing" , nursingIDs);
-}
 
 
 

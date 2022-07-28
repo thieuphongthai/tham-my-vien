@@ -26,7 +26,7 @@ router.get('/admin/service-note', AdminController.showServiceNote);
 router.post('/admin/customers/:id/service-note', AdminController.createServiceNote);
 router.get('/admin/customers/:id/detail', AdminController.getOneBusinessCustomer)
 router.patch('/admin/customers/:id/comment', AdminController.createComment)
-router.put('/admin/customers/:id', validateUploadImage.upload, AdminController.editCustomer);
+router.put('/admin/customers/:id', validateUploadImage.uploadSingleCustomer, AdminController.editCustomer);
 
 
 router.delete('/admin/service-note/:id', AdminController.destroyServiceNote);
@@ -36,13 +36,6 @@ router.delete('/admin/service-note-trash/:id', AdminController.realDestroyServic
 router.patch('/admin/service-note-trash/:id/restore', AdminController.restoreServiceNote);
 /*Admin End*/
 // [authJwt.verifyToken, authJwt.isBusinessEmploy]
-
-
-
-
-
-
-
 
 router.post("/logout", controller.logout);
 router.post("/", controller.postLogin);

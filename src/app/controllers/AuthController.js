@@ -140,10 +140,8 @@ class AuthController {
                     position: user.position,
                     
                 }, process.env.ACCESSTOKEN_KEY, {
-                    expiresIn: 600, // 10p
+                    expiresIn: 600000, // 10p
                 });
-
-                // const { password, ...others } = user._doc;
 
                 const refreshToken = jwt.sign({
                     id: user._id,
@@ -153,30 +151,21 @@ class AuthController {
                 }, process.env.REFRESHTOKEN_KEY, {
                     expiresIn: 86400, // 24 giờ
                 })
-                // var authorities = [];
+                
                 console.log(user.role)
-                // authorities.push("ROLES_" + user.role.toUpperCase());
-                // console.log(authorities);
-                res.cookies = ('refreshToken', refreshToken, {
-                    httpOnly: false,
-                    secure: false,
-                    path: `/`,
-                    sameSite: 'strict'
-                });
-                console.log('refreshToken', refreshToken);
-                console.log('user', user.firstName);
-                res.status(200).render(`${user.departmentEng}/${user.positionEng}/${user.positionEng}-overview`, {user, accessToken});
-                // res.json({ user, accessToken });
+                req.session.token = accessToken;
+                res.status(200).render(`${user.departmentEng}/${user.positionEng}/${user.positionEng}-overview`, {user: mongooseToObject(user)});
+                // res.status(200).json({ user: mongooseToObject(user)});
             })
             .catch(next);
     };
 
 
     // Logout
-    logout = async (req, res) => {
+    logout = async (req, res, next) => {
         try {
             req.session = null;
-            return res.status(200).send({ message: "Bạn đã đăng xuất!" });
+            return res.status(200).redirect('/');
         } catch (err) {
             this.next(err);
         }

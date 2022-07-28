@@ -5,6 +5,10 @@ const validateUploadImage = require('../../middleware/validateUploadImage');
 
 
 //Employ
+router.get('/service-note/:id', DoctorController.updateServiceNote)
+
+
+
 router.get('/service-note', DoctorController.showServiceNote);
 
 

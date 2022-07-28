@@ -27,14 +27,13 @@ const ServiceNote = new Schema({
 				{
 					serviceName: String,
 					before: String,
-					after:String,
+					after: String,
 				},
 				{ timestamps: true }
-			)
+			),
 		}
-
 	],
-	
+
 	createName: [
 		{
 			type: String,
@@ -56,7 +55,7 @@ const ServiceNote = new Schema({
 		}
 	],
 
-	recept:[
+	recept: [
 		{
 			type: String,
 			ref: "User"
@@ -69,7 +68,7 @@ const ServiceNote = new Schema({
 			ref: "Status"
 		}
 	],
-	service: [
+	services: [
 		{
 			type: String,
 			ref: "Service"

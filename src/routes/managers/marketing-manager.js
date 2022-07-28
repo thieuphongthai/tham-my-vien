@@ -6,9 +6,9 @@ const validateUploadImage = require('../../middleware/validateUploadImage');
 
 //Employ
 router.patch('/customers/:id/comment', MarketingController.createComment);
-router.put('/customers/:id', validateUploadImage.upload, MarketingController.editCustomer);
+router.put('/customers/:id', validateUploadImage.uploadSingleCustomer, MarketingController.editCustomer);
 
-router.post('/customers', validateUploadImage.upload, MarketingController.createCustomer);
+router.post('/customers', validateUploadImage.uploadSingleCustomer, MarketingController.createCustomer);
 
 router.get('/customers/:id/detail', MarketingController.showCustomerDetail);
 router.get('/customers', MarketingController.showCustomer);

@@ -1,31 +1,31 @@
-//CREATE: submit create user forms
-// Handle create info user
-var createuser = document.getElementById("create-user-btn");
-var createuserForm = document.forms["create-user-form"];
-createuser.addEventListener("click", () => {
-	createuserForm.submit();
+//CREATE: submit create customer forms
+// Handle create info Customer
+var createCustomer = document.getElementById("create-customer-btn");
+var createCustomerForm = document.forms["create-customer-form"];
+createCustomer.addEventListener("click", () => {
+	createCustomerForm.submit();
 });
 
 // Handle select image from modal create
 var addImg = document.getElementById("input-create-img");
-var addAvt = document.getElementById("add-avt-user");
+var addAvt = document.getElementById("add-avt-customer");
 addImg.addEventListener("change", (e) => {
 	addAvt.src = URL.createObjectURL(e.target.files[0]);
 });
-//END CREATE: submit create user forms
+//END CREATE: submit create customer forms
 
-//EDIT: Load edit user modal and submit edit user forms
+//EDIT: Load edit customer modal and submit edit customer forms
 
 // Handle select image from modal edit
 var editImg = document.getElementById("input-edit-img");
-var editAvt = document.getElementById("edit-user-avt");
+var editAvt = document.getElementById("edit-customer-avt");
 editImg.addEventListener("change", (e) => {
 	editAvt.src = URL.createObjectURL(e.target.files[0]);
 });
 
 // Handle push data to edit modal
-var edituser = document.getElementById("edit-user-modal");
-edituser.addEventListener("show.bs.modal", function (event) {
+var editCustomer = document.getElementById("edit-customer-modal");
+editCustomer.addEventListener("show.bs.modal", function (event) {
 	// Button that triggered the modal
 	var button = event.relatedTarget;
 	// Get data from edit button
@@ -41,7 +41,7 @@ edituser.addEventListener("show.bs.modal", function (event) {
 	var desciption = button.getAttribute("data-edit-description");
 
 	// Get element need embeded input
-	var editAvt = document.getElementById("edit-user-avt");
+	var editAvt = document.getElementById("edit-customer-avt");
 	var editFirstName = document.getElementById("edit-firstName");
 	var editLastName = document.getElementById("edit-lastName");
 	var editBirth = document.getElementById("edit-birth");
@@ -56,9 +56,9 @@ edituser.addEventListener("show.bs.modal", function (event) {
 	if (imageEdit === '') {
 		editAvt.setAttribute('src', '/img/user-icon.png');
 	} else {
-		editAvt.setAttribute('src', '/img/uploads/users/' + imageEdit);
+		editAvt.setAttribute('src', '/img/uploads/customers/' + imageEdit);
 	}
-	edituserForm.setAttribute('action', `/hr/employ/users/${idEdit}?_method=PUT`);
+	editCustomerForm.setAttribute('action', `/marketing/employ/customers/${idEdit}?_method=PUT`);
 	editFirstName.value = firstName;
 	editLastName.value = lastName;
 	editBirth.value = birth;
@@ -69,66 +69,74 @@ edituser.addEventListener("show.bs.modal", function (event) {
 	editDescription.value = desciption;
 });
 
-// Handle edit info user
-var editBtn = document.getElementById("edit-user-btn");
-var edituserForm = document.forms["edit-user-form"];
+// Handle edit info Customer
+var editBtn = document.getElementById("edit-customer-btn");
+var editCustomerForm = document.forms["edit-customer-form"];
 editBtn.addEventListener("click", () => {
-	edituserForm.submit();
+	editCustomerForm.submit();
 });
-//EDIT END: Load edit user modal and submit edit user forms
+//EDIT END: Load edit customer modal and submit edit customer forms
 
-// Function convert Vietnameses to English
-function convert_vi_to_en(str) {
-	str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
-	str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
-	str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
-	str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
-	str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
-	str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
-	str = str.replace(/đ/g, "d");
-	str = str.replace(/À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ/g, "A");
-	str = str.replace(/È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ/g, "E");
-	str = str.replace(/Ì|Í|Ị|Ỉ|Ĩ/g, "I");
-	str = str.replace(/Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ/g, "O");
-	str = str.replace(/Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ/g, "U");
-	str = str.replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g, "Y");
-	str = str.replace(/Đ/g, "D");
-	str = str.replace(
-		/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g,
-		" "
-	);
-	str = str.replace(/  +/g, " ");
-	return str;
-}
-// Handle insert first-name and last-name to account in create modal
 
-var inputFirstName = document.getElementById("user-firstName");
-var inputLastName = document.getElementById("user-lastName");
-var inputAccount = document.getElementById("user-account");
-var firstNameValue;
-var lastNameValue;
-inputFirstName.addEventListener("input", () => {
-	firstNameValue = convert_vi_to_en(inputFirstName.value).split(" ");
-	var a;
-	var b = "";
-	firstNameValue.forEach((element) => {
-		a = element.split("", 1);
-		b += a;
-	});
-	inputLastName.addEventListener("input", () => {
-		lastNameValue = convert_vi_to_en(inputLastName.value)
-			.split(" ")
-			.join("")
-			.toLowerCase();
-		inputAccount.setAttribute("value", lastNameValue + b.toLowerCase());
-	});
-});
-//END Handle insert first-name and last-name to account in create modal
+
+// //PUSH COMMENT CUSTOMER: detail customer and submit push comment
+// var detailCustomerAddComment = document.getElementById("detail-customer-add-comment");
+// var detailCustomerComment = document.forms["detail-customer-form"];
+// detailCustomerAddComment.addEventListener("click", () => {
+// 	detailCustomerComment.submit();
+// })
+// var detailCustomer = document.getElementById("detail-customer-modal");
+// detailCustomer.addEventListener("show.bs.modal", function (event) {
+// 	// Button that triggered the modal
+// 	var button = event.relatedTarget;
+// 	// Get data from edit button
+// 	var idDetail = button.getAttribute('data-detail-id');
+// 	var imageDetail = button.getAttribute("data-detail-img");
+// 	var firstName = button.getAttribute("data-detail-firstname");
+// 	var lastName = button.getAttribute("data-detail-lastname");
+// 	var birth = button.getAttribute("data-detail-birth");
+// 	var gender = button.getAttribute("data-detial-gender");
+// 	var phone = button.getAttribute("data-detail-phone");
+// 	var email = button.getAttribute("data-detail-phone");
+// 	var address = button.getAttribute("data-detail-address");
+// 	var desciption = button.getAttribute("data-detail-description");
+// 	var comment = button.getAttribute("data-detail-comment");
+
+// 	// Get element need embeded input
+// 	var detailAvt = document.getElementById("detail-customer-avt");
+// 	var detailName = document.getElementById("detail-customer-name");
+// 	var detailBirth = document.getElementById("detail-customer-birth");
+// 	var detailGender = document.getElementById("detail-customer-gender");
+// 	var detailPhone = document.getElementById("detail-customer-phone");
+// 	var detailEmail = document.getElementById("detail-customer-email");
+// 	var detailAddress = document.getElementById("detail-customer-address");
+// 	var detailDescription = document.getElementById("detail-customer-description");
+// 	var detailComment = document.getElementById("detail-customer-comment");
+
+// 	if (imageDetail === '') {
+// 		editAvt.setAttribute('src', '/img/user-icon.png');
+// 	} else {
+// 		detailAvt.setAttribute('src', '/img/uploads/customers/' + imageDetail);
+// 	}
+// 	detailCustomerComment.setAttribute('action', `/marketing/employ/customers/${idDetail}?_method=PATCH`);
+// 	detailName.innerHTML = firstName + " " + lastName;
+// 	detailBirth.innerHTML = birth;
+// 	detailGender.innerHTML = gender;
+// 	detailPhone.innerHTML = phone;
+// 	detailEmail.innerHTML = email;
+// 	detailAddress.innerHTML = address;
+// 	detailDescription.innerHTML = desciption;
+// 	detailComment.innerHTML = comment;
+// });
+
+// //END PUSH COMMENT CUSTOMER: detail customer and submit push comment
+
+
 
 
 document.addEventListener("DOMContentLoaded", function () {
 	$(document).ready(function () {
-		$("#user_table").DataTable({
+		$("#customer_table").DataTable({
 			paging: true,
 			reponsive: true,
 		});

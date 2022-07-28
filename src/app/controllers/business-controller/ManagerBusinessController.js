@@ -88,7 +88,7 @@ class ManagerBusinessController {
 			Customer.findOneAndUpdate(
 				{ _id: req.params.id },
 				{
-					firstName: req.body.filename,
+					firstName: req.body.firstName,
 					lastName: req.body.lastName,
 					birth: req.body.birth,
 					gender: req.body.gender,
@@ -187,7 +187,10 @@ class ManagerBusinessController {
 				phone: req.body.phone,
 				address: req.body.address
 			},
-			performName: req.body.performUser,
+			result: {
+				serviceName: req.body.service,
+			},
+			performer: req.body.performer,
 			createName: req.body.name,
 			status: "Tạo mới",
 			service: req.body.service,

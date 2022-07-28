@@ -7,12 +7,11 @@ const validateUploadImage = require('../../middleware/validateUploadImage');
 /* Business Manager Start*/
 router.delete('/service-note/:id', ManagerBusinessController.deleteServiceNote);
 router.patch('/service-note/:id', ManagerBusinessController.deleteServiceNote);
-router.patch('/customers/:id', ManagerBusinessController.createComment);
-router.put('/customers/:id', validateUploadImage.upload, ManagerBusinessController.editCustomer);
+router.put('/customers/:id/edit', validateUploadImage.uploadSingleCustomer, ManagerBusinessController.editCustomer);
 
 router.post('/customers/userid', ManagerBusinessController.addUseridToCustomer)
 router.post('/customers/:id/service-note', ManagerBusinessController.createServiceNote);
-router.post('/customers', validateUploadImage.upload, ManagerBusinessController.createCustomer);
+router.post('/customers', validateUploadImage.uploadSingleCustomer, ManagerBusinessController.createCustomer);
 
 router.get('/customers/:id/detail', ManagerBusinessController.showCustomerDetail)
 router.get('/service-note', ManagerBusinessController.showServiceNote);

@@ -72,7 +72,7 @@
 
 
 <!-- Modal Add Performer-->
-	
+
 
 <div class="modal fade" id="add-performer-modal" tabindex="-1" aria-labelledby="add-performer" aria-hidden="true">
 	<div class="modal-dialog modal-xl">
@@ -146,10 +146,13 @@
 								<label for="performer" class="form-label">
 									<h6>Chọn bác sĩ</h6>
 								</label>
+								<div hidden id="receive-performer">
+
+								</div>
 								<select id="select-performer" class="chosen-select" multiple tabindex="6"
-									 name="performer"onchange="getValueSelect(this)">
+									name="performer[]" onchange="getValueSelect(this)">
 									{{#each users}}
-									<option data-userID="{{this._id}}">
+									<option data-userID="{{this._id}}" value="{{this.firstName}} {{this.lastName}}">
 										{{this.firstName}}
 										{{this.lastName}}</option>
 
@@ -160,8 +163,11 @@
 								<label for="nursing" class="form-label">
 									<h6>Chọn Y tá</h6>
 								</label>
-								<select id="select-nursing" class="chosen-select" multiple tabindex="6" name="nursing"
-									onchange="getValueSelect1(this)">
+								<div hidden id="receive-nursing">
+
+								</div>
+								<select id="select-nursing" class="chosen-select" multiple tabindex="6"
+									name="nursing[]" onchange="getValueSelect1(this)">
 									{{#each user1s}}
 									<option data-userID="{{this._id}}" value="{{this.firstName}} {{this.lastName}}">
 										{{this.firstName}}

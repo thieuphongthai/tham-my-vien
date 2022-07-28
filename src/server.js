@@ -36,25 +36,20 @@ app.use(
 		name: "Hachitech-session",
 		secret: `${process.env.SECURITY_KEY}`,
 		httpOnly: true,
-		secure: true,
+		secure: false, // change to 'true' when switching to production enviroment
+		sameSite: 'strict',
+		path: '/'
 	})
 );
 
 // app.use(cookieParser('secret'));
 
-app.use(session({
-	cookie: { maxAge: 5000 },
-    secret: process.env.FLASH_SESSION_KEY,
-    saveUninitialized: true,
-    resave: true
-}));
-
-app.use(flash());
-
-app.use(function(req, res, next){
-    res.locals.user = req.user;
-    next();
-});
+// app.use(session({
+// 	cookie: { maxAge: 5000 },
+//     secret: process.env.FLASH_SESSION_KEY,
+//     saveUninitialized: true,
+//     resave: true
+// }));
 
 
 // Kết nối tới cơ sở dữ liệu
@@ -65,7 +60,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Phân tích cú pháp yêu cầu của các loại nội dung
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(bodyParser.json());
 
 // Xem những yêu cầu được ghi chép lại
 app.use(morgan("combined"));
@@ -92,21 +87,6 @@ app.engine(
 				let newDate = date.toLocaleString('vi-VI', {weekday:"long", day:'numeric', month: 'numeric', year:'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric'});
 				return newDate;
 			},
-			show: (a) => {
-				console.log('log user', a);
-				let fName = a.firstName;
-				let lName = a.lastName;
-				return fName+ ' ' + lName;
-			},
-			showID: (a) => {
-				// console.log('log user id', a);
-				let id = a._id;
-				return id
-			},
-			showIMG: (a) => {
-				let img = a.image.name;
-				return img;
-			}
 		},
 	})
 );
@@ -115,12 +95,6 @@ app.engine(
 app.set("view engine", "hbs");
 // Cấu hình đường dẫn đến tệp tin chứa giao diện người dùng
 app.set("views", path.join(__dirname, "resources", "views"));
-
-app.use(function(req, res, next){
-    res.locals.message = req.session.message;
-    delete req.session.message;
-    next();
-});
 
 app.use(function (req, res, next) {
 	res.header(

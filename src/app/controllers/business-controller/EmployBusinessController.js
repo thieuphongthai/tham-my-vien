@@ -78,7 +78,7 @@ class EmployBusinessController {
 			Customer.findOneAndUpdate(
 				{ _id: req.params.id },
 				{
-					firstName: req.body.filename,
+					firstName: req.body.firstName,
 					lastName: req.body.lastName,
 					birth: req.body.birth,
 					gender: req.body.gender,
@@ -170,15 +170,18 @@ class EmployBusinessController {
 				phone: req.body.phone,
 				address: req.body.address
 			},
+			
 			performer: req.body.performer,
 			createName: req.body.name,
 			status: "Tạo mới",
-			service: req.body.service,
+			service:  req.body.service,
 			comments: { comment: req.body.comment },
 			schedule: req.body.schedule,
 		});
 		serviceNote.save();
+		console.log(serviceNote);
 		res.redirect('back');
+		// res.json(req.body)
 	}
 }
 

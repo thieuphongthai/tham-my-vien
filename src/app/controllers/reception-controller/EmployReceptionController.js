@@ -45,12 +45,15 @@ class ReceptionController {
             ServiceNote.findByIdAndUpdate({ _id: req.params.id },
                 { $push: { performer: req.body.performer, nursing: req.body.nursing }, $set: { stored: "No" } }),
             ServiceNote.delete({ _id: req.params.id }),
-            User.updateMany({ _id: req.body.doctorIDs }, { $set: { state: "Busy" } })
+            User.updateMany({ _id: { $in: req.body.userid }}, { $set: { state: "Busy" } })
         ])
-            .then((serviceNote) => {
+            .then(([serviceNote, users]) => {
+                console.log(serviceNote);
+
                 res.redirect("back")
             })
             .catch(next);
+        // res.json(req.body);
     }
 
 

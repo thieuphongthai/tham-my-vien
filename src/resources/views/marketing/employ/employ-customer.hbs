@@ -3,7 +3,7 @@
 
 	</div>
 	<h3 class="title text-light">Quản lý khách hàng</h3>
-	{{> page/sidebar/marketing/sidebar-employ-marketing}}
+	
 
 	<div class="stask">
 		<!-- Button trigger modal -->
@@ -12,7 +12,9 @@
 		</button>
 	</div>
 </nav>
-<div class="container-fluid mt-3">
+{{> page/sidebar/marketing/sidebar-employ-marketing}}
+<a href="#" class="addBtn-mobile"><i class="ti-plus"></i></a>
+<div class="container-fluid content-container mt-3">
 	<div id="alert-message" class="alert alert-{{message.color}}" role="alert">
 		{{message.content}}
 	</div>

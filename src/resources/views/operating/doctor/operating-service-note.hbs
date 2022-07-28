@@ -2,195 +2,196 @@
 	<div class="title">
 
 	</div>
-	<h3 class="title text-light">Quản lý phiếu dịch vụ</h3>
+	<h3 class="title text-light">phiếu dịch vụ</h3>
 	{{> page/sidebar/operating-room/sidebar-doctor}}
 
 	<div class="stask">
 	</div>
 </nav>
-<div class="container-fluid mt-3">
+<div class="container">
 	<div id="alert-message" class="alert alert-{{message.color}}" role="alert">
 		{{message.content}}
 	</div>
-	<div class="container-table">
-		<table id="customer_table" class="table table-hover table-bordered table-sm">
-			<thead class="table-info">
-				<tr>
-					<th class="text-center" scope="col">#</th>
-					<th class="text-center" scope="col">Khách hàng</th>
-					<th class="text-center" scope="col">Ngày hẹn</th>
-					<th class="text-center" scope="col">Người tạo</th>
-					<th class="text-center" scope="col">Trạng thái</th>
-					<th class="text-center" scope="col">Dịch vụ</th>
-			</thead>
-			<tbody id="table-content">
-				{{#each serviceNotes}}
-				<tr>
-					<th class="text-center" scope="row">{{sum @index 1}}</th>
-					<td class="text-center">
-						<a href="" data-bs-toggle="modal" data-bs-target="#add-performer-modal" data-id="{{this._id}}"
-							{{#each this.customer}} data-customerID="{{this.customerID}}" data-name="{{this.name}}" data-birth="{{this.birth}}"
-							data-gender="{{this.gender}}" data-email="{{this.email}}" data-phone="{{this.phone}}"
-							data-address="{{this.address}}" {{/each}} data-createName="{{this.createName}}"
-							data-service="{{this.service}}" data-schedule="{{this.schedule}}" {{#each comments}}
-							data-comment="{{this.comment}}" {{/each}}>
-							{{#each this.customer}}
-							{{this.name}}
-							{{/each}}
+	<div class="shadow p-3 mb-5 bg-body rounded">
+		{{#each serviceNotes}}
+		<form id="submit-doctor-form">
 
-						</a>
-					</td>
-					</td>
-					<td class="text-center">{{this.schedule}}</td>
-					<td class="text-center">{{this.createName}}</td>
-					<td class="text-center">{{this.status}}</td>
-					<td class="text-center">{{this.service}}</td>
-				</tr>
+			<div class="row">
+				{{#each this.customer}}
+				<h3 class="text-center">{{this.name}}</h3>
 				{{/each}}
-			</tbody>
-		</table>
-	</div>
-	<div class="container-card">
-		{{#each customers}}
-		<div class="card text-dark bg-info mb-3">
-			<div class="card-header">
-				<h5 class="card-title">{{this.firstName}} {{this.lastName}}</h5>
 			</div>
-			<div class="card-body">
-				<p class="card-text">Ngày sinh: {{this.birth}}</p>
-				<p class="card-text">Giới tính: {{this.gender}}</p>
-				<p class="card-text">Email: {{this.email}}</p>
-				<p class="card-text">Địa chỉ: {{this.address}}</p>
-			</div>
-		</div>
-		{{/each}}
-	</div>
-</div>
+			<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+				<li class="nav-item" role="presentation">
+					<button class="nav-link active btn-light" id="pills-profile-customer-tab" data-bs-toggle="pill"
+						data-bs-target="#pills-profile-customer" type="button" role="tab" aria-controls="pills-home"
+						aria-selected="true">Thông tinh</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link  btn-light" id="pills-profile-tab" data-bs-toggle="pill"
+						data-bs-target="#pills-service" type="button" role="tab" aria-controls="pills-profile"
+						aria-selected="false">Dịch vụ</button>
+				</li>
+			</ul>
+			<div class="tab-content" id="pills-tabContent">
 
 
-
-
-<!-- Modal Add Performer-->
-<form method="POST" id="add-performer-form"></form>
-<div class="modal fade" id="add-performer-modal" tabindex="-1" aria-labelledby="add-performer" aria-hidden="true">
-	<div class="modal-dialog modal-xl">
-		<div class="modal-content">
-			<div class="modal-header bg-info text-light">
-				<h5 class="modal-title" id="add-performer-title">Phiếu dịch vụ</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-					<li class="nav-item" role="presentation">
-						<button class="nav-link active" id="pills-profile-customer-tab" data-bs-toggle="pill"
-							data-bs-target="#pills-profile-customer" type="button" role="tab" aria-controls="pills-home"
-							aria-selected="true">Thông tin khách hàng</button>
-					</li>
-					<li class="nav-item" role="presentation">
-						<button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
-							data-bs-target="#pills-service" type="button" role="tab" aria-controls="pills-profile"
-							aria-selected="false">Thông tin dịch vụ</button>
-					</li>
-				</ul>
-				<form method="POST" id="user-state-form" class="row">
-					<div class="tab-content" id="pills-tabContent">
-						<div class="tab-pane fade show active" id="pills-profile-customer" role="tabpanel"
-							aria-labelledby="pills-home-tab">
-							<ul class="list-group">
-								<li class="list-group-item">
-									<input hidden type="text" class="form-control" id="customerID"
-											name="customerID" readonly>
-									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="add-performer-firstLastName"
-											name="name" readonly>
-										<label for="name">Họ tên</label>
-									</div>
-									<div class="form-floating mb-3">
-										<input type="date" class="form-control" id="add-performer-birth" name="birth"
-											readonly>
-										<label for="birth">Ngày sinh</label>
-									</div>
-									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="add-performer-gender" name="gender"
-											readonly>
-										<label for="gender">Giới tính</label>
-									</div>
-									<div class="form-floating mb-3">
-										<input type="email" class="form-control" id="add-performer-email" name="email"
-											readonly>
-										<label for="email">Email address</label>
-									</div>
-									<div class="form-floating mb-3">
-										<input type="number" class="form-control" id="add-performer-phone" name="phone"
-											readonly>
-										<label for="phone">Số điện thoại</label>
-									</div>
-									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="add-performer-address"
-											name="address" readonly>
-										<label for="address">Địa chỉ</label>
-									</div>
-									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="add-performer-createName"
-											name="createName" readonly>
-										<label for="address">Người tạo</label>
-									</div>
-								</li>
-							</ul>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="text-left ml-4">
+							<label for="service">
+								<strong>Reception:</strong>&nbsp;&nbsp;
+							</label>
+							<label for="service-name">
+								<em>{{this.createName}}</em>
+							</label>
 						</div>
-						<div class="tab-pane fade" id="pills-service" role="tabpanel"
-							aria-labelledby="pills-profile-tab">
-							<div class="mb-3">
-								<label for="performer" class="form-label">
-									<h6>Chọn bác sĩ</h6>
-								</label>
-								<select id="select-performer" class="chosen-select" multiple tabindex="6"
-									name="performer" onchange="getValueSelect(this)">
-									{{#each users}}
-									<option data-userID="{{this._id}}" value="{{this.firstName}} {{this.lastName}}">{{this.firstName}}
-										{{this.lastName}}</option>
-										
-									{{/each}}
-								</select>
-								<div hidden id="receive-userid">
+					</div>
 
-								</div>
+					<div class="col-md-6">
+						<div class="text-right mr-4">
+							<label for="status">
+								<strong>Trạng thái:</strong>&nbsp;&nbsp;
+							</label>
+							<label for="status">
+								<em>{{this.status}}</em>
+							</label>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="tab-pane fade show active" id="pills-profile-customer" role="tabpanel"
+					aria-labelledby="pills-home-tab">
+					<div class="row">
+						<div class="col-md-6 text-left">
+							<div class="service mt-3 ">
+								<label class=" ml-4"><strong>Dịch vụ:</strong></label>
 							</div>
-							<div class="mb-3">
-								<label for="service" class="form-label">
-									<h6>Dịch vụ</h6>
-								</label>
-								<input type="text" class="form-control" id="add-performer-service" name="service"
-									readonly>
+							<div class="service mt-3">
+								<label class=" ml-4"><strong>Lịch hẹn:</strong></label>
 							</div>
-							<div class="mb-3">
-								<label for="gender" class="form-label">
-									<h6>Ngày hẹn</h6>
-								</label>
-								<input type="text" class="form-control" id="add-performer-schedule" name="schedule"
-									readonly>
+							<div class="service mt-3">
+								<label class=" ml-4"><strong>Bác sĩ:</strong></label>
 							</div>
+							<div class="service mt-3">
+								<label class=" ml-4"><strong>Y tá:</strong></label>
+							</div>
+							<div class="service mt-3">
+								<label class=" ml-4"><strong>Ghi chú:</strong></label>
+							</div>
+						</div>
 
-							<div class="mb-3">
-								<label for="comment" class="form-label">
-									<h6>Ghi chú: </h6>
-								</label>
-								<textarea class="form-control" id="add-performer-comment" rows="6" name="comment"
-									readonly></textarea>
+						<div class="col-md-6 text-right">
+							<div class="service mt-3">
+								{{#each services}}
+								<label class=" mr-4"><em>{{this.service}}</em></label>
+								{{/each}}
+							</div>
+							<div class="service mt-3">
+								<label class=" mr-4"><em>{{formatDate this.schedule}}</em></label>
+							</div>
+							<div class="service mt-3">
+								<label class=" mr-4"><em>{{this.performer}}1</em></label>
+							</div>
+							<div class="service mt-3">
+								<label class=" mr-4"><em>{{this.nursing}}</em></label>
+							</div>
+							<div class="service mt-3">
+								{{#each comments}}
+								<label class=" mr-4"><em>{{this.comment}}</em></label>
+								{{/each}}
 							</div>
 						</div>
 					</div>
-				</form>
+				</div>
+				<div class="tab-pane fade  " id="pills-service" role="tabpanel" aria-labelledby="pills-profile-tab">
+					<div class="row">
+						<div class="col-md-3 text-left">
+							<div class="service mt-3 ">
+								<label class=" ml-4"><strong>Dịch vụ:</strong></label>
+							</div>
+						</div>
+						<div class="col-md-9 row">
+
+							<div class="col-md-6 text-left">
+								Trước
+
+							</div>
+
+							<div class="col-md-6 text-left">
+								Sau
+							</div>
+						</div>
+					</div>
+					{{#each services}}
+					<div class="row">
+						<div class="col-md-3 text-left">
+							<div class="service mt-3 ">
+								<label class=" ml-4"><strong>{{this.service}}</strong></label>
+							</div>
+						</div>
+
+						<div class="col-md-9 row">
+
+							<div class="col-md-6 text-left">
+
+								<label for="input-customer-service-before-img"
+									class="label-avt btn btn-sm btn-primary mt-3">
+									<h6>Chọn hình ảnh</h6>
+								</label>
+								<input hidden id="input-customer-service-before-img" type="file" name="before"
+									accept="image/png, image/gif, image/jpeg">
+							</div>
+
+							<div class="col-md-6 text-left">
+								<label for="input-customer-service-after-img"
+									class="label-avt btn btn-sm btn-primary mt-3">
+									<h6>Chọn hình ảnh</h6>
+								</label>
+								<input hidden id="input-customer-service-after-img" type="file" name="after"
+									accept="image/png, image/gif, image/jpeg">
+							</div>
+						</div>
+					</div>
+					{{/each }}
+				</div>
 			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng lại</button>
-				<button type="button" id="add-performer-btn" class="btn btn-primary">Cập nhật</button>
+			<hr>
+			<div class="row">
+				<div class="col-md-6">
+
+				</div>
+
+				<div class="col-md-6 text-right">
+
+					<button type="button" data-bs-toggle="modal" data-bs-target="#submit-doctor-modal"
+						class="btn btn-success" data-id="{{this._id}}">Lưu thay đổi</button>
+				</div>
+			</div>
+			{{else}}
+			<div class="text-center">Chưa có dịch vụ cần thực hiện.</div>
+			{{/each }}
+		</form>
+
+
+	</div>
+	<div class="modal fade" id="submit-doctor-modal" tabindex="-1" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Xóa</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					Bạn có đồng ý xóa vĩnh viễn không?
+				</div>
+				<div class="modal-footer">
+					<button id="submit-form-doctor-btn" type="button" class="btn btn-danger">Có, chắc chắn</button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Không</button>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
-
-
-
-
-<script src="/js/reception/reception-service-note.js"></script>
+<script src="/js/operating/doctor.js"></script>
